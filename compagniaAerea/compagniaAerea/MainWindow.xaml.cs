@@ -23,20 +23,37 @@ namespace compagniaAerea
         public MainWindow()
         {
             InitializeComponent();
+
         }
-        private void dipendente_click(object sender, System.EventArgs e)
+        
+    private void clkDipendente(object sender, RoutedEventArgs e)
         {
-            sinistra.Visibility = Visibility.Hidden;
-            destra.Visibility = Visibility.Hidden;
             gridDipendente.Visibility = Visibility.Visible;
-
+            main.Visibility = Visibility.Hidden;
         }
 
-        private void cliente_click(object sender, RoutedEventArgs e)
+        private void clkret(object sender, RoutedEventArgs e)
         {
-            sinistra.Visibility = Visibility.Hidden;
-            destra.Visibility = Visibility.Hidden;
-            cliente.Visibility = Visibility.Visible;
+            back();//metodo di ritorno al main
         }
+
+        private void clrek(object sender, RoutedEventArgs e)
+        {
+            back();//metodo di ritorno al main
+        }
+
+        private void clkcliente(object sender, RoutedEventArgs e)
+        {
+            cliente.Visibility = Visibility.Visible;
+            main.Visibility = Visibility.Hidden;
+        }
+        private void back()
+        {
+            cliente.Visibility = Visibility.Hidden;
+            gridDipendente.Visibility = Visibility.Hidden;
+            main.Visibility = Visibility.Visible;
+        }
+
     }
+     
 }

@@ -7,23 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid x:Name="padre">
-        <Grid x:Name="sinistra" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="224">
-            <Button x:Name="btnCliente" Content="CLIENTE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" RenderTransformOrigin="-9.495,-0.983" Height="299" Click="cliente_click"/>
+        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="508" Margin="9,-4,0,0" Visibility="Hidden">
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="228,85,0,0" TextWrapping="Wrap" Text="Nome Utente" VerticalAlignment="Top" Width="83"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="228,168,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="83"/>
+            <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="172,208,0,0" VerticalAlignment="Top" Width="180"/>
+            <TextBox x:Name="txtUtente" HorizontalAlignment="Left" Height="24" Margin="172,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="245" Margin="160,54,0,0" VerticalAlignment="Top" Width="208"/>
+            <Button x:Name="btnLogIn" Content="Log In" HorizontalAlignment="Left" Margin="228,250,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="button" Content="&lt;-" HorizontalAlignment="Left" Height="26" Margin="35,10,0,0" VerticalAlignment="Top" Width="44" Click="clkret"/>
         </Grid>
-        <Grid x:Name="destra" HorizontalAlignment="Left" Height="299" Margin="253,10,0,0" VerticalAlignment="Top" Width="224">
-            <Button x:Name="btnDipente" Content="DIPENDENTE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="299" Click="dipendente_click"/>
+        <Grid x:Name="cliente" HorizontalAlignment="Left" Height="319" Margin="-5,-5,0,0" VerticalAlignment="Top" Width="512" Visibility="Hidden">
+            <Button x:Name="btnControlla" Content="Controlla il tuo biglietto" HorizontalAlignment="Left" Height="252" Margin="257,57,0,0" VerticalAlignment="Top" Width="224"/>
+            <Button x:Name="btnPrenota" Content="prenota il tuo biglietto" HorizontalAlignment="Left" Height="249" Margin="10,57,0,0" VerticalAlignment="Top" Width="224"/>
+            <Button x:Name="btnback" Content="->" HorizontalAlignment="Left" Height="29" Margin="424,10,0,0" VerticalAlignment="Top" Width="57" Click="clrek"/>
         </Grid>
-        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="507" Margin="10,-10,0,0" Visibility="Hidden">
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="228,43,0,0" TextWrapping="Wrap" Text="Nome Utente" VerticalAlignment="Top" Width="83"/>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="228,121,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="83"/>
-            <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="197,151,0,0" VerticalAlignment="Top" Width="181"/>
-            <TextBox x:Name="txtUtente" HorizontalAlignment="Left" Height="23" Margin="197,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+        <Grid x:Name="main" HorizontalAlignment="Left" Height="319" Margin="0,-13,0,0" VerticalAlignment="Top" Width="507">
+            <Button x:Name="btnCliente" Content="CLIENTE" HorizontalAlignment="Left" Height="242" Margin="10,67,0,0" VerticalAlignment="Top" Width="222" Click="clkcliente"/>
+            <Button x:Name="btnDipendente" Content="DIPENDENTE" HorizontalAlignment="Left" Height="242" Margin="254,67,0,0" VerticalAlignment="Top" Width="228" Click="clkDipendente"/>
         </Grid>
-        <Grid x:Name="cliente" HorizontalAlignment="Left" Height="319" Margin="0,3,0,-3" VerticalAlignment="Top" Width="512" Visibility="Hidden">
-            <Button x:Name="btnControlla" Content="Controlla il tuo biglietto" HorizontalAlignment="Left" Height="302" Margin="257,7,0,0" VerticalAlignment="Top" Width="224"/>
-            <Button x:Name="btnPrenota" Content="prenota il tuo biglietto" HorizontalAlignment="Left" Height="299" Margin="10,7,0,0" VerticalAlignment="Top" Width="224"/>
-        </Grid>
-
 
 
     </Grid>
