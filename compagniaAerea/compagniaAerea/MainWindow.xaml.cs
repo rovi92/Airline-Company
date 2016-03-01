@@ -25,8 +25,8 @@ namespace compagniaAerea
             InitializeComponent();
 
         }
-        
-    private void click_dipendente(object sender, RoutedEventArgs e)
+
+        private void click_dipendente(object sender, RoutedEventArgs e)
         {
             gridDipendente.Visibility = Visibility.Visible;
             main.Visibility = Visibility.Hidden;
@@ -47,7 +47,7 @@ namespace compagniaAerea
         {
             back();//metodo di ritorno al main
         }*/
-       
+
         private void back()
         {
             gridCliente.Visibility = Visibility.Hidden;
@@ -56,5 +56,5 @@ namespace compagniaAerea
         }
 
     }
-     
+
 }
