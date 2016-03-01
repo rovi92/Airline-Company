@@ -22,8 +22,12 @@
             <Button x:Name="btnback" Content="->" HorizontalAlignment="Left" Height="29" Margin="424,10,0,0" VerticalAlignment="Top" Width="57" Click="clrek"/>
         </Grid>
         <Grid x:Name="main" HorizontalAlignment="Left" Height="319" Margin="0,-13,0,0" VerticalAlignment="Top" Width="507">
-            <Button x:Name="btnCliente" Content="CLIENTE" HorizontalAlignment="Left" Height="242" Margin="10,67,0,0" VerticalAlignment="Top" Width="222" Click="clkcliente"/>
-            <Button x:Name="btnDipendente" Content="DIPENDENTE" HorizontalAlignment="Left" Height="242" Margin="254,67,0,0" VerticalAlignment="Top" Width="228" Click="clkDipendente"/>
+            <Button x:Name="btnCliente" Content="CLIENTE" HorizontalAlignment="Left" Height="242" Margin="10,67,0,0" VerticalAlignment="Top" Width="222" Click="clkcliente" Background="White" BorderBrush="#FF0A0A0A"/>
+            <Button x:Name="btnDipendente" Content="DIPENDENTE" HorizontalAlignment="Left" Height="242" Margin="254,67,0,0" VerticalAlignment="Top" Width="228" Click="clkDipendente">
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
+            </Button>
         </Grid>
 
 
