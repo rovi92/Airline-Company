@@ -7,37 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="535">
     <Grid x:Name="padre">
-        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="508" Margin="9,-4,0,0" Visibility="Hidden">
+        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="508" Margin="9,-4,0,0">
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="228,85,0,0" TextWrapping="Wrap" Text="Nome Utente" VerticalAlignment="Top" Width="83"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="228,168,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="83"/>
             <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="172,208,0,0" VerticalAlignment="Top" Width="180"/>
             <TextBox x:Name="txtUtente" HorizontalAlignment="Left" Height="24" Margin="172,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="245" Margin="160,54,0,0" VerticalAlignment="Top" Width="208"/>
             <Button x:Name="btnLogIn" Content="Log In" HorizontalAlignment="Left" Margin="228,250,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="button" HorizontalAlignment="Left" Height="26" Margin="35,10,0,0" VerticalAlignment="Top" Width="44" Click="click_back">
-                <Image x:Name="image" Height="100" Width="100"/>
-            </Button>
         </Grid>
         <Grid x:Name="gridCliente" HorizontalAlignment="Left" Height="319" Margin="0,-4,0,0" VerticalAlignment="Top" Width="512" Visibility="Hidden">
             <Button x:Name="btnControlla" Content="Controlla il tuo biglietto" HorizontalAlignment="Left" Height="252" Margin="257,57,0,0" VerticalAlignment="Top" Width="224"/>
             <Button x:Name="btnPrenota" Content="prenota il tuo biglietto" HorizontalAlignment="Left" Height="249" Margin="10,57,0,0" VerticalAlignment="Top" Width="224"/>
             <Button x:Name="btnback" Content="->" HorizontalAlignment="Left" Height="29" Margin="424,10,0,0" VerticalAlignment="Top" Width="57" Click="click_back"/>
         </Grid>
-        <Grid x:Name="main" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517" Visibility="Visible">
-            <Border BorderBrush="#00695C" BorderThickness="2" HorizontalAlignment="Left" Margin="10,0,0,20" Height="194" VerticalAlignment="Bottom" Width="244">
-                <Grid x:Name="left_grid" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="240" Visibility="Visible" Background="#4DB6AC" Margin="0,0,0,0">
-                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lorem ILorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec." VerticalAlignment="Top" Height="120" Width="200"/>
-                    <Button x:Name="btnCliente" Content="CLIENTE" Margin="20,145,20,25" Click="click_cliente"/>
-                </Grid>
-            </Border>
-            <Border BorderBrush="#00695C" BorderThickness="2" HorizontalAlignment="Right" Margin="0,0,10,20" Height="194" VerticalAlignment="Bottom" Width="244">
-                <Grid x:Name="right_grid" HorizontalAlignment="Right" Height="190" VerticalAlignment="Top" Width="240" Visibility="Visible" Background="#4DB6AC">
-                    <TextBlock x:Name="textBlock3" Margin="10,10,10,0" TextWrapping="Wrap" Text="Lorem ILorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec." VerticalAlignment="Top" Height="120"/>
-                    <Button x:Name="btnDipendente" Content="DIPENDENTE" Margin="20,145,20,25" Click="click_dipendente"/>
-                </Grid>
-            </Border>
-            <Image x:Name="image1" HorizontalAlignment="Left" Height="95" Margin="10,5,0,0" VerticalAlignment="Top" Width="497"/>
-        </Grid>
+       
 
 
     </Grid>
