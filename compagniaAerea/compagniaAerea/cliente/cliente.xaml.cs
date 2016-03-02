@@ -22,6 +22,13 @@ namespace compagniaAerea.cliente
         public Window1()
         {
             InitializeComponent();
+           
         }
+
+    
+
+      
+
+      
     }
 }

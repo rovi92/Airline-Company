@@ -5,9 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:compagniaAerea.cliente"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="572">
+        Title="Window1" Height="554.5" Width="776">
     <Grid x:Name="padre" Margin="0,0,2,0">
-        <Grid HorizontalAlignment="Left" Height="47" Margin="0,222,0,0" VerticalAlignment="Top" Width="562">
+        <Grid x:Name="header" Margin="0,0,0,475">
+            <Grid.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF5F0202" Offset="1"/>
+                    <GradientStop Color="#FFFF0606" Offset="0.23"/>
+                </RadialGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid x:Name="body" Margin="0,53,0,2" RenderTransformOrigin="0.487,0.5">
+            <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="25,17,0,0" TextWrapping="Wrap" Text="nome" VerticalAlignment="Top" Width="39"/>
+            <TextBlock x:Name="telefono" HorizontalAlignment="Left" Margin="313,14,0,0" TextWrapping="Wrap" Text="telefono" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock x:Name="cognome" HorizontalAlignment="Left" Margin="175,17,0,0" TextWrapping="Wrap" Text="cognome" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock x:Name="mail" HorizontalAlignment="Left" Margin="455,14,0,0" TextWrapping="Wrap" Text="e-mail" VerticalAlignment="Top"/>
+            <TextBlock x:Name="indirizzo" HorizontalAlignment="Left" Margin="25,79,0,0" TextWrapping="Wrap" Text="indirizzo" VerticalAlignment="Top" Width="47"/>
+            <TextBlock x:Name="città" HorizontalAlignment="Left" Margin="175,79,0,0" TextWrapping="Wrap" Text="città" VerticalAlignment="Top" Width="47"/>
+            <TextBlock x:Name="stato" HorizontalAlignment="Left" Margin="455,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" Height="16"><Run Text="stato"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="cap" HorizontalAlignment="Left" Margin="313,79,0,0" TextWrapping="Wrap" Text="cap" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtNome" HorizontalAlignment="Left" Height="23" Margin="25,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtCognome" HorizontalAlignment="Left" Height="23" Margin="175,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="23" Margin="313,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtMail" HorizontalAlignment="Left" Height="23" Margin="455,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtIndirizzo" HorizontalAlignment="Left" Height="23" Margin="25,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtCittà" HorizontalAlignment="Left" Height="23" Margin="175,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtCap" HorizontalAlignment="Left" Height="23" Margin="313,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtstato" HorizontalAlignment="Left" Height="23" Margin="455,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Grid x:Name="andata" Height="239" Margin="0,149,0,0" VerticalAlignment="Top">
+                <Calendar Margin="0,64,558,0" VerticalAlignment="Top" Height="165" HorizontalAlignment="Right" Width="208"/>
+
+                <TextBlock x:Name="partenza_Copy" HorizontalAlignment="Left" Margin="261,34,0,0" TextWrapping="Wrap" Text="partenza" VerticalAlignment="Top"/>
+                <TextBlock x:Name="arrivo_Copy" HorizontalAlignment="Left" Margin="535,36,0,0" TextWrapping="Wrap" Text="arrivo" VerticalAlignment="Top" RenderTransformOrigin="-1.228,0.501"/>
+                <TextBlock x:Name="oraPartenza_Copy" HorizontalAlignment="Left" Margin="261,139,0,0" TextWrapping="Wrap" Text="ora partenza" VerticalAlignment="Top" RenderTransformOrigin="0.721,0.543"/>
+                <TextBlock x:Name="oraArrivo_Copy" HorizontalAlignment="Left" Margin="535,139,0,0" TextWrapping="Wrap" Text="ora arrivo" VerticalAlignment="Top"/>
+                <ListBox x:Name="listPartenza" HorizontalAlignment="Left" Height="69" Margin="261,55,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox x:Name="listArrivo" HorizontalAlignment="Left" Height="69" Margin="535,57,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox x:Name="listOraPartenza" HorizontalAlignment="Left" Height="69" Margin="261,160,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox x:Name="listOraArrivo" HorizontalAlignment="Left" Height="69" Margin="535,160,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox x:Name="listCoincidenze" HorizontalAlignment="Left" Height="67" Margin="395,57,0,0" VerticalAlignment="Top" Width="100"/>
+                <ListBox x:Name="listOrariCoincidenzeArrivo" HorizontalAlignment="Left" Height="67" Margin="395,160,0,0" VerticalAlignment="Top" Width="46"/>
+                <ListBox x:Name="listOrariCoincidenzePartenze" HorizontalAlignment="Left" Height="67" Margin="441,160,0,0" VerticalAlignment="Top" Width="46"/>
+
+                <RadioButton x:Name="rdbAndata" Content="Andata" HorizontalAlignment="Left" Margin="658,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+                <RadioButton x:Name="rdbRitorno" Content="Ritorno" HorizontalAlignment="Left" Margin="657,73,0,0" VerticalAlignment="Top" />
+                <Button x:Name="button" Content="Conferma" HorizontalAlignment="Left" Margin="658,174,0,0" VerticalAlignment="Top" Width="82" Height="40"/>
+                <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="39,28,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem  Name="cbi1">Andata</ComboBoxItem>
+                    <ComboBoxItem  Name="cbi2">Andata e ritorno</ComboBoxItem>
+
+                </ComboBox>
+                <TextBlock x:Name="orarioScalo" HorizontalAlignment="Left" Margin="363,139,0,0" TextWrapping="Wrap" Text="selezionare l'ora di ripartenza" VerticalAlignment="Top"/>
+                <TextBlock x:Name="scali" HorizontalAlignment="Left" Margin="395,36,0,0" TextWrapping="Wrap" Text="eventuali scali" VerticalAlignment="Top"/>
+
+
+            </Grid>
+           
+
+        </Grid>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="53" Margin="0,-5,0,0" VerticalAlignment="Top" Width="100" Source="/compagniaAerea;component/immagini/1 logo db .jpg" RenderTransformOrigin="0.32,1.64"/>
+        <Grid x:Name="footer" Margin="0,483,0,0">
             <Grid.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF5F0202" Offset="1"/>

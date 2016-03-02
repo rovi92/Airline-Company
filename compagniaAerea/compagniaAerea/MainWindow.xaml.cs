@@ -23,12 +23,16 @@ namespace compagniaAerea
         public MainWindow()
         {
             InitializeComponent();
+          
 
-        }
+         }
 
         private void click_apriFormCliente(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Apertura Form Cliente");
+            cliente.Window1 cl = new cliente.Window1();
+            cl.Show();
+            this.Close();
+            
         }
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
