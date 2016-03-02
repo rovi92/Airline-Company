@@ -27,7 +27,7 @@
             <Border BorderBrush="#00695C" BorderThickness="2" HorizontalAlignment="Left" Margin="10,0,0,20" Height="194" VerticalAlignment="Bottom" Width="244">
                 <Grid x:Name="left_grid" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="240" Visibility="Visible" Background="#4DB6AC" Margin="0,0,0,0">
                     <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lorem ILorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec." VerticalAlignment="Top" Height="120" Width="200"/>
-                    <Button x:Name="btnCliente" Content="CLIENTE" Margin="20,145,20,25" Click="click_cliente"/>
+                    <Button x:Name="btnCliente" Content="cliente" Margin="20,145,20,25" Click="click_cliente"/>
                 </Grid>
             </Border>
             <Border BorderBrush="#00695C" BorderThickness="2" HorizontalAlignment="Right" Margin="0,0,10,20" Height="194" VerticalAlignment="Bottom" Width="244">
