@@ -26,34 +26,30 @@ namespace compagniaAerea
 
         }
 
-        private void click_dipendente(object sender, RoutedEventArgs e)
+        private void click_apriFormCliente(object sender, RoutedEventArgs e)
         {
-            gridDipendente.Visibility = Visibility.Visible;
-           
+            MessageBox.Show("Apertura Form Cliente");
         }
 
-        private void click_cliente(object sender, RoutedEventArgs e)
+        private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
-            gridCliente.Visibility = Visibility.Visible;
-            
+            gridRegistrazione.Visibility = Visibility.Visible;
+            main.Visibility = Visibility.Hidden;
         }
 
-        private void click_back(object sender, RoutedEventArgs e)
+        /*private void click_back(object sender, RoutedEventArgs e)
         {
             back();//metodo di ritorno al main
         }
 
-        /*private void clrek(object sender, RoutedEventArgs e)
-        {
-            back();//metodo di ritorno al main
-        }*/
+        
 
         private void back()
         {
             gridCliente.Visibility = Visibility.Hidden;
             gridDipendente.Visibility = Visibility.Hidden;
            
-        }
+        }*/
 
      
     }
