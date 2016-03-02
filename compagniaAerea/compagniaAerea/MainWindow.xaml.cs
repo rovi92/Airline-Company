@@ -27,7 +27,7 @@ namespace compagniaAerea
 
          }
 
-        private void click_apriFormCliente(object sender, RoutedEventArgs e)
+        private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
             cliente.Window1 cl = new cliente.Window1();
             cl.Show();
@@ -39,6 +39,12 @@ namespace compagniaAerea
         {
             gridRegistrazione.Visibility = Visibility.Visible;
             main.Visibility = Visibility.Hidden;
+        }
+
+        private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
+        {
+            //Qui il codice della form per il cliente registrato
+            MessageBox.Show("Apri form registrato");
         }
 
         /*private void click_back(object sender, RoutedEventArgs e)
@@ -55,7 +61,7 @@ namespace compagniaAerea
            
         }*/
 
-     
+
     }
 
 }

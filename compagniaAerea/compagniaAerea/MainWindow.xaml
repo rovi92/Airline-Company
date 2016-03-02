@@ -8,44 +8,44 @@
         Title="MainWindow" Height="360" Width="560">
     <Grid Name="base" Background="#F5F5F5" Visibility="Visible">
         <Grid Name="main" Background="#F5F5F5">
-            <Border BorderBrush="#0277BD" BorderThickness="2" HorizontalAlignment="Left" Height="218" Margin="15,95,0,0" VerticalAlignment="Top" Width="215">
-                <Grid HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="210" Background="#B3E5FC">
-                    <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6"/>
-                    <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
+            <Border BorderBrush="#FFFFAF4E" BorderThickness="2" HorizontalAlignment="Left" Height="218" Margin="15,95,0,0" VerticalAlignment="Top" Width="215">
+                <Grid HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000">
+                    <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
+                    <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
                     <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-                    <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,94,131,104" Text="Password:"/>
+                    <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,94,131,104" Text="Password:" Foreground="White"/>
                     <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,112,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
-                    <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,161,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="click_apriFormCliente"/>
-                    <Label Height="25" Margin="19,133,20,56">
+                    <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,161,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="click_apriFormClienteRegistrato"/>
+                    <Label Height="25" Margin="19,133,20,56" Foreground="#FFFFC4C4">
                         <Hyperlink Click="click_apriRegistrazione">
-                            <TextBlock Text="Non hai un account? Registrati" />
+                            <TextBlock Text="Non hai un account? Registrati" Foreground="White" />
                         </Hyperlink>
                     </Label>
                     <Label Height="25" Margin="15,184,15,5">
-                        <Hyperlink Click="click_apriFormCliente">
+                        <Hyperlink Click="click_apriFormClienteNonRegistrato">
                             <InlineUIContainer>
-                                <TextBlock Height="17" RenderTransformOrigin="0.282,0.533" Width="169" ><Run Text="Oppure prenota "/><Run Text="il"/><Run Text=" tuo"/><Run Text=" biglietto"/></TextBlock>
+                                <TextBlock Height="17" RenderTransformOrigin="0.282,0.533" Width="169" Foreground="White" ><Run Text="Oppure prenota "/><Run Text="il"/><Run Text=" tuo"/><Run Text=" biglietto"/></TextBlock>
                             </InlineUIContainer>
                         </Hyperlink>
                     </Label>
 
-        </Grid>
+                </Grid>
             </Border>
-            <Border BorderBrush="#0277BD" BorderThickness="2" HorizontalAlignment="Left" Height="218" Margin="260,95,0,0" VerticalAlignment="Top" Width="275">
-                <Grid Height="214" VerticalAlignment="Top" Background="#B3E5FC" HorizontalAlignment="Left" Width="271" >
-                    <TextBlock x:Name="biglietto_title" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="Ricerca Biglietto" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Width="181" Opacity="0.6"/>
-                    <TextBlock x:Name="codice_biglietto" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Codice Biglietto:" VerticalAlignment="Top" Margin="15,44,0,0"/>
+            <Border BorderBrush="#FFFFAF4E" BorderThickness="2" HorizontalAlignment="Left" Height="218" Margin="260,95,0,0" VerticalAlignment="Top" Width="275">
+                <Grid Height="214" VerticalAlignment="Top" Background="#FF9E0000" HorizontalAlignment="Left" Width="271" >
+                    <TextBlock x:Name="biglietto_title" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="Ricerca Biglietto" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Width="181" Opacity="0.6" Foreground="White"/>
+                    <TextBlock x:Name="codice_biglietto" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Codice Biglietto:" VerticalAlignment="Top" Margin="15,44,0,0" Foreground="White"/>
                     <TextBox x:Name="CodiceBigliettotxt" HorizontalAlignment="Left" Height="20" Margin="15,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" IsHitTestVisible="True" AllowDrop="True" Tag="" Background="White"/>
-                    <TextBlock x:Name="nome_biglietto" HorizontalAlignment="Left" Margin="15,98,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="nome_biglietto" HorizontalAlignment="Left" Margin="15,98,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top" Foreground="White"/>
                     <TextBox x:Name="NomeBigliettotxt" HorizontalAlignment="Left" Height="20" Margin="15,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101"/>
-                    <TextBlock x:Name="cognome_biglietto" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Cognome:" VerticalAlignment="Top" Margin="118,98,0,0"/>
+                    <TextBlock x:Name="cognome_biglietto" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Cognome:" VerticalAlignment="Top" Margin="118,98,0,0" Foreground="White"/>
                     <TextBox x:Name="CognomeBigliettotxt" HorizontalAlignment="Left" Height="20" Margin="118,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
                     <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
-        </Grid>
+                </Grid>
             </Border>
             <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="10,8,0,0" VerticalAlignment="Top" Width="532"/>
 
-    </Grid>
+        </Grid>
         <Grid Name="gridRegistrazione" Background="#F5F5F5" Visibility="Hidden">
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
