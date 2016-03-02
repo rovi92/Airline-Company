@@ -13,7 +13,7 @@
             <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="172,208,0,0" VerticalAlignment="Top" Width="180"/>
             <TextBox x:Name="txtUtente" HorizontalAlignment="Left" Height="24" Margin="172,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="245" Margin="160,54,0,0" VerticalAlignment="Top" Width="208"/>
-            <Button x:Name="btnLogIn" Content="Log In" HorizontalAlignment="Left" Margin="228,250,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnLogIn" Content="Log In" HorizontalAlignment="Left" Margin="228,250,0,0" VerticalAlignment="Top" Width="75" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
         </Grid>
         <Grid x:Name="gridCliente" HorizontalAlignment="Left" Height="319" Margin="0,-4,0,0" VerticalAlignment="Top" Width="512" Visibility="Hidden">
             <Button x:Name="btnControlla" Content="Controlla il tuo biglietto" HorizontalAlignment="Left" Height="252" Margin="257,57,0,0" VerticalAlignment="Top" Width="224"/>
