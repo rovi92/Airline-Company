@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,22 +24,23 @@ namespace compagniaAerea
         public MainWindow()
         {
             InitializeComponent();
-          
+            
 
-         }
+        }
+      
+        Boolean rdbState = true;
+
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-            cliente.Window1 cl = new cliente.Window1();
-            cl.Show();
-            this.Close();
+            
             
         }
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
             gridRegistrazione.Visibility = Visibility.Visible;
-            main.Visibility = Visibility.Hidden;
+            
         }
 
         private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
@@ -47,21 +49,34 @@ namespace compagniaAerea
             MessageBox.Show("Apri form registrato");
         }
 
-        /*private void click_back(object sender, RoutedEventArgs e)
+        private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
         {
-            back();//metodo di ritorno al main
+            if (this.rdbState == false)
+            {
+                dataRitorno.Visibility = Visibility.Visible;
+                tblRitorno.Visibility = Visibility.Visible;
+                this.rdbState = true;
+            }
         }
 
-        
-
-        private void back()
+        private void rdbSoloAndata_Checked(object sender, RoutedEventArgs e)
         {
-            gridCliente.Visibility = Visibility.Hidden;
-            gridDipendente.Visibility = Visibility.Hidden;
-           
-        }*/
+            this.rdbState = false;
+            dataRitorno.Visibility = Visibility.Hidden;
+            tblRitorno.Visibility = Visibility.Hidden;
+        }
 
+        private void Accedi_Click(object sender, RoutedEventArgs e)
+        {
+            gridSelezionaVolo.Visibility = Visibility.Hidden;
+            gridLogIn.Visibility = Visibility.Visible;
+        }
 
+        private void Registrazione_Click(object sender, RoutedEventArgs e)
+        {
+            gridRegistrazione.Visibility = Visibility.Visible;
+            
+        }
     }
 
 }
