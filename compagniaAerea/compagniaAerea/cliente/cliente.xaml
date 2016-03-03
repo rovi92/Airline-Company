@@ -63,8 +63,7 @@
                 <TextBlock x:Name="scali" HorizontalAlignment="Left" Margin="395,36,0,0" TextWrapping="Wrap" Text="eventuali scali" VerticalAlignment="Top"/>
                 
                 <TextBlock x:Name="Volo" HorizontalAlignment="Left" Margin="657,37,0,0" TextWrapping="Wrap" Text="Selezionare il volo" VerticalAlignment="Top"/>               
-                <Button x:Name="btnsave" Content="salva" Grid.Column="1" HorizontalAlignment="Left" Margin="285,393,0,0" VerticalAlignment="Top" Width="76" Click="button1_Click"/>
-
+                
             </Grid>
            
 
