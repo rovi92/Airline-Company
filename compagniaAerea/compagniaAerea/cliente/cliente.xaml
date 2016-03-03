@@ -36,7 +36,7 @@
             <TextBox x:Name="txtCittà" HorizontalAlignment="Left" Height="23" Margin="103,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
             <TextBox x:Name="txtCap" HorizontalAlignment="Left" Height="23" Margin="241,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
             <TextBox x:Name="txtstato" HorizontalAlignment="Left" Height="23" Margin="383,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-            <Grid x:Name="andata" Height="239" Margin="0,149,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Grid x:Name="gridVolo" Height="239" Margin="0,149,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <Calendar Margin="0,64,558,0" VerticalAlignment="Top" Height="165" HorizontalAlignment="Right" Width="208"/>
 
                 <TextBlock x:Name="partenza_Copy" HorizontalAlignment="Left" Margin="261,34,0,0" TextWrapping="Wrap" Text="partenza" VerticalAlignment="Top"/>
