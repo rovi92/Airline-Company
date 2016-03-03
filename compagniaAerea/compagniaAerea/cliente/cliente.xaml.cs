@@ -24,11 +24,6 @@ namespace compagniaAerea.cliente
             InitializeComponent();
            
         }
-
-    
-
-      
-
-      
+                
     }
 }
