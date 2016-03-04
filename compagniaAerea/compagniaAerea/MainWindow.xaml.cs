@@ -21,14 +21,24 @@ namespace compagniaAerea
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        int gridPrec = -1;//prima variabile negativa visto che la arraylist parte da 0
+        int gridCorrente = -1;//logicamente anche questa la faccio partire da -1 perchè lasciarla vuota mi dava problemi e se è vuota non è null in c#
+        Boolean rdbState = true;
+        ArrayList gridchange = new ArrayList();//ho creato una array list in modo da dare a ogni grid un numero,un id identificativo in questo caso partendo da 0
+        Grid grid;
+        
+         public MainWindow()
         {
-            InitializeComponent();
-            
+          
+          //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
 
+            InitializeComponent();
+            populateGrid();
+            grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
+            grid.Visibility = Visibility.Visible;
         }
       
-        Boolean rdbState = true;
+        
 
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
@@ -39,7 +49,8 @@ namespace compagniaAerea
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
-            gridRegistrazione.Visibility = Visibility.Visible;
+            // gridRegistrazione.Visibility = Visibility.Visible;
+           
             
         }
 
@@ -68,15 +79,56 @@ namespace compagniaAerea
 
         private void Accedi_Click(object sender, RoutedEventArgs e)
         {
-            gridSelezionaVolo.Visibility = Visibility.Hidden;
-            gridLogIn.Visibility = Visibility.Visible;
+
+            //gridLogIn.Visibility = Visibility.Visible;
+            this.gridCorrente = 0;
+            currentGrid(this.gridCorrente);
+
         }
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
-            gridRegistrazione.Visibility = Visibility.Visible;
-            
+            //  gridRegistrazione.Visibility = Visibility.Visible;
+            this.gridCorrente = 1;
+            currentGrid(this.gridCorrente);
+
+        }
+        public void populateGrid()
+        { //popolamento della lista
+            gridchange.Add(gridLogIn);//grid di logIn pos 0
+            gridchange.Add(gridRegistrazione);//grid di registrazione pos 1
+            gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
+            gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
+        }
+
+        public void currentGrid(int num)  /* metodo di apertura e chiusura delle grid,d'ora in avanti per aprire basta 
+                                          aggiungere nel popolamento la grid che si vuole aprire
+                                          vedere la posizione in cui è 
+                                          aggiungerla il numero di posizione al this.gridCurrent e passarlo a questo metodo e possiamo creare 12123213123 ∞ diciamo*/
+        {
+            if (this.gridCorrente != this.gridPrec)
+            {
+                grid.Visibility = Visibility.Hidden;//la prima grid che pprende la rende invisibile visto che ha controllato se la pagina è cambiata
+
+                grid = (Grid)gridchange[this.gridCorrente];//carico una nuova grid
+                grid.Visibility = Visibility.Visible;
+
+                this.gridPrec = this.gridCorrente;//metto nella grid precedente il valore della corrente in modo che quando cambia ha già il valore impostato
+            }
+        }
+
+        private void prenotaVolo_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 2;
+            currentGrid(this.gridCorrente);
+        }
+
+        private void InfoBiglietto_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 3;
+            currentGrid(this.gridCorrente);
         }
     }
+      
 
 }
