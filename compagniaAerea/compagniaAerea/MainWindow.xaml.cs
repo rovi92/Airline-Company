@@ -29,9 +29,7 @@ namespace compagniaAerea
         
          public MainWindow()
         {
-          
-          //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
-
+            //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
@@ -49,15 +47,16 @@ namespace compagniaAerea
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
-            // gridRegistrazione.Visibility = Visibility.Visible;
-           
-            
+            this.gridCorrente = 1;
+            currentGrid(this.gridCorrente);
+
+
         }
 
         private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
         {
-            //Qui il codice della form per il cliente registrato
-            MessageBox.Show("Apri form registrato");
+            this.gridCorrente = 4;
+            currentGrid(this.gridCorrente);
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -99,6 +98,7 @@ namespace compagniaAerea
             gridchange.Add(gridRegistrazione);//grid di registrazione pos 1
             gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
             gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
+            gridchange.Add(gridDipendente);//grid dipendente pos 4
         }
 
         public void currentGrid(int num)  /* metodo di apertura e chiusura delle grid,d'ora in avanti per aprire basta 
@@ -126,6 +126,12 @@ namespace compagniaAerea
         private void InfoBiglietto_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 3;
+            currentGrid(this.gridCorrente);
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 0;
             currentGrid(this.gridCorrente);
         }
     }
