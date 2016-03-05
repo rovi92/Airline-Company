@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White" Visibility="Visible">
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
             <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
@@ -73,15 +73,18 @@
         </Grid>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="860" Background="#FFA8A5A5">
 
-            <MenuItem x:Name="LogIn" Header="_Login" >
-                <MenuItem x:Name="Accedi" Header="Accedi" Click="Accedi_Click"/>
-                <MenuItem x:Name="Registrati" Header="Registrati" Click="Registrazione_Click"/>
+            <MenuItem x:Name="MILogIn" Header="_Login" >
+                <MenuItem x:Name="MIAccedi" Header="Accedi" Click="Accedi_Click"/>
+                <MenuItem x:Name="MIRegistrati" Header="Registrati" Click="Registrazione_Click"/>
             </MenuItem>
-            <MenuItem x:Name="Voli" Header="I miei voli" >
-                <MenuItem x:Name="prenotaVolo" Header="Prenota il tuo volo" Click="prenotaVolo_Click" />
-                <MenuItem x:Name="infoBiglietto" Header="info sul tuo biglietto" Click="InfoBiglietto_Click" />
+            <MenuItem x:Name="MIVoli" Header="I miei voli" >
+                <MenuItem x:Name="MIprenotaVolo" Header="Prenota il tuo volo" Click="prenotaVolo_Click" />
+                <MenuItem x:Name="MIinfoBiglietto" Header="info sul tuo biglietto" Click="InfoBiglietto_Click" />
             </MenuItem>
-            <MenuItem x:Name="offerte" Header="Offerte" />
+            <MenuItem x:Name="MIofferte" Header="Offerte" />
+            <MenuItem x:Name="MIturni" Header="Turni dipendenti" Visibility="Hidden"/>
+            <MenuItem x:Name="MIGestioneAerei" Header="Gestione aerei" Visibility="Hidden"/>
+            <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
 
         </Menu>
         <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White" Visibility="Hidden">

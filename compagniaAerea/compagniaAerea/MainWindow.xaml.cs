@@ -41,14 +41,15 @@ namespace compagniaAerea
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-            
-            
+
+         
         }
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 1;
             currentGrid(this.gridCorrente);
+           
 
 
         }
@@ -57,6 +58,9 @@ namespace compagniaAerea
         {
             this.gridCorrente = 4;
             currentGrid(this.gridCorrente);
+            MIGestioneAerei.Visibility = Visibility.Visible;
+            MIGestioneTariffario.Visibility = Visibility.Visible;
+            MIturni.Visibility = Visibility.Visible;
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -133,6 +137,10 @@ namespace compagniaAerea
         {
             this.gridCorrente = 0;
             currentGrid(this.gridCorrente);
+            MIGestioneAerei.Visibility = Visibility.Hidden;
+            MIGestioneTariffario.Visibility = Visibility.Hidden;
+            MIturni.Visibility = Visibility.Hidden;
+
         }
     }
       
