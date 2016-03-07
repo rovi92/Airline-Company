@@ -26,6 +26,8 @@ namespace compagniaAerea
         Boolean rdbState = true;
         ArrayList gridchange = new ArrayList();//ho creato una array list in modo da dare a ogni grid un numero,un id identificativo in questo caso partendo da 0
         Grid grid;
+        String stringa_connessione;//Variabile per la stringa di connessione
+        Gestione_Cliente gestione_cliente;
         
          public MainWindow()
         {
@@ -34,14 +36,23 @@ namespace compagniaAerea
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
+
+            //Stringa di conessione al database
+            stringa_connessione = "Server = tcp:erikserver.database.windows.net,1433; Database = UniboAirlines; User ID = erik_amministratore@erikserver; Password = Cesenate_81; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
         }
-      
-        
+
+
+        //Click del bottone Registrazione presente nella form di Registrazione
+        private void Registrazione_Cliente(object sender, RoutedEventArgs e)
+        {
+            gestione_cliente = new Gestione_Cliente(stringa_connessione);
+            gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text, (DateTime) DataNascitaPicker.SelectedDate , Usernametxt.Text, "Prova" , Indirizzotxt.Text, Telefonotxt.Text, Emailtxt.Text, StatoCombobox.Text, Regionetxt.Text, Cittàtxt.Text, int.Parse(Captxt.Text), CodiceFiscaletxt.Text);
+        }
 
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-
+        
          
         }
 
@@ -94,6 +105,7 @@ namespace compagniaAerea
             //  gridRegistrazione.Visibility = Visibility.Visible;
             this.gridCorrente = 1;
             currentGrid(this.gridCorrente);
+          
 
         }
         public void populateGrid()
@@ -142,6 +154,8 @@ namespace compagniaAerea
             MIturni.Visibility = Visibility.Hidden;
 
         }
+       
+       
     }
       
 

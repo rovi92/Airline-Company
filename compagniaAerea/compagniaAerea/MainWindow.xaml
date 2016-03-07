@@ -40,7 +40,7 @@
             <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
 
         </Grid>
-        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Hidden" >
+        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Visible" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="cognome" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Cognome:" VerticalAlignment="Top" RenderTransformOrigin="0.486,-0.683"/>
@@ -70,6 +70,7 @@
             <TextBox x:Name="Captxt" HorizontalAlignment="Left" Height="20" Margin="359,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="codice_fiscale" HorizontalAlignment="Left" Margin="274,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="78"><Run Text="Codice Fiscale:"/><LineBreak/><Run/></TextBlock>
             <TextBox x:Name="CodiceFiscaletxt" HorizontalAlignment="Left" Height="20" Margin="359,264,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="Registrazionebtn" Content="Registrati" HorizontalAlignment="Left" Margin="359,338,0,0" VerticalAlignment="Top" Width="120" Click="Registrazione_Cliente"/>
         </Grid>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="860" Background="#FFA8A5A5">
 
@@ -118,7 +119,7 @@
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
         <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Background="White" Visibility="Hidden">
-           <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
+            <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
             <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="765,2,0,0" VerticalAlignment="Top" Width="75" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="100" Margin="965,208,-205,0" VerticalAlignment="Top" Width="100"/>
