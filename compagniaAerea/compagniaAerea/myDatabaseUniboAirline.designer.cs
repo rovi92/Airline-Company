@@ -22,6 +22,7 @@ namespace compagniaAerea
 	using System;
 	
 	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="UniboAirlines")]
 	public partial class myDatabaseUniboAirlineDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -29,7 +30,22 @@ namespace compagniaAerea
 		
     #region Definizioni metodo Extensibility
     partial void OnCreated();
+    partial void InsertBabaglio_Imbarcato(Babaglio_Imbarcato instance);
+    partial void UpdateBabaglio_Imbarcato(Babaglio_Imbarcato instance);
+    partial void DeleteBabaglio_Imbarcato(Babaglio_Imbarcato instance);
+    partial void InsertPasseggero(Passeggero instance);
+    partial void UpdatePasseggero(Passeggero instance);
+    partial void DeletePasseggero(Passeggero instance);
+    partial void InsertTipo_Bagaglio(Tipo_Bagaglio instance);
+    partial void UpdateTipo_Bagaglio(Tipo_Bagaglio instance);
+    partial void DeleteTipo_Bagaglio(Tipo_Bagaglio instance);
     #endregion
+		
+		public myDatabaseUniboAirlineDataContext() : 
+				base(global::compagniaAerea.Properties.Settings.Default.UniboAirlinesConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public myDatabaseUniboAirlineDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -53,6 +69,693 @@ namespace compagniaAerea
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<Babaglio_Imbarcato> Babaglio_Imbarcato
+		{
+			get
+			{
+				return this.GetTable<Babaglio_Imbarcato>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Passeggero> Passeggero
+		{
+			get
+			{
+				return this.GetTable<Passeggero>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Tipo_Bagaglio> Tipo_Bagaglio
+		{
+			get
+			{
+				return this.GetTable<Tipo_Bagaglio>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Babaglio_Imbarcato")]
+	public partial class Babaglio_Imbarcato : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idBagaglio;
+		
+		private int _Dimensione;
+		
+		private int _idTipo_bagaglio;
+		
+		private EntityRef<Tipo_Bagaglio> _Tipo_Bagaglio;
+		
+    #region Definizioni metodo Extensibility
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidBagaglioChanging(int value);
+    partial void OnidBagaglioChanged();
+    partial void OnDimensioneChanging(int value);
+    partial void OnDimensioneChanged();
+    partial void OnidTipo_bagaglioChanging(int value);
+    partial void OnidTipo_bagaglioChanged();
+    #endregion
+		
+		public Babaglio_Imbarcato()
+		{
+			this._Tipo_Bagaglio = default(EntityRef<Tipo_Bagaglio>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idBagaglio", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idBagaglio
+		{
+			get
+			{
+				return this._idBagaglio;
+			}
+			set
+			{
+				if ((this._idBagaglio != value))
+				{
+					this.OnidBagaglioChanging(value);
+					this.SendPropertyChanging();
+					this._idBagaglio = value;
+					this.SendPropertyChanged("idBagaglio");
+					this.OnidBagaglioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dimensione", DbType="Int NOT NULL")]
+		public int Dimensione
+		{
+			get
+			{
+				return this._Dimensione;
+			}
+			set
+			{
+				if ((this._Dimensione != value))
+				{
+					this.OnDimensioneChanging(value);
+					this.SendPropertyChanging();
+					this._Dimensione = value;
+					this.SendPropertyChanged("Dimensione");
+					this.OnDimensioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipo_bagaglio", DbType="Int NOT NULL")]
+		public int idTipo_bagaglio
+		{
+			get
+			{
+				return this._idTipo_bagaglio;
+			}
+			set
+			{
+				if ((this._idTipo_bagaglio != value))
+				{
+					if (this._Tipo_Bagaglio.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidTipo_bagaglioChanging(value);
+					this.SendPropertyChanging();
+					this._idTipo_bagaglio = value;
+					this.SendPropertyChanged("idTipo_bagaglio");
+					this.OnidTipo_bagaglioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tipo_Bagaglio_Babaglio_Imbarcato", Storage="_Tipo_Bagaglio", ThisKey="idTipo_bagaglio", OtherKey="idTipo_bagaglio", IsForeignKey=true)]
+		public Tipo_Bagaglio Tipo_Bagaglio
+		{
+			get
+			{
+				return this._Tipo_Bagaglio.Entity;
+			}
+			set
+			{
+				Tipo_Bagaglio previousValue = this._Tipo_Bagaglio.Entity;
+				if (((previousValue != value) 
+							|| (this._Tipo_Bagaglio.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tipo_Bagaglio.Entity = null;
+						previousValue.Babaglio_Imbarcato.Remove(this);
+					}
+					this._Tipo_Bagaglio.Entity = value;
+					if ((value != null))
+					{
+						value.Babaglio_Imbarcato.Add(this);
+						this._idTipo_bagaglio = value.idTipo_bagaglio;
+					}
+					else
+					{
+						this._idTipo_bagaglio = default(int);
+					}
+					this.SendPropertyChanged("Tipo_Bagaglio");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Passeggero")]
+	public partial class Passeggero : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPasseggero;
+		
+		private string _Nome;
+		
+		private string _Cognome;
+		
+		private System.DateTime _Data_di_nascita;
+		
+		private string _Username;
+		
+		private string _Password;
+		
+		private string _Indirizzo;
+		
+		private string _Telefono;
+		
+		private string _Email;
+		
+		private string _Stato;
+		
+		private string _Regione;
+		
+		private string _Città;
+		
+		private int _CAP;
+		
+		private string _CF;
+		
+    #region Definizioni metodo Extensibility
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPasseggeroChanging(int value);
+    partial void OnidPasseggeroChanged();
+    partial void OnNomeChanging(string value);
+    partial void OnNomeChanged();
+    partial void OnCognomeChanging(string value);
+    partial void OnCognomeChanged();
+    partial void OnData_di_nascitaChanging(System.DateTime value);
+    partial void OnData_di_nascitaChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnIndirizzoChanging(string value);
+    partial void OnIndirizzoChanged();
+    partial void OnTelefonoChanging(string value);
+    partial void OnTelefonoChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnStatoChanging(string value);
+    partial void OnStatoChanged();
+    partial void OnRegioneChanging(string value);
+    partial void OnRegioneChanged();
+    partial void OnCittàChanging(string value);
+    partial void OnCittàChanged();
+    partial void OnCAPChanging(int value);
+    partial void OnCAPChanged();
+    partial void OnCFChanging(string value);
+    partial void OnCFChanged();
+    #endregion
+		
+		public Passeggero()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPasseggero", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPasseggero
+		{
+			get
+			{
+				return this._idPasseggero;
+			}
+			set
+			{
+				if ((this._idPasseggero != value))
+				{
+					this.OnidPasseggeroChanging(value);
+					this.SendPropertyChanging();
+					this._idPasseggero = value;
+					this.SendPropertyChanged("idPasseggero");
+					this.OnidPasseggeroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Nome
+		{
+			get
+			{
+				return this._Nome;
+			}
+			set
+			{
+				if ((this._Nome != value))
+				{
+					this.OnNomeChanging(value);
+					this.SendPropertyChanging();
+					this._Nome = value;
+					this.SendPropertyChanged("Nome");
+					this.OnNomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cognome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Cognome
+		{
+			get
+			{
+				return this._Cognome;
+			}
+			set
+			{
+				if ((this._Cognome != value))
+				{
+					this.OnCognomeChanging(value);
+					this.SendPropertyChanging();
+					this._Cognome = value;
+					this.SendPropertyChanged("Cognome");
+					this.OnCognomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data_di_nascita", DbType="Date NOT NULL")]
+		public System.DateTime Data_di_nascita
+		{
+			get
+			{
+				return this._Data_di_nascita;
+			}
+			set
+			{
+				if ((this._Data_di_nascita != value))
+				{
+					this.OnData_di_nascitaChanging(value);
+					this.SendPropertyChanging();
+					this._Data_di_nascita = value;
+					this.SendPropertyChanged("Data_di_nascita");
+					this.OnData_di_nascitaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(20)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indirizzo", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Indirizzo
+		{
+			get
+			{
+				return this._Indirizzo;
+			}
+			set
+			{
+				if ((this._Indirizzo != value))
+				{
+					this.OnIndirizzoChanging(value);
+					this.SendPropertyChanging();
+					this._Indirizzo = value;
+					this.SendPropertyChanged("Indirizzo");
+					this.OnIndirizzoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stato", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Stato
+		{
+			get
+			{
+				return this._Stato;
+			}
+			set
+			{
+				if ((this._Stato != value))
+				{
+					this.OnStatoChanging(value);
+					this.SendPropertyChanging();
+					this._Stato = value;
+					this.SendPropertyChanged("Stato");
+					this.OnStatoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Regione", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Regione
+		{
+			get
+			{
+				return this._Regione;
+			}
+			set
+			{
+				if ((this._Regione != value))
+				{
+					this.OnRegioneChanging(value);
+					this.SendPropertyChanging();
+					this._Regione = value;
+					this.SendPropertyChanged("Regione");
+					this.OnRegioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Città", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Città
+		{
+			get
+			{
+				return this._Città;
+			}
+			set
+			{
+				if ((this._Città != value))
+				{
+					this.OnCittàChanging(value);
+					this.SendPropertyChanging();
+					this._Città = value;
+					this.SendPropertyChanged("Città");
+					this.OnCittàChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAP", DbType="Int NOT NULL")]
+		public int CAP
+		{
+			get
+			{
+				return this._CAP;
+			}
+			set
+			{
+				if ((this._CAP != value))
+				{
+					this.OnCAPChanging(value);
+					this.SendPropertyChanging();
+					this._CAP = value;
+					this.SendPropertyChanged("CAP");
+					this.OnCAPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CF", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		public string CF
+		{
+			get
+			{
+				return this._CF;
+			}
+			set
+			{
+				if ((this._CF != value))
+				{
+					this.OnCFChanging(value);
+					this.SendPropertyChanging();
+					this._CF = value;
+					this.SendPropertyChanged("CF");
+					this.OnCFChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tipo_Bagaglio")]
+	public partial class Tipo_Bagaglio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idTipo_bagaglio;
+		
+		private string _Descrizione;
+		
+		private double _Prezzo;
+		
+		private EntitySet<Babaglio_Imbarcato> _Babaglio_Imbarcato;
+		
+    #region Definizioni metodo Extensibility
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidTipo_bagaglioChanging(int value);
+    partial void OnidTipo_bagaglioChanged();
+    partial void OnDescrizioneChanging(string value);
+    partial void OnDescrizioneChanged();
+    partial void OnPrezzoChanging(double value);
+    partial void OnPrezzoChanged();
+    #endregion
+		
+		public Tipo_Bagaglio()
+		{
+			this._Babaglio_Imbarcato = new EntitySet<Babaglio_Imbarcato>(new Action<Babaglio_Imbarcato>(this.attach_Babaglio_Imbarcato), new Action<Babaglio_Imbarcato>(this.detach_Babaglio_Imbarcato));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTipo_bagaglio", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idTipo_bagaglio
+		{
+			get
+			{
+				return this._idTipo_bagaglio;
+			}
+			set
+			{
+				if ((this._idTipo_bagaglio != value))
+				{
+					this.OnidTipo_bagaglioChanging(value);
+					this.SendPropertyChanging();
+					this._idTipo_bagaglio = value;
+					this.SendPropertyChanged("idTipo_bagaglio");
+					this.OnidTipo_bagaglioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descrizione", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Descrizione
+		{
+			get
+			{
+				return this._Descrizione;
+			}
+			set
+			{
+				if ((this._Descrizione != value))
+				{
+					this.OnDescrizioneChanging(value);
+					this.SendPropertyChanging();
+					this._Descrizione = value;
+					this.SendPropertyChanged("Descrizione");
+					this.OnDescrizioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prezzo", DbType="Float NOT NULL")]
+		public double Prezzo
+		{
+			get
+			{
+				return this._Prezzo;
+			}
+			set
+			{
+				if ((this._Prezzo != value))
+				{
+					this.OnPrezzoChanging(value);
+					this.SendPropertyChanging();
+					this._Prezzo = value;
+					this.SendPropertyChanged("Prezzo");
+					this.OnPrezzoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tipo_Bagaglio_Babaglio_Imbarcato", Storage="_Babaglio_Imbarcato", ThisKey="idTipo_bagaglio", OtherKey="idTipo_bagaglio")]
+		public EntitySet<Babaglio_Imbarcato> Babaglio_Imbarcato
+		{
+			get
+			{
+				return this._Babaglio_Imbarcato;
+			}
+			set
+			{
+				this._Babaglio_Imbarcato.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Babaglio_Imbarcato(Babaglio_Imbarcato entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tipo_Bagaglio = this;
+		}
+		
+		private void detach_Babaglio_Imbarcato(Babaglio_Imbarcato entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tipo_Bagaglio = null;
 		}
 	}
 }

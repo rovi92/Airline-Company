@@ -1,1 +1,37 @@
-﻿
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UniboAirlines" Class="myDatabaseUniboAirlineDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore@erikserver" SettingsObjectName="compagniaAerea.Properties.Settings" SettingsPropertyName="UniboAirlinesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Babaglio_Imbarcato" Member="Babaglio_Imbarcato">
+    <Type Name="Babaglio_Imbarcato">
+      <Column Name="idBagaglio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Dimensione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTipo_bagaglio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tipo_Bagaglio_Babaglio_Imbarcato" Member="Tipo_Bagaglio" ThisKey="idTipo_bagaglio" OtherKey="idTipo_bagaglio" Type="Tipo_Bagaglio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Passeggero" Member="Passeggero">
+    <Type Name="Passeggero">
+      <Column Name="idPasseggero" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Cognome" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Data_di_nascita" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Indirizzo" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Stato" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Regione" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Città" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CF" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tipo_Bagaglio" Member="Tipo_Bagaglio">
+    <Type Name="Tipo_Bagaglio">
+      <Column Name="idTipo_bagaglio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descrizione" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Prezzo" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Tipo_Bagaglio_Babaglio_Imbarcato" Member="Babaglio_Imbarcato" ThisKey="idTipo_bagaglio" OtherKey="idTipo_bagaglio" Type="Babaglio_Imbarcato" />
+    </Type>
+  </Table>
+</Database>

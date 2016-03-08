@@ -4,29 +4,51 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace compagniaAerea
 {
     class Gestione_Cliente
     {
-        String stringa_connessione;
-        SqlConnection con;//con sta per connessione
-        SqlCommand cmd;//cmd sta per command
+        private myDatabaseUniboAirlineDataContext myDatabase;
 
-        public Gestione_Cliente(String stringa_connessione)
+        public Gestione_Cliente()
         {
-            this.stringa_connessione = stringa_connessione;
+            myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
         }
-
-        public void Registrazione_Cliente(String nome, String cognome, DateTime data_di_nascita, String username, String password, String indirizzo, String telefono, String email, String stato, String regione, String città, int CAP, String CF)
+        //metodo per registrazione
+        public void Registrazione_Cliente(String nome, String cognome, DateTime data_di_nascita, String username, String password,String password2, String indirizzo, String telefono, String email, String stato, String regione, String città, int CAP, String CF)
         {
-            con = new SqlConnection(stringa_connessione);
-            string query = "INSERT INTO [Clienti] (Nome, Cognome, Data_di_nascita, Username, Password, Indirizzo, Telefono, Email, Stato, Regione, Città, CAP, CF) VALUES('" + nome + "','" + cognome + "','" + data_di_nascita + "','" + username + "','" + password + "','" + indirizzo + "','" + telefono + "','" + email + "','" + stato + "','" + regione + "','" + città + "','" + CAP + "','" + CF + "')";
-            cmd = new SqlCommand(query, con);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-       
+            int numeroId = 0;
+            if (password == password2)
+            {
+                numeroId++;
+                Passeggero p = new Passeggero()
+                {
+                    //inserimento dati nel database
+                    idPasseggero = numeroId,
+                    Nome = nome,
+                    Cognome = cognome,
+                    Data_di_nascita = data_di_nascita,
+                    Username = username,
+                    Password = password,
+                    Telefono = telefono,
+                    Indirizzo = indirizzo,
+                    Email = email,
+                    Stato = stato,
+                    Regione = regione,
+                    Città = città,
+                    CAP = CAP,
+                    CF = CF,
+                };
+                myDatabase.Passeggero.InsertOnSubmit(p);
+                myDatabase.SubmitChanges();
+
+            }
+            else
+            {
+                MessageBox.Show("password errata");
+            }
         }
     }
 }

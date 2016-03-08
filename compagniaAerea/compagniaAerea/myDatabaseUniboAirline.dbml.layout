@@ -1,1 +1,31 @@
-﻿
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="myDatabaseUniboAirline">
+  <DataContextMoniker Name="/myDatabaseUniboAirlineDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0d1619e7-4221-4150-86e8-169badc9dd18" absoluteBounds="3.5, 0.875, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Babaglio_Imbarcato" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7a51e5f1-5e10-4118-b25c-c55403bdeb41" absoluteBounds="3.515, 1.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8735a32f-e419-4b70-8315-2ed925fff1f3" absoluteBounds="2.875, 3.125, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1321620d-62d8-4899-bdf0-f80e81dced47" absoluteBounds="2.89, 3.585, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97877b0f-2538-4084-8713-ea5d3dde3f35" absoluteBounds="0.75, 0.875, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Tipo_Bagaglio" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02d2f8fd-67cb-416e-bf44-97e8432a9f6e" absoluteBounds="0.765, 1.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.56814697265625); (3.5 : 1.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tipo_Bagaglio/Tipo_Bagaglio_Babaglio_Imbarcato" />
+      <nodes>
+        <classShapeMoniker Id="97877b0f-2538-4084-8713-ea5d3dde3f35" />
+        <classShapeMoniker Id="0d1619e7-4221-4150-86e8-169badc9dd18" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

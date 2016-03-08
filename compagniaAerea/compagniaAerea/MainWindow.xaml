@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White" Visibility="Visible">
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0">
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
             <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
@@ -40,7 +40,7 @@
             <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
 
         </Grid>
-        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Visible" >
+        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="cognome" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Cognome:" VerticalAlignment="Top" RenderTransformOrigin="0.486,-0.683"/>
@@ -61,7 +61,9 @@
             <TextBlock x:Name="telefono" HorizontalAlignment="Left" Margin="274,100,0,0" TextWrapping="Wrap" Text="Telefono:" VerticalAlignment="Top"/>
             <TextBox x:Name="Telefonotxt" HorizontalAlignment="Left" Height="20" Margin="359,99,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="stato" HorizontalAlignment="Left" Margin="274,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Stato"/><Run Text=":"/></TextBlock>
-            <ComboBox x:Name="StatoCombobox" HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120" />
+            <ComboBox x:Name="StatoCombobox" HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120" >
+                <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
+            </ComboBox>
             <TextBlock x:Name="regione" HorizontalAlignment="Left" Margin="274,166,0,0" TextWrapping="Wrap" Text="Regione:" VerticalAlignment="Top"/>
             <TextBox x:Name="Regionetxt" HorizontalAlignment="Left" Height="20" Margin="359,165,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="città" HorizontalAlignment="Left" Margin="274,199,0,0" TextWrapping="Wrap" Text="Città:" VerticalAlignment="Top"/>
@@ -122,7 +124,7 @@
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
             <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="765,2,0,0" VerticalAlignment="Top" Width="75" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="965,208,-205,0" VerticalAlignment="Top" Width="100"/>
+       
     </Grid>
 
 </Window>
