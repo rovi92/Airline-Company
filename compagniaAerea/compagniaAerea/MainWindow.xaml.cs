@@ -36,7 +36,7 @@ namespace compagniaAerea
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            gestione_cliente = new Gestione_Cliente();
+            gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
 
         }
 
