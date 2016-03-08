@@ -62,6 +62,11 @@
       <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
     </Compile>
     <Compile Include="Gestione_Cliente.cs" />
+    <Compile Include="myDatabaseUniboAirline.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
+    </Compile>
     <Compile Include="StateGrid.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +98,9 @@
     <None Include="databaseLocaleAirline.dbml.layout">
       <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
     </None>
+    <None Include="myDatabaseUniboAirline.dbml.layout">
+      <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -100,6 +108,11 @@
     <None Include="databaseLocaleAirline.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>databaseLocaleAirline.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="myDatabaseUniboAirline.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>myDatabaseUniboAirline.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
