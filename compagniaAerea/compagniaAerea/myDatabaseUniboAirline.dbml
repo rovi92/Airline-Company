@@ -1,11 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UniboAirlines" Class="myDatabaseUniboAirlineDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore@erikserver" SettingsObjectName="compagniaAerea.Properties.Settings" SettingsPropertyName="UniboAirlinesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Aereo" Member="Aereo">
+    <Type Name="Aereo">
+      <Column Name="idAereo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Modello" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Capacità" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Capacità_economy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Capacità_buisness" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Capacità_first" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPiano_di_volo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Piano_di_volo_Aereo" Member="Piano_di_volo" ThisKey="idPiano_di_volo" OtherKey="idPiano_di_volo" Type="Piano_di_volo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Aereoporto" Member="Aereoporto">
+    <Type Name="Aereoporto">
+      <Column Name="Nome" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Indirizzo" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Città" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Aereoporto_Piano_di_volo" Member="Piano_di_volo" ThisKey="Nome" OtherKey="Aereoporto_partenza" Type="Piano_di_volo" />
+      <Association Name="Aereoporto_Piano_di_volo1" Member="Piano_di_volo1" ThisKey="Nome" OtherKey="Aereporto_arrivo" Type="Piano_di_volo" />
+    </Type>
+  </Table>
   <Table Name="dbo.Babaglio_Imbarcato" Member="Babaglio_Imbarcato">
     <Type Name="Babaglio_Imbarcato">
       <Column Name="idBagaglio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Dimensione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="idTipo_bagaglio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Prenotazione_Babaglio_Imbarcato" Member="Prenotazione" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Prenotazione" IsForeignKey="true" />
       <Association Name="Tipo_Bagaglio_Babaglio_Imbarcato" Member="Tipo_Bagaglio" ThisKey="idTipo_bagaglio" OtherKey="idTipo_bagaglio" Type="Tipo_Bagaglio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pagamento" Member="Pagamento">
+    <Type Name="Pagamento">
+      <Column Name="idPagamento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Data_pagamento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo_pagamento" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Prenotazione_Pagamento" Member="Prenotazione" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Prenotazione" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Passeggero" Member="Passeggero">
@@ -24,6 +59,46 @@
       <Column Name="Città" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="CAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CF" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Association Name="Passeggero_Prenotazione" Member="Prenotazione" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Prenotazione" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Piano_di_volo" Member="Piano_di_volo">
+    <Type Name="Piano_di_volo">
+      <Column Name="idPiano_di_volo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Numero_volo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Partenza" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Arrivo" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Data_partenza" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Orario_partenza" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Data_arrivo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Orario_arrivo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Aereoporto_partenza" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Aereporto_arrivo" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Piano_di_volo_Aereo" Member="Aereo" ThisKey="idPiano_di_volo" OtherKey="idPiano_di_volo" Type="Aereo" />
+      <Association Name="Piano_di_volo_Scalo" Member="Scalo" ThisKey="idPiano_di_volo" OtherKey="idPiano_di_volo" Type="Scalo" />
+      <Association Name="Aereoporto_Piano_di_volo" Member="Aereoporto" ThisKey="Aereoporto_partenza" OtherKey="Nome" Type="Aereoporto" IsForeignKey="true" />
+      <Association Name="Aereoporto_Piano_di_volo1" Member="Aereoporto1" ThisKey="Aereporto_arrivo" OtherKey="Nome" Type="Aereoporto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prenotazione" Member="Prenotazione">
+    <Type Name="Prenotazione">
+      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Data_prenotazione" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Numero_persone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Totale" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="idPasseggero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Prenotazione_Babaglio_Imbarcato" Member="Babaglio_Imbarcato" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Babaglio_Imbarcato" />
+      <Association Name="Prenotazione_Pagamento" Member="Pagamento" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Pagamento" />
+      <Association Name="Prenotazione_Scalo" Member="Scalo" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Scalo" />
+      <Association Name="Passeggero_Prenotazione" Member="Passeggero" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Passeggero" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Scalo" Member="Scalo">
+    <Type Name="Scalo">
+      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPiano_di_volo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Piano_di_volo_Scalo" Member="Piano_di_volo" ThisKey="idPiano_di_volo" OtherKey="idPiano_di_volo" Type="Piano_di_volo" IsForeignKey="true" />
+      <Association Name="Prenotazione_Scalo" Member="Prenotazione" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Prenotazione" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Tipo_Bagaglio" Member="Tipo_Bagaglio">

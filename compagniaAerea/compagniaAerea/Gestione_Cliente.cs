@@ -19,14 +19,14 @@ namespace compagniaAerea
         //metodo per registrazione
         public void Registrazione_Cliente(String nome, String cognome, DateTime data_di_nascita, String username, String password,String password2, String indirizzo, String telefono, String email, String stato, String regione, String città, int CAP, String CF)
         {
-            int numeroId = 0;
+            
             if (password == password2)
             {
-                numeroId++;
+
                 Passeggero p = new Passeggero()
                 {
                     //inserimento dati nel database
-                    idPasseggero = numeroId,
+                    idPasseggero = 1234,
                     Nome = nome,
                     Cognome = cognome,
                     Data_di_nascita = data_di_nascita,
