@@ -26,8 +26,7 @@ namespace compagniaAerea
         Boolean rdbState = true;
         ArrayList gridchange = new ArrayList();//ho creato una array list in modo da dare a ogni grid un numero,un id identificativo in questo caso partendo da 0
         Grid grid;
-        Boolean firstTouch = false;
-        String textInBox; //contenitore del text telle dextbox
+         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_Cliente gestione_cliente;
         
@@ -67,7 +66,6 @@ namespace compagniaAerea
 
             }
         }
-
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
@@ -127,6 +125,7 @@ namespace compagniaAerea
           
 
         }
+
         public void populateGrid()
         { //popolamento della lista
             gridchange.Add(gridLogIn);//grid di logIn pos 0
@@ -136,13 +135,13 @@ namespace compagniaAerea
             gridchange.Add(gridDipendente);//grid dipendente pos 4
         }
 
-        public void currentGrid(int num)  /* metodo di apertura e chiusura delle grid,d'ora in avanti per aprire basta 
+        public void currentGrid(int num)  {
+            if (this.gridCorrente != this.gridPrec)
+            {/* metodo di apertura e chiusura delle grid,d'ora in avanti per aprire basta 
                                           aggiungere nel popolamento la grid che si vuole aprire
                                           vedere la posizione in cui è 
                                           aggiungerla il numero di posizione al this.gridCurrent e passarlo a questo metodo e possiamo creare 12123213123 ∞ diciamo*/
-        {
-            if (this.gridCorrente != this.gridPrec)
-            {
+
                 grid.Visibility = Visibility.Hidden;//la prima grid che pprende la rende invisibile visto che ha controllato se la pagina è cambiata
 
                 grid = (Grid)gridchange[this.gridCorrente];//carico una nuova grid
@@ -174,8 +173,8 @@ namespace compagniaAerea
             MIturni.Visibility = Visibility.Hidden;
 
         }
-
-        private void InFocus(object sender, RoutedEventArgs e)
+        //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
+         private void InFocus(object sender, RoutedEventArgs e) 
         {
            
             TextBox tb = (TextBox)sender;
@@ -192,7 +191,7 @@ namespace compagniaAerea
             }
         }
 
-        private void InPasswordFocus(object sender, RoutedEventArgs e)
+        private void InPasswordFocus(object sender, RoutedEventArgs e)//non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per la password
         {
             PasswordBox pb = (PasswordBox)sender;
             this.textInBox = pb.Password;
