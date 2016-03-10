@@ -210,8 +210,10 @@ namespace compagniaAerea
 
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-
-            gestione_cliente.Cerca_volo();
+            myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
+            
+            //dataGrid.ItemsSource = prova;
+           var prova = gestione_cliente.Cerca_volo();
             
          
         }
