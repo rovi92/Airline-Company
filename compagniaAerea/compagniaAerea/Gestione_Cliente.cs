@@ -11,6 +11,7 @@ namespace compagniaAerea
     class Gestione_Cliente
     {
         private myDatabaseUniboAirlineDataContext myDatabase;
+        Boolean statoRegistrazione = false;
 
         public Gestione_Cliente()
         {
@@ -43,12 +44,21 @@ namespace compagniaAerea
                 };
                 myDatabase.Passeggero.InsertOnSubmit(p);
                 myDatabase.SubmitChanges();
-
+                statoRegistrazione = true;
             }
             else
             {
                 MessageBox.Show("password errata");
+                statoRegistrazione = false;
             }
+        }
+        public void errori()
+        {
+            //metodo per correggere i campi 
+        }
+        public Boolean statoRegistrazioneCliente()
+        {
+            return this.statoRegistrazione;
         }
     }
 }

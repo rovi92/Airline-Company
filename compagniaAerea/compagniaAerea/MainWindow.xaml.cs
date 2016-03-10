@@ -26,8 +26,11 @@ namespace compagniaAerea
         Boolean rdbState = true;
         ArrayList gridchange = new ArrayList();//ho creato una array list in modo da dare a ogni grid un numero,un id identificativo in questo caso partendo da 0
         Grid grid;
+        Boolean firstTouch = false;
+        String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_Cliente gestione_cliente;
+        
         
          public MainWindow()
         {
@@ -36,7 +39,7 @@ namespace compagniaAerea
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
+           gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
 
         }
 
@@ -44,24 +47,25 @@ namespace compagniaAerea
         //Click del bottone Registrazione presente nella form di Registrazione
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
-           // gestione_cliente = new Gestione_Cliente();  
+          // gestione_cliente = new Gestione_Cliente();  
             //inserimento dati nel metodo
-            gestione_cliente.Registrazione_Cliente(
-                Nometxt.Text, 
-                Cognometxt.Text, 
-                (DateTime) DataNascitaPicker.SelectedDate , 
+            gestione_cliente.Registrazione_Cliente(Nometxt.Text,Cognometxt.Text,
+                (DateTime) DataNascitaPicker.SelectedDate ,
                 Usernametxt.Text, Passwordtxt.Password,
                 conferma_password.Password , 
                 Indirizzotxt.Text, Telefonotxt.Text,
                 Emailtxt.Text, StatoCombobox.Name, 
                 Regionetxt.Text, Cittàtxt.Text, 
-               // int.Parse(Captxt.Text), 
                 Int32.Parse(Captxt.Text),
                 CodiceFiscaletxt.Text);
-            MessageBox.Show("registrazione fatta con successo");
-                gridRegistrazione.Visibility = Visibility.Hidden;
-                gridSelezionaVolo.Visibility = Visibility.Visible;
-            
+            if (gestione_cliente.statoRegistrazioneCliente())
+            {
+                MessageBox.Show("registrazione avvenuta con successo");
+                this.gridCorrente = 2;
+                currentGrid(this.gridCorrente);
+                
+
+            }
         }
 
 
@@ -143,7 +147,8 @@ namespace compagniaAerea
 
                 grid = (Grid)gridchange[this.gridCorrente];//carico una nuova grid
                 grid.Visibility = Visibility.Visible;
-
+                
+               
                 this.gridPrec = this.gridCorrente;//metto nella grid precedente il valore della corrente in modo che quando cambia ha già il valore impostato
             }
         }
@@ -169,7 +174,40 @@ namespace compagniaAerea
             MIturni.Visibility = Visibility.Hidden;
 
         }
-       
+
+        private void InFocus(object sender, RoutedEventArgs e)
+        {
+           
+            TextBox tb = (TextBox)sender;
+            this.textInBox = tb.Text;
+            tb.Text = "";
+        }
+
+        private void OutFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text.Equals(""))
+            { 
+                tb.Text = this.textInBox;
+            }
+        }
+
+        private void InPasswordFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            this.textInBox = pb.Password;
+            pb.Password = "";
+        }
+
+        private void OutPasswordFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            if (pb.Password.Equals(""))
+            {
+                pb.Password = this.textInBox;
+            }
+        }
+
        
     }
       
