@@ -53,17 +53,21 @@ namespace compagniaAerea
             }
         }
 
-        public dynamic Cerca_volo()
+        public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
         {
-            var prova = (from p in myDatabase.Piano_di_volo
+            var cerca_volo = (from p in myDatabase.Piano_di_volo
                          where p.idPiano_di_volo == 3
                          select new
                          {
-                             Prova = p.Partenza,
-                             Arrivo = p.Arrivo
+                            /* Prova = p.Partenza,
+                             Arrivo = p.Arrivo*/
+                             p.Partenza,
+                             p.Arrivo,
+                             p.Data_partenza,
+                             p.Data_arrivo
                          });
 
-            return prova;
+            return cerca_volo;
 
 
             //Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());

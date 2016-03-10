@@ -213,7 +213,9 @@ namespace compagniaAerea
             myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
             
             //dataGrid.ItemsSource = prova;
-           var prova = gestione_cliente.Cerca_volo();
+           var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime) dataPartenza.SelectedDate, (DateTime) dataRitorno.SelectedDate);
+            dataGrid.ItemsSource = cerca_volo;
+            LABEL_PROVA.Content = cerca_volo;
             
          
         }
