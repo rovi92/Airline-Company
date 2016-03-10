@@ -40,7 +40,7 @@
             <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
 
         </Grid>
-        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" >
+        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Hidden" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" Text="nome" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
 
@@ -92,7 +92,7 @@
             <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
 
         </Menu>
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White">
 
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="74,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="74,48,0,0" TextWrapping="Wrap" Text="partenza del tuo volo" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
@@ -109,7 +109,9 @@
             <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="89,354,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True"/>
             <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="221,354,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
             <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="332,354,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
-            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="423,386,0,0" VerticalAlignment="Top" Width="95" Height="27"/>
+            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="423,386,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="586,178,0,0" VerticalAlignment="Top" Width="100"/>
+            <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="549,178,0,0" VerticalAlignment="Top" Width="279"/>
 
         </Grid>
         <Grid x:Name="footer" Margin="0,452,0,5">

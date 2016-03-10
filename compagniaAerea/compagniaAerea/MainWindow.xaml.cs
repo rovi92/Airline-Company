@@ -26,7 +26,7 @@ namespace compagniaAerea
         Boolean rdbState = true;
         ArrayList gridchange = new ArrayList();//ho creato una array list in modo da dare a ogni grid un numero,un id identificativo in questo caso partendo da 0
         Grid grid;
-         String textInBox; //contenitore del text telle dextbox
+        String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_Cliente gestione_cliente;
         
@@ -65,6 +65,7 @@ namespace compagniaAerea
                 
 
             }
+            
         }
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
@@ -207,7 +208,13 @@ namespace compagniaAerea
             }
         }
 
-       
+        private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
+        {
+
+            gestione_cliente.Cerca_volo();
+            
+         
+        }
     }
       
 

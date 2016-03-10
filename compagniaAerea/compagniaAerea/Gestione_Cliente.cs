@@ -52,6 +52,20 @@ namespace compagniaAerea
                 statoRegistrazione = false;
             }
         }
+
+        public void Cerca_volo()
+        {
+            /* Piano_di_volo piano = new Piano_di_volo();
+             List<Piano_di_volo> pianolist = new List<Piano_di_volo>();*/
+            var prova = from p in myDatabase.Piano_di_volo
+                        where p.idPiano_di_volo == 1
+                        select p.Arrivo;
+
+
+
+             Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());
+        }
+
         public void errori()
         {
             //metodo per correggere i campi 
