@@ -112,7 +112,7 @@
             <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="423,386,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
             <Grid HorizontalAlignment="Left" Height="100" Margin="586,178,0,0" VerticalAlignment="Top" Width="100"/>
             <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="549,178,0,0" VerticalAlignment="Top" Width="279"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="474,148,0,0" VerticalAlignment="Top" Height="174" Width="318"/>
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="474,24,0,0" VerticalAlignment="Top" Height="298" Width="318"/>
             <Label x:Name="LABEL_PROVA" Content="Label" HorizontalAlignment="Left" Margin="474,343,0,0" VerticalAlignment="Top"/>
 
         </Grid>
