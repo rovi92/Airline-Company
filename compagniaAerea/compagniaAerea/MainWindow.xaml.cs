@@ -44,6 +44,7 @@ namespace compagniaAerea
 
 
         //Click del bottone Registrazione presente nella form di Registrazione
+        #region registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
           // gestione_cliente = new Gestione_Cliente();  
@@ -65,8 +66,9 @@ namespace compagniaAerea
                 
 
             }
-            
+
         }
+        #endregion
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
@@ -74,14 +76,16 @@ namespace compagniaAerea
          
         }
 
+        #region apri grid registrazione
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 1;
             currentGrid(this.gridCorrente);
-           
+
 
 
         }
+        #endregion
 
         private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
         {
@@ -165,6 +169,7 @@ namespace compagniaAerea
             currentGrid(this.gridCorrente);
         }
 
+        #region place holder manuale
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 0;
@@ -207,7 +212,8 @@ namespace compagniaAerea
                 pb.Password = this.textInBox;
             }
         }
-
+        #endregion
+        #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
             myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
@@ -216,10 +222,9 @@ namespace compagniaAerea
            var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime) dataPartenza.SelectedDate, (DateTime) dataRitorno.SelectedDate);
             dataGrid.ItemsSource = cerca_volo;
             LABEL_PROVA.Content = cerca_volo;
-            
-         
-        }
+         }
+        #endregion
     }
-      
+
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -73,9 +74,21 @@ namespace compagniaAerea
             //Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());
         }
 
-        public void errori()
+        public bool erroriDiScrittura(String nome, String cognome, DateTime data_di_nascita, String username, String password, String password2, String indirizzo, String telefono, String email, String stato, String regione, String città, int CAP, String CF)
         {
             //metodo per correggere i campi 
+            ArrayList alErrori = new ArrayList();
+            char n = Convert.ToChar(nome);
+            #region nome
+            if (nome != "")
+            {
+                if(nome != "nome")
+                {
+                    alErrori.Add(true);
+                }
+            }
+            #endregion
+            return true;
         }
         public Boolean statoRegistrazioneCliente()
         {
