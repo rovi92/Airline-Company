@@ -40,7 +40,7 @@
             <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
 
         </Grid>
-        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Hidden" >
+        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" Text="nome" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
 
@@ -62,8 +62,8 @@
             <TextBlock x:Name="telefono" HorizontalAlignment="Left" Margin="274,100,0,0" TextWrapping="Wrap" Text="Telefono:" VerticalAlignment="Top"/>
             <TextBox x:Name="Telefonotxt" HorizontalAlignment="Left" Height="20" Margin="359,99,0,0"  Text="numero di telefono" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
             <TextBlock x:Name="stato" HorizontalAlignment="Left" Margin="274,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Stato"/><Run Text=":"/></TextBlock>
-            <ComboBox x:Name="StatoCombobox" HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120" >
-                <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
+            <ComboBox x:Name="StatoCombobox"  HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120"  >
+               <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
             </ComboBox>
             <TextBlock x:Name="regione" HorizontalAlignment="Left" Margin="274,166,0,0" TextWrapping="Wrap" Text="Regione:" VerticalAlignment="Top"/>
             <TextBox x:Name="Regionetxt" HorizontalAlignment="Left" Height="20" Margin="359,165,0,0" TextWrapping="Wrap" Text="regione" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus" />
@@ -92,7 +92,7 @@
             <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
 
         </Menu>
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White" Visibility="Hidden">
 
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
