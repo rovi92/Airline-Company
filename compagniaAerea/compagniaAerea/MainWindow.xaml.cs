@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace compagniaAerea
 {
     /// <summary>
@@ -29,16 +30,18 @@ namespace compagniaAerea
         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_Cliente gestione_cliente;
-        
-        
-         public MainWindow()
+        InterfacciaError errore = new Error();
+
+
+        public MainWindow()
         {
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-           gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
+            gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
+
 
         }
 
@@ -47,40 +50,51 @@ namespace compagniaAerea
         #region registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
-          // gestione_cliente = new Gestione_Cliente();  
+            errore.ValueText(Nometxt);
+            errore.ValueText(Cognometxt);
+            errore.ValueText(Usernametxt);
+            errore.valuePassword(Passwordtxt);
+            errore.valuePassword(conferma_password);
+            errore.ValueText(Emailtxt);
+            errore.ValueText(Indirizzotxt);
+            errore.ValueText(Telefonotxt);
+            errore.ValueText(Regionetxt);
+            errore.ValueText(Cittàtxt);
+            errore.ValueText(Captxt);
+            errore.ValueText(CodiceFiscaletxt);
+            errore.checkPs(Passwordtxt, conferma_password);
             //inserimento dati nel metodo
-            gestione_cliente.Registrazione_Cliente(Nometxt.Text,Cognometxt.Text,
-                (DateTime) DataNascitaPicker.SelectedDate ,
+            if (errore.checkText())
+            {
+                gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+                (DateTime)DataNascitaPicker.SelectedDate,
                 Usernametxt.Text, Passwordtxt.Password,
-                conferma_password.Password , 
+                conferma_password.Password,
                 Indirizzotxt.Text, Telefonotxt.Text,
-                Emailtxt.Text, StatoCombobox.Name, 
-                Regionetxt.Text, Cittàtxt.Text, 
+                Emailtxt.Text, StatoCombobox.Name,
+                Regionetxt.Text, Cittàtxt.Text,
                 Int32.Parse(Captxt.Text),
                 CodiceFiscaletxt.Text);
-            if (gestione_cliente.statoRegistrazioneCliente())
-            {
-                MessageBox.Show("registrazione avvenuta con successo");
-                this.gridCorrente = 2;
-                currentGrid(this.gridCorrente);
-                
 
+            
             }
-
+            else {
+                MessageBox.Show(errore.codError());
+            }
         }
         #endregion
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-        
-         
+
+
         }
 
         #region apri grid registrazione
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 1;
-            currentGrid(this.gridCorrente);
+            currentGrid();
 
 
 
@@ -90,7 +104,7 @@ namespace compagniaAerea
         private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 4;
-            currentGrid(this.gridCorrente);
+            currentGrid();
             MIGestioneAerei.Visibility = Visibility.Visible;
             MIGestioneTariffario.Visibility = Visibility.Visible;
             MIturni.Visibility = Visibility.Visible;
@@ -118,7 +132,7 @@ namespace compagniaAerea
 
             //gridLogIn.Visibility = Visibility.Visible;
             this.gridCorrente = 0;
-            currentGrid(this.gridCorrente);
+            currentGrid();
 
         }
 
@@ -126,8 +140,8 @@ namespace compagniaAerea
         {
             //  gridRegistrazione.Visibility = Visibility.Visible;
             this.gridCorrente = 1;
-            currentGrid(this.gridCorrente);
-          
+            currentGrid();
+
 
         }
 
@@ -140,7 +154,8 @@ namespace compagniaAerea
             gridchange.Add(gridDipendente);//grid dipendente pos 4
         }
 
-        public void currentGrid(int num)  {
+        public void currentGrid()
+        {
             if (this.gridCorrente != this.gridPrec)
             {/* metodo di apertura e chiusura delle grid,d'ora in avanti per aprire basta 
                                           aggiungere nel popolamento la grid che si vuole aprire
@@ -151,8 +166,8 @@ namespace compagniaAerea
 
                 grid = (Grid)gridchange[this.gridCorrente];//carico una nuova grid
                 grid.Visibility = Visibility.Visible;
-                
-               
+
+
                 this.gridPrec = this.gridCorrente;//metto nella grid precedente il valore della corrente in modo che quando cambia ha già il valore impostato
             }
         }
@@ -160,29 +175,29 @@ namespace compagniaAerea
         private void prenotaVolo_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 2;
-            currentGrid(this.gridCorrente);
+            currentGrid();
         }
 
         private void InfoBiglietto_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 3;
-            currentGrid(this.gridCorrente);
+            currentGrid();
         }
 
         #region place holder manuale
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 0;
-            currentGrid(this.gridCorrente);
+            currentGrid();
             MIGestioneAerei.Visibility = Visibility.Hidden;
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIturni.Visibility = Visibility.Hidden;
 
         }
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
-         private void InFocus(object sender, RoutedEventArgs e) 
+        private void InFocus(object sender, RoutedEventArgs e)
         {
-           
+
             TextBox tb = (TextBox)sender;
             this.textInBox = tb.Text;
             tb.Text = "";
@@ -192,7 +207,7 @@ namespace compagniaAerea
         {
             TextBox tb = (TextBox)sender;
             if (tb.Text.Equals(""))
-            { 
+            {
                 tb.Text = this.textInBox;
             }
         }
@@ -217,16 +232,17 @@ namespace compagniaAerea
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
             myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
-            
+
             //dataGrid.ItemsSource = prova;
-           var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime) dataPartenza.SelectedDate, (DateTime) dataRitorno.SelectedDate);
+            var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
             dataGrid.ItemsSource = cerca_volo;
             LABEL_PROVA.Content = cerca_volo;
-         }
+        }
         #endregion
 
-       
+
     }
+
 
     //prova
 }
