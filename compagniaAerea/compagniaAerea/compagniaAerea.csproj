@@ -95,6 +95,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram3.cd" />
     <None Include="databaseLocaleAirline.dbml.layout">
       <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
     </None>
