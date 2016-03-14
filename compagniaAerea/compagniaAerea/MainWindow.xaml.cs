@@ -42,7 +42,7 @@ namespace compagniaAerea
 
         }
 
-
+        //dio cane
         //Click del bottone Registrazione presente nella form di Registrazione
         #region registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
