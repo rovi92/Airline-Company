@@ -9,10 +9,12 @@ namespace compagniaAerea
 {
     interface InterfacciaError
     {
-        void ValueText(TextBox tx);
+        
         Boolean checkText();
+        void ValueText(TextBox tx);
         void valuePassword(PasswordBox ps);
         void checkPs(PasswordBox ps1, PasswordBox ps2);
+        void longTxt(TextBox txtB1, int numMax);
         String codError();
         
     }
