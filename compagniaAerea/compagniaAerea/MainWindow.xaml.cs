@@ -45,9 +45,9 @@ namespace compagniaAerea
 
         }
 
-        //dio cane
+        
         //Click del bottone Registrazione presente nella form di Registrazione
-        #region registrazione del cliente
+        #region grid registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
             errore.ValueText(Nometxt);
@@ -79,7 +79,7 @@ namespace compagniaAerea
                 Int32.Parse(Captxt.Text),
                 CodiceFiscaletxt.Text);
 
-            
+
             }
             else {
                 MessageBox.Show(errore.codError());
@@ -87,30 +87,26 @@ namespace compagniaAerea
         }
         #endregion
 
-        private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
+        #region grid cerca volo
+       
+        #region bottone cerca volo
+        private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
+            myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
 
-
-        }
-
-        #region apri grid registrazione
-        private void click_apriRegistrazione(object sender, RoutedEventArgs e)
-        {
-            this.gridCorrente = 1;
-            currentGrid();
-
-
-
+            //dataGrid.ItemsSource = prova;
+            var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+            dataGrid.ItemsSource = cerca_volo;
+            LABEL_PROVA.Content = cerca_volo;
         }
         #endregion
 
-        private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
+        #region radioButton andata/andata e ritorno
+        private void rdbSoloAndata_Checked(object sender, RoutedEventArgs e)
         {
-            this.gridCorrente = 4;
-            currentGrid();
-            MIGestioneAerei.Visibility = Visibility.Visible;
-            MIGestioneTariffario.Visibility = Visibility.Visible;
-            MIturni.Visibility = Visibility.Visible;
+            this.rdbState = false;
+            dataRitorno.Visibility = Visibility.Hidden;
+            tblRitorno.Visibility = Visibility.Hidden;
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -123,11 +119,16 @@ namespace compagniaAerea
             }
         }
 
-        private void rdbSoloAndata_Checked(object sender, RoutedEventArgs e)
+        #endregion
+
+        #endregion
+
+        #region gestione delle grid
+
+        private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-            this.rdbState = false;
-            dataRitorno.Visibility = Visibility.Hidden;
-            tblRitorno.Visibility = Visibility.Hidden;
+
+
         }
 
         private void Accedi_Click(object sender, RoutedEventArgs e)
@@ -137,6 +138,15 @@ namespace compagniaAerea
             this.gridCorrente = 0;
             currentGrid();
 
+        }
+
+        private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 4;
+            currentGrid();
+            MIGestioneAerei.Visibility = Visibility.Visible;
+            MIGestioneTariffario.Visibility = Visibility.Visible;
+            MIturni.Visibility = Visibility.Visible;
         }
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
@@ -187,6 +197,14 @@ namespace compagniaAerea
             currentGrid();
         }
 
+        private void click_apriRegistrazione(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 1;
+            currentGrid();
+        }
+        
+        #endregion
+
         #region place holder manuale
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -231,21 +249,12 @@ namespace compagniaAerea
             }
         }
         #endregion
-        #region bottone cerca volo
-        private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
-        {
-            myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
 
-            //dataGrid.ItemsSource = prova;
-            var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-            dataGrid.ItemsSource = cerca_volo;
-            LABEL_PROVA.Content = cerca_volo;
-        }
-        #endregion
-
+       
 
     }
+}
 
 
     //prova
-}
+

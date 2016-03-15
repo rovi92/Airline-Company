@@ -40,7 +40,7 @@
             <Button x:Name="button1" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20"/>
 
         </Grid>
-        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" >
+        <Grid Name="gridRegistrazione" Background="White" Margin="0,0,0,53" Visibility="Hidden" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
 
@@ -94,7 +94,7 @@
             <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
 
         </Menu>
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White">
 
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
@@ -118,6 +118,12 @@
             <Label x:Name="LABEL_PROVA" Content="Label" HorizontalAlignment="Left" Margin="474,343,0,0" VerticalAlignment="Top"/>
 
         </Grid>
+        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Background="White" Visibility="Hidden">
+            <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
+            <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="765,2,0,0" VerticalAlignment="Top" Width="75" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
+        </Grid>
+        
+        
         <Grid x:Name="footer" Margin="0,452,0,5">
 
             <Grid.Background>
@@ -128,10 +134,7 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Background="White" Visibility="Hidden">
-            <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
-            <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="765,2,0,0" VerticalAlignment="Top" Width="75" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
-        </Grid>
+       
 
     </Grid>
 
