@@ -9,7 +9,7 @@ namespace compagniaAerea
 {
     interface InterfacciaError
     {
-        
+        //funzione
         Boolean checkText();
         void ValueText(TextBox tx);
         void valuePassword(PasswordBox ps);
