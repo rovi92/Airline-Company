@@ -18,6 +18,7 @@ namespace compagniaAerea
         {
             myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
         }
+        #region registrazione cliente
         //metodo per registrazione
         public void Registrazione_Cliente(String nome, String cognome, DateTime data_di_nascita, String username, String password,String password2, String indirizzo, String telefono, String email, String stato, String regione, String città, int CAP, String CF)
         {
@@ -53,7 +54,9 @@ namespace compagniaAerea
                 statoRegistrazione = false;
             }
         }
+        #endregion
 
+        #region ricerca del volo
         public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
         {
             var cerca_volo = (from p in myDatabase.Piano_di_volo
@@ -73,10 +76,13 @@ namespace compagniaAerea
 
             //Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());
         }
+        #endregion
 
+        #region controllo cliente
         public Boolean statoRegistrazioneCliente()
         {
             return this.statoRegistrazione;
         }
+        #endregion
     }
 }
