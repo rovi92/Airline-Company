@@ -92,12 +92,22 @@ namespace compagniaAerea
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-            myDatabaseUniboAirlineDataContext myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
+            // myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
 
             //dataGrid.ItemsSource = prova;
-            var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-            dataGrid.ItemsSource = cerca_volo;
-            LABEL_PROVA.Content = cerca_volo;
+            errore.ValueText(txtPartenza);
+            errore.ValueText(txtDestinazioneVolo);
+            errore.ValueText(dataPartenza);
+            if(errore.checkText())
+            {
+                var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                dataGrid.ItemsSource = cerca_volo;
+                //LABEL_PROVA.Content = cerca_volo;
+            } else
+            {
+                MessageBox.Show(errore.codError());
+            }
+
         }
         #endregion
 

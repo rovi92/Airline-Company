@@ -60,7 +60,8 @@ namespace compagniaAerea
         public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
         {
             var cerca_volo = (from p in myDatabase.Piano_di_volo
-                         where p.idPiano_di_volo == 3
+                              join aereo in myDatabase.Aereoporto on p.Aereoporto_partenza equals aereo.Nome
+                         where p.Partenza == partenza && p.Arrivo == destinazione
                          select new
                          {
                             /* Prova = p.Partenza,
@@ -68,7 +69,11 @@ namespace compagniaAerea
                              p.Partenza,
                              p.Arrivo,
                              p.Data_partenza,
-                             p.Data_arrivo
+                             p.Orario_partenza,
+                             p.Data_arrivo,
+                             p.Orario_arrivo,
+                             aereo.Indirizzo
+                             
                          });
 
             return cerca_volo;
