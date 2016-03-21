@@ -63,7 +63,7 @@
             <TextBox x:Name="Telefonotxt" HorizontalAlignment="Left" Height="20" Margin="359,99,0,0" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
             <TextBlock x:Name="stato" HorizontalAlignment="Left" Margin="274,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Stato"/><Run Text=":"/></TextBlock>
             <ComboBox x:Name="StatoCombobox"  HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120"  >
-               <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
+                <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
             </ComboBox>
             <TextBlock x:Name="regione" HorizontalAlignment="Left" Margin="274,166,0,0" TextWrapping="Wrap" Text="Regione:" VerticalAlignment="Top"/>
             <TextBox x:Name="Regionetxt" HorizontalAlignment="Left" Height="20" Margin="359,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus" />
@@ -94,36 +94,36 @@
             <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
 
         </Menu>
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,48" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,20,0,53" Background="White" Visibility="Hidden">
 
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="231,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBox x:Name="txtDestinazioneVolo" HorizontalAlignment="Left" Height="20" Margin="229,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
             <RadioButton x:Name="rdbAndataRitorno" Content="Andata e Ritorno" HorizontalAlignment="Left" Margin="20,115,0,0" VerticalAlignment="Top" Checked="rdbAndataRitorno_Checked" IsChecked="True" GroupName="rdbTipoVolo"/>
-            <RadioButton x:Name="rdbSoloAndata" Content="Sola Andata" HorizontalAlignment="Left" Margin="184,115,0,0" VerticalAlignment="Top" GroupName="rdbTipoVolo" Checked="rdbSoloAndata_Checked"/>
-            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="74,178,0,0" VerticalAlignment="Top"/>
-            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="287,178,0,0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="74,148,0,0" TextWrapping="Wrap" Text="giorno di andata" VerticalAlignment="Top"/>
-            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="287,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="giorno di "/><Run Text="ritorno"/></TextBlock>
-            <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="74,255,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
-            <Label x:Name="lblPosti"  Content="{Binding ElementName=sldPosti, Path=Value}" HorizontalAlignment="Left" Margin="184,255,0,0" VerticalAlignment="Top" Width="24"/>
-            <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="89,354,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True"/>
-            <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="221,354,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
-            <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="332,354,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
-            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="423,386,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
+            <RadioButton x:Name="rdbSoloAndata" Content="Sola Andata" HorizontalAlignment="Left" Margin="229,115,0,0" VerticalAlignment="Top" GroupName="rdbTipoVolo" Checked="rdbSoloAndata_Checked"/>
+            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="229,178,0,0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="20,157,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="229,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Data arrivo"/></TextBlock>
+            <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
+            <Label x:Name="lblPosti"  Content="{Binding ElementName=sldPosti, Path=Value}" HorizontalAlignment="Left" Margin="119,245,0,0" VerticalAlignment="Top" Width="24"/>
+            <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True"/>
+            <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="152,320,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
+            <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="271,320,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
+            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="278,367,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
             <Grid HorizontalAlignment="Left" Height="100" Margin="586,178,0,0" VerticalAlignment="Top" Width="100"/>
             <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="549,178,0,0" VerticalAlignment="Top" Width="279"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="474,24,0,0" VerticalAlignment="Top" Height="298" Width="318"/>
-            <Label x:Name="LABEL_PROVA" Content="Label" HorizontalAlignment="Left" Margin="474,343,0,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="474,24,0,0" VerticalAlignment="Top" Height="311" Width="318"/>
+            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="697,367,0,0" VerticalAlignment="Top" Width="95" Height="27"/>
 
         </Grid>
         <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Background="White" Visibility="Hidden">
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="359,32,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="87" FontSize="14.667" FontWeight="Bold"/>
             <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="765,2,0,0" VerticalAlignment="Top" Width="75" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
         </Grid>
-        
-        
+
+
         <Grid x:Name="footer" Margin="0,452,0,5">
 
             <Grid.Background>
@@ -134,7 +134,7 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-       
+
 
     </Grid>
 
