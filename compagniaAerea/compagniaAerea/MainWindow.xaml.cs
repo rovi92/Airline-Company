@@ -97,7 +97,7 @@ namespace compagniaAerea
             //dataGrid.ItemsSource = prova;
             errore.ValueText(txtPartenza);
             errore.ValueText(txtDestinazioneVolo);
-            errore.ValueText(dataPartenza);
+            
             if(errore.checkText())
             {
                 var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
