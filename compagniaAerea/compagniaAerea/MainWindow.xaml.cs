@@ -97,7 +97,7 @@ namespace compagniaAerea
             //dataGrid.ItemsSource = prova;
             errore.ValueText(txtPartenza);
             errore.ValueText(txtDestinazioneVolo);
-            errore.ValueText(dataPartenza);
+           /* errore.ValueText(dataPartenza);
             if(errore.checkText())
             {
                 var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
@@ -107,7 +107,7 @@ namespace compagniaAerea
             {
                 MessageBox.Show(errore.codError());
             }
-
+            */
         }
         #endregion
 
@@ -132,12 +132,29 @@ namespace compagniaAerea
         #endregion
 
         #endregion
+        #region cerca biglietto
+        private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
+        {
+            //controllo campi non vuoti
+            errore.ValueText(CodiceBigliettotxt);
+            errore.ValueText(NomeBigliettotxt);
+            errore.ValueText(CognomeBigliettotxt);
+            if (errore.checkText())
+            {
+                /*
+                ricerca biglietto nel db
+               */
+            }
+            else { MessageBox.Show(errore.codError()); }
 
+        }
+        #endregion
         #region gestione delle grid
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
-
+            this.gridCorrente = 1;
+            currentGrid();
 
         }
 
@@ -150,13 +167,18 @@ namespace compagniaAerea
 
         }
 
-        private void click_apriFormClienteRegistrato(object sender, RoutedEventArgs e)
+        private void click_login(object sender, RoutedEventArgs e)
         {
-            this.gridCorrente = 4;
-            currentGrid();
-            MIGestioneAerei.Visibility = Visibility.Visible;
-            MIGestioneTariffario.Visibility = Visibility.Visible;
-            MIturni.Visibility = Visibility.Visible;
+            errore.ValueText(Login_usernametxt);
+            errore.valuePassword(Login_passwordtxt);
+            if (errore.checkText())//controllo caratteri non vuoti nelle box
+            {
+                this.gridCorrente = 4;
+                currentGrid();
+                MIGestioneAerei.Visibility = Visibility.Visible;
+                MIGestioneTariffario.Visibility = Visibility.Visible;
+                MIturni.Visibility = Visibility.Visible;
+            }
         }
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
@@ -258,13 +280,13 @@ namespace compagniaAerea
                 pb.Password = this.textInBox;
             }
         }
+
+
+
+
+
         #endregion
 
-       
-
+        
     }
 }
-
-
-    //prova
-
