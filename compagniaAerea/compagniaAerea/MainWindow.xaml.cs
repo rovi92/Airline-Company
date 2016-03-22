@@ -187,7 +187,11 @@ namespace compagniaAerea
             gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
             gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
             gridchange.Add(gridDipendente);//grid dipendente pos 4
-        }
+            gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 5
+            gridchange.Add(GridDipendenteTurni);//grid dei turni dei dipendenti posizione 6
+            gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 7
+            gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 8
+         }
 
         public void currentGrid()
         {
