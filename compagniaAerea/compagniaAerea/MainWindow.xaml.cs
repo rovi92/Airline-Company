@@ -107,7 +107,7 @@ namespace compagniaAerea
             {
                 MessageBox.Show(errore.codError());
             }
-            
+
         }
         #endregion
 
@@ -132,7 +132,7 @@ namespace compagniaAerea
         #endregion
 
         #endregion
-       
+
         #region cerca biglietto
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
         {
@@ -169,7 +169,7 @@ namespace compagniaAerea
 
         }
 
-      
+
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
@@ -191,7 +191,7 @@ namespace compagniaAerea
             gridchange.Add(GridDipendenteTurni);//grid dei turni dei dipendenti posizione 6
             gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 7
             gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 8
-         }
+        }
 
         public void currentGrid()
         {
@@ -232,7 +232,7 @@ namespace compagniaAerea
         #endregion
 
         #region place holder manuale
-       
+
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
         private void InFocus(object sender, RoutedEventArgs e)
         {
@@ -280,7 +280,7 @@ namespace compagniaAerea
             errore.valuePassword(Login_passwordtxt);
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
-               
+
                 if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
                     MIGestioneAerei.Visibility = Visibility.Visible;
@@ -290,8 +290,8 @@ namespace compagniaAerea
                     this.gridCorrente = 4;
                     currentGrid();
                 }
-            }
-        }
+    }
+}
         #endregion
 
         #region dipendente
