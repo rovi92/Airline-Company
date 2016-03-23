@@ -337,12 +337,37 @@ namespace compagniaAerea
         {
             borderGridTO.Visibility = Visibility.Hidden;
         }
-        #endregion
-        
+
+
+
         #endregion
 
-     
+        #region gestione voli
 
-     
+        private void aggiungi_voloClick(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(aereoporto_partenzatxt);
+            errore.ValueText(aereoporto_arrivotxt);
+            errore.ValueText(gatetxt);
+            errore.ValueText(orario_partenzatxt);
+            errore.ValueText(orario_arrivotxt);
+
+            if (errore.checkText())
+            {
+                /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                   dataGrid.ItemsSource = cerca_volo;*/
+                //LABEL_PROVA.Content = cerca_volo;
+            }
+            else
+            {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
     }
 }
