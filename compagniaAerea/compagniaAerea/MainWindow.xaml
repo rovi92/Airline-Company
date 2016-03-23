@@ -127,20 +127,32 @@
             <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
 
                 <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="22" Margin="198,74,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="109" Margin="43,74,0,0" VerticalAlignment="Top" Width="119">
-                    <Image x:Name="image1" HorizontalAlignment="Left" Margin="-1" Width="104"/>
+                    <Image x:Name="image1" Margin="-1"/>
                 </Border>
-                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="198,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="198,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="22" Margin="198,212,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="24" Margin="243,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="codiceDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="243,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="dataAssunzionetxt" HorizontalAlignment="Left" Height="22" Margin="243,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="cognome_dipendente" HorizontalAlignment="Left" Margin="243,66,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
+                <TextBlock x:Name="nome_dipendente" HorizontalAlignment="Left" Margin="243,124,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
+                <TextBlock x:Name="codice_dipendente" HorizontalAlignment="Left" Margin="243,176,0,0" TextWrapping="Wrap" Text="Codice" VerticalAlignment="Top"/>
+                <TextBlock x:Name="data_assunzione" HorizontalAlignment="Left" Margin="243,233,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
+                <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="525,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" TextChanged="telefonoDipendentetxt_TextChanged" Height="22"/>
+                <TextBox x:Name="telefonoDipendentetxt_Copy" HorizontalAlignment="Left" Margin="243,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24"/>
+                <TextBox x:Name="telefonoDipendentetxt_Copy1" HorizontalAlignment="Left" Margin="525,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="25"/>
+                <TextBox x:Name="telefonoDipendentetxt_Copy2" HorizontalAlignment="Left" Margin="525,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22"/>
+                <TextBlock x:Name="data_assunzione_Copy" HorizontalAlignment="Left" Margin="525,127,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="19"/>
+                <TextBlock x:Name="data_assunzione_Copy1" HorizontalAlignment="Left" Margin="243,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
+                <TextBlock x:Name="data_assunzione_Copy2" HorizontalAlignment="Left" Margin="525,177,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="21"/>
+                <TextBlock x:Name="data_assunzione_Copy3" HorizontalAlignment="Left" Margin="525,236,0,0" TextWrapping="Wrap" Text="Indirizzo" VerticalAlignment="Top"/>
 
             </Grid>
             <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
                 <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,10,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
                 <Grid HorizontalAlignment="Left" Height="100" Margin="286,120,0,0" VerticalAlignment="Top" Width="100"/>
             </Grid>
-            <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850">
+            <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
                 <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="378,10,0,0" TextWrapping="Wrap" Text="tariffario" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
                 <DataGrid x:Name="dgPartenza" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="290" Width="120"/>
                 <DataGrid x:Name="dgArrivo" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" Height="290" Width="124"/>
@@ -161,6 +173,8 @@
                     <Button x:Name="button2" Content="salva prezzo" HorizontalAlignment="Left" Margin="291,284,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </Grid>
+            <Button x:Name="button3" Content="cambia dati" HorizontalAlignment="Left" Margin="530,324,0,0" VerticalAlignment="Top" Width="75" Click="button3_Click"/>
+
 
 
         </Grid>

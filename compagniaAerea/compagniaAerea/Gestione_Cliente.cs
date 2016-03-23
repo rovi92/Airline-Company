@@ -57,16 +57,16 @@ namespace compagniaAerea
         #endregion
 
         #region ricerca del volo
-        public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
+       /* public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
         {
             var cerca_volo = (from p in myDatabase.Piano_di_volo
                               join aeroporto in myDatabase.Aereoporto on p.Aereoporto_partenza equals aeroporto.Nome
                               join tariffario in myDatabase.Tariffario on p.idPiano_di_volo  equals tariffario.idPiano_di_volo
                               where p.idPiano_di_volo == 3
-                         select new
+                         select new*/
                          {
                             /* Prova = p.Partenza,
-                             Arrivo = p.Arrivo*/
+                             Arrivo = p.Arrivo*//*
                              p.Partenza,
                              p.Arrivo,
                              p.Data_partenza,
@@ -76,12 +76,12 @@ namespace compagniaAerea
                              aeroporto.Indirizzo
                              
                          });
-
+       
             return cerca_volo;
-
-
+           
+    
             //Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());
-        }
+        }*/
         #endregion
 
         #region controllo cliente
