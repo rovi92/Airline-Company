@@ -57,7 +57,7 @@ namespace compagniaAerea
         #endregion
 
         #region ricerca del volo
-        public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
+       /* public dynamic Cerca_volo(String partenza, String destinazione, DateTime data_partenza, DateTime data_ritorno)
         {
             var cerca_volo = (from p in myDatabase.Piano_di_volo
                               join aeroporto in myDatabase.Aereoporto on p.Aereoporto_partenza equals aeroporto.Nome
@@ -65,8 +65,8 @@ namespace compagniaAerea
                               where p.idPiano_di_volo == 3
                          select new
                          {
-                            /* Prova = p.Partenza,
-                             Arrivo = p.Arrivo*/
+                            Prova = p.Partenza,
+                             Arrivo = p.Arrivo
                              p.Partenza,
                              p.Arrivo,
                              p.Data_partenza,
@@ -82,8 +82,9 @@ namespace compagniaAerea
 
             //Console.WriteLine("VEDIAMO COSA SCRIVE STA ROBA "+prova.ToString());
         }
+        */
         #endregion
-
+    
         #region controllo cliente
         public Boolean statoRegistrazioneCliente()
         {

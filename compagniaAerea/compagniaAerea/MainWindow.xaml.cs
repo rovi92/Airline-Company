@@ -100,14 +100,14 @@ namespace compagniaAerea
             
             if(errore.checkText())
             {
-                var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-                dataGrid.ItemsSource = cerca_volo;
+             /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                dataGrid.ItemsSource = cerca_volo;*/
                 //LABEL_PROVA.Content = cerca_volo;
             } else
             {
                 MessageBox.Show(errore.codError());
             }
-
+            
         }
         #endregion
 
@@ -132,7 +132,7 @@ namespace compagniaAerea
         #endregion
 
         #endregion
-
+       
         #region cerca biglietto
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
         {
@@ -169,7 +169,7 @@ namespace compagniaAerea
 
         }
 
-
+      
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
@@ -186,12 +186,11 @@ namespace compagniaAerea
             gridchange.Add(gridRegistrazione);//grid di registrazione pos 1
             gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
             gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
-            gridchange.Add(gridDipendente);//grid dipendente pos 4
-            gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 5
-            gridchange.Add(GridDipendenteTurni);//grid dei turni dei dipendenti posizione 6
-            gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 7
-            gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 8
-        }
+            gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 4
+            gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 5
+            gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
+            
+         }
 
         public void currentGrid()
         {
@@ -232,7 +231,7 @@ namespace compagniaAerea
         #endregion
 
         #region place holder manuale
-
+       
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
         private void InFocus(object sender, RoutedEventArgs e)
         {
@@ -280,18 +279,19 @@ namespace compagniaAerea
             errore.valuePassword(Login_passwordtxt);
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
-
+               
                 if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
-                    MIGestioneAerei.Visibility = Visibility.Visible;
+
+                    MIGestioneVoli.Visibility = Visibility.Visible;
                     MIGestioneTariffario.Visibility = Visibility.Visible;
-                    MIturni.Visibility = Visibility.Visible;
-                    MIGestioneOfferte.Visibility = Visibility.Visible;
+                    MIProfilo.Visibility = Visibility.Visible;
+                    gridDipendente.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
                 }
-    }
-}
+            }
+        }
         #endregion
 
         #region dipendente
@@ -299,14 +299,50 @@ namespace compagniaAerea
         {
             this.gridCorrente = 0;
             currentGrid();
-            MIGestioneAerei.Visibility = Visibility.Hidden;
+            MIGestioneVoli.Visibility = Visibility.Hidden;
             MIGestioneTariffario.Visibility = Visibility.Hidden;
-            MIturni.Visibility = Visibility.Hidden;
-            MIGestioneOfferte.Visibility = Visibility.Hidden;
+            MIProfilo.Visibility = Visibility.Hidden;
+           
+            gridDipendente.Visibility = Visibility.Hidden;
 
         }
 
         //tutto ciò che fa parte di dipendente metti qui
+        #region btnMenu
+        private void click_Tariffario(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 6;
+            currentGrid();
+        }
+        private void Click_gestioneVoli(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 5;
+            currentGrid();
+        }
+        private void Click_profilo(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 4;
+            currentGrid();
+        }
         #endregion
+
+        #region tariffario
+
+        private void ckbOfferta_Checked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Visible;
+        }
+
+        private void ckbOfferta_Unchecked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Hidden;
+        }
+        #endregion
+        
+        #endregion
+
+     
+
+     
     }
 }
