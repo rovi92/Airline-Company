@@ -90,10 +90,9 @@
             </MenuItem>
             <MenuItem x:Name="MIofferte" Header="Offerte" />
 
-            <MenuItem x:Name="MIturni" Header="Turni dipendenti" Visibility="Hidden"/>
-            <MenuItem x:Name="MIGestioneAerei" Header="Gestione voli" Visibility="Hidden"/>
-            <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden"/>
-            <MenuItem x:Name="MIGestioneOfferte" Header="Gestione Offerte" Visibility="Hidden"/>
+            <MenuItem x:Name="MIGestioneVoli" Header="gestione voli" Visibility="Hidden" Click="Click_gestioneVoli"/>
+            <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden" Click="click_Tariffario"/>
+            <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
 
         </Menu>
         <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,20,0,53" Background="White" Visibility="Hidden">
@@ -120,9 +119,8 @@
             <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="697,367,0,0" VerticalAlignment="Top" Width="95" Height="27"/>
 
         </Grid>
-
-
-        <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="417" Margin="10,35,0,0" VerticalAlignment="Top" Width="850" Background="White">
+    
+       <Grid x:Name="gridDipendente" HorizontalAlignment="Left" Height="417" Margin="10,35,0,0" VerticalAlignment="Top" Width="850" Background="White" Visibility="Hidden">
             <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="766,0,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click"/>
             <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
 
@@ -156,24 +154,28 @@
                 <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="378,10,0,0" TextWrapping="Wrap" Text="tariffario" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
                 <DataGrid x:Name="dgPartenza" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="290" Width="120"/>
                 <DataGrid x:Name="dgArrivo" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" Height="290" Width="124"/>
+                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="355" Margin="402,35,0,0" VerticalAlignment="Top" Width="438"/>
                 <Grid x:Name="gridDatiTariffarioOfferta" HorizontalAlignment="Left" Height="350" Margin="402,40,0,0" VerticalAlignment="Top" Width="438">
                     <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="costo Tratta" VerticalAlignment="Top" Height="23" Width="91"/>
-                    <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtCostoTratta" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="30,62,0,0" TextWrapping="Wrap" Text="in offerta" VerticalAlignment="Top" Width="77"/>
-                    <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="161,63,0,0" VerticalAlignment="Top"/>
-                    <Grid x:Name="gridDipendenteTariffarioOfferta" HorizontalAlignment="Left" Height="158" Margin="0,94,0,0" VerticalAlignment="Top" Width="438">
-                        <DatePicker HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="244,43,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="244,86,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="29,22,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="273,22,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="29,93,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="79"/>
-                        <Button x:Name="button" Content="applica offerta" HorizontalAlignment="Left" Margin="260,127,0,0" VerticalAlignment="Top" Width="104"/>
-                    </Grid>
-                    <Button x:Name="button2" Content="salva prezzo" HorizontalAlignment="Left" Margin="291,284,0,0" VerticalAlignment="Top" Width="75"/>
+                    <CheckBox x:Name="ckbOfferta" Content="inserizione nella offerta&#xD;&#xA;" HorizontalAlignment="Left" Margin="161,63,0,0" VerticalAlignment="Top" Height="15" Checked="ckbOfferta_Checked" Unchecked="ckbOfferta_Unchecked"/>
+                    <Border x:Name="borderGridTO" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="438" Margin="0,96,0,0" Visibility="Hidden">
+                        <Grid x:Name="gridDipendenteTariffarioOfferta" HorizontalAlignment="Left" Height="163" Margin="0,-1,-2,-1" VerticalAlignment="Top" Width="438">
+                            <DatePicker HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
+                            <DatePicker HorizontalAlignment="Left" Margin="244,43,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txtPsconto" HorizontalAlignment="Left" Height="23" Margin="244,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="29,22,0,0" TextWrapping="Wrap" Text="data inizio " VerticalAlignment="Top"/>
+                            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="273,22,0,0" TextWrapping="Wrap" Text="data scadenza" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="29,93,0,0" TextWrapping="Wrap" Text="percentuale di sconto" VerticalAlignment="Top" Width="125"/>
+                            <Button x:Name="btnAo" Content="applica offerta" HorizontalAlignment="Left" Margin="260,127,0,0" VerticalAlignment="Top" Width="104"/>
+                        </Grid>
+                    </Border>
+                    <Button x:Name="btnSp" Content="salva prezzo" HorizontalAlignment="Left" Margin="291,284,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </Grid>
             <Button x:Name="button3" Content="cambia dati" HorizontalAlignment="Left" Margin="530,324,0,0" VerticalAlignment="Top" Width="75" Click="button3_Click"/>
+
 
 
 
