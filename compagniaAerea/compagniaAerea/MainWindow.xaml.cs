@@ -227,11 +227,54 @@ namespace compagniaAerea
             this.gridCorrente = 1;
             currentGrid();
         }
-        
+        #region profilo dipendente
+        string telefono_dipendente, email_dipendente, indirizzodi_pendente;
+        private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            telefono_dipendente = telefonoDipendentetxt.Text;
+            telefonoDipendentetxt.IsEnabled = true;
+        }
+
+        private void cambia_emailcb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            email_dipendente = email_dipendentetxt.Text;
+            email_dipendentetxt.IsEnabled = true;            
+
+        }
+        private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            indirizzodi_pendente = indirizzo_dipendentetxt.Text;
+            indirizzo_dipendentetxt.IsEnabled = true;
+        }
+        private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(telefonoDipendentetxt);
+            errore.ValueText(email_dipendentetxt);
+            errore.ValueText(indirizzo_dipendentetxt);
+
+            if (errore.checkText())
+            {
+                cambia_telefono_dipendentecb.IsChecked = false;
+                cambia_email_dipendentecb.IsChecked = false;
+                cambia_indirizzo_dipendentecb.IsChecked = false;
+                //cambio cambio dei dati nel db
+            }
+            else {
+                MessageBox.Show(errore.codError(), "ERRORE!",MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+        }
+       
+        #endregion
+
         #endregion
 
         #region place holder manuale
-       
+
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
         private void InFocus(object sender, RoutedEventArgs e)
         {
@@ -364,10 +407,14 @@ namespace compagniaAerea
             }
         }
 
-        #endregion
+
+
+
 
         #endregion
 
+        #endregion
 
+        
     }
 }
