@@ -323,7 +323,7 @@ namespace compagniaAerea
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
                
-                if(login_username.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
+                if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
