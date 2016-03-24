@@ -280,7 +280,7 @@ namespace compagniaAerea
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
                
-                if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
+                if(login_username.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -338,7 +338,29 @@ namespace compagniaAerea
             borderGridTO.Visibility = Visibility.Hidden;
         }
 
+        private void click_salvaPrezzo(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtCostoTratta);
+            if (errore.checkText())
+            {
 
+            }
+            else {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        private void click_applicaOfferta(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtPsconto);
+            if (errore.checkText())
+            {
+
+            }
+            else {
+                MessageBox.Show(errore.codError());
+            }
+        }
 
         #endregion
 
@@ -364,10 +386,11 @@ namespace compagniaAerea
             }
         }
 
-        #endregion
 
         #endregion
 
+        #endregion
 
+      
     }
 }
