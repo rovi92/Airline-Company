@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White" Visibility="Visible">
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0">
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
             <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
