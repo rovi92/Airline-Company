@@ -329,7 +329,7 @@ namespace compagniaAerea
                     MIGestioneVoli.Visibility = Visibility.Visible;
                     MIGestioneTariffario.Visibility = Visibility.Visible;
                     MIProfilo.Visibility = Visibility.Visible;
-                    gridDipendente.Visibility = Visibility.Visible;
+                    btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
                 }
@@ -345,8 +345,9 @@ namespace compagniaAerea
             MIGestioneVoli.Visibility = Visibility.Hidden;
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
+            btnLogOut.Visibility = Visibility.Hidden;
            
-            gridDipendente.Visibility = Visibility.Hidden;
+           
 
         }
 
