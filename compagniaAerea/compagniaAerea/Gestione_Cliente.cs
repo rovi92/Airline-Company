@@ -63,8 +63,8 @@ namespace compagniaAerea
                               join aeroporto in myDatabase.Aereoporto on p.Aereoporto_partenza equals aeroporto.Nome
                               join tariffario in myDatabase.Tariffario on p.idPiano_di_volo  equals tariffario.idPiano_di_volo
                               where p.idPiano_di_volo == 3
-                         select new
-                         {
+                         select new*/
+                       /*  {
                             Prova = p.Partenza,
                              Arrivo = p.Arrivo
                              p.Partenza,
@@ -84,7 +84,7 @@ namespace compagniaAerea
         }
         */
         #endregion
-    
+
         #region controllo cliente
         public Boolean statoRegistrazioneCliente()
         {
