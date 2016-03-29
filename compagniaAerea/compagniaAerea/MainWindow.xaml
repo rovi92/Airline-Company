@@ -121,81 +121,106 @@
 
         </Grid>
 
-       
+        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Hidden">
+            <TextBox x:Name="nomepasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblocknome" HorizontalAlignment="Left" Margin="58,44,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textblockcognometxt" HorizontalAlignment="Left" Margin="204,44,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
+            <TextBox x:Name="cognomepasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="204,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblockemail" HorizontalAlignment="Left" Margin="356,44,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
+            <TextBox x:Name="emailpasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="356,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblockvia" HorizontalAlignment="Left" Margin="58,118,0,0" TextWrapping="Wrap" Text="Via" VerticalAlignment="Top"/>
+            <TextBox x:Name="viapasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,137,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblockcittà" HorizontalAlignment="Left" Margin="206,118,0,0" TextWrapping="Wrap" Text="Città/Paese" VerticalAlignment="Top"/>
+            <TextBox x:Name="cittàpasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="204,137,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblockcap" HorizontalAlignment="Left" Margin="356,118,0,0" TextWrapping="Wrap" Text="CAP" VerticalAlignment="Top"/>
+            <TextBox x:Name="cappasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="356,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="28"/>
+            <TextBlock x:Name="cftextblock" HorizontalAlignment="Left" Margin="58,182,0,0" TextWrapping="Wrap" Text="Codice Fiscale" VerticalAlignment="Top"/>
+            <TextBox x:Name="cfpasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="tipobabgliocombobox" HorizontalAlignment="Left" Margin="58,277,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textblockbagagli" HorizontalAlignment="Left" Margin="58,256,0,0" TextWrapping="Wrap" Text="Bagaglio/i imbarcati" VerticalAlignment="Top"/>
+            <TextBox x:Name="bagaglitxt" HorizontalAlignment="Left" Height="23" Margin="204,277,0,0" TextWrapping="Wrap" Text="N." VerticalAlignment="Top" Width="39"/>
+            <TextBlock x:Name="textblockpagamento" HorizontalAlignment="Left" Margin="554,46,0,0" TextWrapping="Wrap" Text="Tipo pagamento" VerticalAlignment="Top" Visibility="Hidden"/>
+            <ComboBox x:Name="pagamentocombobox" HorizontalAlignment="Left" Margin="554,67,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
 
 
 
-            <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-                <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
-                <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="109" Margin="43,74,0,0" VerticalAlignment="Top" Width="119">
-                    <Image x:Name="image1" Margin="-1"/>
+        </Grid>
+
+
+
+
+
+        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
+            <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
+            <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="109" Margin="43,74,0,0" VerticalAlignment="Top" Width="119">
+                <Image x:Name="image1" Margin="-1"/>
+            </Border>
+            <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="24" Margin="243,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="codiceDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="243,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="dataAssunzione_dipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBlock x:Name="cognome_dipendentetbl" HorizontalAlignment="Left" Margin="243,66,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
+            <TextBlock x:Name="nome_dipendentetbl" HorizontalAlignment="Left" Margin="243,124,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
+            <TextBlock x:Name="codice_dipendentetbl" HorizontalAlignment="Left" Margin="243,176,0,0" TextWrapping="Wrap" Text="Codice" VerticalAlignment="Top"/>
+            <TextBlock x:Name="data_assunzione_dipendentetbl" HorizontalAlignment="Left" Margin="243,233,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
+            <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="525,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
+            <TextBox x:Name="data_nascita_dipendentetxt" HorizontalAlignment="Left" Margin="243,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24" IsEnabled="False"/>
+            <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="525,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="25" IsEnabled="False"/>
+            <TextBox x:Name="indirizzo_dipendentetxt" HorizontalAlignment="Left" Margin="525,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
+            <TextBlock x:Name="Telefono_dipendentetbl" HorizontalAlignment="Left" Margin="525,127,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="19"/>
+            <TextBlock x:Name="data_nascita_dipendentetbl" HorizontalAlignment="Left" Margin="243,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
+            <TextBlock x:Name="email_dipendentetbl" HorizontalAlignment="Left" Margin="525,177,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="21"/>
+            <TextBlock x:Name="indirizzo_dipendentetbl" HorizontalAlignment="Left" Margin="525,236,0,0" TextWrapping="Wrap" Text="Indirizzo" VerticalAlignment="Top"/>
+            <CheckBox x:Name="cambia_telefono_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,148,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_telefonocb_Checked"/>
+            <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,197,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
+            <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,254,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked"/>
+            <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
+        </Grid>
+        <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,-12,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
+            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+            <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock11_Copy" HorizontalAlignment="Left" Margin="178,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
+            <DatePicker Name="arrivopicker" HorizontalAlignment="Left" Margin="178,82,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="28,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
+            <TextBox x:Name="aereoporto_partenzatxt" HorizontalAlignment="Left" Height="23" Margin="28,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="178,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
+            <TextBox x:Name="aereoporto_arrivotxt" HorizontalAlignment="Left" Height="23" Margin="178,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="321,9,0,0" TextWrapping="Wrap" Text="Gate" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
+            <TextBox x:Name="gatetxt" HorizontalAlignment="Left" Height="25" Margin="321,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.4,-0.433"/>
+            <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="28,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
+            <TextBox x:Name="orario_partenzatxt" HorizontalAlignment="Left" Height="22" Margin="28,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock14_Copy" HorizontalAlignment="Left" Margin="178,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
+            <TextBox x:Name="orario_arrivotxt" HorizontalAlignment="Left" Height="22" Margin="178,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="10,160,0,0" TextWrapping="Wrap" Text="Elenco voli:" VerticalAlignment="Top" FontSize="18.667"/>
+            <DataGrid x:Name="volidatagrid" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Height="192" Width="850"/>
+            <Button x:Name="aggiungi_volobtn" Content="Aggiungi" HorizontalAlignment="Left" Margin="321,132,0,0" VerticalAlignment="Top" Width="120" Click="aggiungi_voloClick"/>
+            <Button x:Name="elimina_volobtn" Content="Elimina" HorizontalAlignment="Left" Margin="690,162,0,0" VerticalAlignment="Top" Width="150"/>
+        </Grid>
+        <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
+            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="378,10,0,0" TextWrapping="Wrap" Text="tariffario" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
+            <DataGrid x:Name="dgPartenza" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="290" Width="120"/>
+            <DataGrid x:Name="dgArrivo" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" Height="290" Width="124"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="355" Margin="402,35,0,0" VerticalAlignment="Top" Width="438"/>
+            <Grid x:Name="gridDatiTariffarioOfferta" HorizontalAlignment="Left" Height="350" Margin="402,40,0,0" VerticalAlignment="Top" Width="438">
+                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="costo Tratta" VerticalAlignment="Top" Height="23" Width="91"/>
+                <TextBox x:Name="txtCostoTratta" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="30,62,0,0" TextWrapping="Wrap" Text="in offerta" VerticalAlignment="Top" Width="77"/>
+                <CheckBox x:Name="ckbOfferta" Content="inserizione nella offerta&#xD;&#xA;" HorizontalAlignment="Left" Margin="161,63,0,0" VerticalAlignment="Top" Height="15" Checked="ckbOfferta_Checked" Unchecked="ckbOfferta_Unchecked"/>
+                <Border x:Name="borderGridTO" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="438" Margin="0,96,0,0" Visibility="Hidden">
+                    <Grid x:Name="gridDipendenteTariffarioOfferta" HorizontalAlignment="Left" Height="163" Margin="0,-1,-2,-1" VerticalAlignment="Top" Width="438">
+                        <DatePicker HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="244,43,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtPsconto" HorizontalAlignment="Left" Height="23" Margin="244,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="29,22,0,0" TextWrapping="Wrap" Text="data inizio " VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="273,22,0,0" TextWrapping="Wrap" Text="data scadenza" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="29,93,0,0" TextWrapping="Wrap" Text="percentuale di sconto" VerticalAlignment="Top" Width="125"/>
+                        <Button x:Name="btnAo" Content="applica offerta" HorizontalAlignment="Left" Margin="260,127,0,0" VerticalAlignment="Top" Width="104" Click="click_applicaOfferta"/>
+                    </Grid>
                 </Border>
-                <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="24" Margin="243,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                <TextBox x:Name="codiceDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="243,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                <TextBox x:Name="dataAssunzione_dipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                <TextBlock x:Name="cognome_dipendentetbl" HorizontalAlignment="Left" Margin="243,66,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
-                <TextBlock x:Name="nome_dipendentetbl" HorizontalAlignment="Left" Margin="243,124,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
-                <TextBlock x:Name="codice_dipendentetbl" HorizontalAlignment="Left" Margin="243,176,0,0" TextWrapping="Wrap" Text="Codice" VerticalAlignment="Top"/>
-                <TextBlock x:Name="data_assunzione_dipendentetbl" HorizontalAlignment="Left" Margin="243,233,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
-                <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="525,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
-                <TextBox x:Name="data_nascita_dipendentetxt" HorizontalAlignment="Left" Margin="243,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24" IsEnabled="False"/>
-                <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="525,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="25" IsEnabled="False"/>
-                <TextBox x:Name="indirizzo_dipendentetxt" HorizontalAlignment="Left" Margin="525,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
-                <TextBlock x:Name="Telefono_dipendentetbl" HorizontalAlignment="Left" Margin="525,127,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="19"/>
-                <TextBlock x:Name="data_nascita_dipendentetbl" HorizontalAlignment="Left" Margin="243,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
-                <TextBlock x:Name="email_dipendentetbl" HorizontalAlignment="Left" Margin="525,177,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="21"/>
-                <TextBlock x:Name="indirizzo_dipendentetbl" HorizontalAlignment="Left" Margin="525,236,0,0" TextWrapping="Wrap" Text="Indirizzo" VerticalAlignment="Top"/>
-                <CheckBox x:Name="cambia_telefono_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,148,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_telefonocb_Checked"/>
-                <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,197,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
-                <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,254,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked"/>
-                <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
+                <Button x:Name="btnSp" Content="salva prezzo" HorizontalAlignment="Left" Margin="291,284,0,0" VerticalAlignment="Top" Width="75" Click="click_salvaPrezzo"/>
             </Grid>
-            <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,-12,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
-                <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
-                <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock11_Copy" HorizontalAlignment="Left" Margin="178,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
-                <DatePicker Name="arrivopicker" HorizontalAlignment="Left" Margin="178,82,0,0" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="28,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
-                <TextBox x:Name="aereoporto_partenzatxt" HorizontalAlignment="Left" Height="23" Margin="28,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="178,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
-                <TextBox x:Name="aereoporto_arrivotxt" HorizontalAlignment="Left" Height="23" Margin="178,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="321,9,0,0" TextWrapping="Wrap" Text="Gate" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
-                <TextBox x:Name="gatetxt" HorizontalAlignment="Left" Height="25" Margin="321,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.4,-0.433"/>
-                <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="28,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
-                <TextBox x:Name="orario_partenzatxt" HorizontalAlignment="Left" Height="22" Margin="28,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock14_Copy" HorizontalAlignment="Left" Margin="178,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
-                <TextBox x:Name="orario_arrivotxt" HorizontalAlignment="Left" Height="22" Margin="178,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="10,160,0,0" TextWrapping="Wrap" Text="Elenco voli:" VerticalAlignment="Top" FontSize="18.667"/>
-                <DataGrid x:Name="volidatagrid" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Height="192" Width="850"/>
-                <Button x:Name="aggiungi_volobtn" Content="Aggiungi" HorizontalAlignment="Left" Margin="321,132,0,0" VerticalAlignment="Top" Width="120" Click="aggiungi_voloClick"/>
-                <Button x:Name="elimina_volobtn" Content="Elimina" HorizontalAlignment="Left" Margin="690,162,0,0" VerticalAlignment="Top" Width="150"/>
-            </Grid>
-            <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-                <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="378,10,0,0" TextWrapping="Wrap" Text="tariffario" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
-                <DataGrid x:Name="dgPartenza" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="290" Width="120"/>
-                <DataGrid x:Name="dgArrivo" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" Height="290" Width="124"/>
-                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="355" Margin="402,35,0,0" VerticalAlignment="Top" Width="438"/>
-                <Grid x:Name="gridDatiTariffarioOfferta" HorizontalAlignment="Left" Height="350" Margin="402,40,0,0" VerticalAlignment="Top" Width="438">
-                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="costo Tratta" VerticalAlignment="Top" Height="23" Width="91"/>
-                    <TextBox x:Name="txtCostoTratta" HorizontalAlignment="Left" Height="23" Margin="161,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="30,62,0,0" TextWrapping="Wrap" Text="in offerta" VerticalAlignment="Top" Width="77"/>
-                    <CheckBox x:Name="ckbOfferta" Content="inserizione nella offerta&#xD;&#xA;" HorizontalAlignment="Left" Margin="161,63,0,0" VerticalAlignment="Top" Height="15" Checked="ckbOfferta_Checked" Unchecked="ckbOfferta_Unchecked"/>
-                    <Border x:Name="borderGridTO" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="438" Margin="0,96,0,0" Visibility="Hidden">
-                        <Grid x:Name="gridDipendenteTariffarioOfferta" HorizontalAlignment="Left" Height="163" Margin="0,-1,-2,-1" VerticalAlignment="Top" Width="438">
-                            <DatePicker HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
-                            <DatePicker HorizontalAlignment="Left" Margin="244,43,0,0" VerticalAlignment="Top"/>
-                            <TextBox x:Name="txtPsconto" HorizontalAlignment="Left" Height="23" Margin="244,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="29,22,0,0" TextWrapping="Wrap" Text="data inizio " VerticalAlignment="Top"/>
-                            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="273,22,0,0" TextWrapping="Wrap" Text="data scadenza" VerticalAlignment="Top"/>
-                            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="29,93,0,0" TextWrapping="Wrap" Text="percentuale di sconto" VerticalAlignment="Top" Width="125"/>
-                            <Button x:Name="btnAo" Content="applica offerta" HorizontalAlignment="Left" Margin="260,127,0,0" VerticalAlignment="Top" Width="104" Click="click_applicaOfferta"/>
-                        </Grid>
-                    </Border>
-                    <Button x:Name="btnSp" Content="salva prezzo" HorizontalAlignment="Left" Margin="291,284,0,0" VerticalAlignment="Top" Width="75" Click="click_salvaPrezzo"/>
-                </Grid>
-            </Grid>
+        </Grid>
 
         <Grid x:Name="footer" Margin="0,452,0,5">
 
