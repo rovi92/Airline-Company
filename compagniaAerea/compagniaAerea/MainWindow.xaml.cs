@@ -64,6 +64,7 @@ namespace compagniaAerea
             errore.ValueText(CodiceFiscaletxt);
             errore.checkPs(Passwordtxt, conferma_password);
             errore.longTxt(CodiceFiscaletxt, 16);
+            errore.shortTxt(CodiceFiscaletxt, 16);
             errore.longTxt(Captxt, 5);
             errore.longTxt(Telefonotxt, 10);
             //inserimento dati nel metodo
