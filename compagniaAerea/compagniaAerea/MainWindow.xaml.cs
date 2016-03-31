@@ -50,6 +50,7 @@ namespace compagniaAerea
         #region grid registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
+            
             errore.ValueText(Nometxt);
             errore.ValueText(Cognometxt);
             errore.ValueText(Usernametxt);
@@ -62,25 +63,33 @@ namespace compagniaAerea
             errore.ValueText(Cittàtxt);
             errore.ValueText(Captxt);
             errore.ValueText(CodiceFiscaletxt);
-            errore.checkPs(Passwordtxt, conferma_password);
             errore.longTxt(CodiceFiscaletxt, 16);
             errore.shortTxt(CodiceFiscaletxt, 16);
             errore.longTxt(Captxt, 5);
             errore.longTxt(Telefonotxt, 10);
+            errore.checkPs(Passwordtxt, conferma_password);
             //inserimento dati nel metodo
             if (errore.checkText())
             {
-                gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
-                (DateTime)DataNascitaPicker.SelectedDate,
-                Usernametxt.Text, Passwordtxt.Password,
-                conferma_password.Password,
-                Indirizzotxt.Text, Telefonotxt.Text,
-                Emailtxt.Text, StatoCombobox.Name,
-                Regionetxt.Text, Cittàtxt.Text,
-                Int32.Parse(Captxt.Text),
-                CodiceFiscaletxt.Text);
+                // aggiunta dei metodi di controllo di esistenza dei dati 
+                if (gestione_cliente.controlCF(CodiceFiscaletxt.Text).Equals(true) && gestione_cliente.controlloUsername(Usernametxt.Text).Equals(true) && gestione_cliente.controlloEmail(Emailtxt.Text).Equals(true))
+                {
+                    gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+                    (DateTime)DataNascitaPicker.SelectedDate,
+                    Usernametxt.Text, Passwordtxt.Password,
+                    conferma_password.Password,
+                    Indirizzotxt.Text, Telefonotxt.Text,
+                    Emailtxt.Text, StatoCombobox.Name,
+                    Regionetxt.Text, Cittàtxt.Text,
+                    Int32.Parse(Captxt.Text),
+                    CodiceFiscaletxt.Text);
 
-
+                    errore.TraverseVisualTree(gridRegistrazione);
+                    MessageBox.Show("registrazione avvenuta con successo");
+                    this.gridCorrente = 2;
+                    currentGrid();
+                }
+                
             }
             else {
                 MessageBox.Show(errore.codError());
