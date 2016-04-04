@@ -29,7 +29,7 @@ namespace compagniaAerea
         Grid grid;
         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
-        Gestione_Cliente gestione_cliente;
+        Gestione_utente gestione_cliente;
         InterfacciaError errore = new Error();
 
 
@@ -40,7 +40,7 @@ namespace compagniaAerea
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
+            gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
 
 
         }
@@ -74,12 +74,16 @@ namespace compagniaAerea
                 // aggiunta dei metodi di controllo di esistenza dei dati 
                 if (gestione_cliente.controlCF(CodiceFiscaletxt.Text).Equals(true) && gestione_cliente.controlloUsername(Usernametxt.Text).Equals(true) && gestione_cliente.controlloEmail(Emailtxt.Text).Equals(true))
                 {
+                    ComboBoxItem typeItem = (ComboBoxItem)StatoCombobox.SelectedItem;
+                    string stato = typeItem.Content.ToString();
+                    
+
                     gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
                     (DateTime)DataNascitaPicker.SelectedDate,
                     Usernametxt.Text, Passwordtxt.Password,
                     conferma_password.Password,
                     Indirizzotxt.Text, Telefonotxt.Text,
-                    Emailtxt.Text, StatoCombobox.Name,
+                    Emailtxt.Text,stato,
                     Regionetxt.Text, Cittàtxt.Text,
                     Int32.Parse(Captxt.Text),
                     CodiceFiscaletxt.Text);

@@ -10,7 +10,7 @@ namespace compagniaAerea
     {
         DatabaseManager myDatabase;
         public VoloImpl(){
-            myDatabase = DatabaseManager.Instance;//dasd
+            myDatabase = DatabaseManager.Instance;
         }
         public bool getExistDestination(string destinazione)
         {

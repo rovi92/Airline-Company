@@ -64,7 +64,7 @@
             <TextBox x:Name="Telefonotxt" HorizontalAlignment="Left" Height="20" Margin="359,99,0,0" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
             <TextBlock x:Name="stato" HorizontalAlignment="Left" Margin="274,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Stato"/><Run Text=":"/></TextBlock>
             <ComboBox x:Name="StatoCombobox"  HorizontalAlignment="Left" Margin="359,131,0,0" VerticalAlignment="Top" Width="120"  >
-                <ComboBoxItem x:Name="Italia" Content="Italia" ></ComboBoxItem>
+                <ComboBoxItem x:Name="Italia" Content="Italia"  ></ComboBoxItem>
             </ComboBox>
             <TextBlock x:Name="regione" HorizontalAlignment="Left" Margin="274,166,0,0" TextWrapping="Wrap" Text="Regione:" VerticalAlignment="Top"/>
             <TextBox x:Name="Regionetxt" HorizontalAlignment="Left" Height="20" Margin="359,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus" />
