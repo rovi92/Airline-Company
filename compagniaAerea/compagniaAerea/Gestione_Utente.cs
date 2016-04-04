@@ -9,14 +9,18 @@ using System.Windows;
 
 namespace compagniaAerea
 {
-    class Gestione_Cliente
+    class Gestione_utente 
     {
-        private myDatabaseUniboAirlineDataContext myDatabase;
+        
+        DatabaseManager myDatabase;
         Boolean statoRegistrazione = false;
         ArrayList alErrori = new ArrayList();
-        public Gestione_Cliente()
+        public Gestione_utente()
         {
-            myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
+           
+            myDatabase = DatabaseManager.Instance;
+            
+          
         }
         #region registrazione cliente
         //metodo per registrazione
@@ -30,22 +34,23 @@ namespace compagniaAerea
                 {
                     //inserimento dati nel database
                     idPasseggero = 1234,
-                    Nome = nome,
-                    Cognome = cognome,
-                    Data_di_nascita = data_di_nascita,
-                    Username = username,
-                    Password = password,
-                    Telefono = telefono,
-                    Indirizzo = indirizzo,
-                    Email = email,
-                    Stato = stato,
-                    Regione = regione,
-                    Città = città,
+                    nome = nome,
+                    cognome = cognome,
+                    data_di_nascita = data_di_nascita,
+                    username = username,
+                    password = password,
+                    telefono = telefono,
+                    indirizzo = indirizzo,
+                    email = email,
+                    stato = stato,
+                    regione = regione,
+                    città = città,
                     CAP = CAP,
                     CF = CF,
                 };
-                myDatabase.Passeggero.InsertOnSubmit(p);
-                myDatabase.SubmitChanges();
+                myDatabase.getDb().Passeggero.InsertOnSubmit(p);
+                myDatabase.getDb().SubmitChanges();
+
                 statoRegistrazione = true;
             }
             else
@@ -58,7 +63,7 @@ namespace compagniaAerea
         #region controllo CF
         public Boolean controlCF(String CF)
         {
-            Boolean i = (from c in myDatabase.Passeggero
+            Boolean i = (from c in myDatabase.getDb().Passeggero
                          select c.CF).Contains(CF);
             if (i.Equals(true))
             {
@@ -73,8 +78,8 @@ namespace compagniaAerea
         #region controllo username
         public Boolean controlloUsername(String username)
         {
-            Boolean i = (from c in myDatabase.Passeggero
-                         select c.Username).Contains(username);
+            Boolean i = (from c in myDatabase.getDb().Passeggero
+                         select c.username).Contains(username);
             if (i.Equals(true))
             {
                 MessageBox.Show("username non valido");
@@ -87,8 +92,8 @@ namespace compagniaAerea
         #region controllo mail
         public Boolean controlloEmail(String email)
         {
-            Boolean i = (from c in myDatabase.Passeggero
-                         select c.Email).Contains(email);
+            Boolean i = (from c in myDatabase.getDb().Passeggero
+                         select c.email).Contains(email);
             if (i.Equals(true))
             {
                 MessageBox.Show("mail già registrata");
