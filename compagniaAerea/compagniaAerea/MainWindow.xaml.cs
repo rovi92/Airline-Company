@@ -30,6 +30,7 @@ namespace compagniaAerea
         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_utente gestione_cliente;
+        VoloImpl volo;
         InterfacciaError errore = new Error();
 
 
@@ -41,6 +42,7 @@ namespace compagniaAerea
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
+            volo = new VoloImpl();//classe volo
 
 
         }
@@ -114,9 +116,9 @@ namespace compagniaAerea
             
             if(errore.checkText())
             {
-             /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-                dataGrid.ItemsSource = cerca_volo;*/
-                //LABEL_PROVA.Content = cerca_volo;
+                    /*var cerca_volo = volo.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                    dataGrid.ItemsSource = cerca_volo;*/
+                    //LABEL_PROVA.Content = cerca_volo;
             } else
             {
                 MessageBox.Show(errore.codError());
