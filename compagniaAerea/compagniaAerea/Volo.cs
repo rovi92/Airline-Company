@@ -8,7 +8,8 @@ namespace compagniaAerea
 {
     interface Volo
     {
-        bool getExistDestination(string destinazione);
+        Boolean getExistDestination(string destinazione);
+        void executeTratta();//aggiornamento entità locale tratta per la lettura dei dati
         dynamic Cerca_volo(string partenza, string destinazione, DateTime data_partenza, DateTime data_ritorno);
     }
 }

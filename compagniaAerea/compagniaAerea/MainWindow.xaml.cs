@@ -36,13 +36,15 @@ namespace compagniaAerea
 
         public MainWindow()
         {
+            
+            gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
+            volo = new VoloImpl();//classe volo
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
-            volo = new VoloImpl();//classe volo
+            volo.executeTratta();//aggiornamento database locale
 
 
         }
@@ -78,9 +80,7 @@ namespace compagniaAerea
                 {
                     ComboBoxItem typeItem = (ComboBoxItem)StatoCombobox.SelectedItem;
                     string stato = typeItem.Content.ToString();
-                    
-
-                    gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+                     gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
                     (DateTime)DataNascitaPicker.SelectedDate,
                     Usernametxt.Text, Passwordtxt.Password,
                     conferma_password.Password,
@@ -93,6 +93,7 @@ namespace compagniaAerea
                     errore.TraverseVisualTree(gridRegistrazione);
                     MessageBox.Show("registrazione avvenuta con successo");
                     this.gridCorrente = 2;
+                    volo.executeTratta();
                     currentGrid();
                 }
                 
@@ -103,22 +104,18 @@ namespace compagniaAerea
         }
         #endregion
 
-        #region grid cerca volo
+        #region grid cerca volo MARA
        
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-            // myDatabase = new myDatabaseUniboAirlineDataContext(); //connessione al database
-
-            //dataGrid.ItemsSource = prova;
+           
             errore.ValueText(txtPartenza);
             errore.ValueText(txtDestinazioneVolo);
             
             if(errore.checkText())
             {
-                    /*var cerca_volo = volo.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-                    dataGrid.ItemsSource = cerca_volo;*/
-                    //LABEL_PROVA.Content = cerca_volo;
+                   
             } else
             {
                 MessageBox.Show(errore.codError());
@@ -171,7 +168,9 @@ namespace compagniaAerea
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 1;
+            gestione_cliente.InitUtente();
             currentGrid();
 
         }
@@ -179,7 +178,7 @@ namespace compagniaAerea
         private void Accedi_Click(object sender, RoutedEventArgs e)
         {
 
-            //gridLogIn.Visibility = Visibility.Visible;
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 0;
             currentGrid();
 
@@ -189,8 +188,9 @@ namespace compagniaAerea
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
-            //  gridRegistrazione.Visibility = Visibility.Visible;
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 1;
+            gestione_cliente.InitUtente();
             currentGrid();
 
 
@@ -200,7 +200,7 @@ namespace compagniaAerea
         { //popolamento della lista
             gridchange.Add(gridLogIn);//grid di logIn pos 0
             gridchange.Add(gridRegistrazione);//grid di registrazione pos 1
-            gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
+            gridchange.Add(gridSelezionaVolo);//grid di seleziona volo pos 2 
             gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
             gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 4
             gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 5
@@ -228,19 +228,24 @@ namespace compagniaAerea
 
         private void prenotaVolo_Click(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 2;
+            volo.executeTratta();//aggiornamento database locale
             currentGrid();
         }
 
         private void InfoBiglietto_Click(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 3;
             currentGrid();
         }
 
         private void click_apriRegistrazione(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 1;
+            gestione_cliente.InitUtente();
             currentGrid();
         }
         #region profilo dipendente
@@ -356,6 +361,7 @@ namespace compagniaAerea
         #region dipendente
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 0;
             currentGrid();
             MIGestioneVoli.Visibility = Visibility.Hidden;
@@ -371,16 +377,19 @@ namespace compagniaAerea
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 6;
             currentGrid();
         }
         private void Click_gestioneVoli(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 5;
             currentGrid();
         }
         private void Click_profilo(object sender, RoutedEventArgs e)
         {
+            errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 4;
             currentGrid();
         }
