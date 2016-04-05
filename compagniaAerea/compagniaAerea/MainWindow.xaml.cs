@@ -104,22 +104,18 @@ namespace compagniaAerea
         }
         #endregion
 
-        #region grid cerca volo MARA
+        #region grid cerca volo 
        
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-           
-            errore.ValueText(txtPartenza);
-            errore.ValueText(txtDestinazioneVolo);
-            
-            if(errore.checkText())
+            volo.getExistDestination(txtPartenza.Text);
+            volo.getExistArrive(txtDestinazioneVolo.Text);
+            if (rdbAndataRitorno.IsPressed)
             {
-                   
-            } else
-            {
-                MessageBox.Show(errore.codError());
+                volo.getExistTimeDestination(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataRitorno");
             }
+            volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
             
         }
         #endregion
@@ -145,7 +141,9 @@ namespace compagniaAerea
         #endregion
 
         #endregion
-       
+
+      
+
         #region cerca biglietto
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
         {
