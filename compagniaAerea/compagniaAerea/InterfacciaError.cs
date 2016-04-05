@@ -15,6 +15,8 @@ namespace compagniaAerea
         void valuePassword(PasswordBox ps);
         void checkPs(PasswordBox ps1, PasswordBox ps2);
         void longTxt(TextBox txtB1, int numMax);
+        void shortTxt(TextBox txtB1, int numMin);
+        void TraverseVisualTree(System.Windows.Media.Visual myMainWindow);
         String codError();
         
     }

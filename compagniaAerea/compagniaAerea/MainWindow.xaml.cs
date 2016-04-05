@@ -29,7 +29,7 @@ namespace compagniaAerea
         Grid grid;
         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
-        Gestione_Cliente gestione_cliente;
+        Gestione_utente gestione_cliente;
         InterfacciaError errore = new Error();
 
 
@@ -40,7 +40,7 @@ namespace compagniaAerea
             populateGrid();
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            gestione_cliente = new Gestione_Cliente();// la classe può esssere richiamata anche sotto se si vuole
+            gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
 
 
         }
@@ -50,6 +50,7 @@ namespace compagniaAerea
         #region grid registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
+            
             errore.ValueText(Nometxt);
             errore.ValueText(Cognometxt);
             errore.ValueText(Usernametxt);
@@ -62,24 +63,37 @@ namespace compagniaAerea
             errore.ValueText(Cittàtxt);
             errore.ValueText(Captxt);
             errore.ValueText(CodiceFiscaletxt);
-            errore.checkPs(Passwordtxt, conferma_password);
             errore.longTxt(CodiceFiscaletxt, 16);
+            errore.shortTxt(CodiceFiscaletxt, 16);
             errore.longTxt(Captxt, 5);
             errore.longTxt(Telefonotxt, 10);
+            errore.checkPs(Passwordtxt, conferma_password);
             //inserimento dati nel metodo
             if (errore.checkText())
             {
-                gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
-                (DateTime)DataNascitaPicker.SelectedDate,
-                Usernametxt.Text, Passwordtxt.Password,
-                conferma_password.Password,
-                Indirizzotxt.Text, Telefonotxt.Text,
-                Emailtxt.Text, StatoCombobox.Name,
-                Regionetxt.Text, Cittàtxt.Text,
-                Int32.Parse(Captxt.Text),
-                CodiceFiscaletxt.Text);
+                // aggiunta dei metodi di controllo di esistenza dei dati 
+                if (gestione_cliente.controlCF(CodiceFiscaletxt.Text).Equals(true) && gestione_cliente.controlloUsername(Usernametxt.Text).Equals(true) && gestione_cliente.controlloEmail(Emailtxt.Text).Equals(true))
+                {
+                    ComboBoxItem typeItem = (ComboBoxItem)StatoCombobox.SelectedItem;
+                    string stato = typeItem.Content.ToString();
+                    
 
+                    gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+                    (DateTime)DataNascitaPicker.SelectedDate,
+                    Usernametxt.Text, Passwordtxt.Password,
+                    conferma_password.Password,
+                    Indirizzotxt.Text, Telefonotxt.Text,
+                    Emailtxt.Text,stato,
+                    Regionetxt.Text, Cittàtxt.Text,
+                    Int32.Parse(Captxt.Text),
+                    CodiceFiscaletxt.Text);
 
+                    errore.TraverseVisualTree(gridRegistrazione);
+                    MessageBox.Show("registrazione avvenuta con successo");
+                    this.gridCorrente = 2;
+                    currentGrid();
+                }
+                
             }
             else {
                 MessageBox.Show(errore.codError());
@@ -100,8 +114,8 @@ namespace compagniaAerea
             
             if(errore.checkText())
             {
-                var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-                dataGrid.ItemsSource = cerca_volo;
+             /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                dataGrid.ItemsSource = cerca_volo;*/
                 //LABEL_PROVA.Content = cerca_volo;
             } else
             {
@@ -186,10 +200,9 @@ namespace compagniaAerea
             gridchange.Add(gridRegistrazione);//grid di registrazione pos 1
             gridchange.Add(gridSelezionaVolo);//grid di seleziona lavoro pos 2 
             gridchange.Add(grid_ricerca_biglietto);//grid di ricerca biglietto pos 3
-            gridchange.Add(gridDipendente);//grid dipendente pos 4
-            gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 5
-            gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 6
-            gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 7
+            gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 4
+            gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 5
+            gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
             
          }
 
@@ -228,7 +241,50 @@ namespace compagniaAerea
             this.gridCorrente = 1;
             currentGrid();
         }
+        #region profilo dipendente
+        string telefono_dipendente, email_dipendente, indirizzodi_pendente;
+        private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            telefono_dipendente = telefonoDipendentetxt.Text;
+            telefonoDipendentetxt.IsEnabled = true;
+        }
+
+        private void cambia_emailcb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            email_dipendente = email_dipendentetxt.Text;
+            email_dipendentetxt.IsEnabled = true;            
         
+        }
+        private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
+        {
+            salva_dipendentebtn.Visibility = Visibility.Visible;
+            indirizzodi_pendente = indirizzo_dipendentetxt.Text;
+            indirizzo_dipendentetxt.IsEnabled = true;
+        }
+        private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(telefonoDipendentetxt);
+            errore.ValueText(email_dipendentetxt);
+            errore.ValueText(indirizzo_dipendentetxt);
+
+            if (errore.checkText())
+            {
+                cambia_telefono_dipendentecb.IsChecked = false;
+                cambia_email_dipendentecb.IsChecked = false;
+                cambia_indirizzo_dipendentecb.IsChecked = false;
+                //cambio cambio dei dati nel db
+            }
+            else {
+                MessageBox.Show(errore.codError(), "ERRORE!",MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+        }
+       
+        #endregion
+
         #endregion
 
         #region place holder manuale
@@ -283,10 +339,11 @@ namespace compagniaAerea
                
                 if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
-                    MIGestioneAerei.Visibility = Visibility.Visible;
+
+                    MIGestioneVoli.Visibility = Visibility.Visible;
                     MIGestioneTariffario.Visibility = Visibility.Visible;
-                    MIturni.Visibility = Visibility.Visible;
-                    MIGestioneOfferte.Visibility = Visibility.Visible;
+                    MIProfilo.Visibility = Visibility.Visible;
+                    btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
                 }
@@ -299,14 +356,99 @@ namespace compagniaAerea
         {
             this.gridCorrente = 0;
             currentGrid();
-            MIGestioneAerei.Visibility = Visibility.Hidden;
+            MIGestioneVoli.Visibility = Visibility.Hidden;
             MIGestioneTariffario.Visibility = Visibility.Hidden;
-            MIturni.Visibility = Visibility.Hidden;
-            MIGestioneOfferte.Visibility = Visibility.Hidden;
+            MIProfilo.Visibility = Visibility.Hidden;
+            btnLogOut.Visibility = Visibility.Hidden;
+           
+           
 
         }
 
         //tutto ciò che fa parte di dipendente metti qui
+        #region btnMenu
+        private void click_Tariffario(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 6;
+            currentGrid();
+        }
+        private void Click_gestioneVoli(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 5;
+            currentGrid();
+        }
+        private void Click_profilo(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 4;
+            currentGrid();
+        }
         #endregion
+
+        #region tariffario
+
+        private void ckbOfferta_Checked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Visible;
+        }
+
+        private void ckbOfferta_Unchecked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Hidden;
+        }
+
+        private void click_salvaPrezzo(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtCostoTratta);
+            if (errore.checkText())
+            {
+
+            }
+            else {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        private void click_applicaOfferta(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtPsconto);
+            if (errore.checkText())
+            {
+
+            }
+            else {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        #endregion
+
+        #region gestione voli
+
+        private void aggiungi_voloClick(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(aereoporto_partenzatxt);
+            errore.ValueText(aereoporto_arrivotxt);
+            errore.ValueText(gatetxt);
+            errore.ValueText(orario_partenzatxt);
+            errore.ValueText(orario_arrivotxt);
+
+            if (errore.checkText())
+            {
+                /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
+                   dataGrid.ItemsSource = cerca_volo;*/
+                //LABEL_PROVA.Content = cerca_volo;
+            }
+            else
+            {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+
+        #endregion
+
+        #endregion
+
+
     }
 }

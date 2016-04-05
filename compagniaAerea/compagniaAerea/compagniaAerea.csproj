@@ -61,14 +61,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseManager.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="Gestione_Cliente.cs" />
+    <Compile Include="Gestione_Utente.cs" />
     <Compile Include="InterfacciaError.cs" />
+    <Compile Include="myDatabaseUniboAirline.cs">
+      <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
+    </Compile>
     <Compile Include="myDatabaseUniboAirline.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Volo.cs" />
+    <Compile Include="VoloImpl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
