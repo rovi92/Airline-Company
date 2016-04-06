@@ -11,7 +11,11 @@ namespace compagniaAerea
         Boolean getExistDestination(string destinazione);
         Boolean getExistArrive(string arrivo);
         Boolean getExistTimeDestination(string data,string tipo);
+        List<VoloImpl.InfoViaggio> getFly(string nandata,string nRitorno,string data);
+        
         void executeTratta();//aggiornamento entità locale tratta per la lettura dei dati
       //  dynamic Cerca_volo(string partenza, string destinazione, DateTime data_partenza, DateTime data_ritorno);
     }
+
+    
 }

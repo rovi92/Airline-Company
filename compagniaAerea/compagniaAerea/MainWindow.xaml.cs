@@ -111,13 +111,32 @@ namespace compagniaAerea
         {
             volo.getExistDestination(txtPartenza.Text);
             volo.getExistArrive(txtDestinazioneVolo.Text);
-            if (rdbAndataRitorno.IsPressed)
+           
+            switch (rdbAndataRitorno.IsChecked)
             {
-                volo.getExistTimeDestination(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataRitorno");
+                case true:
+                    
+                    if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
+                          volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
+                          volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true) &&
+                          volo.getExistTimeDestination(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataRitorno").Equals(true))
+                    {
+                         dataGridRitorno.ItemsSource = volo.getFly( txtDestinazioneVolo.Text, txtPartenza.Text,dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        dataGridAndata.ItemsSource = volo.getFly(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                    }
+                    break;
+                case false:
+                   
+                  //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
+                    if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
+                            volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
+                            volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true))
+                    {
+                        dataGridAndata.ItemsSource = volo.getFly(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                    }
+                    break;
             }
-            volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
-            
-        }
+ }
         #endregion
 
         #region radioButton andata/andata e ritorno
@@ -125,13 +144,17 @@ namespace compagniaAerea
         {
             this.rdbState = false;
             dataRitorno.Visibility = Visibility.Hidden;
+            dataGridAndata.Height = 300;
             tblRitorno.Visibility = Visibility.Hidden;
+            dataGridRitorno.Visibility = Visibility.Hidden;
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
         {
             if (this.rdbState == false)
             {
+                dataGridAndata.Height = 150;
+                dataGridRitorno.Visibility = Visibility.Visible;
                 dataRitorno.Visibility = Visibility.Visible;
                 tblRitorno.Visibility = Visibility.Visible;
                 this.rdbState = true;

@@ -18,10 +18,24 @@ namespace compagniaAerea
         public VoloImpl() {
 
             myDatabase = DatabaseManager.Instance;//al
-            
           
-            
+
+    }
+        public class InfoViaggio
+
+        {
+
+            public string partenza { get; set; }
+
+            public string arrivo { get; set; }
+
+            public  string dataPartenza { get; set; }
+
+            public string orarioPartenza { get; set; }
+
+            public string orarioArrivo { get; set; }
         }
+
         //caricamento di database in locale 
         public void executeTratta()
         {
@@ -30,7 +44,25 @@ namespace compagniaAerea
                             select t).ToList();
 
         }
-
+        public List<InfoViaggio> getFly(string nandata, string nRitorno, string data )
+        {
+            List<InfoViaggio> flyList = new List<InfoViaggio>();
+           
+            for (int i = 0; i< trattaLocale.Count;i++)
+            {
+                if(nandata.Equals(trattaLocale[i].aeroporto_partenza) && nRitorno.Equals(trattaLocale[i].aeroporto_arrivo) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
+                {
+                    flyList.Add(new InfoViaggio()
+                    {
+                        partenza = trattaLocale[i].aeroporto_partenza,
+                        arrivo = trattaLocale[i].aeroporto_arrivo,
+                        dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
+                        orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
+                        orarioArrivo = trattaLocale[i].orario_arrivo.ToString()});
+                }
+            }
+            return flyList;
+        }
         //metodo per controllare se esiste un una certa stringa nel database
         public Boolean getExistDestination(string destinazione)
         {
@@ -86,9 +118,10 @@ namespace compagniaAerea
                 case "dataRitorno":
                     foreach (Tratta t in trattaLocale)
                     {
+
                         if (t.data_partenza.ToString("yyyy-MM-dd").Equals(data))
                         {
-                           return flag = true;
+                            return flag = true;
                         }
                     }
                     MessageBox.Show("nessuna partenza in questa data");
@@ -98,30 +131,6 @@ namespace compagniaAerea
             }
 
         }
-        //Cerca volo
-        #region cerca volo MARALDI
-        /* public dynamic Cerca_volo(string partenza, string destinazione, DateTime data_partenza, DateTime data_ritorno)
-          {
-
-              var cerca_volo = (from tratta in myDatabase.getDb().Tratta
-                               join aeroportop in myDatabase.getDb().Aeroporto on tratta.aeroporto_partenza equals aeroportop.nome
-                               join aeroportoa in myDatabase.getDb().Aeroporto on tratta.aeroporto_arrivo equals aeroportoa.nome
-                               where tratta.gate_partenza == 2
-                               select new
-               {
-                   tratta.data_partenza,
-                   tratta.data_arrivo,
-                   aeroportop.nome,
-                   aeroportoa.telefono
-
-
-               });
-
-              return cerca_volo;
-
-          }*/
-
-        #endregion
 
     }
 }
