@@ -109,8 +109,6 @@ namespace compagniaAerea
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-            volo.getExistDestination(txtPartenza.Text);
-            volo.getExistArrive(txtDestinazioneVolo.Text);
            
             switch (rdbAndataRitorno.IsChecked)
             {
