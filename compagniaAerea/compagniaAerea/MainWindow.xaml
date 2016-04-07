@@ -96,30 +96,35 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
 
         </Menu>
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="802*"/>
+            </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333"/>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="231,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="txtDestinazioneVolo" HorizontalAlignment="Left" Height="20" Margin="229,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-            <RadioButton x:Name="rdbAndataRitorno" Content="Andata e Ritorno" HorizontalAlignment="Left" Margin="20,115,0,0" VerticalAlignment="Top" Checked="rdbAndataRitorno_Checked" IsChecked="True" GroupName="rdbTipoVolo"/>
-            <RadioButton x:Name="rdbSoloAndata" Content="Sola Andata" HorizontalAlignment="Left" Margin="229,115,0,0" VerticalAlignment="Top" GroupName="rdbTipoVolo" Checked="rdbSoloAndata_Checked"/>
-            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top"/>
-            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="229,178,0,0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="20,157,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
-            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="229,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
-            <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
-            <Label x:Name="lblPosti"  Content="{Binding ElementName=sldPosti, Path=Value}" HorizontalAlignment="Left" Margin="119,245,0,0" VerticalAlignment="Top" Width="24"/>
-            <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True"/>
-            <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="152,320,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
-            <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="271,320,0,0" VerticalAlignment="Top"  GroupName="Classe"/>
-            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="278,367,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
-            <Grid HorizontalAlignment="Left" Height="100" Margin="586,178,0,0" VerticalAlignment="Top" Width="100"/>
-            <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="549,178,0,0" VerticalAlignment="Top" Width="279"/>
-            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="394,24,0,0" VerticalAlignment="Top" Height="149" Width="466" 
+            <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="174,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2"/>
+            <TextBox x:Name="txtDestinazioneVolo" HorizontalAlignment="Left" Height="20" Margin="172,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="2"/>
+            <RadioButton x:Name="rdbAndataRitorno" Content="Andata e Ritorno" HorizontalAlignment="Left" Margin="20,115,0,0" VerticalAlignment="Top" Checked="rdbAndataRitorno_Checked" IsChecked="True" GroupName="rdbTipoVolo" Grid.ColumnSpan="3"/>
+            <RadioButton x:Name="rdbSoloAndata" Content="Sola Andata" HorizontalAlignment="Left" Margin="172,115,0,0" VerticalAlignment="Top" GroupName="rdbTipoVolo" Checked="rdbSoloAndata_Checked" Grid.Column="2"/>
+            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="172,178,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="20,157,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="172,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="2"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
+            <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1" Grid.ColumnSpan="3"/>
+            <Label x:Name="lblPosti"  Content="{Binding ElementName=sldPosti, Path=Value}" HorizontalAlignment="Left" Margin="62,245,0,0" VerticalAlignment="Top" Width="24" Grid.Column="2"/>
+            <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True" Grid.ColumnSpan="3"/>
+            <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="94,320,0,0" VerticalAlignment="Top"  GroupName="Classe" Grid.Column="2"/>
+            <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="214,320,0,0" VerticalAlignment="Top"  GroupName="Classe" Grid.Column="2"/>
+            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="220,367,0,0" VerticalAlignment="Top" Width="96" Height="27" Click="btnCercaVolo_Click" Grid.Column="2"/>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="528,178,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
+            <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="492,178,0,0" VerticalAlignment="Top" Width="278" Grid.Column="2"/>
+            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="336,24,0,0" VerticalAlignment="Top" Height="149" Width="466" 
                             GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30"
                             HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" IsReadOnly="True"
-                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended">
+                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -130,10 +135,10 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="697,367,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="prenota_click"/>
-            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="394,173,0,0" VerticalAlignment="Top" Height="150" Width="466"
+            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="640,367,0,0" VerticalAlignment="Top" Width="94" Height="27" Click="prenota_click" Grid.Column="2"/>
+            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="336,173,0,0" VerticalAlignment="Top" Height="150" Width="466"
                             GridLinesVisibility="Horizontal" HeadersVisibility="All"  ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30" IsReadOnly="True"
-                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended">
+                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -257,6 +262,19 @@
                 </RadialGradientBrush>
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
+        </Grid>
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
+            <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="IndietroBiglietto"/>
+            <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="46,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="206"/>
+            <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="208"/>
+            <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="666,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="111"/>
+            <TextBlock x:Name="valutatxb" HorizontalAlignment="Left" Margin="782,295,0,0" TextWrapping="Wrap" Text="Euro" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.533"/>
+            <Label x:Name="codiceVololbl" Content="codice volo" HorizontalAlignment="Left" Height="32" Margin="46,92,0,0" VerticalAlignment="Top" Width="402"/>
+            <Label x:Name="CFlbl" Content="codice fiscale" HorizontalAlignment="Left" Margin="536,34,0,0" VerticalAlignment="Top" Width="270"/>
+            <Label x:Name="aereoporteAndatalbl" Content="aereoporto andata" HorizontalAlignment="Left" Margin="46,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <Label x:Name="aereoportoArrivolbl" Content="aereoporto arrivo" HorizontalAlignment="Left" Margin="334,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <Label x:Name="oraPartenzalbl" Content="orapartenza" HorizontalAlignment="Left" Margin="46,240,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <Label x:Name="dataPartenzalbl" Content="data partenza (gg/mm/aa)" HorizontalAlignment="Left" Margin="46,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
         </Grid>
     </Grid>
 </Window>
