@@ -65,6 +65,7 @@
     <Compile Include="Error.cs" />
     <Compile Include="Gestione_Utente.cs" />
     <Compile Include="InterfacciaError.cs" />
+    <Compile Include="Ticket.cs" />
     <Compile Include="myDatabaseUniboAirline.cs">
       <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
     </Compile>
@@ -73,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
     </Compile>
+    <Compile Include="TicketImpl.cs" />
     <Compile Include="Volo.cs" />
     <Compile Include="VoloImpl.cs" />
     <Page Include="MainWindow.xaml">
