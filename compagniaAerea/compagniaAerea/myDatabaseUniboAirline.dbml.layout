@@ -169,41 +169,41 @@
         <classShapeMoniker Id="334f4476-86d8-4c1b-9cb6-a8d4f3a555b7" />
       </nodes>
     </associationConnector>
-    <classShape Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" absoluteBounds="4, 3.75, 2, 3.5016097005208326">
+    <classShape Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" absoluteBounds="3.875, 3.75, 2, 3.5016097005208326">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Tratta" />
       <nestedChildShapes>
-        <elementListCompartment Id="7a01d075-2d27-460b-9076-2136f8de91b1" absoluteBounds="4.015, 4.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7a01d075-2d27-460b-9076-2136f8de91b1" absoluteBounds="3.8899999999999997, 4.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6 : 5.00804818880208); (9.15625 : 5.00804818880208); (9.15625 : 3.82859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.875 : 5.00804818880208); (9.15625 : 5.00804818880208); (9.15625 : 3.82859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tratta/Tratta_Volo_attuale" />
       <nodes>
         <classShapeMoniker Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" />
         <classShapeMoniker Id="334f4476-86d8-4c1b-9cb6-a8d4f3a555b7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 4.60659912109375); (4 : 4.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 4.60659912109375); (3.875 : 4.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aereo/Aereo_Tratta" />
       <nodes>
         <classShapeMoniker Id="4e0a73f8-9868-41a0-bac2-2b52f61769fd" />
         <classShapeMoniker Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.0625 : 2.27089680989583); (5.0625 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5 : 2.27089680989583); (5 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta" />
       <nodes>
         <classShapeMoniker Id="ee9bd987-6d8c-45cb-b301-79c1c7125f5c" />
         <classShapeMoniker Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.59375 : 2.27089680989583); (5.59375 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.27089680989583); (5.5 : 3.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta1" />
       <nodes>
         <classShapeMoniker Id="ee9bd987-6d8c-45cb-b301-79c1c7125f5c" />
         <classShapeMoniker Id="7a95ccbe-4803-43e4-9d7e-36bfccfa4234" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7 : 6.75080485026042); (6 : 6.75080485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7 : 6.75080485026042); (5.875 : 6.75080485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Piano_di_volo/Piano_di_volo_Tratta" />
       <nodes>
         <classShapeMoniker Id="f7c28cc0-fe52-45b9-89c7-108893fed086" />
