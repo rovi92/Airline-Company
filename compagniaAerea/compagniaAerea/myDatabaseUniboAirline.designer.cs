@@ -72,16 +72,16 @@ namespace compagniaAerea
     partial void InsertTariffario(Tariffario instance);
     partial void UpdateTariffario(Tariffario instance);
     partial void DeleteTariffario(Tariffario instance);
-    partial void InsertTratta(Tratta instance);
-    partial void UpdateTratta(Tratta instance);
-    partial void DeleteTratta(Tratta instance);
     partial void InsertVolo_attuale(Volo_attuale instance);
     partial void UpdateVolo_attuale(Volo_attuale instance);
     partial void DeleteVolo_attuale(Volo_attuale instance);
+    partial void InsertTratta(Tratta instance);
+    partial void UpdateTratta(Tratta instance);
+    partial void DeleteTratta(Tratta instance);
     #endregion
 		
 		public myDatabaseUniboAirlineDataContext() : 
-				base(global::compagniaAerea.Properties.Settings.Default.UniboAirlinesConnectionString, mappingSource)
+				base(global::compagniaAerea.Properties.Settings.Default.UniboAirlinesConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -222,19 +222,19 @@ namespace compagniaAerea
 			}
 		}
 		
-		public System.Data.Linq.Table<Tratta> Tratta
-		{
-			get
-			{
-				return this.GetTable<Tratta>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Volo_attuale> Volo_attuale
 		{
 			get
 			{
 				return this.GetTable<Volo_attuale>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Tratta> Trattas
+		{
+			get
+			{
+				return this.GetTable<Tratta>();
 			}
 		}
 	}
@@ -257,7 +257,7 @@ namespace compagniaAerea
 		
 		private int _capacità_first;
 		
-		private EntitySet<Tratta> _Tratta;
+		private EntitySet<Tratta> _Trattas;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -279,7 +279,7 @@ namespace compagniaAerea
 		
 		public Aereo()
 		{
-			this._Tratta = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta), new Action<Tratta>(this.detach_Tratta));
+			this._Trattas = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Trattas), new Action<Tratta>(this.detach_Trattas));
 			OnCreated();
 		}
 		
@@ -403,16 +403,16 @@ namespace compagniaAerea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aereo_Tratta", Storage="_Tratta", ThisKey="nome,modello", OtherKey="nome,modello")]
-		public EntitySet<Tratta> Tratta
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aereo_Tratta", Storage="_Trattas", ThisKey="nome,modello", OtherKey="nome,modello")]
+		public EntitySet<Tratta> Trattas
 		{
 			get
 			{
-				return this._Tratta;
+				return this._Trattas;
 			}
 			set
 			{
-				this._Tratta.Assign(value);
+				this._Trattas.Assign(value);
 			}
 		}
 		
@@ -436,13 +436,13 @@ namespace compagniaAerea
 			}
 		}
 		
-		private void attach_Tratta(Tratta entity)
+		private void attach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aereo = this;
 		}
 		
-		private void detach_Tratta(Tratta entity)
+		private void detach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aereo = null;
@@ -465,9 +465,9 @@ namespace compagniaAerea
 		
 		private string _città;
 		
-		private EntitySet<Tratta> _Tratta;
+		private EntitySet<Tratta> _Trattas;
 		
-		private EntitySet<Tratta> _Tratta1;
+		private EntitySet<Tratta> _Trattas1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -487,8 +487,8 @@ namespace compagniaAerea
 		
 		public Aeroporto()
 		{
-			this._Tratta = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta), new Action<Tratta>(this.detach_Tratta));
-			this._Tratta1 = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta1), new Action<Tratta>(this.detach_Tratta1));
+			this._Trattas = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Trattas), new Action<Tratta>(this.detach_Trattas));
+			this._Trattas1 = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Trattas1), new Action<Tratta>(this.detach_Trattas1));
 			OnCreated();
 		}
 		
@@ -592,29 +592,29 @@ namespace compagniaAerea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta", Storage="_Tratta", ThisKey="nome", OtherKey="aeroporto_partenza")]
-		public EntitySet<Tratta> Tratta
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta", Storage="_Trattas", ThisKey="nome", OtherKey="aeroporto_partenza")]
+		public EntitySet<Tratta> Trattas
 		{
 			get
 			{
-				return this._Tratta;
+				return this._Trattas;
 			}
 			set
 			{
-				this._Tratta.Assign(value);
+				this._Trattas.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta1", Storage="_Tratta1", ThisKey="nome", OtherKey="aeroporto_arrivo")]
-		public EntitySet<Tratta> Tratta1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta1", Storage="_Trattas1", ThisKey="nome", OtherKey="aeroporto_arrivo")]
+		public EntitySet<Tratta> Trattas1
 		{
 			get
 			{
-				return this._Tratta1;
+				return this._Trattas1;
 			}
 			set
 			{
-				this._Tratta1.Assign(value);
+				this._Trattas1.Assign(value);
 			}
 		}
 		
@@ -638,25 +638,25 @@ namespace compagniaAerea
 			}
 		}
 		
-		private void attach_Tratta(Tratta entity)
+		private void attach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aeroporto = this;
 		}
 		
-		private void detach_Tratta(Tratta entity)
+		private void detach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aeroporto = null;
 		}
 		
-		private void attach_Tratta1(Tratta entity)
+		private void attach_Trattas1(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aeroporto1 = this;
 		}
 		
-		private void detach_Tratta1(Tratta entity)
+		private void detach_Trattas1(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Aeroporto1 = null;
@@ -2405,7 +2405,7 @@ namespace compagniaAerea
 		
 		private EntitySet<Tariffario> _Tariffario;
 		
-		private EntitySet<Tratta> _Tratta;
+		private EntitySet<Tratta> _Trattas;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2428,7 +2428,7 @@ namespace compagniaAerea
 		public Piano_di_volo()
 		{
 			this._Tariffario = new EntitySet<Tariffario>(new Action<Tariffario>(this.attach_Tariffario), new Action<Tariffario>(this.detach_Tariffario));
-			this._Tratta = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta), new Action<Tratta>(this.detach_Tratta));
+			this._Trattas = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Trattas), new Action<Tratta>(this.detach_Trattas));
 			OnCreated();
 		}
 		
@@ -2565,16 +2565,16 @@ namespace compagniaAerea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tratta", Storage="_Tratta", ThisKey="numero_volo", OtherKey="numero_volo")]
-		public EntitySet<Tratta> Tratta
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tratta", Storage="_Trattas", ThisKey="numero_volo", OtherKey="numero_volo")]
+		public EntitySet<Tratta> Trattas
 		{
 			get
 			{
-				return this._Tratta;
+				return this._Trattas;
 			}
 			set
 			{
-				this._Tratta.Assign(value);
+				this._Trattas.Assign(value);
 			}
 		}
 		
@@ -2610,13 +2610,13 @@ namespace compagniaAerea
 			entity.Piano_di_volo = null;
 		}
 		
-		private void attach_Tratta(Tratta entity)
+		private void attach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Piano_di_volo = this;
 		}
 		
-		private void detach_Tratta(Tratta entity)
+		private void detach_Trattas(Tratta entity)
 		{
 			this.SendPropertyChanging();
 			entity.Piano_di_volo = null;
@@ -3357,506 +3357,6 @@ namespace compagniaAerea
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tratta")]
-	public partial class Tratta : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.TimeSpan _orario_partenza;
-		
-		private System.TimeSpan _orario_arrivo;
-		
-		private System.DateTime _data_partenza;
-		
-		private System.DateTime _data_arrivo;
-		
-		private int _gate_partenza;
-		
-		private int _gate_arrivo;
-		
-		private string _nome;
-		
-		private string _modello;
-		
-		private int _numero_volo;
-		
-		private string _aeroporto_partenza;
-		
-		private string _aeroporto_arrivo;
-		
-		private EntitySet<Volo_attuale> _Volo_attuale;
-		
-		private EntityRef<Aereo> _Aereo;
-		
-		private EntityRef<Aeroporto> _Aeroporto;
-		
-		private EntityRef<Aeroporto> _Aeroporto1;
-		
-		private EntityRef<Piano_di_volo> _Piano_di_volo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onorario_partenzaChanging(System.TimeSpan value);
-    partial void Onorario_partenzaChanged();
-    partial void Onorario_arrivoChanging(System.TimeSpan value);
-    partial void Onorario_arrivoChanged();
-    partial void Ondata_partenzaChanging(System.DateTime value);
-    partial void Ondata_partenzaChanged();
-    partial void Ondata_arrivoChanging(System.DateTime value);
-    partial void Ondata_arrivoChanged();
-    partial void Ongate_partenzaChanging(int value);
-    partial void Ongate_partenzaChanged();
-    partial void Ongate_arrivoChanging(int value);
-    partial void Ongate_arrivoChanged();
-    partial void OnnomeChanging(string value);
-    partial void OnnomeChanged();
-    partial void OnmodelloChanging(string value);
-    partial void OnmodelloChanged();
-    partial void Onnumero_voloChanging(int value);
-    partial void Onnumero_voloChanged();
-    partial void Onaeroporto_partenzaChanging(string value);
-    partial void Onaeroporto_partenzaChanged();
-    partial void Onaeroporto_arrivoChanging(string value);
-    partial void Onaeroporto_arrivoChanged();
-    #endregion
-		
-		public Tratta()
-		{
-			this._Volo_attuale = new EntitySet<Volo_attuale>(new Action<Volo_attuale>(this.attach_Volo_attuale), new Action<Volo_attuale>(this.detach_Volo_attuale));
-			this._Aereo = default(EntityRef<Aereo>);
-			this._Aeroporto = default(EntityRef<Aeroporto>);
-			this._Aeroporto1 = default(EntityRef<Aeroporto>);
-			this._Piano_di_volo = default(EntityRef<Piano_di_volo>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orario_partenza", DbType="Time NOT NULL", IsPrimaryKey=true)]
-		public System.TimeSpan orario_partenza
-		{
-			get
-			{
-				return this._orario_partenza;
-			}
-			set
-			{
-				if ((this._orario_partenza != value))
-				{
-					this.Onorario_partenzaChanging(value);
-					this.SendPropertyChanging();
-					this._orario_partenza = value;
-					this.SendPropertyChanged("orario_partenza");
-					this.Onorario_partenzaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orario_arrivo", DbType="Time NOT NULL")]
-		public System.TimeSpan orario_arrivo
-		{
-			get
-			{
-				return this._orario_arrivo;
-			}
-			set
-			{
-				if ((this._orario_arrivo != value))
-				{
-					this.Onorario_arrivoChanging(value);
-					this.SendPropertyChanging();
-					this._orario_arrivo = value;
-					this.SendPropertyChanged("orario_arrivo");
-					this.Onorario_arrivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_partenza", DbType="Date NOT NULL", IsPrimaryKey=true)]
-		public System.DateTime data_partenza
-		{
-			get
-			{
-				return this._data_partenza;
-			}
-			set
-			{
-				if ((this._data_partenza != value))
-				{
-					this.Ondata_partenzaChanging(value);
-					this.SendPropertyChanging();
-					this._data_partenza = value;
-					this.SendPropertyChanged("data_partenza");
-					this.Ondata_partenzaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_arrivo", DbType="Date NOT NULL")]
-		public System.DateTime data_arrivo
-		{
-			get
-			{
-				return this._data_arrivo;
-			}
-			set
-			{
-				if ((this._data_arrivo != value))
-				{
-					this.Ondata_arrivoChanging(value);
-					this.SendPropertyChanging();
-					this._data_arrivo = value;
-					this.SendPropertyChanged("data_arrivo");
-					this.Ondata_arrivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gate_partenza", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int gate_partenza
-		{
-			get
-			{
-				return this._gate_partenza;
-			}
-			set
-			{
-				if ((this._gate_partenza != value))
-				{
-					this.Ongate_partenzaChanging(value);
-					this.SendPropertyChanging();
-					this._gate_partenza = value;
-					this.SendPropertyChanged("gate_partenza");
-					this.Ongate_partenzaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gate_arrivo", DbType="Int NOT NULL")]
-		public int gate_arrivo
-		{
-			get
-			{
-				return this._gate_arrivo;
-			}
-			set
-			{
-				if ((this._gate_arrivo != value))
-				{
-					this.Ongate_arrivoChanging(value);
-					this.SendPropertyChanging();
-					this._gate_arrivo = value;
-					this.SendPropertyChanged("gate_arrivo");
-					this.Ongate_arrivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string nome
-		{
-			get
-			{
-				return this._nome;
-			}
-			set
-			{
-				if ((this._nome != value))
-				{
-					if (this._Aereo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnnomeChanging(value);
-					this.SendPropertyChanging();
-					this._nome = value;
-					this.SendPropertyChanged("nome");
-					this.OnnomeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modello", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string modello
-		{
-			get
-			{
-				return this._modello;
-			}
-			set
-			{
-				if ((this._modello != value))
-				{
-					if (this._Aereo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnmodelloChanging(value);
-					this.SendPropertyChanging();
-					this._modello = value;
-					this.SendPropertyChanged("modello");
-					this.OnmodelloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_volo", DbType="Int NOT NULL")]
-		public int numero_volo
-		{
-			get
-			{
-				return this._numero_volo;
-			}
-			set
-			{
-				if ((this._numero_volo != value))
-				{
-					if (this._Piano_di_volo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onnumero_voloChanging(value);
-					this.SendPropertyChanging();
-					this._numero_volo = value;
-					this.SendPropertyChanged("numero_volo");
-					this.Onnumero_voloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_aeroporto_partenza", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string aeroporto_partenza
-		{
-			get
-			{
-				return this._aeroporto_partenza;
-			}
-			set
-			{
-				if ((this._aeroporto_partenza != value))
-				{
-					if (this._Aeroporto.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onaeroporto_partenzaChanging(value);
-					this.SendPropertyChanging();
-					this._aeroporto_partenza = value;
-					this.SendPropertyChanged("aeroporto_partenza");
-					this.Onaeroporto_partenzaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_aeroporto_arrivo", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string aeroporto_arrivo
-		{
-			get
-			{
-				return this._aeroporto_arrivo;
-			}
-			set
-			{
-				if ((this._aeroporto_arrivo != value))
-				{
-					if (this._Aeroporto1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onaeroporto_arrivoChanging(value);
-					this.SendPropertyChanging();
-					this._aeroporto_arrivo = value;
-					this.SendPropertyChanged("aeroporto_arrivo");
-					this.Onaeroporto_arrivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tratta_Volo_attuale", Storage="_Volo_attuale", ThisKey="orario_partenza,data_partenza,gate_partenza", OtherKey="orario_partenza,data_partenza,gate_partenza")]
-		public EntitySet<Volo_attuale> Volo_attuale
-		{
-			get
-			{
-				return this._Volo_attuale;
-			}
-			set
-			{
-				this._Volo_attuale.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aereo_Tratta", Storage="_Aereo", ThisKey="nome,modello", OtherKey="nome,modello", IsForeignKey=true)]
-		public Aereo Aereo
-		{
-			get
-			{
-				return this._Aereo.Entity;
-			}
-			set
-			{
-				Aereo previousValue = this._Aereo.Entity;
-				if (((previousValue != value) 
-							|| (this._Aereo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Aereo.Entity = null;
-						previousValue.Tratta.Remove(this);
-					}
-					this._Aereo.Entity = value;
-					if ((value != null))
-					{
-						value.Tratta.Add(this);
-						this._nome = value.nome;
-						this._modello = value.modello;
-					}
-					else
-					{
-						this._nome = default(string);
-						this._modello = default(string);
-					}
-					this.SendPropertyChanged("Aereo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta", Storage="_Aeroporto", ThisKey="aeroporto_partenza", OtherKey="nome", IsForeignKey=true)]
-		public Aeroporto Aeroporto
-		{
-			get
-			{
-				return this._Aeroporto.Entity;
-			}
-			set
-			{
-				Aeroporto previousValue = this._Aeroporto.Entity;
-				if (((previousValue != value) 
-							|| (this._Aeroporto.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Aeroporto.Entity = null;
-						previousValue.Tratta.Remove(this);
-					}
-					this._Aeroporto.Entity = value;
-					if ((value != null))
-					{
-						value.Tratta.Add(this);
-						this._aeroporto_partenza = value.nome;
-					}
-					else
-					{
-						this._aeroporto_partenza = default(string);
-					}
-					this.SendPropertyChanged("Aeroporto");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta1", Storage="_Aeroporto1", ThisKey="aeroporto_arrivo", OtherKey="nome", IsForeignKey=true)]
-		public Aeroporto Aeroporto1
-		{
-			get
-			{
-				return this._Aeroporto1.Entity;
-			}
-			set
-			{
-				Aeroporto previousValue = this._Aeroporto1.Entity;
-				if (((previousValue != value) 
-							|| (this._Aeroporto1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Aeroporto1.Entity = null;
-						previousValue.Tratta1.Remove(this);
-					}
-					this._Aeroporto1.Entity = value;
-					if ((value != null))
-					{
-						value.Tratta1.Add(this);
-						this._aeroporto_arrivo = value.nome;
-					}
-					else
-					{
-						this._aeroporto_arrivo = default(string);
-					}
-					this.SendPropertyChanged("Aeroporto1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tratta", Storage="_Piano_di_volo", ThisKey="numero_volo", OtherKey="numero_volo", IsForeignKey=true)]
-		public Piano_di_volo Piano_di_volo
-		{
-			get
-			{
-				return this._Piano_di_volo.Entity;
-			}
-			set
-			{
-				Piano_di_volo previousValue = this._Piano_di_volo.Entity;
-				if (((previousValue != value) 
-							|| (this._Piano_di_volo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Piano_di_volo.Entity = null;
-						previousValue.Tratta.Remove(this);
-					}
-					this._Piano_di_volo.Entity = value;
-					if ((value != null))
-					{
-						value.Tratta.Add(this);
-						this._numero_volo = value.numero_volo;
-					}
-					else
-					{
-						this._numero_volo = default(int);
-					}
-					this.SendPropertyChanged("Piano_di_volo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Volo_attuale(Volo_attuale entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tratta = this;
-		}
-		
-		private void detach_Volo_attuale(Volo_attuale entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tratta = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Volo_attuale")]
 	public partial class Volo_attuale : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4043,12 +3543,12 @@ namespace compagniaAerea
 					if ((previousValue != null))
 					{
 						this._Tratta.Entity = null;
-						previousValue.Volo_attuale.Remove(this);
+						previousValue.Volo_attuales.Remove(this);
 					}
 					this._Tratta.Entity = value;
 					if ((value != null))
 					{
-						value.Volo_attuale.Add(this);
+						value.Volo_attuales.Add(this);
 						this._orario_partenza = value.orario_partenza;
 						this._data_partenza = value.data_partenza;
 						this._gate_partenza = value.gate_partenza;
@@ -4082,6 +3582,578 @@ namespace compagniaAerea
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tratta")]
+	public partial class Tratta : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.TimeSpan _orario_partenza;
+		
+		private System.TimeSpan _orario_arrivo;
+		
+		private System.DateTime _data_partenza;
+		
+		private System.DateTime _data_arrivo;
+		
+		private int _gate_partenza;
+		
+		private int _gate_arrivo;
+		
+		private int _posti_economy;
+		
+		private int _posti_buisness;
+		
+		private int _posti_first;
+		
+		private string _nome;
+		
+		private string _modello;
+		
+		private int _numero_volo;
+		
+		private string _aeroporto_partenza;
+		
+		private string _aeroporto_arrivo;
+		
+		private EntitySet<Volo_attuale> _Volo_attuales;
+		
+		private EntityRef<Aereo> _Aereo;
+		
+		private EntityRef<Aeroporto> _Aeroporto;
+		
+		private EntityRef<Aeroporto> _Aeroporto1;
+		
+		private EntityRef<Piano_di_volo> _Piano_di_volo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onorario_partenzaChanging(System.TimeSpan value);
+    partial void Onorario_partenzaChanged();
+    partial void Onorario_arrivoChanging(System.TimeSpan value);
+    partial void Onorario_arrivoChanged();
+    partial void Ondata_partenzaChanging(System.DateTime value);
+    partial void Ondata_partenzaChanged();
+    partial void Ondata_arrivoChanging(System.DateTime value);
+    partial void Ondata_arrivoChanged();
+    partial void Ongate_partenzaChanging(int value);
+    partial void Ongate_partenzaChanged();
+    partial void Ongate_arrivoChanging(int value);
+    partial void Ongate_arrivoChanged();
+    partial void Onposti_economyChanging(int value);
+    partial void Onposti_economyChanged();
+    partial void Onposti_buisnessChanging(int value);
+    partial void Onposti_buisnessChanged();
+    partial void Onposti_firstChanging(int value);
+    partial void Onposti_firstChanged();
+    partial void OnnomeChanging(string value);
+    partial void OnnomeChanged();
+    partial void OnmodelloChanging(string value);
+    partial void OnmodelloChanged();
+    partial void Onnumero_voloChanging(int value);
+    partial void Onnumero_voloChanged();
+    partial void Onaeroporto_partenzaChanging(string value);
+    partial void Onaeroporto_partenzaChanged();
+    partial void Onaeroporto_arrivoChanging(string value);
+    partial void Onaeroporto_arrivoChanged();
+    #endregion
+		
+		public Tratta()
+		{
+			this._Volo_attuales = new EntitySet<Volo_attuale>(new Action<Volo_attuale>(this.attach_Volo_attuales), new Action<Volo_attuale>(this.detach_Volo_attuales));
+			this._Aereo = default(EntityRef<Aereo>);
+			this._Aeroporto = default(EntityRef<Aeroporto>);
+			this._Aeroporto1 = default(EntityRef<Aeroporto>);
+			this._Piano_di_volo = default(EntityRef<Piano_di_volo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orario_partenza", DbType="Time NOT NULL", IsPrimaryKey=true)]
+		public System.TimeSpan orario_partenza
+		{
+			get
+			{
+				return this._orario_partenza;
+			}
+			set
+			{
+				if ((this._orario_partenza != value))
+				{
+					this.Onorario_partenzaChanging(value);
+					this.SendPropertyChanging();
+					this._orario_partenza = value;
+					this.SendPropertyChanged("orario_partenza");
+					this.Onorario_partenzaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orario_arrivo", DbType="Time NOT NULL")]
+		public System.TimeSpan orario_arrivo
+		{
+			get
+			{
+				return this._orario_arrivo;
+			}
+			set
+			{
+				if ((this._orario_arrivo != value))
+				{
+					this.Onorario_arrivoChanging(value);
+					this.SendPropertyChanging();
+					this._orario_arrivo = value;
+					this.SendPropertyChanged("orario_arrivo");
+					this.Onorario_arrivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_partenza", DbType="Date NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime data_partenza
+		{
+			get
+			{
+				return this._data_partenza;
+			}
+			set
+			{
+				if ((this._data_partenza != value))
+				{
+					this.Ondata_partenzaChanging(value);
+					this.SendPropertyChanging();
+					this._data_partenza = value;
+					this.SendPropertyChanged("data_partenza");
+					this.Ondata_partenzaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_arrivo", DbType="Date NOT NULL")]
+		public System.DateTime data_arrivo
+		{
+			get
+			{
+				return this._data_arrivo;
+			}
+			set
+			{
+				if ((this._data_arrivo != value))
+				{
+					this.Ondata_arrivoChanging(value);
+					this.SendPropertyChanging();
+					this._data_arrivo = value;
+					this.SendPropertyChanged("data_arrivo");
+					this.Ondata_arrivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gate_partenza", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int gate_partenza
+		{
+			get
+			{
+				return this._gate_partenza;
+			}
+			set
+			{
+				if ((this._gate_partenza != value))
+				{
+					this.Ongate_partenzaChanging(value);
+					this.SendPropertyChanging();
+					this._gate_partenza = value;
+					this.SendPropertyChanged("gate_partenza");
+					this.Ongate_partenzaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gate_arrivo", DbType="Int NOT NULL")]
+		public int gate_arrivo
+		{
+			get
+			{
+				return this._gate_arrivo;
+			}
+			set
+			{
+				if ((this._gate_arrivo != value))
+				{
+					this.Ongate_arrivoChanging(value);
+					this.SendPropertyChanging();
+					this._gate_arrivo = value;
+					this.SendPropertyChanged("gate_arrivo");
+					this.Ongate_arrivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posti_economy", DbType="Int NOT NULL")]
+		public int posti_economy
+		{
+			get
+			{
+				return this._posti_economy;
+			}
+			set
+			{
+				if ((this._posti_economy != value))
+				{
+					this.Onposti_economyChanging(value);
+					this.SendPropertyChanging();
+					this._posti_economy = value;
+					this.SendPropertyChanged("posti_economy");
+					this.Onposti_economyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posti_buisness", DbType="Int NOT NULL")]
+		public int posti_buisness
+		{
+			get
+			{
+				return this._posti_buisness;
+			}
+			set
+			{
+				if ((this._posti_buisness != value))
+				{
+					this.Onposti_buisnessChanging(value);
+					this.SendPropertyChanging();
+					this._posti_buisness = value;
+					this.SendPropertyChanged("posti_buisness");
+					this.Onposti_buisnessChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posti_first", DbType="Int NOT NULL")]
+		public int posti_first
+		{
+			get
+			{
+				return this._posti_first;
+			}
+			set
+			{
+				if ((this._posti_first != value))
+				{
+					this.Onposti_firstChanging(value);
+					this.SendPropertyChanging();
+					this._posti_first = value;
+					this.SendPropertyChanged("posti_first");
+					this.Onposti_firstChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string nome
+		{
+			get
+			{
+				return this._nome;
+			}
+			set
+			{
+				if ((this._nome != value))
+				{
+					if (this._Aereo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnnomeChanging(value);
+					this.SendPropertyChanging();
+					this._nome = value;
+					this.SendPropertyChanged("nome");
+					this.OnnomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modello", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string modello
+		{
+			get
+			{
+				return this._modello;
+			}
+			set
+			{
+				if ((this._modello != value))
+				{
+					if (this._Aereo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnmodelloChanging(value);
+					this.SendPropertyChanging();
+					this._modello = value;
+					this.SendPropertyChanged("modello");
+					this.OnmodelloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_volo", DbType="Int NOT NULL")]
+		public int numero_volo
+		{
+			get
+			{
+				return this._numero_volo;
+			}
+			set
+			{
+				if ((this._numero_volo != value))
+				{
+					if (this._Piano_di_volo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onnumero_voloChanging(value);
+					this.SendPropertyChanging();
+					this._numero_volo = value;
+					this.SendPropertyChanged("numero_volo");
+					this.Onnumero_voloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_aeroporto_partenza", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string aeroporto_partenza
+		{
+			get
+			{
+				return this._aeroporto_partenza;
+			}
+			set
+			{
+				if ((this._aeroporto_partenza != value))
+				{
+					if (this._Aeroporto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onaeroporto_partenzaChanging(value);
+					this.SendPropertyChanging();
+					this._aeroporto_partenza = value;
+					this.SendPropertyChanged("aeroporto_partenza");
+					this.Onaeroporto_partenzaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_aeroporto_arrivo", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string aeroporto_arrivo
+		{
+			get
+			{
+				return this._aeroporto_arrivo;
+			}
+			set
+			{
+				if ((this._aeroporto_arrivo != value))
+				{
+					if (this._Aeroporto1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onaeroporto_arrivoChanging(value);
+					this.SendPropertyChanging();
+					this._aeroporto_arrivo = value;
+					this.SendPropertyChanged("aeroporto_arrivo");
+					this.Onaeroporto_arrivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tratta_Volo_attuale", Storage="_Volo_attuales", ThisKey="orario_partenza,data_partenza,gate_partenza", OtherKey="orario_partenza,data_partenza,gate_partenza")]
+		public EntitySet<Volo_attuale> Volo_attuales
+		{
+			get
+			{
+				return this._Volo_attuales;
+			}
+			set
+			{
+				this._Volo_attuales.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aereo_Tratta", Storage="_Aereo", ThisKey="nome,modello", OtherKey="nome,modello", IsForeignKey=true)]
+		public Aereo Aereo
+		{
+			get
+			{
+				return this._Aereo.Entity;
+			}
+			set
+			{
+				Aereo previousValue = this._Aereo.Entity;
+				if (((previousValue != value) 
+							|| (this._Aereo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Aereo.Entity = null;
+						previousValue.Trattas.Remove(this);
+					}
+					this._Aereo.Entity = value;
+					if ((value != null))
+					{
+						value.Trattas.Add(this);
+						this._nome = value.nome;
+						this._modello = value.modello;
+					}
+					else
+					{
+						this._nome = default(string);
+						this._modello = default(string);
+					}
+					this.SendPropertyChanged("Aereo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta", Storage="_Aeroporto", ThisKey="aeroporto_partenza", OtherKey="nome", IsForeignKey=true)]
+		public Aeroporto Aeroporto
+		{
+			get
+			{
+				return this._Aeroporto.Entity;
+			}
+			set
+			{
+				Aeroporto previousValue = this._Aeroporto.Entity;
+				if (((previousValue != value) 
+							|| (this._Aeroporto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Aeroporto.Entity = null;
+						previousValue.Trattas.Remove(this);
+					}
+					this._Aeroporto.Entity = value;
+					if ((value != null))
+					{
+						value.Trattas.Add(this);
+						this._aeroporto_partenza = value.nome;
+					}
+					else
+					{
+						this._aeroporto_partenza = default(string);
+					}
+					this.SendPropertyChanged("Aeroporto");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Aeroporto_Tratta1", Storage="_Aeroporto1", ThisKey="aeroporto_arrivo", OtherKey="nome", IsForeignKey=true)]
+		public Aeroporto Aeroporto1
+		{
+			get
+			{
+				return this._Aeroporto1.Entity;
+			}
+			set
+			{
+				Aeroporto previousValue = this._Aeroporto1.Entity;
+				if (((previousValue != value) 
+							|| (this._Aeroporto1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Aeroporto1.Entity = null;
+						previousValue.Trattas1.Remove(this);
+					}
+					this._Aeroporto1.Entity = value;
+					if ((value != null))
+					{
+						value.Trattas1.Add(this);
+						this._aeroporto_arrivo = value.nome;
+					}
+					else
+					{
+						this._aeroporto_arrivo = default(string);
+					}
+					this.SendPropertyChanged("Aeroporto1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tratta", Storage="_Piano_di_volo", ThisKey="numero_volo", OtherKey="numero_volo", IsForeignKey=true)]
+		public Piano_di_volo Piano_di_volo
+		{
+			get
+			{
+				return this._Piano_di_volo.Entity;
+			}
+			set
+			{
+				Piano_di_volo previousValue = this._Piano_di_volo.Entity;
+				if (((previousValue != value) 
+							|| (this._Piano_di_volo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Piano_di_volo.Entity = null;
+						previousValue.Trattas.Remove(this);
+					}
+					this._Piano_di_volo.Entity = value;
+					if ((value != null))
+					{
+						value.Trattas.Add(this);
+						this._numero_volo = value.numero_volo;
+					}
+					else
+					{
+						this._numero_volo = default(int);
+					}
+					this.SendPropertyChanged("Piano_di_volo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Volo_attuales(Volo_attuale entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tratta = this;
+		}
+		
+		private void detach_Volo_attuales(Volo_attuale entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tratta = null;
 		}
 	}
 }
