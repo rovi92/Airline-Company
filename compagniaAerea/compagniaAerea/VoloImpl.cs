@@ -10,17 +10,19 @@ using System.Windows.Documents;
 namespace compagniaAerea
 {
     class VoloImpl : Volo
-    {   
-          
-        DatabaseManager myDatabase;
-      List<Tratta> trattaLocale = new List<Tratta>();
+    {
 
-        public VoloImpl() {
+        DatabaseManager myDatabase;
+        List<Tratta> trattaLocale = new List<Tratta>();
+
+
+        public VoloImpl()
+        {
 
             myDatabase = DatabaseManager.Instance;//al
-          
 
-    }
+
+        }
         public class InfoViaggio
 
         {
@@ -29,7 +31,7 @@ namespace compagniaAerea
 
             public string arrivo { get; set; }
 
-            public  string dataPartenza { get; set; }
+            public string dataPartenza { get; set; }
 
             public string orarioPartenza { get; set; }
 
@@ -40,17 +42,19 @@ namespace compagniaAerea
         public void executeTratta()
         {
             trattaLocale = (from t in myDatabase.getDb().Tratta
-                           // where t.aeroporto_partenza.Equals = 
+                             
                             select t).ToList();
+        
+
 
         }
-        public List<InfoViaggio> getFly(string nandata, string nRitorno, string data )
+        public List<InfoViaggio> getFly(string nandata, string nRitorno, string data)
         {
             List<InfoViaggio> flyList = new List<InfoViaggio>();
-           
-            for (int i = 0; i< trattaLocale.Count;i++)
+
+            for (int i = 0; i < trattaLocale.Count; i++)
             {
-                if(nandata.Equals(trattaLocale[i].aeroporto_partenza) && nRitorno.Equals(trattaLocale[i].aeroporto_arrivo) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
+                if (nandata.Equals(trattaLocale[i].aeroporto_partenza) && nRitorno.Equals(trattaLocale[i].aeroporto_arrivo) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
                 {
                     flyList.Add(new InfoViaggio()
                     {
@@ -58,7 +62,8 @@ namespace compagniaAerea
                         arrivo = trattaLocale[i].aeroporto_arrivo,
                         dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
                         orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
-                        orarioArrivo = trattaLocale[i].orario_arrivo.ToString()});
+                        orarioArrivo = trattaLocale[i].orario_arrivo.ToString()
+                    });
                 }
             }
             return flyList;
@@ -67,10 +72,11 @@ namespace compagniaAerea
         public Boolean getExistDestination(string destinazione)
         {
             Boolean flag = false;
-            foreach (Tratta t in trattaLocale){
+            foreach (Tratta t in trattaLocale)
+            {
                 if (t.aeroporto_partenza.Equals(destinazione))
                 {
-                    flag = true; 
+                    flag = true;
                 }
             }
             if (flag.Equals(false))
@@ -78,7 +84,7 @@ namespace compagniaAerea
                 MessageBox.Show("non abbiamo voli in partenza da questa località");
             }
             return flag;
-            
+
         }
 
         public Boolean getExistArrive(string arrivo)
@@ -102,10 +108,10 @@ namespace compagniaAerea
         public Boolean getExistTimeDestination(string data, string tipo)
         {
             Boolean flag = false;
-            switch(tipo)
+            switch (tipo)
             {
                 case "dataPartenza":
-                    foreach(Tratta t in trattaLocale)
+                    foreach (Tratta t in trattaLocale)
                     {
 
                         if (t.data_partenza.ToString("yyyy-MM-dd").Equals(data))
@@ -132,5 +138,9 @@ namespace compagniaAerea
 
         }
 
+        public void setClass(string classeVolo)
+        {
+
+        }
     }
 }

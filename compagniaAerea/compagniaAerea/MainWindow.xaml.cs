@@ -136,15 +136,20 @@ namespace compagniaAerea
             }
  }
         #endregion
-
+        #region bottone prenota
+        private void prenota_click(object sender, RoutedEventArgs e)
+        {
+         }
+        #endregion
         #region radioButton andata/andata e ritorno
         private void rdbSoloAndata_Checked(object sender, RoutedEventArgs e)
         {
             this.rdbState = false;
-            dataRitorno.Visibility = Visibility.Hidden;
             dataGridAndata.Height = 300;
-            tblRitorno.Visibility = Visibility.Hidden;
             dataGridRitorno.Visibility = Visibility.Hidden;
+            dataRitorno.Visibility = Visibility.Hidden;
+            tblRitorno.Visibility = Visibility.Hidden;
+         
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -438,6 +443,11 @@ namespace compagniaAerea
             }
         }
 
+        private void txtPartenza_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
             errore.ValueText(txtPsconto);
@@ -473,7 +483,7 @@ namespace compagniaAerea
                 MessageBox.Show(errore.codError());
             }
         }
-
+            
 
         #endregion
 

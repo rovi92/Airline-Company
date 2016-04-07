@@ -116,9 +116,34 @@
             <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="278,367,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="btnCercaVolo_Click"/>
             <Grid HorizontalAlignment="Left" Height="100" Margin="586,178,0,0" VerticalAlignment="Top" Width="100"/>
             <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="549,178,0,0" VerticalAlignment="Top" Width="279"/>
-            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="464,24,0,0" VerticalAlignment="Top" Height="150" Width="350"/>
-            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="697,367,0,0" VerticalAlignment="Top" Width="95" Height="27"/>
-            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="464,178,0,0" VerticalAlignment="Top" Height="150" Width="350"/>
+            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="394,24,0,0" VerticalAlignment="Top" Height="149" Width="466" 
+                            GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30"
+                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" IsReadOnly="True"
+                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="Chocolate" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="697,367,0,0" VerticalAlignment="Top" Width="95" Height="27" Click="prenota_click"/>
+            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="394,173,0,0" VerticalAlignment="Top" Height="150" Width="466"
+                            GridLinesVisibility="Horizontal" HeadersVisibility="All"  ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30" IsReadOnly="True"
+                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="Chocolate" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
 
         </Grid>
 
