@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace compagniaAerea
@@ -54,12 +55,14 @@ namespace compagniaAerea
 
             for (int i = 0; i < trattaLocale.Count; i++)
             {
-                if (nandata.Equals(trattaLocale[i].aeroporto_partenza) && nRitorno.Equals(trattaLocale[i].aeroporto_arrivo) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
+               
+                if (nandata.Equals(trattaLocale[i].Aeroporto.città) && nRitorno.Equals(trattaLocale[i].Aeroporto1.città) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
                 {
+                    
                     flyList.Add(new InfoViaggio()
                     {
-                        partenza = trattaLocale[i].aeroporto_partenza,
-                        arrivo = trattaLocale[i].aeroporto_arrivo,
+                        partenza = trattaLocale[i].Aeroporto.città,
+                        arrivo = trattaLocale[i].Aeroporto1.città,
                         dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
                         orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
                         orarioArrivo = trattaLocale[i].orario_arrivo.ToString()
@@ -74,7 +77,7 @@ namespace compagniaAerea
             Boolean flag = false;
             foreach (Tratta t in trattaLocale)
             {
-                if (t.aeroporto_partenza.Equals(destinazione))
+                if (t.Aeroporto.città.Equals(destinazione))
                 {
                     flag = true;
                 }
@@ -93,7 +96,7 @@ namespace compagniaAerea
             Boolean flag = false;
             foreach (Tratta t in trattaLocale)
             {
-                if (t.aeroporto_arrivo.Equals(arrivo))
+                if (t.Aeroporto1.città.Equals(arrivo))
                 {
                     flag = true;
                 }
@@ -138,9 +141,21 @@ namespace compagniaAerea
 
         }
 
-        public void setClass(string classeVolo)
+        public bool setClass(RadioButton rb1, RadioButton rb2, RadioButton rb3)
         {
+            Boolean checkClass = false;
+            if (rb1.IsChecked.Value)
+            {
+              
+            }
+            if (rb2.IsChecked.Value)
+            {
 
+            }
+            if (rb3.IsChecked.Value)
+            {
+
+            }
         }
     }
 }

@@ -65,15 +65,12 @@
     <Compile Include="Error.cs" />
     <Compile Include="Gestione_Utente.cs" />
     <Compile Include="InterfacciaError.cs" />
-    <Compile Include="Ticket.cs" />
-    <Compile Include="myDatabaseUniboAirline.cs">
-      <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
-    </Compile>
     <Compile Include="myDatabaseUniboAirline.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Ticket.cs" />
     <Compile Include="TicketImpl.cs" />
     <Compile Include="Volo.cs" />
     <Compile Include="VoloImpl.cs" />

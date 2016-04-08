@@ -474,9 +474,7 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
-                /*   var cerca_volo = gestione_cliente.Cerca_volo(txtPartenza.Text, txtDestinazioneVolo.Text, (DateTime)dataPartenza.SelectedDate, (DateTime)dataRitorno.SelectedDate);
-                   dataGrid.ItemsSource = cerca_volo;*/
-                //LABEL_PROVA.Content = cerca_volo;
+               
             }
             else
             {
