@@ -15,7 +15,9 @@ namespace compagniaAerea
         String getAereoportoAndata(int codiceBiglietto);
         String getAereoportoArrivo(int codiceBiglietto);
         TimeSpan getOraPartenza(int codiceBiglietto);
-        DateTime getOrataPartenza(int codiceBiglietto);
+        TimeSpan getOraArrivo(int codiceBiglietto);
+        DateTime getDataArrivo(int codiceBiglietto);
+        DateTime getDataPartenza(int codiceBiglietto);
         Double getSpesaTotale(int codiceBiglietto);//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
         
         
