@@ -15,6 +15,7 @@ namespace compagniaAerea
 
         DatabaseManager myDatabase;
         List<Tratta> trattaLocale = new List<Tratta>();
+        RadioButton rb;
 
 
         public VoloImpl()
@@ -37,15 +38,17 @@ namespace compagniaAerea
             public string orarioPartenza { get; set; }
 
             public string orarioArrivo { get; set; }
+
+
         }
 
         //caricamento di database in locale 
         public void executeTratta()
         {
             trattaLocale = (from t in myDatabase.getDb().Tratta
-                             
+
                             select t).ToList();
-        
+
 
 
         }
@@ -55,18 +58,40 @@ namespace compagniaAerea
 
             for (int i = 0; i < trattaLocale.Count; i++)
             {
-               
+
                 if (nandata.Equals(trattaLocale[i].Aeroporto.città) && nRitorno.Equals(trattaLocale[i].Aeroporto1.città) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
                 {
-                    
-                    flyList.Add(new InfoViaggio()
+                    int posti = 0;
+                    int postiMax = 0;
+                    switch (rb.Content.ToString())
                     {
-                        partenza = trattaLocale[i].Aeroporto.città,
-                        arrivo = trattaLocale[i].Aeroporto1.città,
-                        dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
-                        orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
-                        orarioArrivo = trattaLocale[i].orario_arrivo.ToString()
-                    });
+                        case "Economy":
+                            posti = trattaLocale[i].posti_economy;
+                            postiMax = trattaLocale[i].Aereo.capacità_economy;
+                            break;
+                        case "Buisness":
+                            posti = trattaLocale[i].posti_buisness;
+                            postiMax = trattaLocale[i].Aereo.capacità_buisness;
+
+                            break;
+                        case "first":
+                            posti = trattaLocale[i].posti_first;
+                            postiMax = trattaLocale[i].Aereo.capacità_first;
+
+                            break;
+                    }
+                    if (posti < postiMax)
+                    {
+                        flyList.Add(new InfoViaggio()
+                        {
+                            partenza = trattaLocale[i].Aeroporto.città,
+                            arrivo = trattaLocale[i].Aeroporto1.città,
+                            dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
+                            orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
+                            orarioArrivo = trattaLocale[i].orario_arrivo.ToString()
+
+                        });
+                    }
                 }
             }
             return flyList;
@@ -141,21 +166,25 @@ namespace compagniaAerea
 
         }
 
-        public bool setClass(RadioButton rb1, RadioButton rb2, RadioButton rb3)
+        public void setClass(RadioButton rb1)
         {
-            Boolean checkClass = false;
-            if (rb1.IsChecked.Value)
-            {
-              
-            }
-            if (rb2.IsChecked.Value)
-            {
+            rb = rb1;
+        }
 
-            }
-            if (rb3.IsChecked.Value)
-            {
+        public RadioButton getClass()
+        {
+            return this.rb;
+        }
 
-            }
+        public List<String> getValueGrid(DataGrid dg)
+        {
+            //Convert.ToInt32((dgOrdini.SelectedCells[1].Column.GetCellContent(dgOrdini.SelectedItem) as TextBlock).Text);
+
+
+            return new List<String>() { (dg.SelectedCells[0].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text ,
+           (dg.SelectedCells[1].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+             (dg.SelectedCells[2].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+            (dg.SelectedCells[3].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text};
         }
     }
 }

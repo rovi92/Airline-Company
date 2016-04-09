@@ -13,7 +13,9 @@ namespace compagniaAerea
         Boolean getExistArrive(string arrivo);
         Boolean getExistTimeDestination(string data,string tipo);
         List<VoloImpl.InfoViaggio> getFly(string nandata,string nRitorno,string data);
-        Boolean setClass(RadioButton rb1, RadioButton rb2, RadioButton rb3);
+        void setClass(RadioButton rb1);
+        RadioButton getClass();
+        List<String> getValueGrid(DataGrid dg);
         
         void executeTratta();//aggiornamento entità locale tratta per la lettura dei dati
       //  dynamic Cerca_volo(string partenza, string destinazione, DateTime data_partenza, DateTime data_ritorno);

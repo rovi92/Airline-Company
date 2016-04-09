@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace compagniaAerea
 {
@@ -17,7 +18,6 @@ namespace compagniaAerea
         TimeSpan getOraPartenza(int codiceBiglietto);
         DateTime getOrataPartenza(int codiceBiglietto);
         Double getSpesaTotale(int codiceBiglietto);//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
-        
-        
+       
     }
 }

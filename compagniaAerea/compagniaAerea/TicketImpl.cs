@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace compagniaAerea
 {
 
     class TicketImpl : Ticket
     {
+
         DatabaseManager myDatabase;
+      
+      
+
         public TicketImpl()
         {
             myDatabase = DatabaseManager.Instance;
@@ -47,6 +53,11 @@ namespace compagniaAerea
         }
        public Double getSpesaTotale(int codiceBiglietto) {
             return 1;
+        }
+
+        public void DatiAnagraficiBiglietto(TextBox tb)
+        {
+            throw new NotImplementedException();
         }
     }
 }
