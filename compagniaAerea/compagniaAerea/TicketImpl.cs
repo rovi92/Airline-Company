@@ -39,8 +39,9 @@ namespace compagniaAerea
                              ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
                              data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
                              data_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo,
-                             prezzo_bagaglio = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +
-                                                                                                                                    b.Prenotazione.Tariffario.tariffa_solo_andata
+                             prezzo_bagaglio = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +(
+                                                                                                                                    b.Prenotazione.Tariffario.tariffa_solo_andata *
+                                                                                                                                    b.Prenotazione.Tariffario.Classe.prezzo)                                                                                                                                                                                                                                                                     
                          }).ToList();
             biglietti = new ListCollectionView(query);
         }
