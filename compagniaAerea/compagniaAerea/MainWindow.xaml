@@ -115,7 +115,7 @@
             <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="172,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="2"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
             <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1" Grid.ColumnSpan="3"/>
             <Label x:Name="lblPosti"  Content="{Binding ElementName=sldPosti, Path=Value}" HorizontalAlignment="Left" Margin="62,245,0,0" VerticalAlignment="Top" Width="24" Grid.Column="2"/>
-            <RadioButton x:Name="rdbEconomi" Content="Economy" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True" Grid.ColumnSpan="3"/>
+            <RadioButton x:Name="rdbEconomy" Content="Economy" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True" Grid.ColumnSpan="3"/>
             <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Left" Margin="94,320,0,0" VerticalAlignment="Top"  GroupName="Classe" Grid.Column="2"/>
             <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="214,320,0,0" VerticalAlignment="Top"  GroupName="Classe" Grid.Column="2"/>
             <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="220,367,0,0" VerticalAlignment="Top" Width="96" Height="27" Click="btnCercaVolo_Click" Grid.Column="2"/>
@@ -263,8 +263,8 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Visible">
-            <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="IndietroBiglietto"/>
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
+            <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" />
             <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="46,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="206"/>
             <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="208"/>
             <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="666,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="111"/>
