@@ -33,8 +33,8 @@ namespace compagniaAerea
                              cognome_intestatario = b.cognome_intestatario,//ecc..
                              cod_fiscale = b.Prenotazione.Passeggero.CF,
                              cod_volo = b.Prenotazione.Tariffario.numero_volo,
-                             aerep_andata = b.Prenotazione.Tariffario.Piano_di_volo.Trattas.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
-                             aerep_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Trattas.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
+                             aerep_andata = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
+                             aerep_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
                              ora_partenza = b.Prenotazione.Tariffario.Piano_di_volo.orario_partenza,
                              ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
                              data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
@@ -105,7 +105,7 @@ namespace compagniaAerea
             {
                 if (b.codice_biglietto.Equals(codiceBiglietto))
                 {
-                    andata = b.Prenotazione.Tariffario.Piano_di_volo.Trattas.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza;
+                    andata = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza;
                 }
                 break;
             }
@@ -117,7 +117,7 @@ namespace compagniaAerea
             {
                 if (b.codice_biglietto.Equals(codiceBiglietto))
                 {
-                    ritorno = b.Prenotazione.Tariffario.Piano_di_volo.Trattas.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo;
+                    ritorno = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo;
                 }
                 break;
             }

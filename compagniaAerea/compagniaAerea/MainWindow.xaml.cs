@@ -202,17 +202,34 @@ namespace compagniaAerea
             errore.ValueText(CodiceBigliettotxt);
             errore.ValueText(NomeBigliettotxt);
             errore.ValueText(CognomeBigliettotxt);
+          
             if (errore.checkText())
             {
-                /*
-                ricerca biglietto nel db
-               */
+                    btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine
+                    int codice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    this.gridCorrente = 8;
+                    nomelbl.Content = ticket.getNome(codice);
+                    cognomelbl.Content = ticket.getCognome(codice);
+                    CFlbl.Content = ticket.getCF(codice);
+                    codiceVololbl.Content = ticket.getCodiceVolo(codice);
+                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice);
+                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice);
+                    oraPartenzalbl.Content = ticket.getOraPartenza(codice);
+                    oraArrivolbl.Content = ticket.getOraArrivo(codice);
+                    dataPartenzalbl.Content = ticket.getDataPartenza(codice);
+                    dataArrivolbl.Content = ticket.getDataArrivo(codice);
+                    totalelbl.Content = ticket.getSpesaTotale(codice);
             }
             else { MessageBox.Show(errore.codError()); }
 
         }
+        //bottone grid di visualizazione del bigliettoper torna indieto        
+        private void btnIndietro_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 3;
+        }
         #endregion
-       
+
         #region gestione delle grid
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
@@ -255,6 +272,7 @@ namespace compagniaAerea
             gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 5
             gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
             gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
+            gridchange.Add(viewTicket);//grid del biglietto posizione 8
          }
 
         public void currentGrid()
@@ -489,7 +507,7 @@ namespace compagniaAerea
 
         }
 
-       
+      
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
