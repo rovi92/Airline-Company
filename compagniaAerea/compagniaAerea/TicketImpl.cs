@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace compagniaAerea
@@ -10,9 +12,10 @@ namespace compagniaAerea
 
     class TicketImpl : Ticket
     {
+
         DatabaseManager myDatabase;
         ListCollectionView biglietti;
-       
+      
 
         public TicketImpl()
         {
@@ -145,7 +148,7 @@ namespace compagniaAerea
                 }
                 break;
             }
-
+                            
             return ora;
         }
         public DateTime getDataPartenza(int codiceBiglietto)
@@ -156,9 +159,9 @@ namespace compagniaAerea
                 if (b.codice_biglietto.Equals(codiceBiglietto))
                 {
                     data = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza;
-                }
+        }
                 break;
-            }            
+        }
             return data;
         }
         public DateTime getDataArrivo(int codiceBiglietto)
@@ -169,9 +172,9 @@ namespace compagniaAerea
                 if (b.codice_biglietto.Equals(codiceBiglietto))
                 {
                     data = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo;
-                }
+        }
                 break;
-            }
+        }
             return data;
         }
         public Double getSpesaTotale(int codiceBiglietto)
@@ -183,10 +186,15 @@ namespace compagniaAerea
                 {
                     spesa = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +
                                                                                                               b.Prenotazione.Tariffario.tariffa_solo_andata;
-                }
+        }
                 break;
-            }
+        }
             return spesa;
+        }
+
+        public void DatiAnagraficiBiglietto(TextBox tb)
+        {
+            throw new NotImplementedException();
         }
     }
 }

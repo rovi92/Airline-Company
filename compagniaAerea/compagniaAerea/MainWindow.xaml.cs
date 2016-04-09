@@ -32,7 +32,7 @@ namespace compagniaAerea
         Gestione_utente gestione_cliente;
         VoloImpl volo;
         InterfacciaError errore = new Error();
-
+        Ticket ticket = new TicketImpl();
 
         public MainWindow()
         {
@@ -136,11 +136,21 @@ namespace compagniaAerea
             }
  }
         #endregion
+
         #region bottone prenota
         private void prenota_click(object sender, RoutedEventArgs e)
         {
+            //informazioni della grid prenotazione volo salvate in tiket
+            
+            
+            //switch grid
+           
+            this.gridCorrente = 7;
+            currentGrid();
+           
          }
         #endregion
+
         #region radioButton andata/andata e ritorno
         private void rdbSoloAndata_Checked(object sender, RoutedEventArgs e)
         {
@@ -166,9 +176,24 @@ namespace compagniaAerea
 
         #endregion
 
+        #region radiobutton classi di volo
+        private void rdbEconomy_Checked(object sender, RoutedEventArgs e)
+        {
+            volo.setClass(rdbEconomy);
+
+        }
+        private void rdbBuisness_Checked(object sender, RoutedEventArgs e)
+        {
+            volo.setClass(rdbBuisness);
+        }
+        private void rdbFirst_Checked(object sender, RoutedEventArgs e)
+        {
+            volo.setClass(rdbFirst);
+        }
+        #endregion
         #endregion
 
-      
+
 
         #region cerca biglietto
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
@@ -229,7 +254,7 @@ namespace compagniaAerea
             gridchange.Add(GridProfiloDipendente);//grid delle informazioni del dipendente posizione 4
             gridchange.Add(GridDipendenteVoli);//grid dei voli dei dipendenti posizione 5
             gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
-            
+            gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
          }
 
         public void currentGrid()
@@ -382,6 +407,22 @@ namespace compagniaAerea
         }
         #endregion
 
+        #region grid infoVolo dopo il prenota
+        private void btnConfermaDati_Click(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(nomepasseggerotxt);
+            errore.ValueText(cognomepasseggerotxt);
+            errore.ValueText(emailpasseggerotxt);
+            errore.ValueText(viapasseggerotxt);
+            errore.ValueText(cappasseggerotxt);
+            errore.ValueText(cfpasseggerotxt);
+            if (!errore.checkText())
+            {
+                MessageBox.Show("ci sono campi vuoti");
+            }
+        }
+        #endregion
+
         #region dipendente
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -447,6 +488,8 @@ namespace compagniaAerea
         {
 
         }
+
+       
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
