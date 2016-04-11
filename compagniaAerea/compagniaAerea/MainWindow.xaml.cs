@@ -205,6 +205,10 @@ namespace compagniaAerea
           
             if (errore.checkText())
             {
+                /*try
+                {
+                   // Convert.ToInt32
+                }*/
                     btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine
                     int codice = Convert.ToInt32(CodiceBigliettotxt.Text);
                     this.gridCorrente = 8;

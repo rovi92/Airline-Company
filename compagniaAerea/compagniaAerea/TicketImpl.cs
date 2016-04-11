@@ -24,8 +24,8 @@ namespace compagniaAerea
 
         public void getBiglitti(int codiceBiglietto)
         {
-          var  query = (from b in myDatabase.getDb().Biglietto
-                       //  where b.codice_biglietto.Equals(codiceBiglietto)
+            var query = (from b in myDatabase.getDb().Biglietto
+                             //  where b.codice_biglietto.Equals(codiceBiglietto)
                          select new
                          {
                              cod_biglietto = b.codice_biglietto,//indice 0
@@ -39,9 +39,10 @@ namespace compagniaAerea
                              ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
                              data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
                              data_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo,
-                             prezzo_bagaglio = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +(
-                                                                                                                                    b.Prenotazione.Tariffario.tariffa_solo_andata *
-                                                                                                                                    b.Prenotazione.Tariffario.Classe.prezzo)                                                                                                                                                                                                                                                                     
+                             prezzo = (b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo) + ((
+                                                                                                                                    b.Prenotazione.Tariffario.tariffa_solo_andata + 
+                                                                                                                                    b.Prenotazione.Tariffario.Comfort_inclusi.Where(ci=> ci.idComfort <= ci.Comfort.idComfort).First().Comfort.prezzo)*
+                                                                                                                                    b.Prenotazione.Tariffario.Classe.prezzo)                                                                                                                                                                                                                                                                                                                                                        
                          }).ToList();
             biglietti = new ListCollectionView(query);
         }
@@ -185,8 +186,10 @@ namespace compagniaAerea
             {
                 if (b.codice_biglietto.Equals(codiceBiglietto))
                 {
-                    spesa = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +
-                                                                                                              b.Prenotazione.Tariffario.tariffa_solo_andata;
+                    spesa = (b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo) + ((
+                                                                                                                                    b.Prenotazione.Tariffario.tariffa_solo_andata +
+                                                                                                                                    b.Prenotazione.Tariffario.Comfort_inclusi.Where(ci => ci.idComfort <= ci.Comfort.idComfort).First().Comfort.prezzo) *
+                                                                                                                                    b.Prenotazione.Tariffario.Classe.prezzo);
         }
                 break;
         }
