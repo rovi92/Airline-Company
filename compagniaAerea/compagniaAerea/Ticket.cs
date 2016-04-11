@@ -19,7 +19,8 @@ namespace compagniaAerea
         TimeSpan getOraArrivo(int codiceBiglietto);
         DateTime getDataArrivo(int codiceBiglietto);
         DateTime getDataPartenza(int codiceBiglietto);
-        Double getSpesaTotale(int codiceBiglietto);//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
-       
+        Double getSpesaTotale(int codiceBiglietto);
+        void getPopulateDbTicket();//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
+        Double getTotal(double kg,double numeroVolo,double confort,string classe);
     }
 }

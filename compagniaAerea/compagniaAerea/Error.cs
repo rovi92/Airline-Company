@@ -167,14 +167,15 @@ namespace compagniaAerea
                 {
                     PasswordBox tb = (PasswordBox)visualChild;
                     tb.Clear();
-                }else if(visualChild is DataGrid)
+                }
+                else if (visualChild is DataGrid)
                 {
                     DataGrid dg = (DataGrid)visualChild;
                     dg.ItemsSource = null;
                     dg.Items.Clear();
                     dg.Items.Refresh();
                 }
-                
+
                 TraverseVisualTree(visualChild);
             }
         }

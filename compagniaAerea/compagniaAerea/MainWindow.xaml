@@ -29,6 +29,7 @@
             </Label>
 
         </Grid>
+
         <Grid x:Name="grid_ricerca_biglietto" Height="214" VerticalAlignment="Top" HorizontalAlignment="Left" Width="272" Margin="272,78,0,0" Background="#FF9E0000" Visibility="Hidden" >
             <TextBlock x:Name="biglietto_title" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="Ricerca Biglietto" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Width="181" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="codice_biglietto" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Codice Biglietto:" VerticalAlignment="Top" Margin="15,44,0,0" Foreground="White"/>
@@ -40,9 +41,9 @@
             <Button x:Name="CercaBiglietto" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20" Click="cercaBiglietto_Click"/>
         </Grid>
 
-        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Visible">
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
             <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
-            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="406,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click" Visibility="Visible"/>
+            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="406,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click" Visibility="Hidden"/>
             <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="46,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="206"/>
             <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="208"/>
             <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="634,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="112"/>
@@ -57,7 +58,7 @@
             <Label x:Name="oraArrivolbl" Content="oar arrivo" HorizontalAlignment="Left" Margin="334,240,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
             <Label x:Name="dataArrivolbl" Content="data arrivo (gg/mm/aa)" HorizontalAlignment="Left" Margin="334,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
         </Grid>
-        
+
         <Grid Name="gridRegistrazione" Background="White" Margin="0,53" Visibility="Hidden" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
             <TextBox x:Name="Nometxt" HorizontalAlignment="Left" Height="20" Margin="134,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
@@ -92,7 +93,7 @@
             <TextBox x:Name="CodiceFiscaletxt" HorizontalAlignment="Left" Height="20" Margin="359,264,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" GotFocus="InFocus" LostFocus="OutFocus"/>
             <Button x:Name="Registrazionebtn" Content="Registrati" HorizontalAlignment="Left" Margin="359,338,0,0" VerticalAlignment="Top" Width="120" Click="Registrazione_Cliente"/>
         </Grid>
-        
+
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="860" Background="#FFA8A5A5">
             <MenuItem x:Name="MILogIn" Header="_Login" >
                 <MenuItem x:Name="MIAccedi" Header="Accedi" Click="Accedi_Click"/>
@@ -107,13 +108,14 @@
             <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden" Click="click_Tariffario"/>
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
-        
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
+
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,73" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
                 <ColumnDefinition Width="802*"/>
             </Grid.ColumnDefinitions>
+
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333" Grid.ColumnSpan="3"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold" Grid.ColumnSpan="3"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="174,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2"/>
@@ -162,7 +164,7 @@
             </DataGrid>
         </Grid>
 
-        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,34,0,64" Background="White" Visibility="Hidden">
             <TextBox x:Name="nomepasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="textblocknome" HorizontalAlignment="Left" Margin="58,44,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
             <TextBlock x:Name="textblockcognometxt" HorizontalAlignment="Left" Margin="204,44,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
@@ -174,15 +176,25 @@
             <TextBlock x:Name="textblockcittà" HorizontalAlignment="Left" Margin="206,118,0,0" TextWrapping="Wrap" Text="Città/Paese" VerticalAlignment="Top"/>
             <TextBox x:Name="cittàpasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="204,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="textblockcap" HorizontalAlignment="Left" Margin="356,118,0,0" TextWrapping="Wrap" Text="CAP" VerticalAlignment="Top"/>
-            <TextBox x:Name="cappasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="356,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="28"/>
+            <TextBox x:Name="cappasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="356,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
             <TextBlock x:Name="cftextblock" HorizontalAlignment="Left" Margin="58,182,0,0" TextWrapping="Wrap" Text="Codice Fiscale" VerticalAlignment="Top"/>
             <TextBox x:Name="cfpasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <ComboBox x:Name="tipobabgliocombobox" HorizontalAlignment="Left" Margin="58,277,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textblockbagagli" HorizontalAlignment="Left" Margin="58,256,0,0" TextWrapping="Wrap" Text="Bagaglio/i imbarcati" VerticalAlignment="Top"/>
-            <TextBox x:Name="bagaglitxt" HorizontalAlignment="Left" Height="23" Margin="204,277,0,0" TextWrapping="Wrap" Text="N." VerticalAlignment="Top" Width="39"/>
+            <ComboBox x:Name="tipobabgliocombobox" HorizontalAlignment="Left" Margin="58,277,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBoxItem x:Name="ventikg" Content="20"  ></ComboBoxItem>
+                <ComboBoxItem x:Name="trentakg" Content="30"  ></ComboBoxItem>
+                <ComboBoxItem x:Name="cinquantakg" Content="50"  ></ComboBoxItem>
+
+            </ComboBox>
+            <TextBlock x:Name="textblockbagagli" HorizontalAlignment="Left" Margin="58,256,0,0" TextWrapping="Wrap" Text="peso del bagaglio" VerticalAlignment="Top"/>
+            <TextBox x:Name="bagaglitxt" HorizontalAlignment="Left" Height="23" Margin="204,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39"/>
             <TextBlock x:Name="textblockpagamento" HorizontalAlignment="Left" Margin="554,46,0,0" TextWrapping="Wrap" Text="Tipo pagamento" VerticalAlignment="Top" Visibility="Hidden"/>
-            <ComboBox x:Name="pagamentocombobox" HorizontalAlignment="Left" Margin="554,67,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
             <Button x:Name="btnConfermaDati" Content="Conferma Dati" HorizontalAlignment="Left" Margin="356,280,0,0" VerticalAlignment="Top" Width="120" Click="btnConfermaDati_Click"/>
+            <TextBlock x:Name="confortViaggiotbl" HorizontalAlignment="Left" Margin="554,20,0,0" TextWrapping="Wrap" Text="confort di viaggio" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="txbPvolo" HorizontalAlignment="Left" Margin="590,76,0,0" TextWrapping="Wrap" Text="pranzo in volo" VerticalAlignment="Top"/>
+            <CheckBox x:Name="ckbpranzo" Content="20 euro " HorizontalAlignment="Left" Margin="713,76,0,0" VerticalAlignment="Top" Checked="ckbpranzo_Checked" Unchecked="ckbpranzo_Unchecked"/>
+            <CheckBox x:Name="ckbAcon" Content="5 euro" HorizontalAlignment="Left" Margin="713,122,0,0" VerticalAlignment="Top" Unchecked="ckbAcon_Unchecked" Checked="ckbAcon_Checked"/>
+            <TextBlock x:Name="tblCondizioanta" HorizontalAlignment="Left" Margin="590,118,0,0" TextWrapping="Wrap" Text="aria condizionata" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtSommaConfort" HorizontalAlignment="Left" Height="23" Margin="634,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0"/>
         </Grid>
 
         <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
@@ -211,7 +223,7 @@
             <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,254,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked"/>
             <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
         </Grid>
-        
+
         <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,-12,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
             <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
@@ -233,7 +245,7 @@
             <Button x:Name="aggiungi_volobtn" Content="Aggiungi" HorizontalAlignment="Left" Margin="321,132,0,0" VerticalAlignment="Top" Width="120" Click="aggiungi_voloClick"/>
             <Button x:Name="elimina_volobtn" Content="Elimina" HorizontalAlignment="Left" Margin="690,162,0,0" VerticalAlignment="Top" Width="150"/>
         </Grid>
-        
+
         <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="378,10,0,0" TextWrapping="Wrap" Text="tariffario" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
             <DataGrid x:Name="dgPartenza" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="290" Width="120"/>
@@ -268,7 +280,7 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-        
+
 
     </Grid>
 </Window>

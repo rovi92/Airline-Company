@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace compagniaAerea
@@ -14,6 +15,7 @@ namespace compagniaAerea
 
         DatabaseManager myDatabase;
         List<Tratta> trattaLocale = new List<Tratta>();
+        RadioButton rb;
 
 
         public VoloImpl()
@@ -36,15 +38,19 @@ namespace compagniaAerea
             public string orarioPartenza { get; set; }
 
             public string orarioArrivo { get; set; }
+
+            public string codiceVolo { get; set; } 
+
+
         }
 
         //caricamento di database in locale 
         public void executeTratta()
         {
             trattaLocale = (from t in myDatabase.getDb().Tratta
-                             
+
                             select t).ToList();
-        
+
 
 
         }
@@ -54,16 +60,41 @@ namespace compagniaAerea
 
             for (int i = 0; i < trattaLocale.Count; i++)
             {
-                if (nandata.Equals(trattaLocale[i].aeroporto_partenza) && nRitorno.Equals(trattaLocale[i].aeroporto_arrivo) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
+
+                if (nandata.Equals(trattaLocale[i].Aeroporto.città) && nRitorno.Equals(trattaLocale[i].Aeroporto1.città) && data.Equals(trattaLocale[i].data_partenza.ToString("yyyy-MM-dd")))
                 {
-                    flyList.Add(new InfoViaggio()
+                    int posti = 0;
+                    int postiMax = 0;
+                    switch (rb.Content.ToString())
                     {
-                        partenza = trattaLocale[i].aeroporto_partenza,
-                        arrivo = trattaLocale[i].aeroporto_arrivo,
-                        dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
-                        orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
-                        orarioArrivo = trattaLocale[i].orario_arrivo.ToString()
-                    });
+                        case "Economy":
+                            posti = trattaLocale[i].posti_economy;
+                            postiMax = trattaLocale[i].Aereo.capacità_economy;
+                            break;
+                        case "Buisness":
+                            posti = trattaLocale[i].posti_buisness;
+                            postiMax = trattaLocale[i].Aereo.capacità_buisness;
+
+                            break;
+                        case "first":
+                            posti = trattaLocale[i].posti_first;
+                            postiMax = trattaLocale[i].Aereo.capacità_first;
+
+                            break;
+                    }
+                    if (posti < postiMax)
+                    {
+                        flyList.Add(new InfoViaggio()
+                        {
+                            partenza = trattaLocale[i].Aeroporto.città,
+                            arrivo = trattaLocale[i].Aeroporto1.città,
+                            dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
+                            orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
+                            orarioArrivo = trattaLocale[i].orario_arrivo.ToString(),
+                            codiceVolo = trattaLocale[i].numero_volo.ToString()
+
+                        });
+                    }
                 }
             }
             return flyList;
@@ -74,7 +105,7 @@ namespace compagniaAerea
             Boolean flag = false;
             foreach (Tratta t in trattaLocale)
             {
-                if (t.aeroporto_partenza.Equals(destinazione))
+                if (t.Aeroporto.città.Equals(destinazione))
                 {
                     flag = true;
                 }
@@ -93,7 +124,7 @@ namespace compagniaAerea
             Boolean flag = false;
             foreach (Tratta t in trattaLocale)
             {
-                if (t.aeroporto_arrivo.Equals(arrivo))
+                if (t.Aeroporto1.città.Equals(arrivo))
                 {
                     flag = true;
                 }
@@ -138,9 +169,41 @@ namespace compagniaAerea
 
         }
 
-        public void setClass(string classeVolo)
+        public void setClass(RadioButton rb1)
         {
+            rb = rb1;
+        }
 
+        public RadioButton getClass()
+        {
+            return this.rb;
+        }
+
+        public List<String> getValueGrid(DataGrid dg)
+        {
+            //Convert.ToInt32((dgOrdini.SelectedCells[1].Column.GetCellContent(dgOrdini.SelectedItem) as TextBlock).Text);
+
+
+            return new List<String>() { (dg.SelectedCells[0].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text ,
+           (dg.SelectedCells[1].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+             (dg.SelectedCells[2].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+            (dg.SelectedCells[3].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+            (dg.SelectedCells[4].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+            (dg.SelectedCells[5].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text};
+        }
+
+        public string getNameAirport(string città)
+        {
+            string c = "";
+           for(int i = 0;i< trattaLocale.Count(); i++)
+            {
+                if (trattaLocale[i].Aeroporto.città.Equals(città))
+                {
+                    c = trattaLocale[i].Aeroporto.nome;
+                }
+                
+            }
+            return c;
         }
     }
 }

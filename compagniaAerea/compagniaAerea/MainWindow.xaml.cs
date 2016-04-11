@@ -426,6 +426,37 @@ namespace compagniaAerea
         #endregion
 
         #region grid infoVolo dopo il prenota
+
+        private void ckbpranzo_Checked(object sender, RoutedEventArgs e)
+        {
+            int sum = Int32.Parse(txtSommaConfort.Text) + 20;
+            txtSommaConfort.Text = Convert.ToString(sum);
+        }
+        private void ckbpranzo_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int sumConfort = Int32.Parse(txtSommaConfort.Text)-20;
+            if (sumConfort <= 0)
+            {
+                sumConfort = 0;
+            }
+            txtSommaConfort.Text = Convert.ToString(sumConfort);
+        }
+        private void ckbAcon_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int sum = Int32.Parse(txtSommaConfort.Text) - 5;
+            txtSommaConfort.Text = Convert.ToString(sum);
+        }
+
+        private void ckbAcon_Checked(object sender, RoutedEventArgs e)
+        {
+            int sumConfort = Int32.Parse(txtSommaConfort.Text) + 5;
+            if(sumConfort<= 0)
+            {
+                sumConfort = 0;
+            }
+            txtSommaConfort.Text = Convert.ToString(sumConfort);
+        }
+
         private void btnConfermaDati_Click(object sender, RoutedEventArgs e)
         {
             errore.ValueText(nomepasseggerotxt);
@@ -434,12 +465,36 @@ namespace compagniaAerea
             errore.ValueText(viapasseggerotxt);
             errore.ValueText(cappasseggerotxt);
             errore.ValueText(cfpasseggerotxt);
-            if (!errore.checkText())
+            if (errore.checkText())
+            {
+                this.gridCorrente = 8;
+                currentGrid();
+                if (btnConferma_ordine.Visibility.Equals(Visibility.Hidden))
+                {
+                    btnConferma_ordine.Visibility = Visibility.Visible;
+                }
+                ticket.getPopulateDbTicket();
+                nomelbl.Content = nomepasseggerotxt.Text;
+                cognomelbl.Content = cognomepasseggerotxt.Text;
+                CFlbl.Content = cfpasseggerotxt.Text;
+                codiceVololbl.Content = volo.getValueGrid(dataGridAndata)[5];
+                aereoporteAndatalbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridAndata)[0]);
+                aereoportoArrivolbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridAndata)[1]);
+                oraPartenzalbl.Content = volo.getValueGrid(dataGridAndata)[3];
+                oraArrivolbl.Content = volo.getValueGrid(dataGridAndata)[4];
+                dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
+                ComboBoxItem typeItem = (ComboBoxItem)tipobabgliocombobox.SelectedItem;
+                string stato = typeItem.Content.ToString();
+                totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text),volo.getClass().Content.ToString());
+               
+            }
+            else
             {
                 MessageBox.Show("ci sono campi vuoti");
             }
         }
         #endregion
+
 
         #region dipendente
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
@@ -507,7 +562,12 @@ namespace compagniaAerea
 
         }
 
-      
+        private void conferma_ordine_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+     
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
