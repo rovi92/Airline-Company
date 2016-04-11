@@ -36,7 +36,7 @@ namespace compagniaAerea
 
         public MainWindow()
         {
-            
+
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
             volo = new VoloImpl();//classe volo
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
@@ -49,12 +49,12 @@ namespace compagniaAerea
 
         }
 
-        
+
         //Click del bottone Registrazione presente nella form di Registrazione
         #region grid registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
-            
+
             errore.ValueText(Nometxt);
             errore.ValueText(Cognometxt);
             errore.ValueText(Usernametxt);
@@ -80,15 +80,15 @@ namespace compagniaAerea
                 {
                     ComboBoxItem typeItem = (ComboBoxItem)StatoCombobox.SelectedItem;
                     string stato = typeItem.Content.ToString();
-                     gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
-                    (DateTime)DataNascitaPicker.SelectedDate,
-                    Usernametxt.Text, Passwordtxt.Password,
-                    conferma_password.Password,
-                    Indirizzotxt.Text, Telefonotxt.Text,
-                    Emailtxt.Text,stato,
-                    Regionetxt.Text, Cittàtxt.Text,
-                    Int32.Parse(Captxt.Text),
-                    CodiceFiscaletxt.Text);
+                    gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+                   (DateTime)DataNascitaPicker.SelectedDate,
+                   Usernametxt.Text, Passwordtxt.Password,
+                   conferma_password.Password,
+                   Indirizzotxt.Text, Telefonotxt.Text,
+                   Emailtxt.Text, stato,
+                   Regionetxt.Text, Cittàtxt.Text,
+                   Int32.Parse(Captxt.Text),
+                   CodiceFiscaletxt.Text);
 
                     errore.TraverseVisualTree(gridRegistrazione);
                     MessageBox.Show("registrazione avvenuta con successo");
@@ -96,7 +96,7 @@ namespace compagniaAerea
                     volo.executeTratta();
                     currentGrid();
                 }
-                
+
             }
             else {
                 MessageBox.Show(errore.codError());
@@ -105,27 +105,27 @@ namespace compagniaAerea
         #endregion
 
         #region grid cerca volo 
-       
+
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-           
+
             switch (rdbAndataRitorno.IsChecked)
             {
                 case true:
-                    
+
                     if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
                           volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
                           volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true) &&
                           volo.getExistTimeDestination(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataRitorno").Equals(true))
                     {
-                         dataGridRitorno.ItemsSource = volo.getFly( txtDestinazioneVolo.Text, txtPartenza.Text,dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        dataGridRitorno.ItemsSource = volo.getFly(txtDestinazioneVolo.Text, txtPartenza.Text, dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         dataGridAndata.ItemsSource = volo.getFly(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
                     }
                     break;
                 case false:
-                   
-                  //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
+
+                    //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
                     if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
                             volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
                             volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true))
@@ -134,21 +134,21 @@ namespace compagniaAerea
                     }
                     break;
             }
- }
+        }
         #endregion
 
         #region bottone prenota
         private void prenota_click(object sender, RoutedEventArgs e)
         {
             //informazioni della grid prenotazione volo salvate in tiket
-            
-            
+
+
             //switch grid
-           
+
             this.gridCorrente = 7;
             currentGrid();
-           
-         }
+
+        }
         #endregion
 
         #region radioButton andata/andata e ritorno
@@ -159,7 +159,7 @@ namespace compagniaAerea
             dataGridRitorno.Visibility = Visibility.Hidden;
             dataRitorno.Visibility = Visibility.Hidden;
             tblRitorno.Visibility = Visibility.Hidden;
-         
+
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -192,45 +192,70 @@ namespace compagniaAerea
         }
         #endregion
         #endregion
-
-
-
+        
         #region cerca biglietto
+
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
         {
             //controllo campi non vuoti
             errore.ValueText(CodiceBigliettotxt);
             errore.ValueText(NomeBigliettotxt);
             errore.ValueText(CognomeBigliettotxt);
-          
+            bool conversion_flag;//flag per il controllo della conversione dal cosice biglietto in intero
             if (errore.checkText())
             {
-                /*try
+                try//prova conversione e definizione del flag
                 {
-                   // Convert.ToInt32
-                }*/
+                    int cosice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    conversion_flag = true;
+                }
+                catch (InvalidCastException ie)
+                {
+                    MessageBox.Show(ie.Source, "Conversion Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    conversion_flag = false;
+                }
+                if (conversion_flag == true)
+                {
                     btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine
                     int codice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    //cambio grid
                     this.gridCorrente = 8;
-                    nomelbl.Content = ticket.getNome(codice);
-                    cognomelbl.Content = ticket.getCognome(codice);
-                    CFlbl.Content = ticket.getCF(codice);
-                    codiceVololbl.Content = ticket.getCodiceVolo(codice);
-                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice);
-                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice);
-                    oraPartenzalbl.Content = ticket.getOraPartenza(codice);
-                    oraArrivolbl.Content = ticket.getOraArrivo(codice);
-                    dataPartenzalbl.Content = ticket.getDataPartenza(codice);
-                    dataArrivolbl.Content = ticket.getDataArrivo(codice);
-                    totalelbl.Content = ticket.getSpesaTotale(codice);
+                    //modifica parametri nella grid di visualizzazione biglietto
+                    nomelbl.Content = ticket.getNome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    cognomelbl.Content = ticket.getCognome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    CFlbl.Content = ticket.getCF(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    codiceVololbl.Content = ticket.getCodiceVolo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    oraPartenzalbl.Content = ticket.getOraPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    oraArrivolbl.Content = ticket.getOraArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    dataPartenzalbl.Content = ticket.getDataPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    dataArrivolbl.Content = ticket.getDataArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    totalelbl.Content = ticket.getSpesaTotale(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                }
             }
-            else { MessageBox.Show(errore.codError()); }
+            else
+            {
+                MessageBox.Show(errore.codError(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         //bottone grid di visualizazione del bigliettoper torna indieto        
         private void btnIndietro_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 3;
+            //pulitura delle label
+            nomelbl.Content = "";
+            cognomelbl.Content = "";
+            CFlbl.Content = "";
+            codiceVololbl.Content = "";
+            aereoporteAndatalbl.Content = "";
+            aereoportoArrivolbl.Content = "";
+            oraPartenzalbl.Content = "";
+            oraArrivolbl.Content = "";
+            dataArrivolbl.Content = "";
+            dataPartenzalbl.Content = "";
+            totalelbl.Content = "";
         }
         #endregion
 
@@ -254,7 +279,7 @@ namespace compagniaAerea
 
         }
 
-      
+
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
@@ -277,7 +302,7 @@ namespace compagniaAerea
             gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
             gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
             gridchange.Add(viewTicket);//grid del biglietto posizione 8
-         }
+        }
 
         public void currentGrid()
         {
@@ -332,8 +357,8 @@ namespace compagniaAerea
         {
             salva_dipendentebtn.Visibility = Visibility.Visible;
             email_dipendente = email_dipendentetxt.Text;
-            email_dipendentetxt.IsEnabled = true;            
-        
+            email_dipendentetxt.IsEnabled = true;
+
         }
         private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
         {
@@ -355,18 +380,18 @@ namespace compagniaAerea
                 //cambio cambio dei dati nel db
             }
             else {
-                MessageBox.Show(errore.codError(), "ERRORE!",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 
         }
-       
+
         #endregion
 
         #endregion
 
         #region place holder manuale
-       
+
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
         private void InFocus(object sender, RoutedEventArgs e)
         {
@@ -414,8 +439,8 @@ namespace compagniaAerea
             errore.valuePassword(Login_passwordtxt);
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
-               
-                if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
+
+                if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -455,8 +480,8 @@ namespace compagniaAerea
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
-           
-           
+
+
 
         }
 
@@ -511,7 +536,7 @@ namespace compagniaAerea
 
         }
 
-      
+
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
@@ -539,14 +564,14 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
-               
+
             }
             else
             {
                 MessageBox.Show(errore.codError());
             }
         }
-            
+
 
         #endregion
 

@@ -42,7 +42,7 @@
 
         <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="840" Visibility="Visible">
             <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
-            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="406,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click" Visibility="Visible"/>
+            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="406,376,0,0" VerticalAlignment="Top" Width="76"  Visibility="Visible"/>
             <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="46,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="206"/>
             <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="208"/>
             <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="634,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="112"/>
