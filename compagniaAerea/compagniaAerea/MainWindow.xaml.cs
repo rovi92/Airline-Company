@@ -85,7 +85,7 @@ namespace compagniaAerea
                     Usernametxt.Text, Passwordtxt.Password,
                     conferma_password.Password,
                     Indirizzotxt.Text, Telefonotxt.Text,
-                    Emailtxt.Text,stato,
+                   Emailtxt.Text, stato,
                     Regionetxt.Text, Cittàtxt.Text,
                     Int32.Parse(Captxt.Text),
                     CodiceFiscaletxt.Text);
@@ -119,7 +119,7 @@ namespace compagniaAerea
                           volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true) &&
                           volo.getExistTimeDestination(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataRitorno").Equals(true))
                     {
-                         dataGridRitorno.ItemsSource = volo.getFly( txtDestinazioneVolo.Text, txtPartenza.Text,dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        dataGridRitorno.ItemsSource = volo.getFly(txtDestinazioneVolo.Text, txtPartenza.Text, dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         dataGridAndata.ItemsSource = volo.getFly(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
                     }
                     break;
@@ -193,40 +193,69 @@ namespace compagniaAerea
         #endregion
         #endregion
 
-
-
         #region cerca biglietto
+
         private void cercaBiglietto_Click(object sender, RoutedEventArgs e)
         {
             //controllo campi non vuoti
             errore.ValueText(CodiceBigliettotxt);
             errore.ValueText(NomeBigliettotxt);
             errore.ValueText(CognomeBigliettotxt);
-          
+            bool conversion_flag;//flag per il controllo della conversione dal cosice biglietto in intero
             if (errore.checkText())
             {
+                try//prova conversione e definizione del flag
+                {
+                    int cosice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    conversion_flag = true;
+                }
+                catch (InvalidCastException ie)
+                {
+                    MessageBox.Show(ie.Source, "Conversion Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    conversion_flag = false;
+                }
+                if (conversion_flag == true)
+                {
                     btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine
                     int codice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    //cambio grid
                     this.gridCorrente = 8;
-                    nomelbl.Content = ticket.getNome(codice);
-                    cognomelbl.Content = ticket.getCognome(codice);
-                    CFlbl.Content = ticket.getCF(codice);
-                    codiceVololbl.Content = ticket.getCodiceVolo(codice);
-                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice);
-                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice);
-                    oraPartenzalbl.Content = ticket.getOraPartenza(codice);
-                    oraArrivolbl.Content = ticket.getOraArrivo(codice);
-                    dataPartenzalbl.Content = ticket.getDataPartenza(codice);
-                    dataArrivolbl.Content = ticket.getDataArrivo(codice);
-                    totalelbl.Content = ticket.getSpesaTotale(codice);
+                    //modifica parametri nella grid di visualizzazione biglietto
+                    nomelbl.Content = ticket.getNome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    cognomelbl.Content = ticket.getCognome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    CFlbl.Content = ticket.getCF(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    codiceVololbl.Content = ticket.getCodiceVolo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                    oraPartenzalbl.Content = ticket.getOraPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    oraArrivolbl.Content = ticket.getOraArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    dataPartenzalbl.Content = ticket.getDataPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    dataArrivolbl.Content = ticket.getDataArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    totalelbl.Content = ticket.getSpesaTotale(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                }
             }
-            else { MessageBox.Show(errore.codError()); }
+            else
+            {
+                MessageBox.Show(errore.codError(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         //bottone grid di visualizazione del bigliettoper torna indieto        
         private void btnIndietro_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 3;
+            //pulitura delle label
+            nomelbl.Content = "";
+            cognomelbl.Content = "";
+            CFlbl.Content = "";
+            codiceVololbl.Content = "";
+            aereoporteAndatalbl.Content = "";
+            aereoportoArrivolbl.Content = "";
+            oraPartenzalbl.Content = "";
+            oraArrivolbl.Content = "";
+            dataArrivolbl.Content = "";
+            dataPartenzalbl.Content = "";
+            totalelbl.Content = "";
         }
         #endregion
 
@@ -351,7 +380,7 @@ namespace compagniaAerea
                 //cambio cambio dei dati nel db
             }
             else {
-                MessageBox.Show(errore.codError(), "ERRORE!",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 
@@ -411,7 +440,7 @@ namespace compagniaAerea
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
                
-                if(Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
+                if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -567,7 +596,7 @@ namespace compagniaAerea
 
         }
 
-     
+      
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {

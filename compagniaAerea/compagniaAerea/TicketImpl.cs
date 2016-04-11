@@ -19,7 +19,7 @@ namespace compagniaAerea
         List<Classe> classeVolo = new List<Classe>();
         List<Tariffario> tariffario = new List<Tariffario>();
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
-
+      
 
         public TicketImpl()
         {
@@ -47,12 +47,12 @@ namespace compagniaAerea
                              prezzo_bagaglio = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo + (
                                                                                                                                     b.Prenotazione.Tariffario.tariffa_solo_andata *
                                                                                                                                     b.Prenotazione.Tariffario.Classe.prezzo)
-                             }).ToList();
+                         }).ToList();
           
         }
         public void getPopulateDbTicket()
         {
-            
+        
 
             tariffario = (from t in myDatabase.getDb().Tariffario
                           select t).ToList();
@@ -71,20 +71,22 @@ namespace compagniaAerea
             string nome = "";
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
+                //controllo corrispondenza tra nome cognome e codice inseriti da utente e quelli presenti nel DB
                 {
                     nome = b.nome_intestatario;
                 }
                 break;
             }
-            return nome;
+            return nome;         
         }
-        public String getCognome(int codiceBiglietto)
+        public String getCognome(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             string cognome = "";
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
+
                 {
                     cognome = b.cognome_intestatario;
                 }
@@ -92,26 +94,27 @@ namespace compagniaAerea
             }
             return cognome;
         }
-        public String getCF(int codiceBiglietto)
+        public String getCF(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             string CF = "";
-
-            foreach (Biglietto b in biglietti)
-            {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+           
+                foreach (Biglietto b in biglietti)
                 {
-                    CF = b.Prenotazione.Passeggero.CF;
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
+
+                    {
+                        CF = b.Prenotazione.Passeggero.CF;
+                    }
+                    break;
                 }
-                break;
+                return CF;
             }
-            return CF;
-        }
-        public Int32 getCodiceVolo(int codiceBiglietto)
+        public Int32 getCodiceVolo(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             int cod_volo = 0;
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     cod_volo = b.Prenotazione.Tariffario.numero_volo;
                 }
@@ -119,12 +122,12 @@ namespace compagniaAerea
             }
             return cod_volo;
         }
-        public String getAereoportoAndata(int codiceBiglietto)
+        public String getAereoportoAndata(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             string andata = "";
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     andata = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza;
                 }
@@ -132,12 +135,12 @@ namespace compagniaAerea
             }
             return andata;
         }
-        public String getAereoportoArrivo(int codiceBiglietto)
+        public String getAereoportoArrivo(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             string ritorno = "";
-            foreach (Biglietto b in biglietti)
+                foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     ritorno = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo;
                 }
@@ -145,74 +148,78 @@ namespace compagniaAerea
             }
             return ritorno;
         }
-        public TimeSpan getOraPartenza(int codiceBiglietto)
+        public TimeSpan getOraPartenza(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             TimeSpan ora = new TimeSpan(00, 00, 00, 00);//giorni, ore , minuti, secondi
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     ora = b.Prenotazione.Tariffario.Piano_di_volo.orario_partenza;
                 }
                 break;
             }
-
+           
             return ora;
         }
-        public TimeSpan getOraArrivo(int codiceBiglietto)
+        public TimeSpan getOraArrivo(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             TimeSpan ora = new TimeSpan(00, 00, 00, 00);//giorni, ore , minuti, secondi
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     ora = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo;
                 }
                 break;
             }
-
+                            
             return ora;
         }
-        public DateTime getDataPartenza(int codiceBiglietto)
+        public DateTime getDataPartenza(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             DateTime data = new DateTime(2016, 1, 1);
-            foreach (Biglietto b in biglietti)
+           foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     data = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza;
-                }
+        }
                 break;
-            }
+        }
             return data;
         }
-        public DateTime getDataArrivo(int codiceBiglietto)
+        public DateTime getDataArrivo(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             DateTime data = new DateTime(2016, 1, 1);
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
                     data = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo;
-                }
+        }
                 break;
-            }
+        }
             return data;
         }
-        public Double getSpesaTotale(int codiceBiglietto)
+        public Double getSpesaTotale(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
         {
             double spesa = 0;
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto))
+                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
                 {
-                    spesa = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo +
-                                                                                                              b.Prenotazione.Tariffario.tariffa_solo_andata;
-                }
+                    spesa = (b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo)
+                                                                                                        + ((b.Prenotazione.Tariffario.tariffa_solo_andata +
+                                                                                                        b.Prenotazione.Tariffario.Comfort_inclusi.Where(ci => ci.idComfort <= ci.Comfort.idComfort).First().Comfort.prezzo) *
+                                                                                                        b.Prenotazione.Tariffario.Classe.prezzo);
+        }
                 break;
-            }
+        }
             return spesa;
         }
+
+        #endregion
 
         public void DatiAnagraficiBiglietto(TextBox tb)
         {
