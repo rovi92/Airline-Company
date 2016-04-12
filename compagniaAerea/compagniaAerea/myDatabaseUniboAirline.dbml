@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UniboAirlines" Class="myDatabaseUniboAirlineDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore@erikserver" SettingsObjectName="compagniaAerea.Properties.Settings" SettingsPropertyName="UniboAirlinesConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=erikserver.database.windows.net;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore" SettingsObjectName="compagniaAerea.Properties.Settings" SettingsPropertyName="UniboAirlinesConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Aereo" Member="Aereo">
     <Type Name="Aereo">
       <Column Name="nome" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -56,7 +56,7 @@
       <Column Name="idClasse" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="descrizione" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="prezzo" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Classe_Tariffario" Member="Tariffario" ThisKey="idClasse" OtherKey="idClasse" Type="Tariffario" />
+      <Association Name="Classe_Tariffario" Member="Tariffarios" ThisKey="idClasse" OtherKey="idClasse" Type="Tariffario" />
     </Type>
   </Table>
   <Table Name="dbo.Comfort" Member="Comfort">
@@ -100,7 +100,7 @@
       <Column Name="città" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="CAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CF" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
-      <Association Name="Passeggero_Prenotazione" Member="Prenotazione" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Prenotazione" />
+      <Association Name="Passeggero_Prenotazione" Member="Prenotaziones" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Prenotazione" />
     </Type>
   </Table>
   <Table Name="dbo.Personale" Member="Personale">
@@ -127,22 +127,8 @@
       <Column Name="data_arrivo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="orario_arrivo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="cancellato" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Piano_di_volo_Tariffario" Member="Tariffario" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tariffario" />
       <Association Name="Piano_di_volo_Tratta" Member="Tratta" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tratta" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Prenotazione" Member="Prenotazione">
-    <Type Name="Prenotazione">
-      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="data_prenotazione" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="mumero_persone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="totale" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="idPasseggero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idTariffa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Prenotazione_Biglietto" Member="Biglietto" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Biglietto" />
-      <Association Name="Prenotazione_Pagamento" Member="Pagamento" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Pagamento" />
-      <Association Name="Passeggero_Prenotazione" Member="Passeggero" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Passeggero" IsForeignKey="true" />
-      <Association Name="Tariffario_Prenotazione" Member="Tariffario" ThisKey="idTariffa" OtherKey="idTariffa" Type="Tariffario" IsForeignKey="true" />
+      <Association Name="Piano_di_volo_Tariffario" Member="Tariffarios" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tariffario" />
     </Type>
   </Table>
   <Table Name="dbo.Prezzo_bagaglio_imbarcato" Member="Prezzo_bagaglio_imbarcato">
@@ -150,19 +136,6 @@
       <Column Name="range_pesi" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="prezzo" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Prezzo_bagaglio_imbarcato_Babaglio_Imbarcato" Member="Babaglio_Imbarcato" ThisKey="range_pesi" OtherKey="range_pesi" Type="Babaglio_Imbarcato" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Tariffario" Member="Tariffario">
-    <Type Name="Tariffario">
-      <Column Name="idTariffa" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="tariffa_solo_andata" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="tariffa_andata_ritorno" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="numero_volo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idClasse" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Tariffario_Comfort_inclusi" Member="Comfort_inclusi" ThisKey="idTariffa" OtherKey="idTariffa" Type="Comfort_inclusi" />
-      <Association Name="Tariffario_Prenotazione" Member="Prenotazione" ThisKey="idTariffa" OtherKey="idTariffa" Type="Prenotazione" />
-      <Association Name="Classe_Tariffario" Member="Classe" ThisKey="idClasse" OtherKey="idClasse" Type="Classe" IsForeignKey="true" />
-      <Association Name="Piano_di_volo_Tariffario" Member="Piano_di_volo" ThisKey="numero_volo" OtherKey="numero_volo" Type="Piano_di_volo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Tratta" Member="Tratta">
@@ -186,6 +159,32 @@
       <Association Name="Aeroporto_Tratta" Member="Aeroporto" ThisKey="aeroporto_partenza" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
       <Association Name="Aeroporto_Tratta1" Member="Aeroporto1" ThisKey="aeroporto_arrivo" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
       <Association Name="Piano_di_volo_Tratta" Member="Piano_di_volo" ThisKey="numero_volo" OtherKey="numero_volo" Type="Piano_di_volo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tariffario" Member="Tariffarios">
+    <Type Name="Tariffario">
+      <Column Name="idTariffa" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tariffa_solo_andata" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="numero_volo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idClasse" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tariffario_Comfort_inclusi" Member="Comfort_inclusis" ThisKey="idTariffa" OtherKey="idTariffa" Type="Comfort_inclusi" />
+      <Association Name="Tariffario_Prenotazione" Member="Prenotaziones" ThisKey="idTariffa" OtherKey="idTariffa" Type="Prenotazione" />
+      <Association Name="Classe_Tariffario" Member="Classe" ThisKey="idClasse" OtherKey="idClasse" Type="Classe" IsForeignKey="true" />
+      <Association Name="Piano_di_volo_Tariffario" Member="Piano_di_volo" ThisKey="numero_volo" OtherKey="numero_volo" Type="Piano_di_volo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prenotazione" Member="Prenotaziones">
+    <Type Name="Prenotazione">
+      <Column Name="idPrenotazione" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="data_prenotazione" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="numero_persone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="totale" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="idPasseggero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTariffa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Prenotazione_Biglietto" Member="Bigliettos" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Biglietto" />
+      <Association Name="Prenotazione_Pagamento" Member="Pagamentos" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Pagamento" Cardinality="One" />
+      <Association Name="Passeggero_Prenotazione" Member="Passeggero" ThisKey="idPasseggero" OtherKey="idPasseggero" Type="Passeggero" IsForeignKey="true" />
+      <Association Name="Tariffario_Prenotazione" Member="Tariffario" ThisKey="idTariffa" OtherKey="idTariffa" Type="Tariffario" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

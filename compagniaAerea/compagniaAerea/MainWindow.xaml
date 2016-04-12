@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:compagniaAerea"
         mc:Ignorable="d"
         Title="MainWindow" Height="535.5" Width="867.5">
-    <Grid Name="base" Background="White" Visibility="Visible">
+    <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
         <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
@@ -41,23 +41,45 @@
             <Button x:Name="CercaBiglietto" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20" Click="cercaBiglietto_Click"/>
         </Grid>
 
-        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="427" Margin="10,20,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
-            <Button x:Name="btnIndietro" Content="indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
-            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="536,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click"/>
-            <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="46,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="206"/>
-            <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="274,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="208"/>
-            <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="634,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="112"/>
-            <TextBlock x:Name="valutatxb" HorizontalAlignment="Left" Margin="782,295,0,0" TextWrapping="Wrap" Text="Euro" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.533"/>
-            <Label x:Name="codiceVololbl" Content="codice volo" HorizontalAlignment="Left" Height="32" Margin="46,92,0,0" VerticalAlignment="Top" Width="402"/>
-            <Label x:Name="CFlbl" Content="codice fiscale" HorizontalAlignment="Left" Margin="536,34,0,0" VerticalAlignment="Top" Width="270"/>
-            <Label x:Name="aereoporteAndatalbl" Content="aereoporto andata" HorizontalAlignment="Left" Margin="46,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
-            <Label x:Name="aereoportoArrivolbl" Content="aereoporto arrivo" HorizontalAlignment="Left" Margin="334,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
-            <Label x:Name="oraPartenzalbl" Content="ora partenza" HorizontalAlignment="Left" Margin="46,240,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
-            <Label x:Name="dataPartenzalbl" Content="data partenza (gg/mm/aa)" HorizontalAlignment="Left" Margin="46,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
-            <TextBlock x:Name="Totaletxb" HorizontalAlignment="Left" Margin="552,295,0,0" TextWrapping="Wrap" Text="Totale:" VerticalAlignment="Top"/>
-            <Label x:Name="oraArrivolbl" Content="oar arrivo" HorizontalAlignment="Left" Margin="334,240,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
-            <Label x:Name="dataArrivolbl" Content="data arrivo (gg/mm/aa)" HorizontalAlignment="Left" Margin="334,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="427" Margin="10,22,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
+            <TextBlock x:Name="titolotbl" HorizontalAlignment="Left" Margin="70,54,0,0" TextWrapping="Wrap" Text="Dati biglietto" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="nametbl" HorizontalAlignment="Left" Margin="70,108,0,0" TextWrapping="Wrap" Text="Nome: " VerticalAlignment="Top"/>
+            <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="114,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="68"/>
+            <TextBlock x:Name="cognometbl" HorizontalAlignment="Left" Margin="188,108,0,0" TextWrapping="Wrap" Text="Cognome: " VerticalAlignment="Top"/>
+            <Label x:Name="cognomelbl" Content="cognome" HorizontalAlignment="Left" Margin="246,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="70"/>
+            <TextBlock x:Name="cftbl" HorizontalAlignment="Left" Margin="330,108,0,0" TextWrapping="Wrap" Text="Codice fiscale: " VerticalAlignment="Top"/>
+            <Label x:Name="CFlbl" Content="codice fiscale" HorizontalAlignment="Left" Margin="408,103,0,0" VerticalAlignment="Top" Width="89"/>
+            <TextBlock x:Name="numerovolotbl" HorizontalAlignment="Left" Margin="70,140,0,0" TextWrapping="Wrap" Text="Numero volo: " VerticalAlignment="Top"/>
+            <Label x:Name="codiceVololbl" Content="codice volo" HorizontalAlignment="Left" Height="32" Margin="145,135,0,0" VerticalAlignment="Top" Width="82"/>
+            <TextBlock x:Name="aeroportopartenzatbl" HorizontalAlignment="Left" Margin="70,177,0,0" TextWrapping="Wrap" Text="Aeroporto partenza: " VerticalAlignment="Top"/>
+            <Label x:Name="aereoporteAndatalbl" Content="aeroporto andata" HorizontalAlignment="Left" Margin="191,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <TextBlock x:Name="aeroportoarrivotbl" HorizontalAlignment="Left" Margin="330,177,0,0" TextWrapping="Wrap" Text="Aeroporto arrivo: " VerticalAlignment="Top"/>
+            <Label x:Name="aereoportoArrivolbl" Content="aeroporto arrivo" HorizontalAlignment="Left" Margin="430,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <TextBlock x:Name="orariopartenzatbl" HorizontalAlignment="Left" Margin="70,217,0,0" TextWrapping="Wrap" Text="Orario partenza: " VerticalAlignment="Top"/>
+            <Label x:Name="oraPartenzalbl" Content="ora partenza" HorizontalAlignment="Left" Margin="161,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <TextBlock x:Name="orarioarrivotbl" HorizontalAlignment="Left" Margin="330,217,0,0" TextWrapping="Wrap" Text="Orario arrivo: " VerticalAlignment="Top"/>
+            <Label x:Name="oraArrivolbl" Content="ora arrivo" HorizontalAlignment="Left" Margin="403,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
+            <TextBlock x:Name="datapartenzatbl" HorizontalAlignment="Left" Margin="70,257,0,0" TextWrapping="Wrap" Text="Data partenza: " VerticalAlignment="Top"/>
+            <Label x:Name="dataPartenzalbl" Content="data partenza (gg/mm/aa)" HorizontalAlignment="Left" Margin="150,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.481"/>
+            <TextBlock x:Name="dataarrivotbl" HorizontalAlignment="Left" Margin="330,257,0,0" TextWrapping="Wrap" Text="Data arrivo: " VerticalAlignment="Top"/>
+            <Label x:Name="dataArrivolbl" Content="data arrivo (gg/mm/aa)" HorizontalAlignment="Left" Margin="394,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
+            <TextBlock x:Name="Totaletxb" HorizontalAlignment="Left" Margin="70,325,0,0" TextWrapping="Wrap" Text="Totale:" VerticalAlignment="Top" FontSize="13.333" FontWeight="Bold"/>
+            <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="117,321,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="50"/>
+            <TextBlock x:Name="valutatxb" HorizontalAlignment="Left" Margin="161,327,0,0" TextWrapping="Wrap" Text="€" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.533"/>
+            <Button x:Name="btnIndietro" Content="Indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
+            <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="632,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click"/>
             <Button x:Name="btnConferma2" Content="Conferma" HorizontalAlignment="Left" Margin="634,376,0,0" VerticalAlignment="Top" Width="74" Click="btnConferma2_Click" Visibility="Hidden"/>
+
+
+
+
+
+
+
+
+
+
+
         </Grid>
 
         <Grid Name="gridRegistrazione" Background="White" Margin="0,53" Visibility="Hidden" >
@@ -163,6 +185,7 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
+            <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         </Grid>
 
         <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
@@ -186,17 +209,20 @@
                 <ComboBoxItem x:Name="cinquantakg" Content="50"  ></ComboBoxItem>
 
             </ComboBox>
-            <TextBlock x:Name="textblockbagagli" HorizontalAlignment="Left" Margin="58,256,0,0" TextWrapping="Wrap" Text="peso del bagaglio" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textblockbagagli" HorizontalAlignment="Left" Margin="58,256,0,0" TextWrapping="Wrap" Text="Peso bagaglio" VerticalAlignment="Top"/>
             <TextBox x:Name="bagaglitxt" HorizontalAlignment="Left" Height="23" Margin="204,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Text="1"/>
             <TextBlock x:Name="textblockpagamento" HorizontalAlignment="Left" Margin="554,46,0,0" TextWrapping="Wrap" Text="Tipo pagamento" VerticalAlignment="Top" Visibility="Hidden"/>
-            <Button x:Name="btnConfermaDati" Content="Conferma Dati" HorizontalAlignment="Left" Margin="356,280,0,0" VerticalAlignment="Top" Width="120" Click="btnConfermaDati_Click"/>
-            <TextBlock x:Name="confortViaggiotbl" HorizontalAlignment="Left" Margin="554,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold"><Run Text="co"/><Run Text="m"/><Run Text="fort di viaggio"/></TextBlock>
-            <TextBlock x:Name="txbPvolo" HorizontalAlignment="Left" Margin="590,76,0,0" TextWrapping="Wrap" Text="pranzo in volo" VerticalAlignment="Top"/>
-            <CheckBox x:Name="ckbpranzo" Content="20 euro " HorizontalAlignment="Left" Margin="713,76,0,0" VerticalAlignment="Top" Checked="ckbpranzo_Checked" Unchecked="ckbpranzo_Unchecked"/>
-            <CheckBox x:Name="ckbAcon" Content="5 euro" HorizontalAlignment="Left" Margin="713,122,0,0" VerticalAlignment="Top" Unchecked="ckbAcon_Unchecked" Checked="ckbAcon_Checked"/>
-            <TextBlock x:Name="tblCondizioanta" HorizontalAlignment="Left" Margin="590,118,0,0" TextWrapping="Wrap" Text="aria condizionata" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtSommaConfort" HorizontalAlignment="Left" Height="23" Margin="634,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0"/>
-            <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="206,256,0,0" TextWrapping="Wrap" Text="quantità bagagli" VerticalAlignment="Top"/>
+            <Button x:Name="btnConfermaDati" Content="Conferma Dati" HorizontalAlignment="Left" Margin="356,279,0,0" VerticalAlignment="Top" Width="120" Click="btnConfermaDati_Click"/>
+            <TextBlock x:Name="confortViaggiotbl" HorizontalAlignment="Left" Margin="566,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold"><Run Text="Co"/><Run Text="m"/><Run Text="fort di viaggio"/></TextBlock>
+            <TextBlock x:Name="txbPvolo" HorizontalAlignment="Left" Margin="566,64,0,0" TextWrapping="Wrap" Text="Pranzo in volo" VerticalAlignment="Top"/>
+            <CheckBox x:Name="ckbpranzo" Content="20 € " HorizontalAlignment="Left" Margin="690,65,0,0" VerticalAlignment="Top" Checked="ckbpranzo_Checked" Unchecked="ckbpranzo_Unchecked"/>
+            <CheckBox x:Name="ckbAcon" Content="5 €" HorizontalAlignment="Left" Margin="690,107,0,0" VerticalAlignment="Top" Unchecked="ckbAcon_Unchecked" Checked="ckbAcon_Checked"/>
+            <TextBlock x:Name="tblCondizioanta" HorizontalAlignment="Left" Margin="566,106,0,0" TextWrapping="Wrap" Text="Aria condizionata" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="611,282,0,0" TextWrapping="Wrap" Text="Totale: " VerticalAlignment="Top" FontSize="13.333" FontWeight="Bold" RenderTransformOrigin="0.627,0.338"/>
+            <TextBox x:Name="txtSommaConfort" HorizontalAlignment="Left" Height="25" Margin="661,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0"/>
+            <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="206,256,0,0" TextWrapping="Wrap" Text="Numero bagagli" VerticalAlignment="Top"/>
+            <TextBlock x:Name="datipasseggerolbl" HorizontalAlignment="Left" Margin="58,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold" Text="Dati passeggero"></TextBlock>
+
         </Grid>
 
         <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
@@ -273,19 +299,20 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="GridPagamento" HorizontalAlignment="Left" Height="162" Margin="0,78,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-            <TextBlock x:Name="data_pagamento" HorizontalAlignment="Left" Margin="56,50,0,0" TextWrapping="Wrap" Text="data pagamento" VerticalAlignment="Top" Height="22" Width="113"/>
+        <Grid x:Name="GridPagamento" Height="162" Margin="0,78,0,0" VerticalAlignment="Top" Visibility="Hidden">
+            <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="56,0,0,0" TextWrapping="Wrap" Text="Pagamento" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="data_pagamento" HorizontalAlignment="Left" Margin="56,50,0,0" TextWrapping="Wrap" Text="Data pagamento" VerticalAlignment="Top" Height="22" Width="113"/>
             <TextBox x:Name="txtdataPagamento" HorizontalAlignment="Left" Height="24" Margin="56,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="tipoPagamento" HorizontalAlignment="Left" Margin="266,50,0,0" TextWrapping="Wrap" Text="scegli il tipo di pagamento" VerticalAlignment="Top" Height="22" Width="160"/>
-            <ComboBox x:Name="cmbTipoPagamento" HorizontalAlignment="Left" Margin="280,79,0,0" VerticalAlignment="Top" Width="120">
+            <TextBlock x:Name="tipoPagamento" HorizontalAlignment="Left" Margin="266,50,0,0" TextWrapping="Wrap" Text="Tipo pagamento" VerticalAlignment="Top" Height="22" Width="160"/>
+            <ComboBox x:Name="cmbTipoPagamento" HorizontalAlignment="Left" Margin="266,79,0,0" VerticalAlignment="Top" Width="120">
                 <ComboBoxItem x:Name="Visa" Content="Visa" ></ComboBoxItem>
                 <ComboBoxItem x:Name="Master" Content="Master Card" ></ComboBoxItem>
             </ComboBox>
-            <TextBlock x:Name="tblpagamento" HorizontalAlignment="Left" Margin="510,50,0,0" TextWrapping="Wrap" Text="Totale" VerticalAlignment="Top" Height="22" Width="103"/>
-            <TextBox x:Name="txtTotale" HorizontalAlignment="Left" Height="22" Margin="510,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnConferma3" Content="conferma Pagamento" HorizontalAlignment="Left" Margin="712,77,0,0" VerticalAlignment="Top" Width="128" Height="24" Click="btnConferma3_Click"/>
+            <TextBlock x:Name="tblpagamento" HorizontalAlignment="Left" Margin="468,50,0,0" TextWrapping="Wrap" Text="Totale" VerticalAlignment="Top" Height="22" Width="103"/>
+            <TextBox x:Name="txtTotale" HorizontalAlignment="Left" Height="22" Margin="468,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnConferma3" Content="Conferma pagamento" HorizontalAlignment="Left" Margin="639,77,0,0" VerticalAlignment="Top" Width="128" Height="24" Click="btnConferma3_Click"/>
         </Grid>
-       
+
         <Grid x:Name="footer" Margin="0,452,0,5">
             <Grid.Background>
                 <RadialGradientBrush>
@@ -295,7 +322,8 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-      
+
+
 
 
     </Grid>

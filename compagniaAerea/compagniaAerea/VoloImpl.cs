@@ -155,7 +155,7 @@ namespace compagniaAerea
                             return flag = true;
                         }
                     }
-                    MessageBox.Show("nessuna partenza in questa data");
+                    MessageBox.Show("Nessuna partenza in questa data");
                     return flag;
                 case "dataRitorno":
                     foreach (Tratta t in trattaLocale)
@@ -166,7 +166,7 @@ namespace compagniaAerea
                             return flag = true;
                         }
                     }
-                    MessageBox.Show("nessuna partenza in questa data");
+                    MessageBox.Show("Nessuna partenza in questa data");
                     return flag;
                 default:
                     return flag;
