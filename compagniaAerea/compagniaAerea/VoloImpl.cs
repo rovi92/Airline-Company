@@ -39,7 +39,10 @@ namespace compagniaAerea
 
             public string orarioArrivo { get; set; }
 
-            public string codiceVolo { get; set; } 
+            public string codiceVolo { get; set; }
+
+            public string costoViaggio { get; set; }
+
 
 
         }
@@ -76,7 +79,7 @@ namespace compagniaAerea
                             postiMax = trattaLocale[i].Aereo.capacità_buisness;
 
                             break;
-                        case "first":
+                        case "First":
                             posti = trattaLocale[i].posti_first;
                             postiMax = trattaLocale[i].Aereo.capacità_first;
 
@@ -88,10 +91,12 @@ namespace compagniaAerea
                         {
                             partenza = trattaLocale[i].Aeroporto.città,
                             arrivo = trattaLocale[i].Aeroporto1.città,
+                            costoViaggio = trattaLocale[i].Piano_di_volo.Tariffario.First(t => t.numero_volo == trattaLocale[i].Piano_di_volo.numero_volo).tariffa_solo_andata.ToString(),
                             dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
                             orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
                             orarioArrivo = trattaLocale[i].orario_arrivo.ToString(),
                             codiceVolo = trattaLocale[i].numero_volo.ToString()
+                            
 
                         });
                     }
@@ -189,7 +194,8 @@ namespace compagniaAerea
              (dg.SelectedCells[2].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
             (dg.SelectedCells[3].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
             (dg.SelectedCells[4].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-            (dg.SelectedCells[5].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text};
+            (dg.SelectedCells[5].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
+            (dg.SelectedCells[6].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text};
         }
 
         public string getNameAirport(string città)

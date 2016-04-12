@@ -14,7 +14,8 @@ namespace compagniaAerea
     {
 
         DatabaseManager myDatabase;
-        ListCollectionView biglietti;
+      //  ListCollectionView biglietti;
+       List<String> primoTicket = new List<String>();
         List<Comfort> comfort = new List<Comfort>();
         List<Classe> classeVolo = new List<Classe>();
         List<Tariffario> tariffario = new List<Tariffario>();
@@ -43,10 +44,11 @@ namespace compagniaAerea
                              ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
                              data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
                              data_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo,
-                             
+
                              prezzo_bagaglio = b.Babaglio_Imbarcato.Where(bi => bi.peso <= bi.Prezzo_bagaglio_imbarcato.range_pesi).First().Prezzo_bagaglio_imbarcato.prezzo + (
                                                                                                                                     b.Prenotazione.Tariffario.tariffa_solo_andata *
                                                                                                                                     b.Prenotazione.Tariffario.Classe.prezzo)
+                            // predadd = b.Prenotazione.Tariffario.Comfort_inclusi.Where(c => c.idTariffa == b.Prenotazione.idTariffa).First().Comfort.prezzo
                          }).ToList();
           
         }
@@ -65,13 +67,13 @@ namespace compagniaAerea
             comfort = (from c in myDatabase.getDb().Comfort
                        select c).ToList();
         }
-
+/*
         public String getNome(int codiceBiglietto)
         {
             string nome = "";
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
+                if (b.codice_biglietto.Equals(codiceBiglietto) )
                 //controllo corrispondenza tra nome cognome e codice inseriti da utente e quelli presenti nel DB
                 {
                     nome = b.nome_intestatario;
@@ -80,12 +82,12 @@ namespace compagniaAerea
             }
             return nome;         
         }
-        public String getCognome(int codiceBiglietto, string nome_intestatario, string cognome_intestatario)
+        public String getCognome(int codiceBiglietto)
         {
             string cognome = "";
             foreach (Biglietto b in biglietti)
             {
-                if (b.codice_biglietto.Equals(codiceBiglietto) && b.nome_intestatario.Equals(nome_intestatario) && b.cognome_intestatario.Equals(cognome_intestatario))
+                if (b.codice_biglietto.Equals(codiceBiglietto))
 
                 {
                     cognome = b.cognome_intestatario;
@@ -218,15 +220,12 @@ namespace compagniaAerea
         }
             return spesa;
         }
-
-        #endregion
-
-        public void DatiAnagraficiBiglietto(TextBox tb)
+         public void DatiAnagraficiBiglietto(TextBox tb)
         {
             throw new NotImplementedException();
         }
-
-        public double getTotal(double kg, double numeroVolo, double confort, string classe)
+*/
+        public double getTotal(double kg,double quantitaBagagli, double numeroVolo, double confort, string classe)
         {
             double prezzoBagaglio = 0;
             for (int i = 0; i < bagaglio.Count; i++)
@@ -245,9 +244,7 @@ namespace compagniaAerea
                     tariffaSolaAndata = tariffario[a].tariffa_solo_andata;
                 }
             }
-            double comfort2 = confort;
-          
-            
+           
             double classeScelta = 0;
           for(int cl = 0; cl < classeVolo.Count; cl++)
             {
@@ -256,9 +253,18 @@ namespace compagniaAerea
                     classeScelta = classeVolo[cl].prezzo;
                 }
             }
-            return prezzoBagaglio +( tariffaSolaAndata+ comfort2 )*(classeScelta/10);
+            return (prezzoBagaglio*quantitaBagagli) +( tariffaSolaAndata+ confort)+(classeScelta);
         }
 
-        
+    
+        public void firstTicket(List<String> l)
+        {
+            primoTicket = l;
+        }
+
+        public List<string> getFirstTicket()
+        {
+            return primoTicket;
+        }
     }
 }

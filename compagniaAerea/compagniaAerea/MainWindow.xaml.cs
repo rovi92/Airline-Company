@@ -140,11 +140,11 @@ namespace compagniaAerea
         #region bottone prenota
         private void prenota_click(object sender, RoutedEventArgs e)
         {
-            //informazioni della grid prenotazione volo salvate in tiket
-            
-            
-            //switch grid
-           
+            if (!btnConferma_ordine.IsVisible)
+            {
+                btnConferma_ordine.Visibility = Visibility.Visible;
+            }
+            btnIndietro.Visibility = Visibility.Hidden;
             this.gridCorrente = 7;
             currentGrid();
            
@@ -221,7 +221,7 @@ namespace compagniaAerea
                     //cambio grid
                     this.gridCorrente = 8;
                     //modifica parametri nella grid di visualizzazione biglietto
-                    nomelbl.Content = ticket.getNome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
+                   /* nomelbl.Content = ticket.getNome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
                     cognomelbl.Content = ticket.getCognome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
                     CFlbl.Content = ticket.getCF(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
                     codiceVololbl.Content = ticket.getCodiceVolo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
@@ -231,7 +231,7 @@ namespace compagniaAerea
                     oraArrivolbl.Content = ticket.getOraArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
                     dataPartenzalbl.Content = ticket.getDataPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
                     dataArrivolbl.Content = ticket.getDataArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
-                    totalelbl.Content = ticket.getSpesaTotale(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
+                    totalelbl.Content = ticket.getSpesaTotale(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();*/
                 }
             }
             else
@@ -302,6 +302,7 @@ namespace compagniaAerea
             gridchange.Add(GridDipendentetariffario);//grid del tariffario posizione 6
             gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
             gridchange.Add(viewTicket);//grid del biglietto posizione 8
+            gridchange.Add(GridPagamento);//grid del pagamento 9
          }
 
         public void currentGrid()
@@ -514,13 +515,72 @@ namespace compagniaAerea
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 ComboBoxItem typeItem = (ComboBoxItem)tipobabgliocombobox.SelectedItem;
                 string stato = typeItem.Content.ToString();
-                totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text),volo.getClass().Content.ToString());
-               
+                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClass().Content.ToString()) * int.Parse(lblPosti.Content.ToString())).ToString();
+                
+
             }
             else
             {
                 MessageBox.Show("ci sono campi vuoti");
             }
+        }
+
+        private void conferma_ordine_click(object sender, RoutedEventArgs e)
+        {
+            if (rdbAndataRitorno.IsChecked.Value)
+            {
+
+                ComboBoxItem typeItem = (ComboBoxItem)tipobabgliocombobox.SelectedItem;
+                string stato = typeItem.Content.ToString();
+
+                ticket.firstTicket(new List<string>
+                {
+                    nomelbl.Content.ToString(),
+                    cognomelbl.Content.ToString(),
+                    CFlbl.Content.ToString(),
+                    codiceVololbl.Content.ToString(),
+                    aereoporteAndatalbl.Content.ToString(),
+                    aereoportoArrivolbl.Content.ToString(),
+                    oraPartenzalbl.Content.ToString(),
+                    oraArrivolbl.Content.ToString(),
+                    dataPartenzalbl.Content.ToString(),
+                    stato,
+                    totalelbl.Content.ToString()
+                });
+                nomelbl.Content = nomepasseggerotxt.Text;
+                cognomelbl.Content = cognomepasseggerotxt.Text;
+                CFlbl.Content = cfpasseggerotxt.Text;
+                codiceVololbl.Content = volo.getValueGrid(dataGridRitorno)[5];
+                aereoporteAndatalbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridRitorno)[0]);
+                aereoportoArrivolbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridRitorno)[1]);
+                oraPartenzalbl.Content = volo.getValueGrid(dataGridRitorno)[3];
+                oraArrivolbl.Content = volo.getValueGrid(dataGridRitorno)[4];
+                dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
+                totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClass().Content.ToString()) * int.Parse(lblPosti.Content.ToString());
+                btnConferma2.Visibility = Visibility.Visible;
+                btnConferma_ordine.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.gridCorrente = 9;
+                currentGrid();
+            }
+        }
+
+        private void btnConferma2_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            txtdataPagamento.Text = today.ToString();
+            txtTotale.Text = Convert.ToString(Double.Parse(totalelbl.Content.ToString())+ Double.Parse(ticket.getFirstTicket()[10])) ;
+            this.gridCorrente = 9;
+            currentGrid();
+        }
+
+        private void btnConferma3_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("grazie per aver scelto la nostra compagnia");
+            this.gridCorrente = 2;
+            currentGrid();
         }
         #endregion
 
@@ -591,12 +651,7 @@ namespace compagniaAerea
 
         }
 
-        private void conferma_ordine_click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-      
+        
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
