@@ -189,7 +189,7 @@ namespace compagniaAerea
             //Convert.ToInt32((dgOrdini.SelectedCells[1].Column.GetCellContent(dgOrdini.SelectedItem) as TextBlock).Text);
 
 
-            return new List<String>() { (dg.SelectedCells[0].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text ,
+            return new List<String>() { (dg.SelectedCells[0].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
            (dg.SelectedCells[1].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
              (dg.SelectedCells[2].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
             (dg.SelectedCells[3].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
