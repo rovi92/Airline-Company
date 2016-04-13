@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 15.375" name="myDatabaseUniboAirline">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 14.375" name="myDatabaseUniboAirline">
   <DataContextMoniker Name="/myDatabaseUniboAirlineDataContext" />
   <nestedChildShapes>
     <classShape Id="6cb4e248-b754-4809-bb08-da3c46318f6b" absoluteBounds="1.125, 4.75, 2, 1.7708968098958327">
@@ -54,12 +54,6 @@
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Pagamento" />
       <nestedChildShapes>
         <elementListCompartment Id="0d7bf801-b52f-4821-a9ff-07edf8f82492" absoluteBounds="9.515, 8.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="24b88515-60d5-4f1b-b1b1-61b1697a81c8" absoluteBounds="3.875, 11.625, 2, 3.5016097005208344">
-      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero" />
-      <nestedChildShapes>
-        <elementListCompartment Id="efeb1fcb-f318-4a4e-be90-bc0cc01edc9e" absoluteBounds="3.8900000000000006, 12.085, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="b44024a0-3889-4820-8204-ab5250abe053" absoluteBounds="4, 4.75, 2, 2.9247054036458318">
@@ -121,21 +115,21 @@
         <classShapeMoniker Id="e84c38fd-45c8-43ed-9a98-be5d340f482b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.15625 : 4.75); (1.15625 : 0.90625); (4 : 0.90625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.15625 : 4.75); (1.15625 : 0.90625); (4 : 0.90625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aereo/Aereo_Tratta" />
       <nodes>
         <classShapeMoniker Id="6cb4e248-b754-4809-bb08-da3c46318f6b" />
         <classShapeMoniker Id="82122d34-b351-43c5-b771-e1de45a4efa1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.25 : 2.26044840494792); (4 : 2.26044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.25 : 2.26044840494792); (4 : 2.26044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta" />
       <nodes>
         <classShapeMoniker Id="d1edec8f-5b01-49d4-84f6-55bba86c9662" />
         <classShapeMoniker Id="82122d34-b351-43c5-b771-e1de45a4efa1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.25 : 1.75522420247396); (4 : 1.75522420247396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.25 : 1.75522420247396); (4 : 1.75522420247396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta1" />
       <nodes>
         <classShapeMoniker Id="d1edec8f-5b01-49d4-84f6-55bba86c9662" />
@@ -155,7 +149,7 @@
         <elementListCompartment Id="b528346a-9383-4ad1-8a6f-32c576a06512" absoluteBounds="3.6399999999999997, 9.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.625 : 10.2219962565104); (6.16666666666667 : 10.2219962565104 : JumpStart); (6.33333333333333 : 10.2219962565104 : JumpEnd); (6.75 : 10.2219962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.625 : 10.2219962565104); (6.07291666666667 : 10.2219962565104 : JumpStart); (6.23958333333333 : 10.2219962565104 : JumpEnd); (6.75 : 10.2219962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tariffario/Tariffario_Comfort_inclusi" />
       <nodes>
         <classShapeMoniker Id="73968191-4a2c-43f9-9fc7-68b4f0254945" />
@@ -196,17 +190,23 @@
         <classShapeMoniker Id="66529054-41aa-4510-9bf9-2f1acdc7704a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.875 : 11.625); (6.25 : 11.25); (6.25 : 8.9631982421875); (6.375 : 8.9631982421875); (6.75 : 8.5881982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero/Passeggero_Prenotazione" />
-      <nodes>
-        <classShapeMoniker Id="24b88515-60d5-4f1b-b1b1-61b1697a81c8" />
-        <classShapeMoniker Id="81d1c297-54b0-4051-b79d-74815bb90c10" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(3.78125 : 9.25); (3.78125 : 8.16270182291667); (6.75 : 8.16270182291667)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tariffario/Tariffario_Prenotazione" />
       <nodes>
         <classShapeMoniker Id="73968191-4a2c-43f9-9fc7-68b4f0254945" />
+        <classShapeMoniker Id="81d1c297-54b0-4051-b79d-74815bb90c10" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1efd2bfc-8edd-45a1-8a39-c3c2c53207e1" absoluteBounds="4.25, 11.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d9c6edd-be3c-4a0f-9728-d71ddf286a6a" absoluteBounds="4.265, 12.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.15625 : 11.75); (6.15625 : 8.40670253255209); (6.75 : 8.40670253255209)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero/Passeggero_Prenotazione" />
+      <nodes>
+        <classShapeMoniker Id="1efd2bfc-8edd-45a1-8a39-c3c2c53207e1" />
         <classShapeMoniker Id="81d1c297-54b0-4051-b79d-74815bb90c10" />
       </nodes>
     </associationConnector>
