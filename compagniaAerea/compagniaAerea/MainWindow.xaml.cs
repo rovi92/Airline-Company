@@ -507,7 +507,7 @@ namespace compagniaAerea
                 nomelbl.Content = nomepasseggerotxt.Text;
                 cognomelbl.Content = cognomepasseggerotxt.Text;
                 CFlbl.Content = cfpasseggerotxt.Text;
-                codiceVololbl.Content = volo.getValueGrid(dataGridAndata)[5];
+                codiceVololbl.Content = volo.getValueGrid(dataGridAndata)[2];
                 aereoporteAndatalbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridAndata)[0]);
                 aereoportoArrivolbl.Content = volo.getNameAirport(volo.getValueGrid(dataGridAndata)[1]);
                 oraPartenzalbl.Content = volo.getValueGrid(dataGridAndata)[3];
@@ -515,9 +515,8 @@ namespace compagniaAerea
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 ComboBoxItem typeItem = (ComboBoxItem)tipobabgliocombobox.SelectedItem;
                 string stato = typeItem.Content.ToString();
-                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClass().Content.ToString()) * int.Parse(lblPosti.Content.ToString())).ToString();
-                
-
+               totalelbl.Content = (ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClass().Content.ToString()) * int.Parse(lblPosti.Content.ToString())).ToString();
+                 
             }
             else
             {
@@ -559,9 +558,14 @@ namespace compagniaAerea
                 totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClass().Content.ToString()) * int.Parse(lblPosti.Content.ToString());
                 btnConferma2.Visibility = Visibility.Visible;
                 btnConferma_ordine.Visibility = Visibility.Hidden;
+              
+              
+
             }
             else
             {
+                txtdataPagamento.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                txtTotale.Text = totalelbl.Content.ToString();
                 this.gridCorrente = 9;
                 currentGrid();
             }
@@ -569,18 +573,27 @@ namespace compagniaAerea
 
         private void btnConferma2_Click(object sender, RoutedEventArgs e)
         {
-            DateTime today = DateTime.Today;
-            txtdataPagamento.Text = today.ToString();
-            txtTotale.Text = Convert.ToString(Double.Parse(totalelbl.Content.ToString())+ Double.Parse(ticket.getFirstTicket()[10])) ;
+            
+            txtdataPagamento.Text = DateTime.Today.ToString("dd/MM/yyyy");
+           
+                txtTotale.Text = Convert.ToString(Convert.ToDouble(ticket.getFirstTicket()[10]) + Double.Parse(totalelbl.Content.ToString()));
+         
+              
+            
             this.gridCorrente = 9;
             currentGrid();
         }
 
         private void btnConferma3_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+
             MessageBox.Show("grazie per aver scelto la nostra compagnia");
+
             this.gridCorrente = 2;
             currentGrid();
+            ticket.getPopulateDbTicket();
+            volo.executeTratta();
+            errore.TraverseVisualTree(this.grid);
         }
         #endregion
 

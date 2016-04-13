@@ -41,7 +41,7 @@
             <Button x:Name="CercaBiglietto" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20" Click="cercaBiglietto_Click"/>
         </Grid>
 
-        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="427" Margin="10,22,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="427" Margin="10,20,0,0" VerticalAlignment="Top" Width="840" Visibility="Hidden">
             <TextBlock x:Name="titolotbl" HorizontalAlignment="Left" Margin="70,54,0,0" TextWrapping="Wrap" Text="Dati biglietto" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
             <TextBlock x:Name="nametbl" HorizontalAlignment="Left" Margin="70,108,0,0" TextWrapping="Wrap" Text="Nome: " VerticalAlignment="Top"/>
             <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="114,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="68"/>
@@ -65,22 +65,11 @@
             <Label x:Name="dataArrivolbl" Content="data arrivo (gg/mm/aa)" HorizontalAlignment="Left" Margin="394,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.423"/>
             <TextBlock x:Name="Totaletxb" HorizontalAlignment="Left" Margin="70,325,0,0" TextWrapping="Wrap" Text="Totale:" VerticalAlignment="Top" FontSize="13.333" FontWeight="Bold"/>
             <Label x:Name="totalelbl" Content="totale" HorizontalAlignment="Left" Margin="117,321,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="50"/>
-            <TextBlock x:Name="valutatxb" HorizontalAlignment="Left" Margin="161,327,0,0" TextWrapping="Wrap" Text="€" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.533"/>
+            <TextBlock x:Name="valutatxb" HorizontalAlignment="Left" Margin="167,327,0,0" TextWrapping="Wrap" Text="€" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.533"/>
             <Button x:Name="btnIndietro" Content="Indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
             <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="632,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click"/>
             <Button x:Name="btnConferma2" Content="Conferma" HorizontalAlignment="Left" Margin="634,376,0,0" VerticalAlignment="Top" Width="74" Click="btnConferma2_Click" Visibility="Hidden"/>
-
-
-
-
-
-
-
-
-
-
-
-        </Grid>
+</Grid>
 
         <Grid Name="gridRegistrazione" Background="White" Margin="0,53" Visibility="Hidden" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
@@ -132,7 +121,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -160,7 +149,7 @@
             <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="336,24,0,0" VerticalAlignment="Top" Height="149" Width="466" 
                             GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30"
                             HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" IsReadOnly="True"
-                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2">
+                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -170,11 +159,19 @@
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
+                    <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Arrivo in"/>
+                    <DataGridTextColumn Binding="{Binding costoViaggio}" IsReadOnly="True" Header="Costo"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding  orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
+                    <DataGridTextColumn Binding="{Binding  codiceVolo}" IsReadOnly="True" Header="id volo"/>
+                </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="640,367,0,0" VerticalAlignment="Top" Width="94" Height="27" Click="prenota_click" Grid.Column="2"/>
             <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="336,173,0,0" VerticalAlignment="Top" Height="150" Width="466"
                             GridLinesVisibility="Horizontal" HeadersVisibility="All"  ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30" IsReadOnly="True"
-                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2">
+                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -184,11 +181,18 @@
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
+                    <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Arrivo in"/>
+                    <DataGridTextColumn Binding="{Binding costoViaggio}" IsReadOnly="True" Header="Costo"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding  orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
+                </DataGrid.Columns>
             </DataGrid>
             <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         </Grid>
 
-        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,42,0,56" Background="White" Visibility="Hidden">
             <TextBox x:Name="nomepasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="textblocknome" HorizontalAlignment="Left" Margin="58,44,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
             <TextBlock x:Name="textblockcognometxt" HorizontalAlignment="Left" Margin="204,44,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
@@ -299,7 +303,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="GridPagamento" Height="162" Margin="0,78,0,0" VerticalAlignment="Top" Visibility="Hidden">
+        <Grid x:Name="GridPagamento" Height="162" Margin="0,107,0,0" VerticalAlignment="Top" Visibility="Hidden">
             <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="56,0,0,0" TextWrapping="Wrap" Text="Pagamento" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
             <TextBlock x:Name="data_pagamento" HorizontalAlignment="Left" Margin="56,50,0,0" TextWrapping="Wrap" Text="Data pagamento" VerticalAlignment="Top" Height="22" Width="113"/>
             <TextBox x:Name="txtdataPagamento" HorizontalAlignment="Left" Height="24" Margin="56,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
