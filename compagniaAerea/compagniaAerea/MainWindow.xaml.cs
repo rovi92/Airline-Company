@@ -199,14 +199,14 @@ namespace compagniaAerea
         {
             //controllo campi non vuoti
             errore.ValueText(CodiceBigliettotxt);
-            errore.ValueText(NomeBigliettotxt);
-            errore.ValueText(CognomeBigliettotxt);
+
             bool conversion_flag;//flag per il controllo della conversione dal cosice biglietto in intero
+            int codice =-1;
             if (errore.checkText())
             {
                 try//prova conversione e definizione del flag
                 {
-                    int cosice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    codice = Convert.ToInt32(CodiceBigliettotxt.Text);
                     conversion_flag = true;
                 }
                 catch (InvalidCastException ie)
@@ -216,22 +216,24 @@ namespace compagniaAerea
                 }
                 if (conversion_flag == true)
                 {
-                    btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine
-                    int codice = Convert.ToInt32(CodiceBigliettotxt.Text);
+                    ticket.getBiglietto(codice);
+                    btnConferma_ordine.Visibility = Visibility.Hidden;//nascosto bottone del conferma ordine                
                     //cambio grid
                     this.gridCorrente = 8;
+                    currentGrid();
                     //modifica parametri nella grid di visualizzazione biglietto
-                   /* nomelbl.Content = ticket.getNome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    cognomelbl.Content = ticket.getCognome(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    CFlbl.Content = ticket.getCF(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    codiceVololbl.Content = ticket.getCodiceVolo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text);
-                    oraPartenzalbl.Content = ticket.getOraPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
-                    oraArrivolbl.Content = ticket.getOraArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
-                    dataPartenzalbl.Content = ticket.getDataPartenza(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
-                    dataArrivolbl.Content = ticket.getDataArrivo(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();
-                    totalelbl.Content = ticket.getSpesaTotale(codice, NomeBigliettotxt.Text, CognomeBigliettotxt.Text).ToString();*/
+                    nomelbl.Content = ticket.getNome();
+                    cognomelbl.Content = ticket.getCognome();
+                    CFlbl.Content = ticket.getCF();
+                    codiceVololbl.Content = ticket.getCodiceVolo();
+                    aereoporteAndatalbl.Content = ticket.getAereoportoAndata();
+                    aereoportoArrivolbl.Content = ticket.getAereoportoArrivo();
+                    oraPartenzalbl.Content = ticket.getOraPartenza();
+                    oraArrivolbl.Content = ticket.getOraArrivo();
+                    dataPartenzalbl.Content = ticket.getDataPartenza();
+                    dataArrivolbl.Content = ticket.getDataArrivo();
+                    totalelbl.Content = ticket.getSpesaTotale();
+                   
                 }
             }
             else
@@ -244,6 +246,7 @@ namespace compagniaAerea
         private void btnIndietro_Click(object sender, RoutedEventArgs e)
         {
             this.gridCorrente = 3;
+            currentGrid();
             //pulitura delle label
             nomelbl.Content = "";
             cognomelbl.Content = "";
