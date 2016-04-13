@@ -69,7 +69,7 @@
             <Button x:Name="btnIndietro" Content="Indietro" HorizontalAlignment="Left" Margin="732,376,0,0" VerticalAlignment="Top" Width="74" Click="btnIndietro_Click" />
             <Button x:Name="btnConferma_ordine" Content="Conferma" HorizontalAlignment="Left" Margin="632,376,0,0" VerticalAlignment="Top" Width="76" Click="conferma_ordine_click"/>
             <Button x:Name="btnConferma2" Content="Conferma" HorizontalAlignment="Left" Margin="634,376,0,0" VerticalAlignment="Top" Width="74" Click="btnConferma2_Click" Visibility="Hidden"/>
-</Grid>
+        </Grid>
 
         <Grid Name="gridRegistrazione" Background="White" Margin="0,53" Visibility="Hidden" >
             <TextBlock x:Name="nome" HorizontalAlignment="Left" Margin="20,67,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top"/>
@@ -121,7 +121,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
