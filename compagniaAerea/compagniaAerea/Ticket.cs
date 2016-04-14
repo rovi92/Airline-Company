@@ -21,9 +21,11 @@ namespace compagniaAerea
         String getDataArrivo();
         String getDataPartenza();
         String getSpesaTotale();
+        
         void getPopulateDbTicket();//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
-        Double getTotal(double kg, double quantitaBagagli, double numeroVolo,double cofort,string classe);
-     
+        Double getTotal(double kg, double quantitaBagagli, double numeroVolo,double cofort,int classe);
+        void createBooking(string dataPrenotazione,int numeroPersone,float totale,int idPasseggero,int idTariffa);
+        
         void firstTicket(List<String> l);
         List<String> getFirstTicket();
     }

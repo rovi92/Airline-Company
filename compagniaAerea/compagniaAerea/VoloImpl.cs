@@ -15,8 +15,8 @@ namespace compagniaAerea
 
         DatabaseManager myDatabase;
         List<Tratta> trattaLocale = new List<Tratta>();
-        RadioButton rb;
-
+        string className = "";
+        int idClasse = 0;
 
         public VoloImpl()
         {
@@ -68,21 +68,26 @@ namespace compagniaAerea
                 {
                     int posti = 0;
                     int postiMax = 0;
-                    switch (rb.Content.ToString())
+                    switch (this.className)
                     {
                         case "Economy":
                             posti = trattaLocale[i].posti_economy;
                             postiMax = trattaLocale[i].Aereo.capacità_economy;
+                            this.idClasse = 1;
                             break;
                         case "Buisness":
                             posti = trattaLocale[i].posti_buisness;
                             postiMax = trattaLocale[i].Aereo.capacità_buisness;
-
+                            this.idClasse = 2;
                             break;
                         case "First":
                             posti = trattaLocale[i].posti_first;
                             postiMax = trattaLocale[i].Aereo.capacità_first;
+                            this.idClasse = 3;
 
+                            break;
+                        default:
+                            this.idClasse = -1;
                             break;
                     }
                     if (posti < postiMax)
@@ -96,8 +101,8 @@ namespace compagniaAerea
                             orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
                             orarioArrivo = trattaLocale[i].orario_arrivo.ToString(),
                             codiceVolo = trattaLocale[i].numero_volo.ToString(),
-                          
-                            
+
+
 
                         });
                     }
@@ -175,41 +180,43 @@ namespace compagniaAerea
 
         }
 
-        public void setClass(RadioButton rb1)
+        public void setClass(String className)
         {
-            rb = rb1;
+            this.className = className;
         }
 
-        public RadioButton getClass()
+        public String getClassName()
         {
-            return this.rb;
+            return this.className;
+        }
+
+        public int getClassId()
+        {
+            return this.idClasse;
         }
 
         public List<String> getValueGrid(DataGrid dg)
         {
             //Convert.ToInt32((dgOrdini.SelectedCells[1].Column.GetCellContent(dgOrdini.SelectedItem) as TextBlock).Text);
-
-
-            return new List<String>() {
-                (dg.SelectedCells[0].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-           (dg.SelectedCells[1].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-             (dg.SelectedCells[2].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-            (dg.SelectedCells[3].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-            (dg.SelectedCells[4].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text,
-            (dg.SelectedCells[5].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text
-           };
-        }
+            List<String> tmp = new List<String>();
+            for (int i = 0; i < dg.SelectedCells.Count; i++)
+            {
+                tmp.Add((dg.SelectedCells[i].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text);
+            }
+            return tmp;
+       
+    }
 
         public string getNameAirport(string città)
         {
             string c = "";
-           for(int i = 0;i< trattaLocale.Count(); i++)
+            for (int i = 0; i < trattaLocale.Count(); i++)
             {
                 if (trattaLocale[i].Aeroporto.città.Equals(città))
                 {
                     c = trattaLocale[i].Aeroporto.nome;
                 }
-                
+
             }
             return c;
         }

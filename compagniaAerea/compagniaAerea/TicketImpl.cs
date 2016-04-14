@@ -86,8 +86,8 @@ namespace compagniaAerea
         {
             throw new NotImplementedException();
         }
-
-        public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort, string classe)
+        #region GET tiket e tutto ciò che è correlato al biglietto
+        public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort, int classe)
         {
             double prezzoBagaglio = 0;
             for (int i = 0; i < bagaglio.Count; i++)
@@ -98,23 +98,26 @@ namespace compagniaAerea
                 }
 
             }
+
+            double classeScelta = 0;
+            for (int cl = 0; cl < classeVolo.Count; cl++)
+            {
+                if (classeVolo[cl].idClasse == classe)
+                {
+                    classeScelta = classeVolo[cl].prezzo;
+                }
+            }
+
             double tariffaSolaAndata = 0;
             for (int a = 0; a < tariffario.Count; a++)
             {
-                if (tariffario[a].numero_volo == (numeroVolo))
+                if (tariffario[a].numero_volo == (numeroVolo) && tariffario[a].idClasse == classe)
                 {
                     tariffaSolaAndata = tariffario[a].tariffa_solo_andata;
                 }
             }
 
-            double classeScelta = 0;
-            for (int cl = 0; cl < classeVolo.Count; cl++)
-            {
-                if (classeVolo[cl].descrizione.Equals(classe))
-                {
-                    classeScelta = classeVolo[cl].prezzo;
-                }
-            }
+          
             return (prezzoBagaglio * quantitaBagagli) + (tariffaSolaAndata + confort) + (classeScelta);
         }
 
@@ -183,5 +186,26 @@ namespace compagniaAerea
         {
             return ib.spesa.ToString();
         }
+
+
+
+        #endregion
+        #region SET TIKET
+
+        public void createBooking(string dataPrenotazione, int numeroPersone, float totale, int idPasseggero, int idTariffa)
+        {
+            Prenotazione pr = new Prenotazione()
+            {
+                data_prenotazione = Convert.ToDateTime(dataPrenotazione),
+                numero_persone = numeroPersone,
+                totale = totale,
+                idPasseggero = idPasseggero,
+                idTariffa = idTariffa,
+            };
+        }
+
+        
+
+        #endregion
     }
 }
