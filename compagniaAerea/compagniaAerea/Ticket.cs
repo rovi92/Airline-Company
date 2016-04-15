@@ -24,7 +24,11 @@ namespace compagniaAerea
         
         void getPopulateDbTicket();//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
         Double getTotal(double kg, double quantitaBagagli, double numeroVolo,double cofort,int classe);
-        void createBooking(string dataPrenotazione,int numeroPersone,float totale,int idPasseggero,int idTariffa);
+        int getIdTariffa(int numeroVolo,int numeroClasse);
+        void createBooking(string dataPrenotazione,int numeroPersone,double totale,int idPasseggero,int idTariffa);
+        int getIdPrenotaione();
+        void insertRecordPagamento(string dataPagamento,string tipoPagamento,int idprenotazione);
+        void insertRecordTiket(string nomeIntestatario,string cognomeIntestatario,int idPrenotazione);
         
         void firstTicket(List<String> l);
         List<String> getFirstTicket();

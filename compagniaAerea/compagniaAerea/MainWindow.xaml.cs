@@ -580,7 +580,7 @@ namespace compagniaAerea
             }
             else
             {
-                txtdataPagamento.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
                 txtTotale.Text = totalelbl.Content.ToString();
                 this.gridCorrente = 9;
                 currentGrid();
@@ -590,7 +590,7 @@ namespace compagniaAerea
         private void btnConferma2_Click(object sender, RoutedEventArgs e)
         {
             
-            txtdataPagamento.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
            
                 txtTotale.Text = Convert.ToString(Convert.ToDouble(ticket.getFirstTicket()[10]) + Double.Parse(totalelbl.Content.ToString()));
          
@@ -606,33 +606,59 @@ namespace compagniaAerea
         #region PAGAMENTO
         private void btnConferma3_Click(object sender, RoutedEventArgs e)
         {
-            if (gestione_cliente.controlCF(lblPosti.Content.ToString()).Equals(false) && gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(false))
+            ComboBoxItem item = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
+            string tipoPagamento = item.Content.ToString();
+            if (rdbSoloAndata.IsChecked.Value)
             {
-                //registra solo i biglietti con id del passeggero già registrato 
+                if (gestione_cliente.controlCF(lblPosti.Content.ToString()).Equals(true) || gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(true))
+                {
+                    gestione_cliente.InitUtente();
 
+                    ticket.getPopulateDbTicket();
+                    ticket.createBooking(txtdataPagamento.Text,
+                    int.Parse(lblPosti.Content.ToString()),
+                    Double.Parse(txtTotale.Text.ToString()), gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text, emailpasseggerotxt.Text),
+                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getClassId()));
+
+                    ticket.getPopulateDbTicket();
+                    ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text, ticket.getIdPrenotaione());
+
+                }
+                else
+                {
+                    gestione_cliente.InitUtente();
+                    gestione_cliente.Registrazione_Cliente //registro il cliente
+                        (nomepasseggerotxt.Text,
+                        cognomepasseggerotxt.Text,
+                        viapasseggerotxt.Text,
+                        emailpasseggerotxt.Text,
+                        cittàpasseggerotxt.Text,
+                        Int32.Parse(cappasseggerotxt.Text),
+                        cfpasseggerotxt.Text);
+
+                    gestione_cliente.InitUtente();
+                    ticket.getPopulateDbTicket();
+                    ticket.createBooking(txtdataPagamento.Text,
+                    int.Parse(lblPosti.Content.ToString()),
+                    Double.Parse(txtTotale.Text.ToString()), gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text,emailpasseggerotxt.Text),
+                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()),volo.getClassId()));
+                    /*ComboBoxItem typeItem = (ComboBoxItem)cboType.SelectedItem;
+                    string value = typeItem.Content.ToString();*/
+                    
+                    ticket.getPopulateDbTicket();
+                    ticket.insertRecordPagamento(txtdataPagamento.Text,tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text,ticket.getIdPrenotaione());
+                }
+
+                   MessageBox.Show("grazie per aver scelto la nostra compagnia");
+
+                this.gridCorrente = 2;
+                currentGrid();
+                ticket.getPopulateDbTicket();
+                volo.executeTratta();
+                errore.TraverseVisualTree(this.grid);
             }
-            else
-            {
-                gestione_cliente.Registrazione_Cliente //registro il cliente
-                    (nomepasseggerotxt.Text,
-                    cognomepasseggerotxt.Text,
-                    viapasseggerotxt.Text,
-                    emailpasseggerotxt.Text,
-                    cittàpasseggerotxt.Text,
-                    Int32.Parse(cappasseggerotxt.Text),
-                    cfpasseggerotxt.Text);
-                gestione_cliente.InitUtente();
-               /// ticket.createBooking(txtdataPagamento,int.Parse(lblPosti.Content.ToString()),float.Parse(txtTotale.Text), gestione_cliente.getLastIdPassenger(),);
-
-            }
-
-            /*   MessageBox.Show("grazie per aver scelto la nostra compagnia");
-
-            this.gridCorrente = 2;
-            currentGrid();
-            ticket.getPopulateDbTicket();
-            volo.executeTratta();
-            errore.TraverseVisualTree(this.grid);*/
         }
         #endregion
 

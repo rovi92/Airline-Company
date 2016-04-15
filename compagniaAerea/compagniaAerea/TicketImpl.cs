@@ -18,6 +18,8 @@ namespace compagniaAerea
         List<Comfort> comfort = new List<Comfort>();
         List<Classe> classeVolo = new List<Classe>();
         List<Tariffario> tariffario = new List<Tariffario>();
+        List<Pagamento> pagamento = new List<Pagamento>();
+        List<Prenotazione> prenotazione = new List<Prenotazione>();
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
 
@@ -79,6 +81,12 @@ namespace compagniaAerea
             comfort = (from c in myDatabase.getDb().Comfort
                        select c).ToList();
 
+            prenotazione = (from pr in myDatabase.getDb().Prenotaziones
+                            select pr).ToList();
+
+
+            pagamento = (from pg in myDatabase.getDb().Pagamento
+                         select pg).ToList();
         }
 
 
@@ -187,22 +195,82 @@ namespace compagniaAerea
             return ib.spesa.ToString();
         }
 
-
+        public int getIdTariffa(int numeroVolo, int numeroClasse)
+        {
+            int idTariffa = 0;
+            foreach(Tariffario t in tariffario)
+            {
+                if (t.idClasse.Equals(numeroClasse) && t.numero_volo.Equals(numeroVolo)) 
+                {
+                    idTariffa = t.idTariffa;
+                }  
+            }
+            return idTariffa;
+        }
 
         #endregion
         #region SET TIKET
 
-        public void createBooking(string dataPrenotazione, int numeroPersone, float totale, int idPasseggero, int idTariffa)
+        public void createBooking(string dataPrenotazione, int numeroPersone,double totale, int idPasseggero, int idTariffa)
         {
             Prenotazione pr = new Prenotazione()
             {
-                data_prenotazione = Convert.ToDateTime(dataPrenotazione),
+                // Convert.ToDateTime(dataPrenotazione)
+                data_prenotazione = Convert.ToDateTime(dataPrenotazione).ToUniversalTime(),
                 numero_persone = numeroPersone,
                 totale = totale,
                 idPasseggero = idPasseggero,
                 idTariffa = idTariffa,
             };
+            myDatabase.getDb().Prenotaziones.InsertOnSubmit(pr);
+            myDatabase.getDb().SubmitChanges();
         }
+
+        public void insertRecordPagamento(string dataPagamento, string tipoPagamento, int idprenotazione)
+        {
+            Pagamento p = new Pagamento()
+            {
+                idPagamento = getIdPagamento(),
+                data_pagamento = Convert.ToDateTime(dataPagamento),
+                tipo_pagamento = tipoPagamento,
+                idPrenotazione = idprenotazione
+            };
+            myDatabase.getDb().Pagamento.InsertOnSubmit(p);
+            myDatabase.getDb().SubmitChanges();
+        }
+
+        public int getIdPrenotaione()
+        {
+            int idPrenotazione = 0;
+            for (int i = 0; i <= myDatabase.getDb().Prenotaziones.LongCount(); i++)
+            {
+                idPrenotazione++;
+            }
+            return idPrenotazione;
+        }
+
+        public void insertRecordTiket(string nomeIntestatario, string cognomeIntestatario, int idPrenotazione)
+        {
+            Biglietto b = new Biglietto()
+            {
+                nome_intestatario = nomeIntestatario,
+                cognome_intestatario = cognomeIntestatario,
+                idPrenotazione = idPrenotazione
+            };
+            myDatabase.getDb().Biglietto.InsertOnSubmit(b);
+            myDatabase.getDb().SubmitChanges();
+        }
+        private int getIdPagamento()
+        {
+            int id = 0;
+            int count = Convert.ToInt32(pagamento.LongCount());
+            id = pagamento.Last().idPagamento + 1;
+                //  aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
+            return id; 
+        }
+
+
+
 
 
 

@@ -28,7 +28,7 @@ namespace compagniaAerea
         public void InitUtente()
         {
             registrazioneUtente = (from ru in myDatabase.getDb().Passeggeros
-                                   select ru).ToList();
+                                  select ru).ToList();
         }
         #region registrazione cliente
         //metodo per registrazione
@@ -111,10 +111,25 @@ namespace compagniaAerea
             return this.idPasseggero;
         }
 
-        public int getLastIdPassenger()
+        public int getLastIdPassenger(string cf,string email)
         {
-            int a = registrazioneUtente.Count();
-            return registrazioneUtente[a].idPasseggero;
+            int a = 0;
+            int lastId = 0;
+            foreach(Passeggero p in registrazioneUtente)
+            {
+                if(p.CF.Equals(cf) && p.email.Equals(email))
+                {
+                    a = p.idPasseggero;
+                }
+                lastId++;
+            }
+            if(a == 0)
+            {
+                a = lastId;
+            }
+            return a;
+              // myDatabase.getDb().Passeggeros.First(t => t.idPasseggero.Equals(a)).idPasseggero;
+              // aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
         }
     }
 }
