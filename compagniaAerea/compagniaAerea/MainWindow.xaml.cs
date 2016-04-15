@@ -33,6 +33,7 @@ namespace compagniaAerea
         VoloImpl volo;
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
+        Dipendente dipendente = new DipendenteImpl();
 
         public MainWindow()
         {
@@ -437,12 +438,13 @@ namespace compagniaAerea
         #region grid logIn
         private void click_login(object sender, RoutedEventArgs e)
         {
-            errore.ValueText(Login_usernametxt);
+            errore.ValueText(Login_nometxt);
             errore.valuePassword(Login_passwordtxt);
+            errore.ValueText(Login_cognometxt);
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
                
-                if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
+                if (Login_nometxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin")&&Login_cognometxt.Text.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -452,6 +454,19 @@ namespace compagniaAerea
                     this.gridCorrente = 4;
                     currentGrid();
                 }
+                else
+                {
+                    dipendente.getDipendente(Login_nometxt.Text,Login_cognometxt.Text);
+                    if(Login_nometxt.Text.Equals(dipendente.getNome() )&& Login_cognometxt.Text.Equals(dipendente.getCognome()))
+                    {
+                        this.gridCorrente = 4;
+                        currentGrid();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Riempire tutti i campi", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

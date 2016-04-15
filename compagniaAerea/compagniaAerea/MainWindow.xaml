@@ -8,13 +8,15 @@
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="297" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
-            <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Us"/><Run Text="ername:"/></TextBlock>
-            <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,94,131,104" Text="Password:" Foreground="White"/>
-            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,112,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
-            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,161,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="click_login"/>
+            <TextBlock x:Name="login_nome" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="N"/><Run Text="ome:"/></TextBlock>
+            <TextBox x:Name="Login_nometxt" HorizontalAlignment="Left" Height="20" Margin="23,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,131,131,147" Text="Password:" Foreground="White"/>
+            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,153,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
+            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="23,204,0,0" VerticalAlignment="Top" Width="165" Height="20" Click="click_login"/>
+            <TextBox x:Name="Login_cognometxt" HorizontalAlignment="Left" Height="23" Margin="24,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+            <TextBlock x:Name="login_cognome" HorizontalAlignment="Left" Margin="24,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Co"/><Run Text="gnome:"/></TextBlock>
             <Label Height="25" Margin="19,133,20,56" Foreground="#FFFFC4C4">
                 <Hyperlink Click="click_apriRegistrazione">
                     <TextBlock Text="Non hai un account? Registrati" Foreground="White" />
@@ -121,7 +123,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="-10,40,0,58" Background="White" Visibility="Visible">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>

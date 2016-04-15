@@ -14,13 +14,13 @@ namespace compagniaAerea
     {
 
         DatabaseManager myDatabase;
-       List<String> primoTicket = new List<String>();
+        List<String> primoTicket = new List<String>();
         List<Comfort> comfort = new List<Comfort>();
         List<Classe> classeVolo = new List<Classe>();
         List<Tariffario> tariffario = new List<Tariffario>();
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
-      
+
 
         public TicketImpl()
         {
@@ -45,28 +45,28 @@ namespace compagniaAerea
 
 
         public void getBiglietto(int codiceBiglietto)
-                         {
+        {
             ib = (from b in myDatabase.getDb().Biglietto
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
                       nome = b.nome_intestatario,
                       cognome = b.cognome_intestatario,
-                             cod_fiscale = b.Prenotazione.Passeggero.CF,
-                             cod_volo = b.Prenotazione.Tariffario.numero_volo,
+                      cod_fiscale = b.Prenotazione.Passeggero.CF,
+                      cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
-                             ora_partenza = b.Prenotazione.Tariffario.Piano_di_volo.orario_partenza,
-                             ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
-                             data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
-                             data_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo,
+                      ora_partenza = b.Prenotazione.Tariffario.Piano_di_volo.orario_partenza,
+                      ora_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.orario_arrivo,
+                      data_partenza = b.Prenotazione.Tariffario.Piano_di_volo.data_partenza,
+                      data_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.data_arrivo,
                       spesa = b.Prenotazione.totale
                   }).First();
         }
 
         public void getPopulateDbTicket()
         {
-        
+
 
             tariffario = (from t in myDatabase.getDb().Tariffarios
                           select t).ToList();
@@ -117,7 +117,7 @@ namespace compagniaAerea
                 }
             }
 
-          
+
             return (prezzoBagaglio * quantitaBagagli) + (tariffaSolaAndata + confort) + (classeScelta);
         }
 
@@ -163,17 +163,17 @@ namespace compagniaAerea
         }
 
         public string getOraPartenza()
-                {
+        {
             return ib.ora_partenza.ToString();
-                }
+        }
 
         public string getOraArrivo()
-                {
+        {
             return ib.ora_arrivo.ToString();
-            }
-           
+        }
+
         public string getDataArrivo()
-                {
+        {
             return ib.data_arrivo.ToString("dd/MM/yyyy");
         }
 
@@ -204,7 +204,7 @@ namespace compagniaAerea
             };
         }
 
-        
+
 
         #endregion
     }
