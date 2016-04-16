@@ -40,6 +40,55 @@ namespace compagniaAerea
         }
         #endregion campi vuoti
 
+        #region controllo codice fiscale
+        public void CfCheck(TextBox tx, int num)
+        {
+            if(tx.Text.Length != num)
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(4);
+            }
+        }
+        #endregion
+
+        #region controllo CAP
+        public void CAPCheck(TextBox tx, string numero, int num)
+        {
+            try
+            {
+                Int32.Parse(numero);
+                errorTxtBox.Add(true);
+            }
+            catch (FormatException)
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(5);
+            }
+
+            if (tx.Text.Length != num)
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(5);
+            }
+        }
+        #endregion
+
+        #region checkEmail
+        public void IsValidEmail(TextBox tx)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(tx.Text);
+                errorTxtBox.Add(true);
+            }
+            catch
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(6);
+            }
+        }
+        #endregion
+
         #region valutazione psw
         public void valuePassword(PasswordBox ps)// da errore se la password è vuota
         {
@@ -95,6 +144,9 @@ namespace compagniaAerea
             Boolean repetCaseEmpty = false;
             Boolean repetCasePs = false;
             Boolean repetCaseLong = false;
+            Boolean repetCaseCf = false;
+            Boolean repetCaseCAP = false;
+            Boolean repetCaseEmail = false;
             
 
             for (int i = 0; i < tipeError.Count; i++)
@@ -107,14 +159,14 @@ namespace compagniaAerea
                         if (repetCaseEmpty.Equals(false))
                         {
                             repetCaseEmpty = true;
-                            result = " potrebbe esserci un campo non compilato "  ;
+                            result = " Compilare tutti i campi "  ;
                             tmp.Add(result);
                         }
                         break;
                     case 2://messaggio di errore se la password è differente
                         if (repetCasePs.Equals(false)){
                             repetCasePs = true;
-                            result = " password non valida ";
+                            result = " Password non corrispondente ";
                             tmp.Add(result);
                             
                         }
@@ -123,10 +175,35 @@ namespace compagniaAerea
                         if (repetCaseLong.Equals(false))
                         {
                             repetCaseLong = true;
-                            result = " lunghezza non valida in un campo ";
+                            result = " Lunghezza non valida in un campo ";
                             tmp.Add(result);
                         }
                         break;
+                    case 4://messaggio di errore se il codice fiscale non è formato da 16 caratteri
+                        if (repetCaseCf.Equals(false))
+                        {
+                            repetCaseCf = true;
+                            result = " Il codice fiscale deve contenere 16 caratteri";
+                            tmp.Add(result);
+                        }
+                        break;
+                    case 5://messaggio di errore se il CAP non è formato da 5 numeri
+                        if (repetCaseCAP.Equals(false))
+                        {
+                            repetCaseCAP = true;
+                            result = " Il CAP deve contenere 5 numeri";
+                            tmp.Add(result);
+                        }
+                        break;
+                    case 6://messaggio di errore se la mail non è valida
+                        if (repetCaseEmail.Equals(false))
+                        {
+                            repetCaseEmail = true;
+                            result = " Email non valida";
+                            tmp.Add(result);
+                        }
+                        break;
+
                 }
                 
             }
