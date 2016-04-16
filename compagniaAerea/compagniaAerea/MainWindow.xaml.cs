@@ -37,7 +37,7 @@ namespace compagniaAerea
 
         public MainWindow()
         {
-            
+
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
             volo = new VoloImpl();//classe volo
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
@@ -50,12 +50,12 @@ namespace compagniaAerea
 
         }
 
-        
+
         //Click del bottone Registrazione presente nella form di Registrazione
         #region grid registrazione del cliente
         private void Registrazione_Cliente(object sender, RoutedEventArgs e)
         {
-            
+
             errore.ValueText(Nometxt);
             errore.ValueText(Cognometxt);
             errore.ValueText(Usernametxt);
@@ -81,13 +81,13 @@ namespace compagniaAerea
                 {
                     ComboBoxItem typeItem = (ComboBoxItem)StatoCombobox.SelectedItem;
                     string stato = typeItem.Content.ToString();
-                     gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
-                    
-                    Indirizzotxt.Text, 
-                   Emailtxt.Text, 
-                     Cittàtxt.Text,
-                    Int32.Parse(Captxt.Text),
-                    CodiceFiscaletxt.Text);
+                    gestione_cliente.Registrazione_Cliente(Nometxt.Text, Cognometxt.Text,
+
+                   Indirizzotxt.Text,
+                  Emailtxt.Text,
+                    Cittàtxt.Text,
+                   Int32.Parse(Captxt.Text),
+                   CodiceFiscaletxt.Text);
 
                     errore.TraverseVisualTree(gridRegistrazione);
                     MessageBox.Show("registrazione avvenuta con successo");
@@ -95,24 +95,25 @@ namespace compagniaAerea
                     volo.executeTratta();
                     currentGrid();
                 }
-                
+
             }
-            else {
+            else
+            {
                 MessageBox.Show(errore.codError());
             }
         }
         #endregion
 
         #region grid cerca volo 
-       
+
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-           
+
             switch (rdbAndataRitorno.IsChecked)
             {
                 case true:
-                    
+
                     if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
                           volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
                           volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true) &&
@@ -123,8 +124,8 @@ namespace compagniaAerea
                     }
                     break;
                 case false:
-                   
-                  //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
+
+                    //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
                     if (volo.getExistDestination(txtPartenza.Text).Equals(true) &&
                             volo.getExistArrive(txtDestinazioneVolo.Text).Equals(true) &&
                             volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza").Equals(true))
@@ -133,7 +134,7 @@ namespace compagniaAerea
                     }
                     break;
             }
- }
+        }
         #endregion
 
         #region bottone prenota
@@ -142,12 +143,13 @@ namespace compagniaAerea
             if (!btnConferma_ordine.IsVisible)
             {
                 btnConferma_ordine.Visibility = Visibility.Visible;
+                ticket.setQuantitàPersone(Int32.Parse(lblPosti.Content.ToString()));
             }
             btnIndietro.Visibility = Visibility.Hidden;
             this.gridCorrente = 7;
             currentGrid();
-           
-         }
+
+        }
         #endregion
 
         #region radioButton andata/andata e ritorno
@@ -158,7 +160,7 @@ namespace compagniaAerea
             dataGridRitorno.Visibility = Visibility.Hidden;
             dataRitorno.Visibility = Visibility.Hidden;
             tblRitorno.Visibility = Visibility.Hidden;
-         
+
         }
 
         private void rdbAndataRitorno_Checked(object sender, RoutedEventArgs e)
@@ -200,7 +202,7 @@ namespace compagniaAerea
             errore.ValueText(CodiceBigliettotxt);
 
             bool conversion_flag;//flag per il controllo della conversione dal cosice biglietto in intero
-            int codice =-1;
+            int codice = -1;
             if (errore.checkText())
             {
                 try//prova conversione e definizione del flag
@@ -232,7 +234,7 @@ namespace compagniaAerea
                     dataPartenzalbl.Content = ticket.getDataPartenza();
                     dataArrivolbl.Content = ticket.getDataArrivo();
                     totalelbl.Content = ticket.getSpesaTotale();
-                   
+
                 }
             }
             else
@@ -281,7 +283,7 @@ namespace compagniaAerea
 
         }
 
-      
+
 
         private void Registrazione_Click(object sender, RoutedEventArgs e)
         {
@@ -305,7 +307,7 @@ namespace compagniaAerea
             gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
             gridchange.Add(viewTicket);//grid del biglietto posizione 8
             gridchange.Add(GridPagamento);//grid del pagamento 9
-         }
+        }
 
         public void currentGrid()
         {
@@ -360,8 +362,8 @@ namespace compagniaAerea
         {
             salva_dipendentebtn.Visibility = Visibility.Visible;
             email_dipendente = email_dipendentetxt.Text;
-            email_dipendentetxt.IsEnabled = true;            
-        
+            email_dipendentetxt.IsEnabled = true;
+
         }
         private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
         {
@@ -382,19 +384,20 @@ namespace compagniaAerea
                 cambia_indirizzo_dipendentecb.IsChecked = false;
                 //cambio cambio dei dati nel db
             }
-            else {
+            else
+            {
                 MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 
         }
-       
+
         #endregion
 
         #endregion
 
         #region place holder manuale
-       
+
         //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
         private void InFocus(object sender, RoutedEventArgs e)
         {
@@ -443,8 +446,8 @@ namespace compagniaAerea
             errore.ValueText(Login_cognometxt);
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
-               
-                if (Login_nometxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin")&&Login_cognometxt.Text.Equals("admin"))
+
+                if (Login_nometxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin") && Login_cognometxt.Text.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -456,8 +459,8 @@ namespace compagniaAerea
                 }
                 else
                 {
-                    dipendente.getDipendente(Login_nometxt.Text,Login_cognometxt.Text);
-                    if(Login_nometxt.Text.Equals(dipendente.getNome() )&& Login_cognometxt.Text.Equals(dipendente.getCognome()))
+                    dipendente.getDipendente(Login_nometxt.Text, Login_cognometxt.Text);
+                    if (Login_nometxt.Text.Equals(dipendente.getNome()) && Login_cognometxt.Text.Equals(dipendente.getCognome()))
                     {
                         this.gridCorrente = 4;
                         currentGrid();
@@ -480,7 +483,7 @@ namespace compagniaAerea
         }
         private void ckbpranzo_Unchecked(object sender, RoutedEventArgs e)
         {
-            int sumConfort = Int32.Parse(txtSommaConfort.Text)-20;
+            int sumConfort = Int32.Parse(txtSommaConfort.Text) - 20;
             if (sumConfort <= 0)
             {
                 sumConfort = 0;
@@ -496,7 +499,7 @@ namespace compagniaAerea
         private void ckbAcon_Checked(object sender, RoutedEventArgs e)
         {
             int sumConfort = Int32.Parse(txtSommaConfort.Text) + 5;
-            if(sumConfort<= 0)
+            if (sumConfort <= 0)
             {
                 sumConfort = 0;
             }
@@ -505,6 +508,7 @@ namespace compagniaAerea
 
         private void btnConfermaDati_Click(object sender, RoutedEventArgs e)
         {
+            
             errore.ValueText(nomepasseggerotxt);
             errore.ValueText(cognomepasseggerotxt);
             errore.ValueText(emailpasseggerotxt);
@@ -531,8 +535,8 @@ namespace compagniaAerea
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 ComboBoxItem typeItem = (ComboBoxItem)tipobabgliocombobox.SelectedItem;
                 string kgBagaglio = typeItem.Content.ToString();
-               totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
-                 
+                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
+
             }
             else
             {
@@ -574,8 +578,8 @@ namespace compagniaAerea
                 totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getClassId()) * int.Parse(lblPosti.Content.ToString());
                 btnConferma2.Visibility = Visibility.Visible;
                 btnConferma_ordine.Visibility = Visibility.Hidden;
-              
-              
+
+
 
             }
             else
@@ -589,13 +593,13 @@ namespace compagniaAerea
 
         private void btnConferma2_Click(object sender, RoutedEventArgs e)
         {
-            
+
             txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
-           
-                txtTotale.Text = Convert.ToString(Convert.ToDouble(ticket.getFirstTicket()[10]) + Double.Parse(totalelbl.Content.ToString()));
-         
-              
-            
+
+            txtTotale.Text = Convert.ToString(Convert.ToDouble(ticket.getFirstTicket()[10]) + Double.Parse(totalelbl.Content.ToString()));
+
+
+
             this.gridCorrente = 9;
             currentGrid();
         }
@@ -613,12 +617,14 @@ namespace compagniaAerea
                 if (gestione_cliente.controlCF(lblPosti.Content.ToString()).Equals(true) || gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(true))
                 {
                     gestione_cliente.InitUtente();
-
                     ticket.getPopulateDbTicket();
+
                     ticket.createBooking(txtdataPagamento.Text,
                     int.Parse(lblPosti.Content.ToString()),
-                    Double.Parse(txtTotale.Text.ToString()), gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text, emailpasseggerotxt.Text),
-                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getClassId()));
+                    Double.Parse(txtTotale.Text.ToString()),
+                    gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text, emailpasseggerotxt.Text),
+                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()),
+                    volo.getClassId()));
 
                     ticket.getPopulateDbTicket();
                     ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
@@ -628,8 +634,7 @@ namespace compagniaAerea
                 else
                 {
                     gestione_cliente.InitUtente();
-                    gestione_cliente.Registrazione_Cliente //registro il cliente
-                        (nomepasseggerotxt.Text,
+                    gestione_cliente.Registrazione_Cliente(nomepasseggerotxt.Text,
                         cognomepasseggerotxt.Text,
                         viapasseggerotxt.Text,
                         emailpasseggerotxt.Text,
@@ -641,24 +646,46 @@ namespace compagniaAerea
                     ticket.getPopulateDbTicket();
                     ticket.createBooking(txtdataPagamento.Text,
                     int.Parse(lblPosti.Content.ToString()),
-                    Double.Parse(txtTotale.Text.ToString()), gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text,emailpasseggerotxt.Text),
-                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()),volo.getClassId()));
-                    /*ComboBoxItem typeItem = (ComboBoxItem)cboType.SelectedItem;
-                    string value = typeItem.Content.ToString();*/
-                    
+                    Double.Parse(txtTotale.Text.ToString()),
+                    gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text, emailpasseggerotxt.Text),
+                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()),
+                    volo.getClassId()));
+
+
                     ticket.getPopulateDbTicket();
-                    ticket.insertRecordPagamento(txtdataPagamento.Text,tipoPagamento, ticket.getIdPrenotaione());
-                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text,ticket.getIdPrenotaione());
+                    ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text, ticket.getIdPrenotaione());
                 }
 
-                   MessageBox.Show("grazie per aver scelto la nostra compagnia");
-
-                this.gridCorrente = 2;
-                currentGrid();
-                ticket.getPopulateDbTicket();
-                volo.executeTratta();
-                errore.TraverseVisualTree(this.grid);
             }
+            else
+            {
+              if (gestione_cliente.controlCF(lblPosti.Content.ToString()).Equals(true) || gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(true))
+                {
+                   /* gestione_cliente.InitUtente();
+                    ticket.getPopulateDbTicket();
+                    ticket.createBooking(txtdataPagamento.Text,
+                    
+                        );*/
+                    /*  ticket.createBooking(txtdataPagamento.Text,
+                    int.Parse(lblPosti.Content.ToString()),
+                    Double.Parse(txtTotale.Text.ToString()),
+                    gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text, emailpasseggerotxt.Text),
+                    ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()),
+                    volo.getClassId()));*/
+                }
+                else
+                {
+
+                }
+            }
+            MessageBox.Show("grazie per aver scelto la nostra compagnia");
+
+            this.gridCorrente = 2;
+            currentGrid();
+            ticket.getPopulateDbTicket();
+            volo.executeTratta();
+            errore.TraverseVisualTree(this.grid);
         }
         #endregion
 
@@ -673,8 +700,8 @@ namespace compagniaAerea
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
-           
-           
+
+
 
         }
 
@@ -719,7 +746,8 @@ namespace compagniaAerea
             {
 
             }
-            else {
+            else
+            {
                 MessageBox.Show(errore.codError());
             }
         }
@@ -729,7 +757,7 @@ namespace compagniaAerea
 
         }
 
-        
+
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
@@ -738,7 +766,8 @@ namespace compagniaAerea
             {
 
             }
-            else {
+            else
+            {
                 MessageBox.Show(errore.codError());
             }
         }
@@ -757,14 +786,14 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
-               
+
             }
             else
             {
                 MessageBox.Show(errore.codError());
             }
         }
-            
+
 
         #endregion
 

@@ -21,6 +21,8 @@ namespace compagniaAerea
         String getDataArrivo();
         String getDataPartenza();
         String getSpesaTotale();
+        int getQuatitàPersone();
+        void setQuantitàPersone(int persone);
         
         void getPopulateDbTicket();//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
         Double getTotal(double kg, double quantitaBagagli, double numeroVolo,double cofort,int classe);

@@ -123,7 +123,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Visible">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -193,9 +193,10 @@
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <Grid Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
         </Grid>
 
-        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,25,0,73" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridInfoVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
             <TextBox x:Name="nomepasseggerotxt" HorizontalAlignment="Left" Height="24" Margin="58,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="textblocknome" HorizontalAlignment="Left" Margin="58,44,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
             <TextBlock x:Name="textblockcognometxt" HorizontalAlignment="Left" Margin="204,44,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
@@ -228,7 +229,7 @@
             <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="611,282,0,0" TextWrapping="Wrap" Text="Totale: " VerticalAlignment="Top" FontSize="13.333" FontWeight="Bold" RenderTransformOrigin="0.627,0.338"/>
             <TextBox x:Name="txtSommaConfort" HorizontalAlignment="Left" Height="25" Margin="661,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0"/>
             <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="206,256,0,0" TextWrapping="Wrap" Text="Numero bagagli" VerticalAlignment="Top"/>
-            <TextBlock x:Name="datipasseggerolbl" HorizontalAlignment="Left" Margin="58,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold" Text="Dati passeggero"></TextBlock>
+            <TextBlock x:Name="datipasseggerolbl" HorizontalAlignment="Left" Margin="58,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="24" FontWeight="Bold"><Run Text="Dati "/><Run Text="Intestatario"/></TextBlock>
 
         </Grid>
 

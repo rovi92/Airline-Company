@@ -22,6 +22,7 @@ namespace compagniaAerea
         List<Prenotazione> prenotazione = new List<Prenotazione>();
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
+        int quantitaPersone = 0;
 
 
         public TicketImpl()
@@ -267,6 +268,16 @@ namespace compagniaAerea
             id = pagamento.Last().idPagamento + 1;
                 //  aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
             return id; 
+        }
+
+        public int getQuatitàPersone()
+        {
+            return this.quantitaPersone;
+        }
+
+        public void setQuantitàPersone(int persone)
+        {
+            this.quantitaPersone = persone;
         }
 
 
