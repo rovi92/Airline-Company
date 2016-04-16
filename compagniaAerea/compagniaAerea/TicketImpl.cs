@@ -95,6 +95,7 @@ namespace compagniaAerea
         {
             throw new NotImplementedException();
         }
+
         #region GET tiket e tutto ciò che è correlato al biglietto
         public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort, int classe)
         {
@@ -210,6 +211,7 @@ namespace compagniaAerea
         }
 
         #endregion
+
         #region SET TIKET
 
         public void createBooking(string dataPrenotazione, int numeroPersone,double totale, int idPasseggero, int idTariffa)

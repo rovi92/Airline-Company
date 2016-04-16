@@ -13,6 +13,9 @@ namespace compagniaAerea
         Boolean checkText();
         void ValueText(TextBox tx);
         void valuePassword(PasswordBox ps);
+        void CfCheck(TextBox txtB1, int num);
+        void CAPCheck(TextBox txtB1, string numero, int num);
+        void IsValidEmail(TextBox txtB1);
         void checkPs(PasswordBox ps1, PasswordBox ps2);
         void longTxt(TextBox txtB1, int numMax);
         void shortTxt(TextBox txtB1, int numMin);

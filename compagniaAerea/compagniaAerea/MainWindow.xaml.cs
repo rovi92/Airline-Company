@@ -68,8 +68,8 @@ namespace compagniaAerea
             errore.ValueText(Cittàtxt);
             errore.ValueText(Captxt);
             errore.ValueText(CodiceFiscaletxt);
-            errore.longTxt(CodiceFiscaletxt, 16);
-            errore.shortTxt(CodiceFiscaletxt, 16);
+            //errore.longTxt(CodiceFiscaletxt, 16);
+            errore.CfCheck(CodiceFiscaletxt, 16);//Prima c'era //errore.shortTxt(CodiceFiscaletxt, 16);
             errore.longTxt(Captxt, 5);
             errore.longTxt(Telefonotxt, 10);
             errore.checkPs(Passwordtxt, conferma_password);
@@ -508,13 +508,12 @@ namespace compagniaAerea
 
         private void btnConfermaDati_Click(object sender, RoutedEventArgs e)
         {
-            
             errore.ValueText(nomepasseggerotxt);
             errore.ValueText(cognomepasseggerotxt);
-            errore.ValueText(emailpasseggerotxt);
+            errore.IsValidEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
-            errore.ValueText(cappasseggerotxt);
-            errore.ValueText(cfpasseggerotxt);
+            errore.CAPCheck(cappasseggerotxt, cappasseggerotxt.Text, 5);
+            
             if (errore.checkText())
             {
                 this.gridCorrente = 8;
@@ -540,7 +539,7 @@ namespace compagniaAerea
             }
             else
             {
-                MessageBox.Show("ci sono campi vuoti");
+                MessageBox.Show(errore.codError());
             }
         }
 
