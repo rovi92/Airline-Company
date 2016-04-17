@@ -441,13 +441,13 @@ namespace compagniaAerea
         #region grid logIn
         private void click_login(object sender, RoutedEventArgs e)
         {
-            errore.ValueText(Login_nometxt);
+            errore.ValueText(Login_usernametxt);
             errore.valuePassword(Login_passwordtxt);
-            errore.ValueText(Login_cognometxt);
+           
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
 
-                if (Login_nometxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin") && Login_cognometxt.Text.Equals("admin"))
+                if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -457,15 +457,15 @@ namespace compagniaAerea
                     this.gridCorrente = 4;
                     currentGrid();
                 }
-                else
+                /*else
                 {
-                    dipendente.getDipendente(Login_nometxt.Text, Login_cognometxt.Text);
-                    if (Login_nometxt.Text.Equals(dipendente.getNome()) && Login_cognometxt.Text.Equals(dipendente.getCognome()))
+                    dipendente.dipendente(Login_usernametxt.Text);
+                    if (Login_usernametxt.Text.Equals(dipendente.getNome()))
                     {
                         this.gridCorrente = 4;
                         currentGrid();
                     }
-                }
+                }*/
             }
             else
             {
