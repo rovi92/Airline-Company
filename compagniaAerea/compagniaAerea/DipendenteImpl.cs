@@ -29,10 +29,10 @@ namespace compagniaAerea
             public bool hostess { get; set; }
         }
 
-        public void dipendente(string nome_dipendente, string cognome_dipendente, int idDipendente)
+        public void getDipendente(int idDipendente)
         {
             id = (from d in myDatatabase.getDb().Personale
-                  where d.nome == nome_dipendente && d.cognome == cognome_dipendente
+                  where d.idPersonale==idDipendente
                   select new InfoDipendente
                   {
                       nome = d.nome,
@@ -46,7 +46,6 @@ namespace compagniaAerea
                       pilota = d.pilota,
                       hostess = d.hostess
                   }).First();
-           
         }
 
         #region get Dipendente
@@ -120,18 +119,34 @@ namespace compagniaAerea
        
         public void setIndirizzo(string indirizzo)
         {
-            throw new NotImplementedException();
+            Personale p = new Personale()
+            {
+                indirizzo = indirizzo
+            };
+            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            myDatatabase.getDb().SubmitChanges();
         }
 
         public void setEmail(string email)
         {
-            throw new NotImplementedException();
+            Personale p = new Personale()
+            {
+                email = email
+            };
+            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            myDatatabase.getDb().SubmitChanges();
         }
 
         public void setTelefono(string telefono)
         {
-            throw new NotImplementedException();
+            Personale p = new Personale()
+            {
+                telefono=telefono
+            };
+            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            myDatatabase.getDb().SubmitChanges();
         }
-        #endregion
+
+       #endregion
     }
 }

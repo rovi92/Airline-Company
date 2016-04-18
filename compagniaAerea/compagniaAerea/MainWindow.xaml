@@ -121,7 +121,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Visible">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -185,8 +185,8 @@
                     <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Arrivo in"/>
                     <DataGridTextColumn Binding="{Binding costoViaggio}" IsReadOnly="True" Header="Costo"/>
                     <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
-                    <DataGridTextColumn Binding="{Binding  orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
-                    <DataGridTextColumn Binding="{Binding  codiceVolo}" IsReadOnly="True" Header="id volo"/>
+                    <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
+                    <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="id volo"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
@@ -230,7 +230,7 @@
 
         </Grid>
 
-        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
+        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Visible">
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
             <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="374,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="374,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
@@ -252,7 +252,6 @@
             <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,210,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
             <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,268,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked" RenderTransformOrigin="-2.586,-0.091"/>
             <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
-            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="46,80,0,0" VerticalAlignment="Top" Width="263" Visibility="Visible"/>
             <TextBlock x:Name="Cerca_per" HorizontalAlignment="Left" Margin="49,35,0,0" TextWrapping="Wrap" Text="Cerca dipendente per:" VerticalAlignment="Top"/>
             <RadioButton x:Name="rdbNome" Content="Nome" HorizontalAlignment="Left" Margin="185,39,0,0" VerticalAlignment="Top" GroupName="rdbProfiloDipendente" Checked="rdbDipendenteNome_Checked" IsChecked="True"/>
             <RadioButton x:Name="rdbCodice" Content="Codice" HorizontalAlignment="Left" Margin="254,39,0,0" VerticalAlignment="Top" GroupName="rdbProfiloDipendente" Checked="rdbDipendenteCodice_Checked"/>
@@ -260,7 +259,14 @@
             <TextBlock x:Name="impiego" HorizontalAlignment="Left" Margin="374,313,0,0" TextWrapping="Wrap" Text="Impiego" VerticalAlignment="Top"/>
             <TextBox x:Name="genereDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,285,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        </Grid>
+            <DataGrid x:Name="dataprifiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="289" Width="260" >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding codice}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid> 
+        </Grid> 
 
         <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,-12,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>

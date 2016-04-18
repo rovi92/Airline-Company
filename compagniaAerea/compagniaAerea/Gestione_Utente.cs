@@ -47,7 +47,7 @@ namespace compagniaAerea
                 CAP = CAP,
                 CF = CF,
             };
-            myDatabase.getDb().Passeggeros.InsertOnSubmit(p);
+            myDatabase.getDb().Passeggero.InsertOnSubmit(p);
             myDatabase.getDb().SubmitChanges();
 
             statoRegistrazione = true;
