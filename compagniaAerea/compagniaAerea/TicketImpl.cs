@@ -53,9 +53,9 @@ namespace compagniaAerea
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
-                      nome = b.nome_intestatario,
-                      cognome = b.cognome_intestatario,
-                      cod_fiscale = b.Prenotazione.Passeggero.CF,
+                      nome = b.Passeggero.nome,
+                      cognome = b.Passeggero.cognome,
+                      cod_fiscale = b.Passeggero.CF,
                       cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
@@ -71,7 +71,7 @@ namespace compagniaAerea
         {
 
 
-            tariffario = (from t in myDatabase.getDb().Tariffarios
+            tariffario = (from t in myDatabase.getDb().Tariffario
                           select t).ToList();
             classeVolo = (from cll in myDatabase.getDb().Classe
                           select cll).ToList();
@@ -82,7 +82,7 @@ namespace compagniaAerea
             comfort = (from c in myDatabase.getDb().Comfort
                        select c).ToList();
 
-            prenotazione = (from pr in myDatabase.getDb().Prenotaziones
+            prenotazione = (from pr in myDatabase.getDb().Prenotazione
                             select pr).ToList();
 
 
@@ -222,10 +222,9 @@ namespace compagniaAerea
                 data_prenotazione = Convert.ToDateTime(dataPrenotazione).ToUniversalTime(),
                 numero_persone = numeroPersone,
                 totale = totale,
-                idPasseggero = idPasseggero,
                 idTariffa = idTariffa,
             };
-            myDatabase.getDb().Prenotaziones.InsertOnSubmit(pr);
+            myDatabase.getDb().Prenotazione.InsertOnSubmit(pr);
             myDatabase.getDb().SubmitChanges();
         }
 
@@ -245,19 +244,18 @@ namespace compagniaAerea
         public int getIdPrenotaione()
         {
             int idPrenotazione = 0;
-            for (int i = 0; i <= myDatabase.getDb().Prenotaziones.LongCount(); i++)
+            for (int i = 0; i <= myDatabase.getDb().Prenotazione.LongCount(); i++)
             {
                 idPrenotazione++;
             }
             return idPrenotazione;
         }
 
-        public void insertRecordTiket(string nomeIntestatario, string cognomeIntestatario, int idPrenotazione)
+        public void insertRecordTiket(int idPasseggero, int idPrenotazione)
         {
             Biglietto b = new Biglietto()
             {
-                nome_intestatario = nomeIntestatario,
-                cognome_intestatario = cognomeIntestatario,
+                idPasseggero = idPasseggero, 
                 idPrenotazione = idPrenotazione
             };
             myDatabase.getDb().Biglietto.InsertOnSubmit(b);

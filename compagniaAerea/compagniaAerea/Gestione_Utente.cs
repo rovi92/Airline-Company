@@ -27,7 +27,7 @@ namespace compagniaAerea
         }
         public void InitUtente()
         {
-            registrazioneUtente = (from ru in myDatabase.getDb().Passeggeros
+            registrazioneUtente = (from ru in myDatabase.getDb().Passeggero
                                   select ru).ToList();
         }
         #region registrazione cliente
