@@ -2746,7 +2746,9 @@ namespace compagniaAerea
 			this.SendPropertyChanging();
 			entity.Piano_di_volo = null;
 		}
-	}
+
+       
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prenotazione")]
 	public partial class Prenotazione : INotifyPropertyChanging, INotifyPropertyChanged

@@ -268,7 +268,7 @@
             </DataGrid> 
         </Grid> 
 
-        <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Visible">
+        <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="519,0,0,0" TextWrapping="Wrap" Text="Gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
             <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
             <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>

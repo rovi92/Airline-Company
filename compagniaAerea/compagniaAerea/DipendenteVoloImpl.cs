@@ -25,16 +25,18 @@ namespace compagniaAerea
         //Aggiungi piano di volo
         public void Aggiungi_pianodivolo(DateTime data_partenza, DateTime data_arrivo, String orario_partenza, String orario_arrivo, Boolean cancellato)
         {
-            String orario_p = DateTime.Parse(orario_partenza, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss");
-            String orario_a = DateTime.Parse(orario_arrivo, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss");
+            /*TimeSpan orario_p = TimeSpan.Parse(DateTime.Parse(orario_partenza, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss"));
+            TimeSpan orario_a = TimeSpan.Parse(DateTime.Parse(orario_arrivo, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss"));*/
             Piano_di_volo p = new Piano_di_volo()
             {
-                data_partenza = Convert.ToDateTime(data_partenza).ToUniversalTime(),
-                data_arrivo = Convert.ToDateTime(data_arrivo).ToUniversalTime(),
-                orario_partenza = TimeSpan.Parse(orario_p),
-                orario_arrivo = TimeSpan.Parse(orario_a),
-                cancellato = false
+                data_partenza = data_partenza,
+                data_arrivo = data_arrivo,
+                orario_partenza = TimeSpan.Parse(orario_partenza.ToString()),
+                orario_arrivo = TimeSpan.Parse(orario_arrivo.ToString()),
+                cancellato = cancellato
             };
+            myDatabase.getDb().Piano_di_volo.InsertOnSubmit(p);
+            myDatabase.getDb().SubmitChanges();
         }
 
         //Aggiungi tratta

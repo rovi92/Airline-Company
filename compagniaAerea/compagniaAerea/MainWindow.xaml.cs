@@ -792,15 +792,15 @@ namespace compagniaAerea
             errore.ValueText(gatetxt);
             errore.ValueText(orario_partenzatxt);
             errore.ValueText(orario_arrivotxt);
-
-            if (errore.checkText())
+            dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+            /*if (errore.checkText())
             {
-                dipendentevolo.Aggiungi_pianodivolo((DateTime) partenzapicker.SelectedDate, (DateTime) arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+                
             }
             else
             {
                 MessageBox.Show(errore.codError());
-            }
+            }*/
         }
 
 
