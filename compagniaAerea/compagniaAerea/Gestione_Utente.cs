@@ -27,7 +27,7 @@ namespace compagniaAerea
         }
         public void InitUtente()
         {
-            registrazioneUtente = (from ru in myDatabase.getDb().Passeggeros
+            registrazioneUtente = (from ru in myDatabase.getDb().Passeggero
                                   select ru).ToList();
         }
         #region registrazione cliente
@@ -47,7 +47,7 @@ namespace compagniaAerea
                 CAP = CAP,
                 CF = CF,
             };
-            myDatabase.getDb().Passeggeros.InsertOnSubmit(p);
+            myDatabase.getDb().Passeggero.InsertOnSubmit(p);
             myDatabase.getDb().SubmitChanges();
 
             statoRegistrazione = true;

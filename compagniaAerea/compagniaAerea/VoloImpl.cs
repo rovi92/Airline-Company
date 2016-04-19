@@ -57,6 +57,9 @@ namespace compagniaAerea
 
 
         }
+
+        
+
         public List<InfoViaggio> getFly(string nandata, string nRitorno, string data)
         {
             List<InfoViaggio> flyList = new List<InfoViaggio>();
@@ -96,7 +99,7 @@ namespace compagniaAerea
                         {
                             partenza = trattaLocale[i].Aeroporto.città,
                             arrivo = trattaLocale[i].Aeroporto1.città,
-                            costoViaggio = trattaLocale[i].Piano_di_volo.Tariffarios.First(t => t.numero_volo == trattaLocale[i].Piano_di_volo.numero_volo).tariffa_solo_andata.ToString(),
+                            costoViaggio = trattaLocale[i].Piano_di_volo.Tariffario.First(t => t.numero_volo == trattaLocale[i].Piano_di_volo.numero_volo).tariffa_solo_andata.ToString(),
                             dataPartenza = trattaLocale[i].data_partenza.ToString("yyyy-MM-dd"),
                             orarioPartenza = trattaLocale[i].orario_partenza.ToString(),
                             orarioArrivo = trattaLocale[i].orario_arrivo.ToString(),

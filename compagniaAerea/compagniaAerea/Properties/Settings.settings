@@ -2,37 +2,13 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="compagniaAerea.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="UniboAirlinesConnectionString" Type="(Connection string)" Scope="Application">
+    <Setting Name="myUniboAirlinesConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore@erikserver;Password=Cesenate_81&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=erikserver.database.windows.net;Initial Catalog=myUniboAirlines;Persist Security Info=True;User ID=erik_amministratore;Password=Cesenate_81&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore@erikserver;Password=Cesenate_81</Value>
-    </Setting>
-    <Setting Name="uniboAirlinesConnectionString1" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=DESKTOP-TQRPAA4\SQLEXPRESS;Initial Catalog=uniboAirlines;Integrated Security=True&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=DESKTOP-TQRPAA4\SQLEXPRESS;Initial Catalog=uniboAirlines;Integrated Security=True</Value>
-    </Setting>
-    <Setting Name="UniboAirlinesConnectionString2" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=erikserver.database.windows.net;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore;Password=Cesenate_81&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=erikserver.database.windows.net;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore;Password=Cesenate_81</Value>
-    </Setting>
-    <Setting Name="UniboAirlinesConnectionString3" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Persist Security Info=True;User ID=erik_amministratore</Value>
+      <Value Profile="(Default)">Data Source=erikserver.database.windows.net;Initial Catalog=myUniboAirlines;Persist Security Info=True;User ID=erik_amministratore;Password=Cesenate_81</Value>
     </Setting>
   </Settings>
 </SettingsFile>

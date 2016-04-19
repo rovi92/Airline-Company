@@ -54,18 +54,29 @@ namespace compagniaAerea
         #region controllo CAP
         public void CAPCheck(TextBox tx, string numero, int num)
         {
-            try
-            {
-                Int32.Parse(numero);
-                errorTxtBox.Add(true);
-            }
-            catch (FormatException)
-            {
-                errorTxtBox.Add(false);
-                tipeError.Add(5);
-            }
+            /* try
+             {
+                 Int32.Parse(numero);
+                 errorTxtBox.Add(true);
+             }
+             catch (FormatException)
+             {
+                 errorTxtBox.Add(false);
+                 tipeError.Add(5);
+             }
 
-            if (tx.Text.Length != num)
+             if (tx.Text.Length != num)
+             {
+                 errorTxtBox.Add(false);
+                 tipeError.Add(5);
+             }*/
+            /*int i = 0;
+            Boolean result = int.TryParse(numero, out i); */
+            
+            if(Convert.ToInt32(numero) == int.Parse(numero))
+            {
+                errorTxtBox.Add(true);
+            } else
             {
                 errorTxtBox.Add(false);
                 tipeError.Add(5);
@@ -76,6 +87,7 @@ namespace compagniaAerea
         #region checkEmail
         public void IsValidEmail(TextBox tx)
         {
+           
             try
             {
                 var addr = new System.Net.Mail.MailAddress(tx.Text);

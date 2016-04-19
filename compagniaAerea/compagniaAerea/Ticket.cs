@@ -30,7 +30,7 @@ namespace compagniaAerea
         void createBooking(string dataPrenotazione,int numeroPersone,double totale,int idPasseggero,int idTariffa);
         int getIdPrenotaione();
         void insertRecordPagamento(string dataPagamento,string tipoPagamento,int idprenotazione);
-        void insertRecordTiket(string nomeIntestatario,string cognomeIntestatario,int idPrenotazione);
+        void insertRecordTiket(int idPasseggero, int idPrenotazione);
         
         void firstTicket(List<String> l);
         List<String> getFirstTicket();

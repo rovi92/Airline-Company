@@ -22,7 +22,7 @@ namespace compagniaAerea
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="UniboAirlines")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="myUniboAirlines")]
 	public partial class myDatabaseUniboAirlineDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -57,31 +57,31 @@ namespace compagniaAerea
     partial void InsertPagamento(Pagamento instance);
     partial void UpdatePagamento(Pagamento instance);
     partial void DeletePagamento(Pagamento instance);
+    partial void InsertPasseggero(Passeggero instance);
+    partial void UpdatePasseggero(Passeggero instance);
+    partial void DeletePasseggero(Passeggero instance);
     partial void InsertPersonale(Personale instance);
     partial void UpdatePersonale(Personale instance);
     partial void DeletePersonale(Personale instance);
     partial void InsertPiano_di_volo(Piano_di_volo instance);
     partial void UpdatePiano_di_volo(Piano_di_volo instance);
     partial void DeletePiano_di_volo(Piano_di_volo instance);
-    partial void InsertPrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
-    partial void UpdatePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
-    partial void DeletePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
-    partial void InsertTratta(Tratta instance);
-    partial void UpdateTratta(Tratta instance);
-    partial void DeleteTratta(Tratta instance);
-    partial void InsertTariffario(Tariffario instance);
-    partial void UpdateTariffario(Tariffario instance);
-    partial void DeleteTariffario(Tariffario instance);
     partial void InsertPrenotazione(Prenotazione instance);
     partial void UpdatePrenotazione(Prenotazione instance);
     partial void DeletePrenotazione(Prenotazione instance);
-    partial void InsertPasseggero(Passeggero instance);
-    partial void UpdatePasseggero(Passeggero instance);
-    partial void DeletePasseggero(Passeggero instance);
+    partial void InsertPrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
+    partial void UpdatePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
+    partial void DeletePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
+    partial void InsertTariffario(Tariffario instance);
+    partial void UpdateTariffario(Tariffario instance);
+    partial void DeleteTariffario(Tariffario instance);
+    partial void InsertTratta(Tratta instance);
+    partial void UpdateTratta(Tratta instance);
+    partial void DeleteTratta(Tratta instance);
     #endregion
 		
 		public myDatabaseUniboAirlineDataContext() : 
-				base(global::compagniaAerea.Properties.Settings.Default.UniboAirlinesConnectionString2, mappingSource)
+				base(global::compagniaAerea.Properties.Settings.Default.myUniboAirlinesConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -182,6 +182,14 @@ namespace compagniaAerea
 			}
 		}
 		
+		public System.Data.Linq.Table<Passeggero> Passeggero
+		{
+			get
+			{
+				return this.GetTable<Passeggero>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Personale> Personale
 		{
 			get
@@ -198,6 +206,14 @@ namespace compagniaAerea
 			}
 		}
 		
+		public System.Data.Linq.Table<Prenotazione> Prenotazione
+		{
+			get
+			{
+				return this.GetTable<Prenotazione>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Prezzo_bagaglio_imbarcato> Prezzo_bagaglio_imbarcato
 		{
 			get
@@ -206,15 +222,7 @@ namespace compagniaAerea
 			}
 		}
 		
-		public System.Data.Linq.Table<Tratta> Tratta
-		{
-			get
-			{
-				return this.GetTable<Tratta>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Tariffario> Tariffarios
+		public System.Data.Linq.Table<Tariffario> Tariffario
 		{
 			get
 			{
@@ -222,19 +230,11 @@ namespace compagniaAerea
 			}
 		}
 		
-		public System.Data.Linq.Table<Prenotazione> Prenotaziones
+		public System.Data.Linq.Table<Tratta> Tratta
 		{
 			get
 			{
-				return this.GetTable<Prenotazione>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Passeggero> Passeggeros
-		{
-			get
-			{
-				return this.GetTable<Passeggero>();
+				return this.GetTable<Tratta>();
 			}
 		}
 	}
@@ -1091,13 +1091,13 @@ namespace compagniaAerea
 		
 		private int _codice_biglietto;
 		
-		private string _nome_intestatario;
-		
-		private string _cognome_intestatario;
+		private int _idPasseggero;
 		
 		private int _idPrenotazione;
 		
 		private EntitySet<Babaglio_Imbarcato> _Babaglio_Imbarcato;
+		
+		private EntityRef<Passeggero> _Passeggero;
 		
 		private EntityRef<Prenotazione> _Prenotazione;
 		
@@ -1107,10 +1107,8 @@ namespace compagniaAerea
     partial void OnCreated();
     partial void Oncodice_bigliettoChanging(int value);
     partial void Oncodice_bigliettoChanged();
-    partial void Onnome_intestatarioChanging(string value);
-    partial void Onnome_intestatarioChanged();
-    partial void Oncognome_intestatarioChanging(string value);
-    partial void Oncognome_intestatarioChanged();
+    partial void OnidPasseggeroChanging(int value);
+    partial void OnidPasseggeroChanged();
     partial void OnidPrenotazioneChanging(int value);
     partial void OnidPrenotazioneChanged();
     #endregion
@@ -1118,6 +1116,7 @@ namespace compagniaAerea
 		public Biglietto()
 		{
 			this._Babaglio_Imbarcato = new EntitySet<Babaglio_Imbarcato>(new Action<Babaglio_Imbarcato>(this.attach_Babaglio_Imbarcato), new Action<Babaglio_Imbarcato>(this.detach_Babaglio_Imbarcato));
+			this._Passeggero = default(EntityRef<Passeggero>);
 			this._Prenotazione = default(EntityRef<Prenotazione>);
 			OnCreated();
 		}
@@ -1142,42 +1141,26 @@ namespace compagniaAerea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome_intestatario", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string nome_intestatario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPasseggero", DbType="Int NOT NULL")]
+		public int idPasseggero
 		{
 			get
 			{
-				return this._nome_intestatario;
+				return this._idPasseggero;
 			}
 			set
 			{
-				if ((this._nome_intestatario != value))
+				if ((this._idPasseggero != value))
 				{
-					this.Onnome_intestatarioChanging(value);
+					if (this._Passeggero.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidPasseggeroChanging(value);
 					this.SendPropertyChanging();
-					this._nome_intestatario = value;
-					this.SendPropertyChanged("nome_intestatario");
-					this.Onnome_intestatarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cognome_intestatario", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string cognome_intestatario
-		{
-			get
-			{
-				return this._cognome_intestatario;
-			}
-			set
-			{
-				if ((this._cognome_intestatario != value))
-				{
-					this.Oncognome_intestatarioChanging(value);
-					this.SendPropertyChanging();
-					this._cognome_intestatario = value;
-					this.SendPropertyChanged("cognome_intestatario");
-					this.Oncognome_intestatarioChanged();
+					this._idPasseggero = value;
+					this.SendPropertyChanged("idPasseggero");
+					this.OnidPasseggeroChanged();
 				}
 			}
 		}
@@ -1219,6 +1202,40 @@ namespace compagniaAerea
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Passeggero_Biglietto", Storage="_Passeggero", ThisKey="idPasseggero", OtherKey="idPasseggero", IsForeignKey=true)]
+		public Passeggero Passeggero
+		{
+			get
+			{
+				return this._Passeggero.Entity;
+			}
+			set
+			{
+				Passeggero previousValue = this._Passeggero.Entity;
+				if (((previousValue != value) 
+							|| (this._Passeggero.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Passeggero.Entity = null;
+						previousValue.Biglietto.Remove(this);
+					}
+					this._Passeggero.Entity = value;
+					if ((value != null))
+					{
+						value.Biglietto.Add(this);
+						this._idPasseggero = value.idPasseggero;
+					}
+					else
+					{
+						this._idPasseggero = default(int);
+					}
+					this.SendPropertyChanged("Passeggero");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prenotazione_Biglietto", Storage="_Prenotazione", ThisKey="idPrenotazione", OtherKey="idPrenotazione", IsForeignKey=true)]
 		public Prenotazione Prenotazione
 		{
@@ -1236,12 +1253,12 @@ namespace compagniaAerea
 					if ((previousValue != null))
 					{
 						this._Prenotazione.Entity = null;
-						previousValue.Bigliettos.Remove(this);
+						previousValue.Biglietto.Remove(this);
 					}
 					this._Prenotazione.Entity = value;
 					if ((value != null))
 					{
-						value.Bigliettos.Add(this);
+						value.Biglietto.Add(this);
 						this._idPrenotazione = value.idPrenotazione;
 					}
 					else
@@ -1298,7 +1315,7 @@ namespace compagniaAerea
 		
 		private double _prezzo;
 		
-		private EntitySet<Tariffario> _Tariffarios;
+		private EntitySet<Tariffario> _Tariffario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1314,7 +1331,7 @@ namespace compagniaAerea
 		
 		public Classe()
 		{
-			this._Tariffarios = new EntitySet<Tariffario>(new Action<Tariffario>(this.attach_Tariffarios), new Action<Tariffario>(this.detach_Tariffarios));
+			this._Tariffario = new EntitySet<Tariffario>(new Action<Tariffario>(this.attach_Tariffario), new Action<Tariffario>(this.detach_Tariffario));
 			OnCreated();
 		}
 		
@@ -1378,16 +1395,16 @@ namespace compagniaAerea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classe_Tariffario", Storage="_Tariffarios", ThisKey="idClasse", OtherKey="idClasse")]
-		public EntitySet<Tariffario> Tariffarios
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classe_Tariffario", Storage="_Tariffario", ThisKey="idClasse", OtherKey="idClasse")]
+		public EntitySet<Tariffario> Tariffario
 		{
 			get
 			{
-				return this._Tariffarios;
+				return this._Tariffario;
 			}
 			set
 			{
-				this._Tariffarios.Assign(value);
+				this._Tariffario.Assign(value);
 			}
 		}
 		
@@ -1411,13 +1428,13 @@ namespace compagniaAerea
 			}
 		}
 		
-		private void attach_Tariffarios(Tariffario entity)
+		private void attach_Tariffario(Tariffario entity)
 		{
 			this.SendPropertyChanging();
 			entity.Classe = this;
 		}
 		
-		private void detach_Tariffarios(Tariffario entity)
+		private void detach_Tariffario(Tariffario entity)
 		{
 			this.SendPropertyChanging();
 			entity.Classe = null;
@@ -1692,12 +1709,12 @@ namespace compagniaAerea
 					if ((previousValue != null))
 					{
 						this._Tariffario.Entity = null;
-						previousValue.Comfort_inclusis.Remove(this);
+						previousValue.Comfort_inclusi.Remove(this);
 					}
 					this._Tariffario.Entity = value;
 					if ((value != null))
 					{
-						value.Comfort_inclusis.Add(this);
+						value.Comfort_inclusi.Add(this);
 						this._idTariffa = value.idTariffa;
 					}
 					else
@@ -1867,12 +1884,12 @@ namespace compagniaAerea
 					if ((previousValue != null))
 					{
 						this._Prenotazione.Entity = null;
-						previousValue.Pagamentos = null;
+						previousValue.Pagamento.Remove(this);
 					}
 					this._Prenotazione.Entity = value;
 					if ((value != null))
 					{
-						value.Pagamentos = this;
+						value.Pagamento.Add(this);
 						this._idPrenotazione = value.idPrenotazione;
 					}
 					else
@@ -1902,6 +1919,264 @@ namespace compagniaAerea
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Passeggero")]
+	public partial class Passeggero : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPasseggero;
+		
+		private string _nome;
+		
+		private string _cognome;
+		
+		private string _indirizzo;
+		
+		private string _email;
+		
+		private string _città;
+		
+		private int _CAP;
+		
+		private string _CF;
+		
+		private EntitySet<Biglietto> _Biglietto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPasseggeroChanging(int value);
+    partial void OnidPasseggeroChanged();
+    partial void OnnomeChanging(string value);
+    partial void OnnomeChanged();
+    partial void OncognomeChanging(string value);
+    partial void OncognomeChanged();
+    partial void OnindirizzoChanging(string value);
+    partial void OnindirizzoChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OncittàChanging(string value);
+    partial void OncittàChanged();
+    partial void OnCAPChanging(int value);
+    partial void OnCAPChanged();
+    partial void OnCFChanging(string value);
+    partial void OnCFChanged();
+    #endregion
+		
+		public Passeggero()
+		{
+			this._Biglietto = new EntitySet<Biglietto>(new Action<Biglietto>(this.attach_Biglietto), new Action<Biglietto>(this.detach_Biglietto));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPasseggero", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPasseggero
+		{
+			get
+			{
+				return this._idPasseggero;
+			}
+			set
+			{
+				if ((this._idPasseggero != value))
+				{
+					this.OnidPasseggeroChanging(value);
+					this.SendPropertyChanging();
+					this._idPasseggero = value;
+					this.SendPropertyChanged("idPasseggero");
+					this.OnidPasseggeroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string nome
+		{
+			get
+			{
+				return this._nome;
+			}
+			set
+			{
+				if ((this._nome != value))
+				{
+					this.OnnomeChanging(value);
+					this.SendPropertyChanging();
+					this._nome = value;
+					this.SendPropertyChanged("nome");
+					this.OnnomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cognome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string cognome
+		{
+			get
+			{
+				return this._cognome;
+			}
+			set
+			{
+				if ((this._cognome != value))
+				{
+					this.OncognomeChanging(value);
+					this.SendPropertyChanging();
+					this._cognome = value;
+					this.SendPropertyChanged("cognome");
+					this.OncognomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indirizzo", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string indirizzo
+		{
+			get
+			{
+				return this._indirizzo;
+			}
+			set
+			{
+				if ((this._indirizzo != value))
+				{
+					this.OnindirizzoChanging(value);
+					this.SendPropertyChanging();
+					this._indirizzo = value;
+					this.SendPropertyChanged("indirizzo");
+					this.OnindirizzoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_città", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string città
+		{
+			get
+			{
+				return this._città;
+			}
+			set
+			{
+				if ((this._città != value))
+				{
+					this.OncittàChanging(value);
+					this.SendPropertyChanging();
+					this._città = value;
+					this.SendPropertyChanged("città");
+					this.OncittàChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAP", DbType="Int NOT NULL")]
+		public int CAP
+		{
+			get
+			{
+				return this._CAP;
+			}
+			set
+			{
+				if ((this._CAP != value))
+				{
+					this.OnCAPChanging(value);
+					this.SendPropertyChanging();
+					this._CAP = value;
+					this.SendPropertyChanged("CAP");
+					this.OnCAPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CF", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
+		public string CF
+		{
+			get
+			{
+				return this._CF;
+			}
+			set
+			{
+				if ((this._CF != value))
+				{
+					this.OnCFChanging(value);
+					this.SendPropertyChanging();
+					this._CF = value;
+					this.SendPropertyChanged("CF");
+					this.OnCFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Passeggero_Biglietto", Storage="_Biglietto", ThisKey="idPasseggero", OtherKey="idPasseggero")]
+		public EntitySet<Biglietto> Biglietto
+		{
+			get
+			{
+				return this._Biglietto;
+			}
+			set
+			{
+				this._Biglietto.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Biglietto(Biglietto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Passeggero = this;
+		}
+		
+		private void detach_Biglietto(Biglietto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Passeggero = null;
 		}
 	}
 	
@@ -2253,9 +2528,9 @@ namespace compagniaAerea
 		
 		private System.Nullable<bool> _cancellato;
 		
-		private EntitySet<Tratta> _Tratta;
+		private EntitySet<Tariffario> _Tariffario;
 		
-		private EntitySet<Tariffario> _Tariffarios;
+		private EntitySet<Tratta> _Tratta;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2277,8 +2552,8 @@ namespace compagniaAerea
 		
 		public Piano_di_volo()
 		{
+			this._Tariffario = new EntitySet<Tariffario>(new Action<Tariffario>(this.attach_Tariffario), new Action<Tariffario>(this.detach_Tariffario));
 			this._Tratta = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta), new Action<Tratta>(this.detach_Tratta));
-			this._Tariffarios = new EntitySet<Tariffario>(new Action<Tariffario>(this.attach_Tariffarios), new Action<Tariffario>(this.detach_Tariffarios));
 			OnCreated();
 		}
 		
@@ -2402,6 +2677,19 @@ namespace compagniaAerea
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tariffario", Storage="_Tariffario", ThisKey="numero_volo", OtherKey="numero_volo")]
+		public EntitySet<Tariffario> Tariffario
+		{
+			get
+			{
+				return this._Tariffario;
+			}
+			set
+			{
+				this._Tariffario.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tratta", Storage="_Tratta", ThisKey="numero_volo", OtherKey="numero_volo")]
 		public EntitySet<Tratta> Tratta
 		{
@@ -2412,19 +2700,6 @@ namespace compagniaAerea
 			set
 			{
 				this._Tratta.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tariffario", Storage="_Tariffarios", ThisKey="numero_volo", OtherKey="numero_volo")]
-		public EntitySet<Tariffario> Tariffarios
-		{
-			get
-			{
-				return this._Tariffarios;
-			}
-			set
-			{
-				this._Tariffarios.Assign(value);
 			}
 		}
 		
@@ -2448,6 +2723,18 @@ namespace compagniaAerea
 			}
 		}
 		
+		private void attach_Tariffario(Tariffario entity)
+		{
+			this.SendPropertyChanging();
+			entity.Piano_di_volo = this;
+		}
+		
+		private void detach_Tariffario(Tariffario entity)
+		{
+			this.SendPropertyChanging();
+			entity.Piano_di_volo = null;
+		}
+		
 		private void attach_Tratta(Tratta entity)
 		{
 			this.SendPropertyChanging();
@@ -2459,17 +2746,260 @@ namespace compagniaAerea
 			this.SendPropertyChanging();
 			entity.Piano_di_volo = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prenotazione")]
+	public partial class Prenotazione : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Tariffarios(Tariffario entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPrenotazione;
+		
+		private System.DateTime _data_prenotazione;
+		
+		private int _numero_persone;
+		
+		private double _totale;
+		
+		private int _idTariffa;
+		
+		private EntitySet<Biglietto> _Biglietto;
+		
+		private EntitySet<Pagamento> _Pagamento;
+		
+		private EntityRef<Tariffario> _Tariffario;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPrenotazioneChanging(int value);
+    partial void OnidPrenotazioneChanged();
+    partial void Ondata_prenotazioneChanging(System.DateTime value);
+    partial void Ondata_prenotazioneChanged();
+    partial void Onnumero_personeChanging(int value);
+    partial void Onnumero_personeChanged();
+    partial void OntotaleChanging(double value);
+    partial void OntotaleChanged();
+    partial void OnidTariffaChanging(int value);
+    partial void OnidTariffaChanged();
+    #endregion
+		
+		public Prenotazione()
 		{
-			this.SendPropertyChanging();
-			entity.Piano_di_volo = this;
+			this._Biglietto = new EntitySet<Biglietto>(new Action<Biglietto>(this.attach_Biglietto), new Action<Biglietto>(this.detach_Biglietto));
+			this._Pagamento = new EntitySet<Pagamento>(new Action<Pagamento>(this.attach_Pagamento), new Action<Pagamento>(this.detach_Pagamento));
+			this._Tariffario = default(EntityRef<Tariffario>);
+			OnCreated();
 		}
 		
-		private void detach_Tariffarios(Tariffario entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPrenotazione", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPrenotazione
+		{
+			get
+			{
+				return this._idPrenotazione;
+			}
+			set
+			{
+				if ((this._idPrenotazione != value))
+				{
+					this.OnidPrenotazioneChanging(value);
+					this.SendPropertyChanging();
+					this._idPrenotazione = value;
+					this.SendPropertyChanged("idPrenotazione");
+					this.OnidPrenotazioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_prenotazione", DbType="Date NOT NULL")]
+		public System.DateTime data_prenotazione
+		{
+			get
+			{
+				return this._data_prenotazione;
+			}
+			set
+			{
+				if ((this._data_prenotazione != value))
+				{
+					this.Ondata_prenotazioneChanging(value);
+					this.SendPropertyChanging();
+					this._data_prenotazione = value;
+					this.SendPropertyChanged("data_prenotazione");
+					this.Ondata_prenotazioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_persone", DbType="Int NOT NULL")]
+		public int numero_persone
+		{
+			get
+			{
+				return this._numero_persone;
+			}
+			set
+			{
+				if ((this._numero_persone != value))
+				{
+					this.Onnumero_personeChanging(value);
+					this.SendPropertyChanging();
+					this._numero_persone = value;
+					this.SendPropertyChanged("numero_persone");
+					this.Onnumero_personeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_totale", DbType="Float NOT NULL")]
+		public double totale
+		{
+			get
+			{
+				return this._totale;
+			}
+			set
+			{
+				if ((this._totale != value))
+				{
+					this.OntotaleChanging(value);
+					this.SendPropertyChanging();
+					this._totale = value;
+					this.SendPropertyChanged("totale");
+					this.OntotaleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTariffa", DbType="Int NOT NULL")]
+		public int idTariffa
+		{
+			get
+			{
+				return this._idTariffa;
+			}
+			set
+			{
+				if ((this._idTariffa != value))
+				{
+					if (this._Tariffario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidTariffaChanging(value);
+					this.SendPropertyChanging();
+					this._idTariffa = value;
+					this.SendPropertyChanged("idTariffa");
+					this.OnidTariffaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prenotazione_Biglietto", Storage="_Biglietto", ThisKey="idPrenotazione", OtherKey="idPrenotazione")]
+		public EntitySet<Biglietto> Biglietto
+		{
+			get
+			{
+				return this._Biglietto;
+			}
+			set
+			{
+				this._Biglietto.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prenotazione_Pagamento", Storage="_Pagamento", ThisKey="idPrenotazione", OtherKey="idPrenotazione")]
+		public EntitySet<Pagamento> Pagamento
+		{
+			get
+			{
+				return this._Pagamento;
+			}
+			set
+			{
+				this._Pagamento.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Prenotazione", Storage="_Tariffario", ThisKey="idTariffa", OtherKey="idTariffa", IsForeignKey=true)]
+		public Tariffario Tariffario
+		{
+			get
+			{
+				return this._Tariffario.Entity;
+			}
+			set
+			{
+				Tariffario previousValue = this._Tariffario.Entity;
+				if (((previousValue != value) 
+							|| (this._Tariffario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tariffario.Entity = null;
+						previousValue.Prenotazione.Remove(this);
+					}
+					this._Tariffario.Entity = value;
+					if ((value != null))
+					{
+						value.Prenotazione.Add(this);
+						this._idTariffa = value.idTariffa;
+					}
+					else
+					{
+						this._idTariffa = default(int);
+					}
+					this.SendPropertyChanged("Tariffario");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Biglietto(Biglietto entity)
 		{
 			this.SendPropertyChanging();
-			entity.Piano_di_volo = null;
+			entity.Prenotazione = this;
+		}
+		
+		private void detach_Biglietto(Biglietto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Prenotazione = null;
+		}
+		
+		private void attach_Pagamento(Pagamento entity)
+		{
+			this.SendPropertyChanging();
+			entity.Prenotazione = this;
+		}
+		
+		private void detach_Pagamento(Pagamento entity)
+		{
+			this.SendPropertyChanging();
+			entity.Prenotazione = null;
 		}
 	}
 	
@@ -2584,6 +3114,278 @@ namespace compagniaAerea
 		{
 			this.SendPropertyChanging();
 			entity.Prezzo_bagaglio_imbarcato = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tariffario")]
+	public partial class Tariffario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idTariffa;
+		
+		private double _tariffa_solo_andata;
+		
+		private int _numero_volo;
+		
+		private int _idClasse;
+		
+		private EntitySet<Comfort_inclusi> _Comfort_inclusi;
+		
+		private EntitySet<Prenotazione> _Prenotazione;
+		
+		private EntityRef<Classe> _Classe;
+		
+		private EntityRef<Piano_di_volo> _Piano_di_volo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidTariffaChanging(int value);
+    partial void OnidTariffaChanged();
+    partial void Ontariffa_solo_andataChanging(double value);
+    partial void Ontariffa_solo_andataChanged();
+    partial void Onnumero_voloChanging(int value);
+    partial void Onnumero_voloChanged();
+    partial void OnidClasseChanging(int value);
+    partial void OnidClasseChanged();
+    #endregion
+		
+		public Tariffario()
+		{
+			this._Comfort_inclusi = new EntitySet<Comfort_inclusi>(new Action<Comfort_inclusi>(this.attach_Comfort_inclusi), new Action<Comfort_inclusi>(this.detach_Comfort_inclusi));
+			this._Prenotazione = new EntitySet<Prenotazione>(new Action<Prenotazione>(this.attach_Prenotazione), new Action<Prenotazione>(this.detach_Prenotazione));
+			this._Classe = default(EntityRef<Classe>);
+			this._Piano_di_volo = default(EntityRef<Piano_di_volo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTariffa", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idTariffa
+		{
+			get
+			{
+				return this._idTariffa;
+			}
+			set
+			{
+				if ((this._idTariffa != value))
+				{
+					this.OnidTariffaChanging(value);
+					this.SendPropertyChanging();
+					this._idTariffa = value;
+					this.SendPropertyChanged("idTariffa");
+					this.OnidTariffaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tariffa_solo_andata", DbType="Float NOT NULL")]
+		public double tariffa_solo_andata
+		{
+			get
+			{
+				return this._tariffa_solo_andata;
+			}
+			set
+			{
+				if ((this._tariffa_solo_andata != value))
+				{
+					this.Ontariffa_solo_andataChanging(value);
+					this.SendPropertyChanging();
+					this._tariffa_solo_andata = value;
+					this.SendPropertyChanged("tariffa_solo_andata");
+					this.Ontariffa_solo_andataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_volo", DbType="Int NOT NULL")]
+		public int numero_volo
+		{
+			get
+			{
+				return this._numero_volo;
+			}
+			set
+			{
+				if ((this._numero_volo != value))
+				{
+					if (this._Piano_di_volo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onnumero_voloChanging(value);
+					this.SendPropertyChanging();
+					this._numero_volo = value;
+					this.SendPropertyChanged("numero_volo");
+					this.Onnumero_voloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClasse", DbType="Int NOT NULL")]
+		public int idClasse
+		{
+			get
+			{
+				return this._idClasse;
+			}
+			set
+			{
+				if ((this._idClasse != value))
+				{
+					if (this._Classe.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidClasseChanging(value);
+					this.SendPropertyChanging();
+					this._idClasse = value;
+					this.SendPropertyChanged("idClasse");
+					this.OnidClasseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Comfort_inclusi", Storage="_Comfort_inclusi", ThisKey="idTariffa", OtherKey="idTariffa")]
+		public EntitySet<Comfort_inclusi> Comfort_inclusi
+		{
+			get
+			{
+				return this._Comfort_inclusi;
+			}
+			set
+			{
+				this._Comfort_inclusi.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Prenotazione", Storage="_Prenotazione", ThisKey="idTariffa", OtherKey="idTariffa")]
+		public EntitySet<Prenotazione> Prenotazione
+		{
+			get
+			{
+				return this._Prenotazione;
+			}
+			set
+			{
+				this._Prenotazione.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classe_Tariffario", Storage="_Classe", ThisKey="idClasse", OtherKey="idClasse", IsForeignKey=true)]
+		public Classe Classe
+		{
+			get
+			{
+				return this._Classe.Entity;
+			}
+			set
+			{
+				Classe previousValue = this._Classe.Entity;
+				if (((previousValue != value) 
+							|| (this._Classe.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Classe.Entity = null;
+						previousValue.Tariffario.Remove(this);
+					}
+					this._Classe.Entity = value;
+					if ((value != null))
+					{
+						value.Tariffario.Add(this);
+						this._idClasse = value.idClasse;
+					}
+					else
+					{
+						this._idClasse = default(int);
+					}
+					this.SendPropertyChanged("Classe");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tariffario", Storage="_Piano_di_volo", ThisKey="numero_volo", OtherKey="numero_volo", IsForeignKey=true)]
+		public Piano_di_volo Piano_di_volo
+		{
+			get
+			{
+				return this._Piano_di_volo.Entity;
+			}
+			set
+			{
+				Piano_di_volo previousValue = this._Piano_di_volo.Entity;
+				if (((previousValue != value) 
+							|| (this._Piano_di_volo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Piano_di_volo.Entity = null;
+						previousValue.Tariffario.Remove(this);
+					}
+					this._Piano_di_volo.Entity = value;
+					if ((value != null))
+					{
+						value.Tariffario.Add(this);
+						this._numero_volo = value.numero_volo;
+					}
+					else
+					{
+						this._numero_volo = default(int);
+					}
+					this.SendPropertyChanged("Piano_di_volo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Comfort_inclusi(Comfort_inclusi entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tariffario = this;
+		}
+		
+		private void detach_Comfort_inclusi(Comfort_inclusi entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tariffario = null;
+		}
+		
+		private void attach_Prenotazione(Prenotazione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tariffario = this;
+		}
+		
+		private void detach_Prenotazione(Prenotazione entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tariffario = null;
 		}
 	}
 	
@@ -3156,860 +3958,6 @@ namespace compagniaAerea
 		{
 			this.SendPropertyChanging();
 			entity.Tratta = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tariffario")]
-	public partial class Tariffario : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idTariffa;
-		
-		private double _tariffa_solo_andata;
-		
-		private int _numero_volo;
-		
-		private int _idClasse;
-		
-		private EntitySet<Comfort_inclusi> _Comfort_inclusis;
-		
-		private EntitySet<Prenotazione> _Prenotaziones;
-		
-		private EntityRef<Classe> _Classe;
-		
-		private EntityRef<Piano_di_volo> _Piano_di_volo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidTariffaChanging(int value);
-    partial void OnidTariffaChanged();
-    partial void Ontariffa_solo_andataChanging(double value);
-    partial void Ontariffa_solo_andataChanged();
-    partial void Onnumero_voloChanging(int value);
-    partial void Onnumero_voloChanged();
-    partial void OnidClasseChanging(int value);
-    partial void OnidClasseChanged();
-    #endregion
-		
-		public Tariffario()
-		{
-			this._Comfort_inclusis = new EntitySet<Comfort_inclusi>(new Action<Comfort_inclusi>(this.attach_Comfort_inclusis), new Action<Comfort_inclusi>(this.detach_Comfort_inclusis));
-			this._Prenotaziones = new EntitySet<Prenotazione>(new Action<Prenotazione>(this.attach_Prenotaziones), new Action<Prenotazione>(this.detach_Prenotaziones));
-			this._Classe = default(EntityRef<Classe>);
-			this._Piano_di_volo = default(EntityRef<Piano_di_volo>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTariffa", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idTariffa
-		{
-			get
-			{
-				return this._idTariffa;
-			}
-			set
-			{
-				if ((this._idTariffa != value))
-				{
-					this.OnidTariffaChanging(value);
-					this.SendPropertyChanging();
-					this._idTariffa = value;
-					this.SendPropertyChanged("idTariffa");
-					this.OnidTariffaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tariffa_solo_andata", DbType="Float NOT NULL")]
-		public double tariffa_solo_andata
-		{
-			get
-			{
-				return this._tariffa_solo_andata;
-			}
-			set
-			{
-				if ((this._tariffa_solo_andata != value))
-				{
-					this.Ontariffa_solo_andataChanging(value);
-					this.SendPropertyChanging();
-					this._tariffa_solo_andata = value;
-					this.SendPropertyChanged("tariffa_solo_andata");
-					this.Ontariffa_solo_andataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_volo", DbType="Int NOT NULL")]
-		public int numero_volo
-		{
-			get
-			{
-				return this._numero_volo;
-			}
-			set
-			{
-				if ((this._numero_volo != value))
-				{
-					if (this._Piano_di_volo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onnumero_voloChanging(value);
-					this.SendPropertyChanging();
-					this._numero_volo = value;
-					this.SendPropertyChanged("numero_volo");
-					this.Onnumero_voloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClasse", DbType="Int NOT NULL")]
-		public int idClasse
-		{
-			get
-			{
-				return this._idClasse;
-			}
-			set
-			{
-				if ((this._idClasse != value))
-				{
-					if (this._Classe.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidClasseChanging(value);
-					this.SendPropertyChanging();
-					this._idClasse = value;
-					this.SendPropertyChanged("idClasse");
-					this.OnidClasseChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Comfort_inclusi", Storage="_Comfort_inclusis", ThisKey="idTariffa", OtherKey="idTariffa")]
-		public EntitySet<Comfort_inclusi> Comfort_inclusis
-		{
-			get
-			{
-				return this._Comfort_inclusis;
-			}
-			set
-			{
-				this._Comfort_inclusis.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Prenotazione", Storage="_Prenotaziones", ThisKey="idTariffa", OtherKey="idTariffa")]
-		public EntitySet<Prenotazione> Prenotaziones
-		{
-			get
-			{
-				return this._Prenotaziones;
-			}
-			set
-			{
-				this._Prenotaziones.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Classe_Tariffario", Storage="_Classe", ThisKey="idClasse", OtherKey="idClasse", IsForeignKey=true)]
-		public Classe Classe
-		{
-			get
-			{
-				return this._Classe.Entity;
-			}
-			set
-			{
-				Classe previousValue = this._Classe.Entity;
-				if (((previousValue != value) 
-							|| (this._Classe.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Classe.Entity = null;
-						previousValue.Tariffarios.Remove(this);
-					}
-					this._Classe.Entity = value;
-					if ((value != null))
-					{
-						value.Tariffarios.Add(this);
-						this._idClasse = value.idClasse;
-					}
-					else
-					{
-						this._idClasse = default(int);
-					}
-					this.SendPropertyChanged("Classe");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tariffario", Storage="_Piano_di_volo", ThisKey="numero_volo", OtherKey="numero_volo", IsForeignKey=true)]
-		public Piano_di_volo Piano_di_volo
-		{
-			get
-			{
-				return this._Piano_di_volo.Entity;
-			}
-			set
-			{
-				Piano_di_volo previousValue = this._Piano_di_volo.Entity;
-				if (((previousValue != value) 
-							|| (this._Piano_di_volo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Piano_di_volo.Entity = null;
-						previousValue.Tariffarios.Remove(this);
-					}
-					this._Piano_di_volo.Entity = value;
-					if ((value != null))
-					{
-						value.Tariffarios.Add(this);
-						this._numero_volo = value.numero_volo;
-					}
-					else
-					{
-						this._numero_volo = default(int);
-					}
-					this.SendPropertyChanged("Piano_di_volo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Comfort_inclusis(Comfort_inclusi entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = this;
-		}
-		
-		private void detach_Comfort_inclusis(Comfort_inclusi entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = null;
-		}
-		
-		private void attach_Prenotaziones(Prenotazione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = this;
-		}
-		
-		private void detach_Prenotaziones(Prenotazione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prenotazione")]
-	public partial class Prenotazione : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idPrenotazione;
-		
-		private System.DateTime _data_prenotazione;
-		
-		private int _numero_persone;
-		
-		private double _totale;
-		
-		private int _idPasseggero;
-		
-		private int _idTariffa;
-		
-		private EntitySet<Biglietto> _Bigliettos;
-		
-		private EntityRef<Pagamento> _Pagamentos;
-		
-		private EntityRef<Tariffario> _Tariffario;
-		
-		private EntityRef<Passeggero> _Passeggero;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidPrenotazioneChanging(int value);
-    partial void OnidPrenotazioneChanged();
-    partial void Ondata_prenotazioneChanging(System.DateTime value);
-    partial void Ondata_prenotazioneChanged();
-    partial void Onnumero_personeChanging(int value);
-    partial void Onnumero_personeChanged();
-    partial void OntotaleChanging(double value);
-    partial void OntotaleChanged();
-    partial void OnidPasseggeroChanging(int value);
-    partial void OnidPasseggeroChanged();
-    partial void OnidTariffaChanging(int value);
-    partial void OnidTariffaChanged();
-    #endregion
-		
-		public Prenotazione()
-		{
-			this._Bigliettos = new EntitySet<Biglietto>(new Action<Biglietto>(this.attach_Bigliettos), new Action<Biglietto>(this.detach_Bigliettos));
-			this._Pagamentos = default(EntityRef<Pagamento>);
-			this._Tariffario = default(EntityRef<Tariffario>);
-			this._Passeggero = default(EntityRef<Passeggero>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPrenotazione", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idPrenotazione
-		{
-			get
-			{
-				return this._idPrenotazione;
-			}
-			set
-			{
-				if ((this._idPrenotazione != value))
-				{
-					this.OnidPrenotazioneChanging(value);
-					this.SendPropertyChanging();
-					this._idPrenotazione = value;
-					this.SendPropertyChanged("idPrenotazione");
-					this.OnidPrenotazioneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data_prenotazione", DbType="Date NOT NULL")]
-		public System.DateTime data_prenotazione
-		{
-			get
-			{
-				return this._data_prenotazione;
-			}
-			set
-			{
-				if ((this._data_prenotazione != value))
-				{
-					this.Ondata_prenotazioneChanging(value);
-					this.SendPropertyChanging();
-					this._data_prenotazione = value;
-					this.SendPropertyChanged("data_prenotazione");
-					this.Ondata_prenotazioneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numero_persone", DbType="Int NOT NULL")]
-		public int numero_persone
-		{
-			get
-			{
-				return this._numero_persone;
-			}
-			set
-			{
-				if ((this._numero_persone != value))
-				{
-					this.Onnumero_personeChanging(value);
-					this.SendPropertyChanging();
-					this._numero_persone = value;
-					this.SendPropertyChanged("numero_persone");
-					this.Onnumero_personeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_totale", DbType="Float NOT NULL")]
-		public double totale
-		{
-			get
-			{
-				return this._totale;
-			}
-			set
-			{
-				if ((this._totale != value))
-				{
-					this.OntotaleChanging(value);
-					this.SendPropertyChanging();
-					this._totale = value;
-					this.SendPropertyChanged("totale");
-					this.OntotaleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPasseggero", DbType="Int NOT NULL")]
-		public int idPasseggero
-		{
-			get
-			{
-				return this._idPasseggero;
-			}
-			set
-			{
-				if ((this._idPasseggero != value))
-				{
-					if (this._Passeggero.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidPasseggeroChanging(value);
-					this.SendPropertyChanging();
-					this._idPasseggero = value;
-					this.SendPropertyChanged("idPasseggero");
-					this.OnidPasseggeroChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTariffa", DbType="Int NOT NULL")]
-		public int idTariffa
-		{
-			get
-			{
-				return this._idTariffa;
-			}
-			set
-			{
-				if ((this._idTariffa != value))
-				{
-					if (this._Tariffario.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidTariffaChanging(value);
-					this.SendPropertyChanging();
-					this._idTariffa = value;
-					this.SendPropertyChanged("idTariffa");
-					this.OnidTariffaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prenotazione_Biglietto", Storage="_Bigliettos", ThisKey="idPrenotazione", OtherKey="idPrenotazione")]
-		public EntitySet<Biglietto> Bigliettos
-		{
-			get
-			{
-				return this._Bigliettos;
-			}
-			set
-			{
-				this._Bigliettos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prenotazione_Pagamento", Storage="_Pagamentos", ThisKey="idPrenotazione", OtherKey="idPrenotazione", IsUnique=true, IsForeignKey=false)]
-		public Pagamento Pagamentos
-		{
-			get
-			{
-				return this._Pagamentos.Entity;
-			}
-			set
-			{
-				Pagamento previousValue = this._Pagamentos.Entity;
-				if (((previousValue != value) 
-							|| (this._Pagamentos.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pagamentos.Entity = null;
-						previousValue.Prenotazione = null;
-					}
-					this._Pagamentos.Entity = value;
-					if ((value != null))
-					{
-						value.Prenotazione = this;
-					}
-					this.SendPropertyChanged("Pagamentos");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Prenotazione", Storage="_Tariffario", ThisKey="idTariffa", OtherKey="idTariffa", IsForeignKey=true)]
-		public Tariffario Tariffario
-		{
-			get
-			{
-				return this._Tariffario.Entity;
-			}
-			set
-			{
-				Tariffario previousValue = this._Tariffario.Entity;
-				if (((previousValue != value) 
-							|| (this._Tariffario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Tariffario.Entity = null;
-						previousValue.Prenotaziones.Remove(this);
-					}
-					this._Tariffario.Entity = value;
-					if ((value != null))
-					{
-						value.Prenotaziones.Add(this);
-						this._idTariffa = value.idTariffa;
-					}
-					else
-					{
-						this._idTariffa = default(int);
-					}
-					this.SendPropertyChanged("Tariffario");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Passeggero_Prenotazione", Storage="_Passeggero", ThisKey="idPasseggero", OtherKey="idPasseggero", IsForeignKey=true)]
-		public Passeggero Passeggero
-		{
-			get
-			{
-				return this._Passeggero.Entity;
-			}
-			set
-			{
-				Passeggero previousValue = this._Passeggero.Entity;
-				if (((previousValue != value) 
-							|| (this._Passeggero.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Passeggero.Entity = null;
-						previousValue.Prenotaziones.Remove(this);
-					}
-					this._Passeggero.Entity = value;
-					if ((value != null))
-					{
-						value.Prenotaziones.Add(this);
-						this._idPasseggero = value.idPasseggero;
-					}
-					else
-					{
-						this._idPasseggero = default(int);
-					}
-					this.SendPropertyChanged("Passeggero");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Bigliettos(Biglietto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Prenotazione = this;
-		}
-		
-		private void detach_Bigliettos(Biglietto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Prenotazione = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Passeggero")]
-	public partial class Passeggero : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idPasseggero;
-		
-		private string _nome;
-		
-		private string _cognome;
-		
-		private string _indirizzo;
-		
-		private string _email;
-		
-		private string _città;
-		
-		private int _CAP;
-		
-		private string _CF;
-		
-		private EntitySet<Prenotazione> _Prenotaziones;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidPasseggeroChanging(int value);
-    partial void OnidPasseggeroChanged();
-    partial void OnnomeChanging(string value);
-    partial void OnnomeChanged();
-    partial void OncognomeChanging(string value);
-    partial void OncognomeChanged();
-    partial void OnindirizzoChanging(string value);
-    partial void OnindirizzoChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OncittàChanging(string value);
-    partial void OncittàChanged();
-    partial void OnCAPChanging(int value);
-    partial void OnCAPChanged();
-    partial void OnCFChanging(string value);
-    partial void OnCFChanged();
-    #endregion
-		
-		public Passeggero()
-		{
-			this._Prenotaziones = new EntitySet<Prenotazione>(new Action<Prenotazione>(this.attach_Prenotaziones), new Action<Prenotazione>(this.detach_Prenotaziones));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPasseggero", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idPasseggero
-		{
-			get
-			{
-				return this._idPasseggero;
-			}
-			set
-			{
-				if ((this._idPasseggero != value))
-				{
-					this.OnidPasseggeroChanging(value);
-					this.SendPropertyChanging();
-					this._idPasseggero = value;
-					this.SendPropertyChanged("idPasseggero");
-					this.OnidPasseggeroChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string nome
-		{
-			get
-			{
-				return this._nome;
-			}
-			set
-			{
-				if ((this._nome != value))
-				{
-					this.OnnomeChanging(value);
-					this.SendPropertyChanging();
-					this._nome = value;
-					this.SendPropertyChanged("nome");
-					this.OnnomeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cognome", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string cognome
-		{
-			get
-			{
-				return this._cognome;
-			}
-			set
-			{
-				if ((this._cognome != value))
-				{
-					this.OncognomeChanging(value);
-					this.SendPropertyChanging();
-					this._cognome = value;
-					this.SendPropertyChanged("cognome");
-					this.OncognomeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indirizzo", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string indirizzo
-		{
-			get
-			{
-				return this._indirizzo;
-			}
-			set
-			{
-				if ((this._indirizzo != value))
-				{
-					this.OnindirizzoChanging(value);
-					this.SendPropertyChanging();
-					this._indirizzo = value;
-					this.SendPropertyChanged("indirizzo");
-					this.OnindirizzoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_città", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string città
-		{
-			get
-			{
-				return this._città;
-			}
-			set
-			{
-				if ((this._città != value))
-				{
-					this.OncittàChanging(value);
-					this.SendPropertyChanging();
-					this._città = value;
-					this.SendPropertyChanged("città");
-					this.OncittàChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAP", DbType="Int NOT NULL")]
-		public int CAP
-		{
-			get
-			{
-				return this._CAP;
-			}
-			set
-			{
-				if ((this._CAP != value))
-				{
-					this.OnCAPChanging(value);
-					this.SendPropertyChanging();
-					this._CAP = value;
-					this.SendPropertyChanged("CAP");
-					this.OnCAPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CF", DbType="VarChar(16) NOT NULL", CanBeNull=false)]
-		public string CF
-		{
-			get
-			{
-				return this._CF;
-			}
-			set
-			{
-				if ((this._CF != value))
-				{
-					this.OnCFChanging(value);
-					this.SendPropertyChanging();
-					this._CF = value;
-					this.SendPropertyChanged("CF");
-					this.OnCFChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Passeggero_Prenotazione", Storage="_Prenotaziones", ThisKey="idPasseggero", OtherKey="idPasseggero")]
-		public EntitySet<Prenotazione> Prenotaziones
-		{
-			get
-			{
-				return this._Prenotaziones;
-			}
-			set
-			{
-				this._Prenotaziones.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Prenotaziones(Prenotazione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Passeggero = this;
-		}
-		
-		private void detach_Prenotaziones(Prenotazione entity)
-		{
-			this.SendPropertyChanging();
-			entity.Passeggero = null;
 		}
 	}
 }

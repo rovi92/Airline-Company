@@ -56,14 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="databaseLocaleAirline.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
-    </Compile>
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Dipendente.cs" />
     <Compile Include="DipendenteImpl.cs" />
+    <Compile Include="DipendenteVolo.cs" />
+    <Compile Include="DipendenteVoloImpl.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Gestione_Utente.cs" />
     <Compile Include="InterfacciaError.cs" />
@@ -103,9 +100,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="databaseLocaleAirline.dbml.layout">
-      <DependentUpon>databaseLocaleAirline.dbml</DependentUpon>
-    </None>
     <None Include="myDatabaseUniboAirline.dbml.layout">
       <DependentUpon>myDatabaseUniboAirline.dbml</DependentUpon>
     </None>
@@ -113,11 +107,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="databaseLocaleAirline.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>databaseLocaleAirline.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="myDatabaseUniboAirline.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>myDatabaseUniboAirline.designer.cs</LastGenOutput>

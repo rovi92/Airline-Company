@@ -31,6 +31,7 @@ namespace compagniaAerea
         //Variabile per la stringa di connessione
         Gestione_utente gestione_cliente;
         VoloImpl volo;
+        DipendenteVoloImpl dipendentevolo;
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
@@ -40,6 +41,7 @@ namespace compagniaAerea
 
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
             volo = new VoloImpl();//classe volo
+            dipendentevolo = new DipendenteVoloImpl();//classe dipendente volo (per la gestione dei voli da parte del dipendente)
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
@@ -626,8 +628,8 @@ namespace compagniaAerea
                     volo.getClassId()));
 
                     ticket.getPopulateDbTicket();
-                    ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
-                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text, ticket.getIdPrenotaione());
+                   /* ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(gestione_cliente.getLastIdPassenger(cf., cognomepasseggerotxt.Text, ticket.getIdPrenotaione());*/
 
                 }
                 else
@@ -756,7 +758,15 @@ namespace compagniaAerea
 
         }
 
+        private void rdbDipendenteNome_Checked(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void rdbDipendenteCodice_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
@@ -785,7 +795,7 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
-
+                dipendentevolo.Aggiungi_pianodivolo((DateTime) partenzapicker.SelectedDate, (DateTime) arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
             }
             else
             {
