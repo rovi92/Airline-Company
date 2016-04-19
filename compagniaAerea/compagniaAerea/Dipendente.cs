@@ -8,7 +8,10 @@ namespace compagniaAerea
 {
     interface Dipendente
     {
-        void dipendente(string nome_dipendete, string cognome_dipendente, int idDipendente);
+        
+        void getDipendente(int idDIpendente);
+        List<DipendenteImpl.InfoDipendente> getStaff();
+       
         /*get dei dati dipendente*/
         String getNome();
         String getCognome();
