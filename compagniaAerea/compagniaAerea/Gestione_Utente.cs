@@ -18,6 +18,8 @@ namespace compagniaAerea
         List<Passeggero> registrazioneUtente = new List<Passeggero>();
         ArrayList alErrori = new ArrayList();
         int idPasseggero = 0;
+        List<string> codiceFiscale = new List<string>();
+        List<List<String>> CFNC = new List<List<string>>();
         public Gestione_utente()
         {
 
@@ -27,7 +29,7 @@ namespace compagniaAerea
         }
         public void InitUtente()
         {
-            registrazioneUtente = (from ru in myDatabase.getDb().Passeggeros
+            registrazioneUtente = (from ru in myDatabase.getDb().Passeggero
                                   select ru).ToList();
         }
         #region registrazione cliente
@@ -38,7 +40,7 @@ namespace compagniaAerea
             Passeggero p = new Passeggero()
             {
                 //inserimento dati nel database
-                idPasseggero = 1234,
+                
                 nome = nome,
                 cognome = cognome,
                 indirizzo = indirizzo,
@@ -47,7 +49,7 @@ namespace compagniaAerea
                 CAP = CAP,
                 CF = CF,
             };
-            myDatabase.getDb().Passeggeros.InsertOnSubmit(p);
+            myDatabase.getDb().Passeggero.InsertOnSubmit(p);
             myDatabase.getDb().SubmitChanges();
 
             statoRegistrazione = true;
@@ -111,26 +113,18 @@ namespace compagniaAerea
             return this.idPasseggero;
         }
 
-        public int getLastIdPassenger(string cf,string email)
+        public int getLastIdPassenger(string cf)
         {
-            int a = 0;
-            int lastId = 0;
-            foreach(Passeggero p in registrazioneUtente)
-            {
-                if(p.CF.Equals(cf) && p.email.Equals(email))
-                {
-                    a = p.idPasseggero;
-                }
-                lastId++;
-            }
-            if(a == 0)
-            {
-                a = lastId;
-            }
-            return a;
-              // myDatabase.getDb().Passeggeros.First(t => t.idPasseggero.Equals(a)).idPasseggero;
-              // aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
+            return myDatabase.getDb().Passeggero.First(p => p.CF == cf).idPasseggero;
+         }
+        public void saveCF(string codiceFiscale)
+        {
+            this.codiceFiscale.Add(codiceFiscale);
         }
+      
+      
+     
+    
     }
 }
         #endregion

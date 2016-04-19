@@ -26,18 +26,6 @@ namespace compagniaAerea.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tcp:erikserver.database.windows.net,1433;Initial Catalog=UniboAirline" +
-            "s;Persist Security Info=True;User ID=erik_amministratore@erikserver;Password=Ces" +
-            "enate_81")]
-        public string UniboAirlinesConnectionString {
-            get {
-                return ((string)(this["UniboAirlinesConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-TQRPAA4\\SQLEXPRESS;Initial Catalog=uniboAirlines;Integrated S" +
             "ecurity=True")]
         public string uniboAirlinesConnectionString1 {
@@ -65,6 +53,39 @@ namespace compagniaAerea.Properties {
         public string UniboAirlinesConnectionString3 {
             get {
                 return ((string)(this["UniboAirlinesConnectionString3"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=erikserver.database.windows.net,1433;Initial Catalog=UniboAirlines;Pe" +
+            "rsist Security Info=True;User ID=erik_amministratore")]
+        public string UniboAirlinesConnectionString {
+            get {
+                return ((string)(this["UniboAirlinesConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-TQRPAA4\\SQLEXPRESS;Initial Catalog=UniboAirlines;Integrated S" +
+            "ecurity=True")]
+        public string UniboAirlinesConnectionString4 {
+            get {
+                return ((string)(this["UniboAirlinesConnectionString4"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=erikserver.database.windows.net;Initial Catalog=myUniboAirlines;Persi" +
+            "st Security Info=True;User ID=erik_amministratore;Password=Cesenate_81")]
+        public string myUniboAirlinesConnectionString {
+            get {
+                return ((string)(this["myUniboAirlinesConnectionString"]));
             }
         }
     }

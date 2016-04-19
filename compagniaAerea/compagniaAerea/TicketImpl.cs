@@ -23,6 +23,8 @@ namespace compagniaAerea
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
         int quantitaPersone = 0;
+        int idPrenotazioneAndata = 0;
+        int idPrenotazioneRitorno = 0;
 
 
         public TicketImpl()
@@ -53,9 +55,9 @@ namespace compagniaAerea
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
-                      nome = b.nome_intestatario,
+                     /* nome = b.nome_intestatario,
                       cognome = b.cognome_intestatario,
-                      cod_fiscale = b.Prenotazione.Passeggero.CF,
+                      cod_fiscale = b.Prenotazione.Passeggero.CF,*/
                       cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
@@ -71,7 +73,7 @@ namespace compagniaAerea
         {
 
 
-            tariffario = (from t in myDatabase.getDb().Tariffarios
+            tariffario = (from t in myDatabase.getDb().Tariffario
                           select t).ToList();
             classeVolo = (from cll in myDatabase.getDb().Classe
                           select cll).ToList();
@@ -82,7 +84,7 @@ namespace compagniaAerea
             comfort = (from c in myDatabase.getDb().Comfort
                        select c).ToList();
 
-            prenotazione = (from pr in myDatabase.getDb().Prenotaziones
+            prenotazione = (from pr in myDatabase.getDb().Prenotazione
                             select pr).ToList();
 
 
@@ -97,7 +99,7 @@ namespace compagniaAerea
         }
 
         #region GET tiket e tutto ciò che è correlato al biglietto
-        public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort, int classe)
+        public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort,int classe)
         {
             double prezzoBagaglio = 0;
             for (int i = 0; i < bagaglio.Count; i++)
@@ -108,17 +110,7 @@ namespace compagniaAerea
                 }
 
             }
-
-            double classeScelta = 0;
-            for (int cl = 0; cl < classeVolo.Count; cl++)
-            {
-                if (classeVolo[cl].idClasse == classe)
-                {
-                    classeScelta = classeVolo[cl].prezzo;
-                }
-            }
-
-            double tariffaSolaAndata = 0;
+             double tariffaSolaAndata = 0;
             for (int a = 0; a < tariffario.Count; a++)
             {
                 if (tariffario[a].numero_volo == (numeroVolo) && tariffario[a].idClasse == classe)
@@ -128,7 +120,7 @@ namespace compagniaAerea
             }
 
 
-            return (prezzoBagaglio * quantitaBagagli) + (tariffaSolaAndata + confort) + (classeScelta);
+            return (prezzoBagaglio * quantitaBagagli) + (tariffaSolaAndata + confort) ;
         }
 
 
@@ -212,9 +204,9 @@ namespace compagniaAerea
 
         #endregion
 
-        #region SET TIKET
+        #region CREATE TIKET
 
-        public void createBooking(string dataPrenotazione, int numeroPersone,double totale, int idPasseggero, int idTariffa)
+        public void createBooking(string dataPrenotazione, int numeroPersone,double totale, int idTariffa,string tipoViaggio)
         {
             Prenotazione pr = new Prenotazione()
             {
@@ -222,56 +214,45 @@ namespace compagniaAerea
                 data_prenotazione = Convert.ToDateTime(dataPrenotazione).ToUniversalTime(),
                 numero_persone = numeroPersone,
                 totale = totale,
-                idPasseggero = idPasseggero,
                 idTariffa = idTariffa,
             };
-            myDatabase.getDb().Prenotaziones.InsertOnSubmit(pr);
+            
+            myDatabase.getDb().Prenotazione.InsertOnSubmit(pr);
             myDatabase.getDb().SubmitChanges();
+            if (tipoViaggio.Equals("Andata"))
+            {
+                idPrenotazioneAndata = pr.idPrenotazione;
+            }
+            else
+            {
+                idPrenotazioneRitorno = pr.idPrenotazione;
+            }
         }
 
         public void insertRecordPagamento(string dataPagamento, string tipoPagamento, int idprenotazione)
         {
-            Pagamento p = new Pagamento()
+            Pagamento pa = new Pagamento()
             {
-                idPagamento = getIdPagamento(),
+              
                 data_pagamento = Convert.ToDateTime(dataPagamento),
                 tipo_pagamento = tipoPagamento,
                 idPrenotazione = idprenotazione
             };
-            myDatabase.getDb().Pagamento.InsertOnSubmit(p);
+            myDatabase.getDb().Pagamento.InsertOnSubmit(pa);
             myDatabase.getDb().SubmitChanges();
         }
-
-        public int getIdPrenotaione()
-        {
-            int idPrenotazione = 0;
-            for (int i = 0; i <= myDatabase.getDb().Prenotaziones.LongCount(); i++)
-            {
-                idPrenotazione++;
-            }
-            return idPrenotazione;
-        }
-
-        public void insertRecordTiket(string nomeIntestatario, string cognomeIntestatario, int idPrenotazione)
+      
+         public void insertRecordTicket(int idPasseggero, int idPrenotazione)
         {
             Biglietto b = new Biglietto()
             {
-                nome_intestatario = nomeIntestatario,
-                cognome_intestatario = cognomeIntestatario,
+                idPasseggero = idPasseggero,
                 idPrenotazione = idPrenotazione
             };
             myDatabase.getDb().Biglietto.InsertOnSubmit(b);
             myDatabase.getDb().SubmitChanges();
         }
-        private int getIdPagamento()
-        {
-            int id = 0;
-            int count = Convert.ToInt32(pagamento.LongCount());
-            id = pagamento.Last().idPagamento + 1;
-                //  aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
-            return id; 
-        }
-
+        
         public int getQuatitàPersone()
         {
             return this.quantitaPersone;
@@ -281,6 +262,32 @@ namespace compagniaAerea
         {
             this.quantitaPersone = persone;
         }
+
+        public int getIdPrenotazioneAndata()
+        {
+            return this.idPrenotazioneAndata;
+        }
+
+        public int getIdPrenotazioneRitorno()
+        {
+            return this.idPrenotazioneRitorno;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
