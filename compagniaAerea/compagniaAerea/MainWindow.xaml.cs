@@ -234,7 +234,6 @@ namespace compagniaAerea
                     dataPartenzalbl.Content = ticket.getDataPartenza();
                     dataArrivolbl.Content = ticket.getDataArrivo();
                     totalelbl.Content = ticket.getSpesaTotale();
-
                 }
             }
             else
@@ -291,8 +290,6 @@ namespace compagniaAerea
             this.gridCorrente = 1;
             gestione_cliente.InitUtente();
             currentGrid();
-
-
         }
 
         public void populateGrid()
@@ -437,7 +434,7 @@ namespace compagniaAerea
         #endregion
 
         #region grid logIn
-        private void click_login(object sender, RoutedEventArgs e)
+        private void login_click(object sender, RoutedEventArgs e)
         {
             errore.ValueText(Login_usernametxt);
             errore.valuePassword(Login_passwordtxt);
@@ -454,16 +451,8 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
+                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff();
                 }
-                /*else
-                {
-                    dipendente.dipendente(Login_usernametxt.Text);
-                    if (Login_usernametxt.Text.Equals(dipendente.getNome()))
-                    {
-                        this.gridCorrente = 4;
-                        currentGrid();
-                    }
-                }*/
             }
             else
             {
@@ -685,8 +674,7 @@ namespace compagniaAerea
             errore.TraverseVisualTree(this.grid);
         }
         #endregion
-
-
+        
         #region dipendente
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -697,11 +685,14 @@ namespace compagniaAerea
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
-
-
+        }
+        #region profilo dipendete
+        /*ricerca del dipendente nell grid profilo dipendete*/
+        private void CercaDipendente_click(object sender, RoutedEventArgs e)
+        {
 
         }
-
+        #endregion
         //tutto ciò che fa parte di dipendente metti qui
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
@@ -754,9 +745,7 @@ namespace compagniaAerea
 
         }
 
-
-
-        private void click_applicaOfferta(object sender, RoutedEventArgs e)
+       private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
             errore.ValueText(txtPsconto);
             if (errore.checkText())

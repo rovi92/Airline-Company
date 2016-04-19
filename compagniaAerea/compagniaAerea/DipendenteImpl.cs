@@ -10,6 +10,7 @@ namespace compagniaAerea
     {
         DatabaseManager myDatatabase;
         InfoDipendente id = new InfoDipendente();
+        List<Personale> staff = new List<Personale>();
         public DipendenteImpl()
         {
             myDatatabase = DatabaseManager.Instance;
@@ -46,6 +47,12 @@ namespace compagniaAerea
                       pilota = d.pilota,
                       hostess = d.hostess
                   }).First();
+        }
+        public List<Personale> getStaff()
+        {
+            staff = (from d in myDatatabase.getDb().Personale
+                     select d).ToList();
+            return staff;
         }
 
         #region get Dipendente
@@ -147,6 +154,7 @@ namespace compagniaAerea
             myDatatabase.getDb().SubmitChanges();
         }
 
-       #endregion
+       
+        #endregion
     }
 }
