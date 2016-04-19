@@ -237,7 +237,6 @@ namespace compagniaAerea
                     dataPartenzalbl.Content = ticket.getDataPartenza();
                     dataArrivolbl.Content = ticket.getDataArrivo();
                     totalelbl.Content = ticket.getSpesaTotale();
-
                 }
             }
             else
@@ -294,8 +293,6 @@ namespace compagniaAerea
             this.gridCorrente = 1;
             gestione_cliente.InitUtente();
             currentGrid();
-
-
         }
 
         public void populateGrid()
@@ -443,15 +440,15 @@ namespace compagniaAerea
         #endregion
 
         #region grid logIn
-        private void click_login(object sender, RoutedEventArgs e)
+        private void login_click(object sender, RoutedEventArgs e)
         {
-            errore.ValueText(Login_nometxt);
+            errore.ValueText(Login_usernametxt);
             errore.valuePassword(Login_passwordtxt);
-            errore.ValueText(Login_cognometxt);
+           
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
 
-                if (Login_nometxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin") && Login_cognometxt.Text.Equals("admin"))
+                if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
@@ -460,15 +457,7 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
-                }
-                else
-                {
-                    dipendente.getDipendente(Login_nometxt.Text, Login_cognometxt.Text);
-                    if (Login_nometxt.Text.Equals(dipendente.getNome()) && Login_cognometxt.Text.Equals(dipendente.getCognome()))
-                    {
-                        this.gridCorrente = 4;
-                        currentGrid();
-                    }
+                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff();
                 }
             }
             else
@@ -703,8 +692,7 @@ namespace compagniaAerea
             errore.TraverseVisualTree(this.grid);
         }
         #endregion
-
-
+        
         #region dipendente
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -715,11 +703,14 @@ namespace compagniaAerea
             MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
-
-
+        }
+        #region profilo dipendete
+        /*ricerca del dipendente nell grid profilo dipendete*/
+        private void CercaDipendente_click(object sender, RoutedEventArgs e)
+        {
 
         }
-
+        #endregion
         //tutto ciò che fa parte di dipendente metti qui
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
@@ -772,7 +763,15 @@ namespace compagniaAerea
 
         }
 
+        private void rdbDipendenteNome_Checked(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void rdbDipendenteCodice_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void click_applicaOfferta(object sender, RoutedEventArgs e)
         {
@@ -823,15 +822,15 @@ namespace compagniaAerea
             errore.ValueText(gatetxt);
             errore.ValueText(orario_partenzatxt);
             errore.ValueText(orario_arrivotxt);
-
-            if (errore.checkText())
+            dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+            /*if (errore.checkText())
             {
-
+                
             }
             else
             {
                 MessageBox.Show(errore.codError());
-            }
+            }*/
         }
 
 

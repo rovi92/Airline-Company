@@ -8,21 +8,20 @@
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="297" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
+        
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
-            <TextBlock x:Name="login_nome" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="N"/><Run Text="ome:"/></TextBlock>
-            <TextBox x:Name="Login_nometxt" HorizontalAlignment="Left" Height="20" Margin="23,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
-            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,131,131,147" Text="Password:" Foreground="White"/>
-            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,153,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
-            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="23,204,0,0" VerticalAlignment="Top" Width="165" Height="20" Click="click_login"/>
-            <TextBox x:Name="Login_cognometxt" HorizontalAlignment="Left" Height="23" Margin="24,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <TextBlock x:Name="login_cognome" HorizontalAlignment="Left" Margin="24,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"><Run Text="Co"/><Run Text="gnome:"/></TextBlock>
-            <Label Height="25" Margin="19,133,20,56" Foreground="#FFFFC4C4">
+            <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="55"><Run Text="User"/><Run Text="name:"/></TextBlock>
+            <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="23,97,0,181" Text="Password:" Foreground="White" RenderTransformOrigin="0.679,1.37" HorizontalAlignment="Left" Width="56"/>
+            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,120,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
+            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,201,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="login_click"/>
+            <Label Margin="23,157,16,109" Foreground="#FFFFC4C4">
                 <Hyperlink Click="click_apriRegistrazione">
                     <TextBlock Text="Non hai un account? Registrati" Foreground="White" />
                 </Hyperlink>
             </Label>
-            <Label Height="25" Margin="15,184,15,5">
+            <Label Height="25" Margin="24,235,6,36">
                 <Hyperlink Click="click_apriFormClienteNonRegistrato">
                     <InlineUIContainer>
                         <TextBlock Height="17" RenderTransformOrigin="0.282,0.533" Width="169" Foreground="White" ><Run Text="Oppure prenota "/><Run Text="il"/><Run Text=" tuo"/><Run Text=" biglietto"/></TextBlock>
@@ -127,7 +126,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -252,33 +251,43 @@
 
         <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
-            <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="109" Margin="43,74,0,0" VerticalAlignment="Top" Width="119">
-                <Image x:Name="image1" Margin="-1"/>
-            </Border>
-            <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="24" Margin="243,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <TextBox x:Name="codiceDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="243,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <TextBox x:Name="dataAssunzione_dipendentetxt" HorizontalAlignment="Left" Height="22" Margin="243,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <TextBlock x:Name="cognome_dipendentetbl" HorizontalAlignment="Left" Margin="243,66,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
-            <TextBlock x:Name="nome_dipendentetbl" HorizontalAlignment="Left" Margin="243,124,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
-            <TextBlock x:Name="codice_dipendentetbl" HorizontalAlignment="Left" Margin="243,176,0,0" TextWrapping="Wrap" Text="Codice" VerticalAlignment="Top"/>
-            <TextBlock x:Name="data_assunzione_dipendentetbl" HorizontalAlignment="Left" Margin="243,233,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
-            <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="525,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
-            <TextBox x:Name="data_nascita_dipendentetxt" HorizontalAlignment="Left" Margin="243,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24" IsEnabled="False"/>
-            <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="525,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="25" IsEnabled="False"/>
-            <TextBox x:Name="indirizzo_dipendentetxt" HorizontalAlignment="Left" Margin="525,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
-            <TextBlock x:Name="Telefono_dipendentetbl" HorizontalAlignment="Left" Margin="525,127,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="19"/>
-            <TextBlock x:Name="data_nascita_dipendentetbl" HorizontalAlignment="Left" Margin="243,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
-            <TextBlock x:Name="email_dipendentetbl" HorizontalAlignment="Left" Margin="525,177,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="21"/>
-            <TextBlock x:Name="indirizzo_dipendentetbl" HorizontalAlignment="Left" Margin="525,236,0,0" TextWrapping="Wrap" Text="Indirizzo" VerticalAlignment="Top"/>
-            <CheckBox x:Name="cambia_telefono_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,148,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_telefonocb_Checked"/>
-            <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,197,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
-            <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="657,254,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked"/>
+            <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="374,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="374,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="codiceDipendentetxt" HorizontalAlignment="Left" Height="24" Margin="374,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="dataAssunzione_dipendentetxt" HorizontalAlignment="Left" Height="22" Margin="374,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBlock x:Name="cognome_dipendentetbl" HorizontalAlignment="Left" Margin="374,41,0,0" TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Top"/>
+            <TextBlock x:Name="nome_dipendentetbl" HorizontalAlignment="Left" Margin="374,90,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top"/>
+            <TextBlock x:Name="codice_dipendentetbl" HorizontalAlignment="Left" Margin="374,136,0,0" TextWrapping="Wrap" Text="Codice" VerticalAlignment="Top"/>
+            <TextBlock x:Name="data_assunzione_dipendentetbl" HorizontalAlignment="Left" Margin="374,181,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
+            <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="620,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
+            <TextBox x:Name="data_nascita_dipendentetxt" HorizontalAlignment="Left" Margin="374,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24" IsEnabled="False"/>
+            <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="620,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="26" IsEnabled="False"/>
+            <TextBox x:Name="indirizzo_dipendentetxt" HorizontalAlignment="Left" Margin="620,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
+            <TextBlock x:Name="Telefono_dipendentetbl" HorizontalAlignment="Left" Margin="620,140,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="18"/>
+            <TextBlock x:Name="data_nascita_dipendentetbl" HorizontalAlignment="Left" Margin="374,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
+            <TextBlock x:Name="email_dipendentetbl" HorizontalAlignment="Left" Margin="620,190,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="20"/>
+            <TextBlock x:Name="indirizzo_dipendentetbl" HorizontalAlignment="Left" Margin="620,248,0,0" TextWrapping="Wrap" Text="Indirizzo" VerticalAlignment="Top"/>
+            <CheckBox x:Name="cambia_telefono_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,162,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_telefonocb_Checked"/>
+            <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,210,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
+            <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,268,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked" RenderTransformOrigin="-2.586,-0.091"/>
             <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
+            <TextBlock x:Name="Cerca" HorizontalAlignment="Left" Margin="49,35,0,0" TextWrapping="Wrap" Text="Cerca dipendente:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="genere" HorizontalAlignment="Left" Margin="374,269,0,0" TextWrapping="Wrap" Text="Genere" VerticalAlignment="Top" RenderTransformOrigin="0.421,0.752"/>
+            <TextBlock x:Name="impiego" HorizontalAlignment="Left" Margin="374,313,0,0" TextWrapping="Wrap" Text="Impiego" VerticalAlignment="Top"/>
+            <TextBox x:Name="genereDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,285,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <DataGrid x:Name="dataProfiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="245" Width="260" >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding idPersonale}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="cercaDipendentebtn" Content="Cerca" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="CercaDipendente_click"/>
         </Grid>
 
         <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="368,-12,0,0" TextWrapping="Wrap" Text="gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="519,0,0,0" TextWrapping="Wrap" Text="Gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
             <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
             <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>
             <TextBlock x:Name="textBlock11_Copy" HorizontalAlignment="Left" Margin="178,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>

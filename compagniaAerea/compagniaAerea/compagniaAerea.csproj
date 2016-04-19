@@ -59,6 +59,8 @@
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Dipendente.cs" />
     <Compile Include="DipendenteImpl.cs" />
+    <Compile Include="DipendenteVolo.cs" />
+    <Compile Include="DipendenteVoloImpl.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Gestione_Utente.cs" />
     <Compile Include="InterfacciaError.cs" />
