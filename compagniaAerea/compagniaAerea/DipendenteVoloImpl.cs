@@ -71,9 +71,11 @@ namespace compagniaAerea
                 if(p.data_partenza == data_partenza && p.data_arrivo == data_arrivo && p.orario_partenza.Equals(orario_partenza) && p.orario_arrivo.Equals(orario_arrivo))
                 {
                     return true;
+                    //Esegui l'aggiunga del piano di volo (da vedere se farlo nel main oppure qui)
                 } else
                 {
                     return false;
+                    //Il piano di volo è già esistente, quindi mostrare una message box
                 }
             }
             return false;

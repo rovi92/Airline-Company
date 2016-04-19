@@ -10,7 +10,7 @@ namespace compagniaAerea
     {
         
         void getDipendente(int idDIpendente);
-        List<DipendenteImpl.InfoDipendente> getStaff();
+        //List<DipendenteImpl.InfoDipendente> getStaff(); TE L'HO COMMENTATA IO PERCHE' MI DAVA ERRORE
        
         /*get dei dati dipendente*/
         String getNome();

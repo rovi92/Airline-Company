@@ -351,9 +351,7 @@ namespace compagniaAerea
             gestione_cliente.InitUtente();
             currentGrid();
         }
-
         #region profilo dipendente
-
         string telefono_dipendente, email_dipendente, indirizzodi_pendente;
         private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
         {
@@ -435,7 +433,11 @@ namespace compagniaAerea
                 pb.Password = this.textInBox;
             }
         }
-        
+
+
+
+
+
         #endregion
 
         #region grid logIn
@@ -652,8 +654,8 @@ namespace compagniaAerea
 
 
                     ticket.getPopulateDbTicket();
-                    ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
-                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text, ticket.getIdPrenotaione());
+                    /*ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(nomepasseggerotxt.Text, cognomepasseggerotxt.Text, ticket.getIdPrenotaione());*/
                 }
 
             }
