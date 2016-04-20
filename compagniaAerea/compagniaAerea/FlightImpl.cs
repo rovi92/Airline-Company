@@ -45,26 +45,25 @@ namespace compagniaAerea
 
             public double costoFirst { get; set; }//5
 
-            }
+        }
 
         //caricamento di database in locale 
         public void updateFlightLegs()
         {
             voli.AddRange((from p in myDatabase.getDb().Piano_di_volo
-                      select new FlightInfo
-                      {
-                          partenza = p.Tratta.First(t => (t.data_partenza == p.data_partenza && t.orario_partenza == p.orario_partenza)).Aeroporto.città,
-                          arrivo = p.Tratta.First(t =>(t.data_arrivo == p.data_arrivo && t.orario_arrivo == p.orario_arrivo)).Aeroporto1.città,
-                          dataPartenza = p.data_partenza,
-                          dataArrivo = p.data_arrivo,
-                          orarioPartenza = p.orario_partenza,
-                          orarioArrivo = p.orario_arrivo,
-                          codiceVolo = p.numero_volo,
-                          costoEconomy = p.Tariffario.First(t=>t.idClasse == 1).tariffa_solo_andata,
-                          costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
-                          costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata
-                      }).ToList());
-
+                           select new FlightInfo
+                           {
+                               partenza = p.Aeroporto.città,
+                               arrivo = p.Aeroporto1.città,
+                               dataPartenza = p.data_partenza,
+                               dataArrivo = p.data_arrivo,
+                               orarioPartenza = p.orario_partenza,
+                               orarioArrivo = p.orario_arrivo,
+                               codiceVolo = p.numero_volo,
+                               costoEconomy = p.Tariffario.First(t => t.idClasse == 1).tariffa_solo_andata,
+                               costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
+                               costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata
+                           }).ToList());
 
         }
 
@@ -73,7 +72,7 @@ namespace compagniaAerea
             return (from v in voli
                     where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data
                     select v).ToList();
-            
+
         }
         //metodo per controllare se esiste un una certa stringa nel database
 
@@ -82,7 +81,7 @@ namespace compagniaAerea
             return (from v in voli
                     where v.partenza == departure
                     select v).Count() > 0 ? true : false;
-           
+
 
         }
 
@@ -99,10 +98,10 @@ namespace compagniaAerea
             return (from v in voli
                     where v.dataPartenza.ToString("yyyy-MM-dd") == date
                     select v).Count() > 0 ? true : false;
-          
+
         }
 
-        public void setFlightClass(String className,int idClasse)
+        public void setFlightClass(String className, int idClasse)
         {
             this.nomeClasse = className;
             this.idClasse = idClasse;
@@ -113,17 +112,85 @@ namespace compagniaAerea
             return this.nomeClasse;
         }
 
-        public int getFlyClassId()
+        public int getFlightClassId()
         {
             return this.idClasse;
         }
 
-        
+
 
         public string getAirportName(string città)
         {
             return myDatabase.getDb().Aeroporto.First(a => a.città.ToString() == città).nome;
-           
+
+        }
+
+        public Boolean checkFlightSeats(int idVolo, int idClasse, int postiInPrenotamento)
+        {
+            switch (idClasse)
+            {
+                case 1:
+                    /*return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                              where p0.numero_volo == idVolo
+                                                                              select p0.Tratta.First().Aereo.capacità_economy).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                            where p1.numero_volo == idVolo
+                                                                                                                                                            select p1.Tratta.First().posti_economy).First()) + postiInPrenotamento) > 0) && (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                              where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                              select p1.Tratta.Last().Aereo.capacità_economy).First()) - (Convert.ToInt32((from p2 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                           where p2.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                           select p2.Tratta.Last().posti_economy).First()) + postiInPrenotamento) > 0) ? true : false) : ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            where p0.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            select p0.Tratta.First().Aereo.capacità_economy).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          select p1.Tratta.First().posti_economy).First()) + postiInPrenotamento) > 0) ? true : false);*/
+
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? (from p in myDatabase.getDb().Piano_di_volo
+                                                            where p.numero_volo == idVolo
+                                                            select ((p.Tratta.First().Aereo.capacità_economy - (p.Tratta.First().posti_economy + postiInPrenotamento)) > 0) && ((p.Tratta.Last().Aereo.capacità_economy - (p.Tratta.Last().posti_economy + postiInPrenotamento)) > 0)).First() : (from p in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                  where p.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                  select ((p.Tratta.First().Aereo.capacità_economy - (p.Tratta.First().posti_economy + postiInPrenotamento)) > 0)).First();
+
+
+                case 2:
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                              where p0.numero_volo == idVolo
+                                                                              select p0.Tratta.First().Aereo.capacità_buisness).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                             where p1.numero_volo == idVolo
+                                                                                                                                                             select p1.Tratta.First().posti_buisness).First()) + postiInPrenotamento) > 0) && (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                                select p1.Tratta.Last().Aereo.capacità_buisness).First()) - (Convert.ToInt32((from p2 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                              where p2.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                              select p2.Tratta.Last().posti_buisness).First()) + postiInPrenotamento) > 0) ? true : false) : ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                where p0.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                select p0.Tratta.First().Aereo.capacità_buisness).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               select p1.Tratta.First().posti_buisness).First()) + postiInPrenotamento) > 0) ? true : false);
+                case 3:
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                              where p0.numero_volo == idVolo
+                                                                              select p0.Tratta.First().Aereo.capacità_first).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                          where p1.numero_volo == idVolo
+                                                                                                                                                          select p1.Tratta.First().posti_first).First()) + postiInPrenotamento) > 0) && (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                          where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                          select p1.Tratta.Last().Aereo.capacità_first).First()) - (Convert.ToInt32((from p2 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                     where p2.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                     select p2.Tratta.Last().posti_first).First()) + postiInPrenotamento) > 0) ? true : false) : ((Convert.ToInt32((from p0 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    where p0.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    select p0.Tratta.First().Aereo.capacità_first).First()) - (Convert.ToInt32((from p1 in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                where p1.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                select p1.Tratta.First().posti_first).First()) + postiInPrenotamento) > 0) ? true : false);
+                default:
+                    return false;
+            }
+
         }
     }
 }

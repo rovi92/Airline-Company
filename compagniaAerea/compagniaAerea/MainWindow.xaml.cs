@@ -121,13 +121,13 @@ namespace compagniaAerea
                           volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true) &&
                           volo.checkDateFlight(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true))
                     {
+
                         dataGridRitorno.ItemsSource = volo.getCustomFlight(txtDestinazioneVolo.Text, txtPartenza.Text, dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
                     }
                     break;
                 case false:
 
-                    //  volo.getExistTimeDestination(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"), "dataPartenza");
                     if (volo.checkDeparture(txtPartenza.Text).Equals(true) &&
                             volo.checkArrival(txtDestinazioneVolo.Text).Equals(true) &&
                             volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true))
@@ -135,6 +135,7 @@ namespace compagniaAerea
                         dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
                     }
                     break;
+                
             }
         }
         #endregion
@@ -142,19 +143,48 @@ namespace compagniaAerea
         #region bottone prenota
         private void prenota_click(object sender, RoutedEventArgs e)
         {
-
-
-            btnIndietro.Visibility = Visibility.Hidden;
-            if (!GridSupplemento.IsVisible)
+            if (rdbAndataRitorno.IsChecked.Value)
             {
-                GridSupplemento.Visibility = Visibility.Visible;
-            }
-            ticket.setQuantitàPersone(Int32.Parse(lblPosti.Content.ToString()));
-            btnRegistraCliente.Visibility = Visibility.Hidden;
-            this.gridCorrente = 7;
-            currentGrid();
 
+                if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())) && volo.checkFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
+                {
+                    btnIndietro.Visibility = Visibility.Hidden;
+                    if (!GridSupplemento.IsVisible)
+                    {
+                        GridSupplemento.Visibility = Visibility.Visible;
+                    }
+                    ticket.setQuantitàPersone(Int32.Parse(lblPosti.Content.ToString()));
+                    btnRegistraCliente.Visibility = Visibility.Hidden;
+                    this.gridCorrente = 7;
+                    currentGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Posti esauriti dio porco");
+                }
+
+            }
+            else
+            {
+                if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
+                {
+                    btnIndietro.Visibility = Visibility.Hidden;
+                    if (!GridSupplemento.IsVisible)
+                    {
+                        GridSupplemento.Visibility = Visibility.Visible;
+                    }
+                    ticket.setQuantitàPersone(Int32.Parse(lblPosti.Content.ToString()));
+                    btnRegistraCliente.Visibility = Visibility.Hidden;
+                    this.gridCorrente = 7;
+                    currentGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Posti esauriti dio porco");
+                }
+            }
         }
+        
         #endregion
 
         #region radioButton andata/andata e ritorno
@@ -572,7 +602,7 @@ namespace compagniaAerea
                 oraArrivolbl.Content = getCellValue(dataGridAndata, 7);
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 dataArrivolbl.Content = dataRitorno.SelectedDate.ToString();
-                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text),volo.getFlyClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
+                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text),volo.getFlightClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
 
             }
             else
@@ -615,14 +645,14 @@ namespace compagniaAerea
                 oraArrivolbl.Content = getCellValue(dataGridRitorno, 7);
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 
-                totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getFlyClassId()) * int.Parse(lblPosti.Content.ToString());
+                totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getFlightClassId()) * int.Parse(lblPosti.Content.ToString());
                 btnConferma2.Visibility = Visibility.Visible;
                 btnConferma_ordine.Visibility = Visibility.Hidden;
                 //creo la prenotazione di andata
                 ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
                                   int.Parse(lblPosti.Content.ToString()),
                                   Double.Parse(totalelbl.Content.ToString()),
-                                  ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlyClassId()), "Andata");
+                                  ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlightClassId()), "Andata");
 
 
             }
@@ -645,7 +675,7 @@ namespace compagniaAerea
             ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
                                  int.Parse(lblPosti.Content.ToString()),
                                  Double.Parse(totalelbl.Content.ToString()),
-                                 ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlyClassId()), "Ritorno");
+                                 ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlightClassId()), "Ritorno");
             //imposto l'id di ritorno della prenotazione
 
             txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");

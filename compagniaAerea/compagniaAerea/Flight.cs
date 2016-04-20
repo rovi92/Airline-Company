@@ -12,14 +12,14 @@ namespace compagniaAerea
         Boolean checkDeparture(string departure);
         Boolean checkArrival(string arrival);
         Boolean checkDateFlight(string date);
-
+        Boolean checkFlightSeats(int idClasse,int idVolo, int postiInPrenotamento);
         void updateFlightLegs();
 
         void setFlightClass(string className,int idClasse);
 
         List<FlightImpl.FlightInfo> getCustomFlight(string partenza, string arrivo, string data);
         string getFlightClassName();
-        int getFlyClassId();
+        int getFlightClassId();
         string getAirportName(string città);
         
        
