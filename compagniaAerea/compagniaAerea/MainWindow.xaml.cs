@@ -352,7 +352,39 @@ namespace compagniaAerea
             gestione_cliente.InitUtente();
             currentGrid();
         }
+
         #region profilo dipendente
+
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            this.gridCorrente = 0;
+            currentGrid();
+            MIGestioneVoli.Visibility = Visibility.Hidden;
+            MIGestioneTariffario.Visibility = Visibility.Hidden;
+            MIProfilo.Visibility = Visibility.Hidden;
+            btnLogOut.Visibility = Visibility.Hidden;
+        }
+        #region profilo dipendete
+        /*ricerca del dipendente nell grid profilo dipendete*/
+        private void CercaDipendente_click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+            dipendente.getDipendente(Convert.ToInt32(dipendente.getValueGrid(dataProfiliDipendetente)[2]));
+            cognomeDipendentetxt.Text = dipendente.getCognome();
+            nomeDipendentetxt.Text = dipendente.getNome();
+            codiceDipendentetxt.Text = dipendente.getCodice();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            dataAssunzione_dipendentetxt.Text = dipendente.getDataAssunzione();
+            data_nascita_dipendentetxt.Text = dipendente.getDataNascita();
+            genereDipendentetxt.Text = dipendente.getSesso();
+            impiegoDipendentetxt.Text = dipendente.getImpiego();
+            telefonoDipendentetxt.Text = dipendente.getTelefono();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            email_dipendentetxt.Text = dipendente.getEmail();
+        }
+
         string telefono_dipendente, email_dipendente, indirizzodi_pendente;
         private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
         {
@@ -382,10 +414,18 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
+                /*inserimento dei dati nel db*/
+                if (cambia_email_dipendentecb.IsChecked == true)
+                    dipendente.setEmail(email_dipendentetxt.Text);
+                if (cambia_indirizzo_dipendentecb.IsChecked == true)
+                    dipendente.setIndirizzo(indirizzo_dipendentetxt.Text);
+                if (cambia_telefono_dipendentecb.IsChecked == true)
+                    dipendente.setTelefono(telefonoDipendentetxt.Text);
+                //reset checkbox
                 cambia_telefono_dipendentecb.IsChecked = false;
                 cambia_email_dipendentecb.IsChecked = false;
                 cambia_indirizzo_dipendentecb.IsChecked = false;
-                //cambio cambio dei dati nel db
+              
             }
             else
             {
@@ -446,7 +486,7 @@ namespace compagniaAerea
         {
             errore.ValueText(Login_usernametxt);
             errore.valuePassword(Login_passwordtxt);
-           
+
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
 
@@ -459,7 +499,7 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
-                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff();
+                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
                 }
             }
             else
@@ -623,6 +663,9 @@ namespace compagniaAerea
 
             int biglietti = ticket.getQuatitàPersone();
 
+                    ticket.getPopulateDbTicket();
+                   /* ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(gestione_cliente.getLastIdPassenger(cf., cognomepasseggerotxt.Text, ticket.getIdPrenotaione());*/
 
             gestione_cliente.InitUtente();
             if (gestione_cliente.controlCF(cfpasseggerotxt.Text).Equals(true) || gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(true))
@@ -694,26 +737,10 @@ namespace compagniaAerea
             errore.TraverseVisualTree(this.grid);
         }
         #endregion
-        
-        #region dipendente
-        private void btnLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            this.gridCorrente = 0;
-            currentGrid();
-            MIGestioneVoli.Visibility = Visibility.Hidden;
-            MIGestioneTariffario.Visibility = Visibility.Hidden;
-            MIProfilo.Visibility = Visibility.Hidden;
-            btnLogOut.Visibility = Visibility.Hidden;
-        }
-        #region profilo dipendete
-        /*ricerca del dipendente nell grid profilo dipendete*/
-        private void CercaDipendente_click(object sender, RoutedEventArgs e)
-        {
 
-        }
-        #endregion
-        //tutto ciò che fa parte di dipendente metti qui
+
+
+
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
         {
