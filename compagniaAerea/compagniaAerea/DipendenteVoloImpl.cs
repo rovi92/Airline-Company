@@ -10,6 +10,7 @@ namespace compagniaAerea
     {
         DatabaseManager myDatabase;
         List<Piano_di_volo> piano_di_volo = new List<Piano_di_volo>();
+        int numero_volo = 0;
 
         public DipendenteVoloImpl()
         {
@@ -69,17 +70,14 @@ namespace compagniaAerea
         //Controlla se il piano di volo è già inserito nel db
         public Boolean checkPianodivoloExist(DateTime data_partenza, DateTime data_arrivo, String orario_partenza, String orario_arrivo)
         {
-            foreach (Piano_di_volo p in piano_di_volo) {
-                if(p.data_partenza == data_partenza && p.data_arrivo == data_arrivo && p.orario_partenza.Equals(orario_partenza) && p.orario_arrivo.Equals(orario_arrivo))
-                {
-                    return true;
-                    //Esegui l'aggiunga del piano di volo (da vedere se farlo nel main oppure qui)
-                } else
-                {
-                    return false;
-                    //Il piano di volo è già esistente, quindi mostrare una message box
-                }
-            }
+            /*  var query = from p in piano_di_volo
+                          where p.data_partenza == data_partenza.ToUniversalTime() &&
+                          p.data_arrivo == data_arrivo.ToUniversalTime() &&
+                          p.orario_partenza.ToString("HH:mm:ss") == orario_partenza &&
+                          p.orario_arrivo.ToString("HH:mm:ss") == orario_arrivo
+                          select p.numero_volo;
+
+              return query.Count() > 0 ? { numero_volo = Convert.ToInt32(query); true } : false;*/
             return false;
         }
     }

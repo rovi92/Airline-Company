@@ -1,213 +1,227 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.75, 14.875" name="myDatabaseUniboAirline">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.875, 21.75" name="myDatabaseUniboAirline">
   <DataContextMoniker Name="/myDatabaseUniboAirlineDataContext" />
   <nestedChildShapes>
-    <classShape Id="2648b5e1-6841-4cd9-bbef-f52095ed5527" absoluteBounds="1.5, 5.125, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Aereo" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7d940462-a61e-4a75-85a4-622151556124" absoluteBounds="1.5150000000000001, 5.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="3ca5409d-2dff-4c64-892b-19a587153054" absoluteBounds="7, 1.875, 2, 1.5785953776041666">
+    <classShape Id="21ddbfdf-ff52-46be-b5c1-1bae3fb89dbb" absoluteBounds="12, 3.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Volo_attuale" />
       <nestedChildShapes>
-        <elementListCompartment Id="b5b77f3a-31d6-43ea-8b63-bf514ae00038" absoluteBounds="7.015, 2.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="708ce722-e1b7-4923-9f0a-6e083d832746" absoluteBounds="12.015, 3.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="222412d1-9751-4beb-a3d6-101e7d0dd34b" absoluteBounds="1.5, 1.75, 2, 1.7708968098958329">
+    <classShape Id="b4ba098d-aa81-4b83-862f-1d174213974c" absoluteBounds="6.5, 3.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Aereo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1df6eb91-051b-4c32-9312-7bf53445b57b" absoluteBounds="6.515, 3.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b0440c4e-35e1-4694-9164-61dce68cd2da" absoluteBounds="3.75, 8.875, 2, 1.7708968098958327">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto" />
       <nestedChildShapes>
-        <elementListCompartment Id="a0b02275-5a98-4c1c-b5ce-9b2b1d1c966e" absoluteBounds="1.5150000000000001, 2.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0e0e068a-9a7d-476c-b3f8-9ab9cfb2c621" absoluteBounds="3.765, 9.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fe6cd13c-f0ef-4416-ab35-d3c6b6eb057a" absoluteBounds="12.5, 9.75, 2, 1.5785953776041666">
+    <classShape Id="aa04851c-2e26-4fd7-b399-718aebe06376" absoluteBounds="15.5, 9.375, 2, 1.1939925130208344">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Babaglio_Imbarcato" />
       <nestedChildShapes>
-        <elementListCompartment Id="e58c28fd-3422-43f2-b618-8d990f7d5e03" absoluteBounds="12.515, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bc9b087b-01fd-4e4c-9c71-c743bfa908d0" absoluteBounds="15.515, 9.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="db0e4676-6033-4b1a-b909-d0cdeaf9c7c5" absoluteBounds="9.75, 9.875, 2, 1.3862939453124987">
+    <classShape Id="05b4dea7-492d-4597-bdb8-040db858a4d7" absoluteBounds="12.75, 9.25, 2, 1.3862939453124987">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Biglietto" />
       <nestedChildShapes>
-        <elementListCompartment Id="38ab8086-c391-43cc-8550-8770d843d4b8" absoluteBounds="9.765, 10.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="69d63b6a-b700-407d-b663-132610b2dea6" absoluteBounds="12.765, 9.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="43c7eed6-fc32-45a1-9b74-62015e4d9de6" absoluteBounds="1.5, 11, 2, 1.3862939453124987">
+    <classShape Id="643377ea-d9cf-44ba-ad75-cd2932934a99" absoluteBounds="3.5, 3.375, 2, 1.3862939453125005">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Classe" />
       <nestedChildShapes>
-        <elementListCompartment Id="a9cf7504-b44a-414a-ae45-0d717bf9647a" absoluteBounds="1.5150000000000001, 11.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="898fe7cc-e07d-49a8-a038-ebc6f59cafc0" absoluteBounds="3.515, 3.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0536d77f-cc24-4521-99c0-8b7266201efe" absoluteBounds="0.625, 12.75, 2, 1.3862939453124987">
+    <classShape Id="323c0ba4-eb55-466e-90fb-75b6dbb10b86" absoluteBounds="9.25, 2.375, 2, 1.3862939453125003">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Comfort" />
       <nestedChildShapes>
-        <elementListCompartment Id="f2a29dc9-c1d2-4f5b-99b2-0ec7b83d29c4" absoluteBounds="0.64000000000000057, 13.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="54f58a80-47e6-4b8e-97e7-19f98dfe4733" absoluteBounds="9.265, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="86664a5f-38af-49ac-8e88-f6438e74c6fa" absoluteBounds="4.5, 13, 2, 1.1939925130208344">
+    <classShape Id="b06167c8-9905-4a93-89e7-843402844c75" absoluteBounds="12, 6.375, 2, 1.1939925130208344">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Comfort_inclusi" />
       <nestedChildShapes>
-        <elementListCompartment Id="f8b0ae16-3ec8-449c-9bd0-e875877145fb" absoluteBounds="4.515, 13.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b03994ba-63e5-43e2-b65a-39d82147b2d9" absoluteBounds="12.015, 6.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fb8a578b-3d32-4f82-8c81-ee352dbea839" absoluteBounds="9.75, 13, 2, 1.5785953776041666">
+    <classShape Id="ce91b19b-2820-4e4c-a023-79982d66a78b" absoluteBounds="11.75, 12.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Pagamento" />
       <nestedChildShapes>
-        <elementListCompartment Id="ca6fffb6-5a2b-4fe6-ac57-1e4c9ac2f34b" absoluteBounds="9.765, 13.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a9f5dfb8-edbb-4655-a4a9-ba216b92a095" absoluteBounds="11.765, 12.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="58f16def-4bdc-4ea3-9c17-6c48f8d6f69f" absoluteBounds="12.25, 12.25, 2, 2.3478011067708344">
+    <classShape Id="8cfd18a4-9208-476f-8aff-5b5264dcd56d" absoluteBounds="10, 14.75, 2, 2.3478011067708326">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero" />
       <nestedChildShapes>
-        <elementListCompartment Id="f5f73980-9cda-4e59-a279-abc4c2038c64" absoluteBounds="12.265, 12.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4eb958ca-152d-41d7-af9f-6afd095bccc0" absoluteBounds="10.015, 15.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3d83beb1-6ec3-4751-ad86-74c8703bc54f" absoluteBounds="4.25, 5.125, 2, 2.9247054036458318">
+    <classShape Id="06ad0afb-957e-401a-bd16-155c749e91a4" absoluteBounds="9.25, 18.625, 2, 2.9247054036458309">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Personale" />
       <nestedChildShapes>
-        <elementListCompartment Id="31209e88-fcce-4ff1-875a-644fdf22b1e3" absoluteBounds="4.2650000000000006, 5.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="65bd5cb7-e7b5-4eec-8af6-6f970d3fbacc" absoluteBounds="9.265, 19.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="56e2285e-44ee-4ac0-b538-a6a3829cd05b" absoluteBounds="1.5, 7.625, 2, 1.9631982421874996">
+    <classShape Id="9f9deb05-7de7-4745-a3b7-daacaef9da07" absoluteBounds="3.5, 5.875, 2, 2.3478011067708344">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Piano_di_volo" />
       <nestedChildShapes>
-        <elementListCompartment Id="3352a042-f8a2-4d4c-8fdd-b94020120a70" absoluteBounds="1.5150000000000001, 8.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4927409c-2e40-410c-be28-4b5144601099" absoluteBounds="3.515, 6.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="dde22a37-4367-4a65-ac67-e52208c32947" absoluteBounds="7, 10.75, 2, 1.7708968098958344">
+    <classShape Id="5ae84819-71fd-4cea-906a-c1ca0ea2a5e5" absoluteBounds="9, 10.125, 2, 1.7708968098958344">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Prenotazione" />
       <nestedChildShapes>
-        <elementListCompartment Id="a99615c3-6b10-46d5-b4cc-58ceacbbda95" absoluteBounds="7.015, 11.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f3626f4e-9b63-4143-9083-008f67d7dc37" absoluteBounds="9.015, 10.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3a298db2-62f2-46ad-a01f-a551d2404fa5" absoluteBounds="9.75, 7, 2, 1.1939925130208344">
+    <classShape Id="5ff0c3cb-dace-425b-a44f-765e4f308e95" absoluteBounds="15.625, 12.375, 2, 1.1939925130208344">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Prezzo_bagaglio_imbarcato" />
       <nestedChildShapes>
-        <elementListCompartment Id="4ff62202-9bc1-4c32-ad98-7045b130af6f" absoluteBounds="9.765, 7.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="437fface-d44d-426e-b7ac-8ab47c3213cf" absoluteBounds="15.64, 12.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="781344c4-53a2-46ae-83e1-7826774d2e05" absoluteBounds="4.25, 8.875, 2, 1.5785953776041666">
+    <classShape Id="a04576c3-e518-445c-93f4-31e1cc1b5abb" absoluteBounds="6.25, 6.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Tariffario" />
       <nestedChildShapes>
-        <elementListCompartment Id="5a268d75-11c6-44ad-a222-69f2dcd95c05" absoluteBounds="4.2650000000000006, 9.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7abeb3df-7c2c-47be-bbe7-90db9f082115" absoluteBounds="6.265, 6.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" absoluteBounds="4.25, 0.875, 2, 3.5016097005208326">
+    <classShape Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" absoluteBounds="9.25, 5.25, 2, 3.5016097005208318">
       <DataClassMoniker Name="/myDatabaseUniboAirlineDataContext/Tratta" />
       <nestedChildShapes>
-        <elementListCompartment Id="6e1270e8-5884-422e-8da2-993d3ece84b3" absoluteBounds="4.2650000000000006, 1.335, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="165e31bf-48eb-40ee-b60f-362923e3f243" absoluteBounds="9.265, 5.71, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(11.75 : 10.5681469726562); (12.5 : 10.5681469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.75 : 9.97199625651042); (15.5 : 9.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Biglietto/Biglietto_Babaglio_Imbarcato" />
       <nodes>
-        <classShapeMoniker Id="db0e4676-6033-4b1a-b909-d0cdeaf9c7c5" />
-        <classShapeMoniker Id="fe6cd13c-f0ef-4416-ab35-d3c6b6eb057a" />
+        <classShapeMoniker Id="05b4dea7-492d-4597-bdb8-040db858a4d7" />
+        <classShapeMoniker Id="aa04851c-2e26-4fd7-b399-718aebe06376" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.625 : 13.5681469726562); (4.5 : 13.5681469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.25 : 3.7612939453125); (11.625 : 4.1362939453125); (11.625 : 6.97199625651042); (12 : 6.97199625651042)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Comfort/Comfort_Comfort_inclusi" />
       <nodes>
-        <classShapeMoniker Id="0536d77f-cc24-4521-99c0-8b7266201efe" />
-        <classShapeMoniker Id="86664a5f-38af-49ac-8e88-f6438e74c6fa" />
+        <classShapeMoniker Id="323c0ba4-eb55-466e-90fb-75b6dbb10b86" />
+        <classShapeMoniker Id="b06167c8-9905-4a93-89e7-843402844c75" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.25 : 12.25); (11.875 : 11.875); (12.125 : 11.875); (12.125 : 11.6362939453125); (11.75 : 11.2612939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11.375 : 14.75); (11.375 : 9.65625); (11.4166666666667 : 9.65625 : JumpStart); (11.5833333333333 : 9.65625 : JumpEnd); (12.75 : 9.65625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Passeggero/Passeggero_Biglietto" />
       <nodes>
-        <classShapeMoniker Id="58f16def-4bdc-4ea3-9c17-6c48f8d6f69f" />
-        <classShapeMoniker Id="db0e4676-6033-4b1a-b909-d0cdeaf9c7c5" />
+        <classShapeMoniker Id="8cfd18a4-9208-476f-8aff-5b5264dcd56d" />
+        <classShapeMoniker Id="05b4dea7-492d-4597-bdb8-040db858a4d7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.25 : 5.125); (6.625 : 4.75); (6.625 : 2.66429768880208); (7 : 2.66429768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.25 : 18.625); (10.25 : 17.3478011067708); (12.25 : 17.3478011067708); (12.25 : 14.2035953776042); (11.5 : 14.2035953776042); (11.5 : 4.03929768880208); (12 : 4.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Personale/Personale_Volo_attuale" />
       <nodes>
-        <classShapeMoniker Id="3d83beb1-6ec3-4751-ad86-74c8703bc54f" />
-        <classShapeMoniker Id="3ca5409d-2dff-4c64-892b-19a587153054" />
+        <classShapeMoniker Id="06ad0afb-957e-401a-bd16-155c749e91a4" />
+        <classShapeMoniker Id="21ddbfdf-ff52-46be-b5c1-1bae3fb89dbb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9 : 11.0056469726562); (9.75 : 11.0056469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.625 : 8.875); (4.625 : 8.22280110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Piano_di_volo" />
+      <nodes>
+        <classShapeMoniker Id="b0440c4e-35e1-4694-9164-61dce68cd2da" />
+        <classShapeMoniker Id="9f9deb05-7de7-4745-a3b7-daacaef9da07" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 8.875); (5.125 : 8.22280110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Piano_di_volo1" />
+      <nodes>
+        <classShapeMoniker Id="b0440c4e-35e1-4694-9164-61dce68cd2da" />
+        <classShapeMoniker Id="9f9deb05-7de7-4745-a3b7-daacaef9da07" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 10.3806469726562); (11.2916666666667 : 10.3806469726562 : JumpStart); (11.5833333333333 : 10.3806469726562 : JumpEnd); (12.75 : 10.3806469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Prenotazione/Prenotazione_Biglietto" />
       <nodes>
-        <classShapeMoniker Id="dde22a37-4367-4a65-ac67-e52208c32947" />
-        <classShapeMoniker Id="db0e4676-6033-4b1a-b909-d0cdeaf9c7c5" />
+        <classShapeMoniker Id="5ae84819-71fd-4cea-906a-c1ca0ea2a5e5" />
+        <classShapeMoniker Id="05b4dea7-492d-4597-bdb8-040db858a4d7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9 : 12.4595955357071); (9.5625 : 13.0220955357071); (9.5625 : 12.8125); (9.75 : 13)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11 : 11.2973453776042); (11.2916666666667 : 11.2973453776042 : JumpStart); (11.5833333333333 : 11.2973453776042 : JumpEnd); (12.21875 : 11.2973453776042); (12.21875 : 12.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Prenotazione/Prenotazione_Pagamento" />
       <nodes>
-        <classShapeMoniker Id="dde22a37-4367-4a65-ac67-e52208c32947" />
-        <classShapeMoniker Id="fb8a578b-3d32-4f82-8c81-ee352dbea839" />
+        <classShapeMoniker Id="5ae84819-71fd-4cea-906a-c1ca0ea2a5e5" />
+        <classShapeMoniker Id="ce91b19b-2820-4e4c-a023-79982d66a78b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.75 : 7.59699625651042); (13.5 : 7.59699625651042); (13.5 : 9.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.5625 : 12.375); (16.5625 : 10.5689925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Prezzo_bagaglio_imbarcato/Prezzo_bagaglio_imbarcato_Babaglio_Imbarcato" />
       <nodes>
-        <classShapeMoniker Id="3a298db2-62f2-46ad-a01f-a551d2404fa5" />
-        <classShapeMoniker Id="fe6cd13c-f0ef-4416-ab35-d3c6b6eb057a" />
+        <classShapeMoniker Id="5ff0c3cb-dace-425b-a44f-765e4f308e95" />
+        <classShapeMoniker Id="aa04851c-2e26-4fd7-b399-718aebe06376" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.375 : 10.4535953776042); (5.375 : 13)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.25 : 6.25); (7.25 : 6); (8.32291666666667 : 6 : JumpStart); (8.48958333333333 : 6 : JumpEnd); (9 : 6); (9 : 5); (11.4166666666667 : 5 : JumpStart); (11.7083333333333 : 5 : JumpEnd); (11.75 : 5); (11.75 : 6.64224612825521); (12 : 6.64224612825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tariffario/Tariffario_Comfort_inclusi" />
       <nodes>
-        <classShapeMoniker Id="781344c4-53a2-46ae-83e1-7826774d2e05" />
-        <classShapeMoniker Id="86664a5f-38af-49ac-8e88-f6438e74c6fa" />
+        <classShapeMoniker Id="a04576c3-e518-445c-93f4-31e1cc1b5abb" />
+        <classShapeMoniker Id="b06167c8-9905-4a93-89e7-843402844c75" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.25 : 10.3916648666366); (6.8125 : 10.9541648666366); (6.8125 : 10.5611387716847); (7.0013612283153 : 10.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.25 : 7.82859537760417); (7.25 : 11.0104484049479); (9 : 11.0104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tariffario/Tariffario_Prenotazione" />
       <nodes>
-        <classShapeMoniker Id="781344c4-53a2-46ae-83e1-7826774d2e05" />
-        <classShapeMoniker Id="dde22a37-4367-4a65-ac67-e52208c32947" />
+        <classShapeMoniker Id="a04576c3-e518-445c-93f4-31e1cc1b5abb" />
+        <classShapeMoniker Id="5ae84819-71fd-4cea-906a-c1ca0ea2a5e5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 11); (3.875 : 10.625); (3.875 : 10.8285953776042); (4.25 : 10.4535953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 4.7612939453125); (5.875 : 5.1362939453125); (5.875 : 7.03929768880208); (6.25 : 7.03929768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Classe/Classe_Tariffario" />
       <nodes>
-        <classShapeMoniker Id="43c7eed6-fc32-45a1-9b74-62015e4d9de6" />
-        <classShapeMoniker Id="781344c4-53a2-46ae-83e1-7826774d2e05" />
+        <classShapeMoniker Id="643377ea-d9cf-44ba-ad75-cd2932934a99" />
+        <classShapeMoniker Id="a04576c3-e518-445c-93f4-31e1cc1b5abb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 9.23159912109375); (4.25 : 9.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 6.58214884440104); (5.79166666666667 : 6.58214884440104 : JumpStart); (5.95833333333333 : 6.58214884440104 : JumpEnd); (6.25 : 6.58214884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Piano_di_volo/Piano_di_volo_Tariffario" />
       <nodes>
-        <classShapeMoniker Id="56e2285e-44ee-4ac0-b538-a6a3829cd05b" />
-        <classShapeMoniker Id="781344c4-53a2-46ae-83e1-7826774d2e05" />
+        <classShapeMoniker Id="9f9deb05-7de7-4745-a3b7-daacaef9da07" />
+        <classShapeMoniker Id="a04576c3-e518-445c-93f4-31e1cc1b5abb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.25 : 2.20714884440104); (7 : 2.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.25 : 5.31153746153846); (11.4410744349011 : 5.12046302663734 : JumpStart); (11.5589255650989 : 5.00261189643958 : JumpEnd); (11.5660744349011 : 4.99546302663734 : JumpStart); (11.6839255650989 : 4.87761189643958 : JumpEnd); (11.6875 : 4.87403746153846); (11.6875 : 5.14109537760417); (12 : 4.82859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Tratta/Tratta_Volo_attuale" />
       <nodes>
-        <classShapeMoniker Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" />
-        <classShapeMoniker Id="3ca5409d-2dff-4c64-892b-19a587153054" />
+        <classShapeMoniker Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" />
+        <classShapeMoniker Id="21ddbfdf-ff52-46be-b5c1-1bae3fb89dbb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 5.125); (3.875 : 4.75); (3.875 : 2.62580485026042); (3.97916666666667 : 2.62580485026042 : JumpStart); (4.14583333333333 : 2.62580485026042 : JumpEnd); (4.25 : 2.62580485026042)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.40625 : 4.89589680989583); (8.40625 : 8.3213525390625); (9.25 : 8.3213525390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aereo/Aereo_Tratta" />
       <nodes>
-        <classShapeMoniker Id="2648b5e1-6841-4cd9-bbef-f52095ed5527" />
-        <classShapeMoniker Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" />
+        <classShapeMoniker Id="b4ba098d-aa81-4b83-862f-1d174213974c" />
+        <classShapeMoniker Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 3.13585083007812); (3.79166666666667 : 3.13585083007812 : JumpStart); (3.95833333333333 : 3.13585083007812 : JumpEnd); (3.97916666666667 : 3.13585083007812 : JumpStart); (4.14583333333333 : 3.13585083007812 : JumpEnd); (4.25 : 3.13585083007812)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 9.46875); (7.16666666666667 : 9.46875 : JumpStart); (7.33333333333333 : 9.46875 : JumpEnd); (11.15625 : 9.46875); (11.15625 : 8.75160970052083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta" />
       <nodes>
-        <classShapeMoniker Id="222412d1-9751-4beb-a3d6-101e7d0dd34b" />
-        <classShapeMoniker Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" />
+        <classShapeMoniker Id="b0440c4e-35e1-4694-9164-61dce68cd2da" />
+        <classShapeMoniker Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 2.12540242513021); (3.97916666666667 : 2.12540242513021 : JumpStart); (4.14583333333333 : 2.12540242513021 : JumpEnd); (4.25 : 2.12540242513021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 9.1406225); (7.16666666666667 : 9.1406225 : JumpStart); (7.33333333333333 : 9.1406225 : JumpEnd); (11.1249975 : 9.1406225); (11.1249975 : 8.75160970052083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Aeroporto/Aeroporto_Tratta1" />
       <nodes>
-        <classShapeMoniker Id="222412d1-9751-4beb-a3d6-101e7d0dd34b" />
-        <classShapeMoniker Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" />
+        <classShapeMoniker Id="b0440c4e-35e1-4694-9164-61dce68cd2da" />
+        <classShapeMoniker Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 7.6884254047476); (4.0625 : 7.1259254047476); (4.0625 : 1.4689492125651); (4.25 : 1.4689492125651)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 8.0569482421875); (7.16666666666667 : 8.0569482421875 : JumpStart); (7.33333333333333 : 8.0569482421875 : JumpEnd); (8.32291666666667 : 8.0569482421875 : JumpStart); (8.48958333333333 : 8.0569482421875 : JumpEnd); (9.25 : 8.0569482421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/myDatabaseUniboAirlineDataContext/Piano_di_volo/Piano_di_volo_Tratta" />
       <nodes>
-        <classShapeMoniker Id="56e2285e-44ee-4ac0-b538-a6a3829cd05b" />
-        <classShapeMoniker Id="44cf0c3d-5a87-4c95-b5d5-31ddb15fd443" />
+        <classShapeMoniker Id="9f9deb05-7de7-4745-a3b7-daacaef9da07" />
+        <classShapeMoniker Id="fd3799cf-cfeb-4d11-92f5-6fda2f3b9835" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

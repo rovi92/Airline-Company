@@ -31,6 +31,7 @@ namespace compagniaAerea
         //Variabile per la stringa di connessione
         Gestione_utente gestione_cliente;
         FlightImpl volo;
+        DipendenteVoloImpl dipendentevolo;
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
@@ -40,6 +41,7 @@ namespace compagniaAerea
 
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
             volo = new FlightImpl();//classe volo
+            dipendentevolo = new DipendenteVoloImpl();
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
@@ -350,7 +352,39 @@ namespace compagniaAerea
             gestione_cliente.InitUtente();
             currentGrid();
         }
+
         #region profilo dipendente
+
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            this.gridCorrente = 0;
+            currentGrid();
+            MIGestioneVoli.Visibility = Visibility.Hidden;
+            MIGestioneTariffario.Visibility = Visibility.Hidden;
+            MIProfilo.Visibility = Visibility.Hidden;
+            btnLogOut.Visibility = Visibility.Hidden;
+        }
+        #region profilo dipendete
+        /*ricerca del dipendente nell grid profilo dipendete*/
+        private void CercaDipendente_click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+            dipendente.getDipendente(Convert.ToInt32(dipendente.getValueGrid(dataProfiliDipendetente)[2]));
+            cognomeDipendentetxt.Text = dipendente.getCognome();
+            nomeDipendentetxt.Text = dipendente.getNome();
+            codiceDipendentetxt.Text = dipendente.getCodice();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            dataAssunzione_dipendentetxt.Text = dipendente.getDataAssunzione();
+            data_nascita_dipendentetxt.Text = dipendente.getDataNascita();
+            genereDipendentetxt.Text = dipendente.getSesso();
+            impiegoDipendentetxt.Text = dipendente.getImpiego();
+            telefonoDipendentetxt.Text = dipendente.getTelefono();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            email_dipendentetxt.Text = dipendente.getEmail();
+        }
+
         string telefono_dipendente, email_dipendente, indirizzodi_pendente;
         private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
         {
@@ -380,10 +414,18 @@ namespace compagniaAerea
 
             if (errore.checkText())
             {
+                /*inserimento dei dati nel db*/
+                if (cambia_email_dipendentecb.IsChecked == true)
+                    dipendente.setEmail(email_dipendentetxt.Text);
+                if (cambia_indirizzo_dipendentecb.IsChecked == true)
+                    dipendente.setIndirizzo(indirizzo_dipendentetxt.Text);
+                if (cambia_telefono_dipendentecb.IsChecked == true)
+                    dipendente.setTelefono(telefonoDipendentetxt.Text);
+                //reset checkbox
                 cambia_telefono_dipendentecb.IsChecked = false;
                 cambia_email_dipendentecb.IsChecked = false;
                 cambia_indirizzo_dipendentecb.IsChecked = false;
-                //cambio cambio dei dati nel db
+              
             }
             else
             {
@@ -444,7 +486,7 @@ namespace compagniaAerea
         {
             errore.ValueText(Login_usernametxt);
             errore.valuePassword(Login_passwordtxt);
-           
+
             if (errore.checkText())//controllo caratteri non vuoti nelle box
             {
 
@@ -457,7 +499,7 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
-                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff();
+                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
                 }
             }
             else
@@ -621,6 +663,9 @@ namespace compagniaAerea
 
             int biglietti = ticket.getQuatitàPersone();
 
+                    ticket.getPopulateDbTicket();
+                   /* ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotaione());
+                    ticket.insertRecordTiket(gestione_cliente.getLastIdPassenger(cf., cognomepasseggerotxt.Text, ticket.getIdPrenotaione());*/
 
             gestione_cliente.InitUtente();
             if (gestione_cliente.controlCF(cfpasseggerotxt.Text).Equals(true) || gestione_cliente.controlloEmail(emailpasseggerotxt.Text).Equals(true))
@@ -692,26 +737,10 @@ namespace compagniaAerea
             errore.TraverseVisualTree(gridSelezionaVolo);
         }
         #endregion
-        
-        #region dipendente
-        private void btnLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            this.gridCorrente = 0;
-            currentGrid();
-            MIGestioneVoli.Visibility = Visibility.Hidden;
-            MIGestioneTariffario.Visibility = Visibility.Hidden;
-            MIProfilo.Visibility = Visibility.Hidden;
-            btnLogOut.Visibility = Visibility.Hidden;
-        }
-        #region profilo dipendete
-        /*ricerca del dipendente nell grid profilo dipendete*/
-        private void CercaDipendente_click(object sender, RoutedEventArgs e)
-        {
 
-        }
-        #endregion
-        //tutto ciò che fa parte di dipendente metti qui
+
+
+
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
         {
@@ -721,6 +750,7 @@ namespace compagniaAerea
         }
         private void Click_gestioneVoli(object sender, RoutedEventArgs e)
         {
+            dipendentevolo.UpdatePianodivolo();
             errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 5;
             currentGrid();
@@ -822,8 +852,23 @@ namespace compagniaAerea
             errore.ValueText(gatetxt);
             errore.ValueText(orario_partenzatxt);
             errore.ValueText(orario_arrivotxt);
-            dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
-           */ /*if (errore.checkText())
+            /*int numero_volo = dipendentevolo.checkPianodivoloExist((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text);
+            if (numero_volo != -1)
+            {
+                
+            }*/
+            /*if(dipendentevolo.checkPianodivoloExist((DateTime) partenzapicker.SelectedDate, (DateTime) arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text) == true)
+            {
+                //Il piano di volo esiste, quindi aggiungi la tratta
+                MessageBox.Show("Piano di volo esistente");
+            } else
+            {
+                MessageBox.Show("Piano di volo non esistente");
+                //Il piano di volo non esiste, quindi aggiungerlo
+                //dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+            }*/
+            
+            /*if (errore.checkText())
             {
                 
             }
@@ -837,6 +882,7 @@ namespace compagniaAerea
         #endregion
 
         #endregion
+
         #region utility methods
         String getCellValue(DataGrid dg, int index)
         {

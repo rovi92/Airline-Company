@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace compagniaAerea
 {
@@ -20,6 +21,7 @@ namespace compagniaAerea
         {
             public string nome { get; set; }
             public string cognome { get; set; }
+            public int codice { get; set; }
             public string indirizzo { get; set; }
             public DateTime data_nascita { get; set; }
             public DateTime data_assunzione { get; set; }
@@ -33,11 +35,12 @@ namespace compagniaAerea
         public void getDipendente(int idDipendente)
         {
             id = (from d in myDatatabase.getDb().Personale
-                  where d.idPersonale==idDipendente
+                  where d.idPersonale == idDipendente
                   select new InfoDipendente
                   {
                       nome = d.nome,
                       cognome = d.cognome,
+                      codice = d.idPersonale,
                       indirizzo = d.indirizzo,
                       data_nascita = d.data_di_nascita,
                       data_assunzione = d.data_assunzione,
@@ -55,6 +58,19 @@ namespace compagniaAerea
             return staff;
         }
 
+
+        public List<String> getValueGrid(DataGrid dg)
+        {
+            
+            List<String> tmp = new List<String>();
+            for (int i = 0; i < dg.SelectedCells.Count; i++)
+            {
+                tmp.Add((dg.SelectedCells[i].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text);
+            }
+            return tmp;
+
+        }
+
         #region get Dipendente
         public string getCognome()
         {
@@ -65,7 +81,10 @@ namespace compagniaAerea
         {
             return id.cognome;
         }
-
+        public string getCodice()
+        {
+            return id.codice.ToString();
+        }
         public string getIndirizzo()
         {
             return id.indirizzo;
@@ -96,34 +115,25 @@ namespace compagniaAerea
             return id.sesso;
         }
         /*per pilota o hostess ritorna il nome della categoria se true altrimenti stringa vuota*/
-        public string getPilota()
+        public string getImpiego()
         {
             if (id.pilota == true)
             {
                 return "Pilota";
             }
             else
-            {
-                return "";
-            }
-
-        }
-
-        public string getHostess()
-        {
-            if (id.hostess == true)
+             if (id.hostess == true)
             {
                 return "Hostess";
             }
             else
-            {
-                return "";
-            }
+                return "Errore";
         }
+
 
         #endregion
         #region set Dipendente
-       
+
         public void setIndirizzo(string indirizzo)
         {
             Personale p = new Personale()
@@ -148,13 +158,13 @@ namespace compagniaAerea
         {
             Personale p = new Personale()
             {
-                telefono=telefono
+                telefono = telefono
             };
             myDatatabase.getDb().Personale.InsertOnSubmit(p);
             myDatatabase.getDb().SubmitChanges();
         }
 
-       
+
         #endregion
     }
 }
