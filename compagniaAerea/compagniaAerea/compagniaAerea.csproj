@@ -71,8 +71,8 @@
     </Compile>
     <Compile Include="Ticket.cs" />
     <Compile Include="TicketImpl.cs" />
-    <Compile Include="Volo.cs" />
-    <Compile Include="VoloImpl.cs" />
+    <Compile Include="Flight.cs" />
+    <Compile Include="FlightImpl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

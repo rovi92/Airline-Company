@@ -133,7 +133,7 @@
       <Column Name="totale" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="idTariffa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Prenotazione_Biglietto" Member="Biglietto" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Biglietto" />
-      <Association Name="Prenotazione_Pagamento" Member="Pagamento" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Pagamento" Cardinality="One" />
+      <Association Name="Prenotazione_Pagamento" Member="Pagamento" ThisKey="idPrenotazione" OtherKey="idPrenotazione" Type="Pagamento" />
       <Association Name="Tariffario_Prenotazione" Member="Tariffario" ThisKey="idTariffa" OtherKey="idTariffa" Type="Tariffario" IsForeignKey="true" />
     </Type>
   </Table>
