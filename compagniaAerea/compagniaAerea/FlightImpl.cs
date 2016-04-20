@@ -102,9 +102,10 @@ namespace compagniaAerea
           
         }
 
-        public void setFlightClass(String className)
+        public void setFlightClass(String className,int idClasse)
         {
             this.nomeClasse = className;
+            this.idClasse = idClasse;
         }
 
         public String getFlightClassName()

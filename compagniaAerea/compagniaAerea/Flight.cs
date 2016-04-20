@@ -15,7 +15,7 @@ namespace compagniaAerea
 
         void updateFlightLegs();
 
-        void setFlightClass(string className);
+        void setFlightClass(string className,int idClasse);
 
         List<FlightImpl.FlightInfo> getCustomFlight(string partenza, string arrivo, string data);
         string getFlightClassName();

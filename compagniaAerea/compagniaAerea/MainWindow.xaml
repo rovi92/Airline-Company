@@ -8,7 +8,7 @@
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
-        
+
         <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="55"><Run Text="User"/><Run Text="name:"/></TextBlock>
@@ -126,7 +126,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,40,0,58" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,50,0,48" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -195,15 +195,19 @@
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-            <Grid Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+            
             <TextBlock x:Name="lblErroreP" Grid.Column="1" HorizontalAlignment="Left" Margin="0,94,0,0" TextWrapping="Wrap" Text="nessun volo da questa città" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
             <TextBlock x:Name="lblErroreD" Grid.Column="2" HorizontalAlignment="Left" Margin="174,96,0,0" TextWrapping="Wrap" Text="nessun volo da questa città" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
             <TextBlock x:Name="lblErroreDP" Grid.Column="1" HorizontalAlignment="Left" Margin="0,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="nessun volo "/><Run Text="in questa data"/></TextBlock>
             <TextBlock x:Name="lblErroreDA" Grid.Column="2" HorizontalAlignment="Left" Margin="171,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="nessun volo "/><Run Text="in questa data"/></TextBlock>
             <Grid x:Name="gridTipoVolo" HorizontalAlignment="Left" Height="100" Margin="10,250,0,0" VerticalAlignment="Top" Width="356" Grid.ColumnSpan="3" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="88*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
                 <RadioButton x:Name="rdbEconomy" Content="Economy" HorizontalAlignment="Left" Margin="36,73,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True" Checked="rdbEconomy_Checked"/>
-                <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Right" Margin="0,73,164,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbBuisness_Checked"/>
+                <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Right" Margin="0,73,160,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbBuisness_Checked"/>
                 <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="222,73,0,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbFirst_Checked"/>
                 <Label x:Name="lblPosti"  Content="{Binding Value, ElementName=sldPosti}" HorizontalAlignment="Left" Margin="109,10,0,0" VerticalAlignment="Top" Width="24"/>
             </Grid>

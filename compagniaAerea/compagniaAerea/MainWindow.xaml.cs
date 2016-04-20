@@ -183,16 +183,16 @@ namespace compagniaAerea
         #region radiobutton classi di volo
         private void rdbEconomy_Checked(object sender, RoutedEventArgs e)
         {
-            volo.setFlightClass(rdbEconomy.Content.ToString());
-
+            volo.setFlightClass(rdbEconomy.Content.ToString(),1);
+            
         }
         private void rdbBuisness_Checked(object sender, RoutedEventArgs e)
         {
-            volo.setFlightClass(rdbBuisness.Content.ToString());
+            volo.setFlightClass(rdbBuisness.Content.ToString(),2);
         }
         private void rdbFirst_Checked(object sender, RoutedEventArgs e)
         {
-            volo.setFlightClass(rdbFirst.Content.ToString());
+            volo.setFlightClass(rdbFirst.Content.ToString(),3);
         }
         #endregion
         #endregion
@@ -329,7 +329,7 @@ namespace compagniaAerea
 
         private void prenotaVolo_Click(object sender, RoutedEventArgs e)
         {
-            errore.TraverseVisualTree(this.grid);
+            errore.TraverseVisualTree(gridSelezionaVolo);
             this.gridCorrente = 2;
             volo.updateFlightLegs();
             gridTipoVolo.Visibility = Visibility.Hidden;//aggiornamento database locale
@@ -530,7 +530,7 @@ namespace compagniaAerea
                 oraArrivolbl.Content = getCellValue(dataGridAndata, 7);
                 dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
                 dataArrivolbl.Content = dataRitorno.SelectedDate.ToString();
-                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getFlyClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
+                totalelbl.Content = (ticket.getTotal(Convert.ToDouble(kgBagaglio), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text),volo.getFlyClassId()) * int.Parse(lblPosti.Content.ToString())).ToString();
 
             }
             else
@@ -689,7 +689,7 @@ namespace compagniaAerea
             ticket.getPopulateDbTicket();
             gridTipoVolo.Visibility = Visibility.Hidden;
             volo.updateFlightLegs();
-            errore.TraverseVisualTree(this.grid);
+            errore.TraverseVisualTree(gridSelezionaVolo);
         }
         #endregion
         
@@ -817,13 +817,13 @@ namespace compagniaAerea
 
         private void aggiungi_voloClick(object sender, RoutedEventArgs e)
         {
-            errore.ValueText(aereoporto_partenzatxt);
+           /* errore.ValueText(aereoporto_partenzatxt);
             errore.ValueText(aereoporto_arrivotxt);
             errore.ValueText(gatetxt);
             errore.ValueText(orario_partenzatxt);
             errore.ValueText(orario_arrivotxt);
             dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
-            /*if (errore.checkText())
+           */ /*if (errore.checkText())
             {
                 
             }
