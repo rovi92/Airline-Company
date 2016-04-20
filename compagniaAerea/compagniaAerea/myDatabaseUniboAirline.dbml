@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="myUniboAirlines" Class="myDatabaseUniboAirlineDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=erikserver.database.windows.net;Initial Catalog=myUniboAirlines;Persist Security Info=True;User ID=erik_amministratore" SettingsObjectName="compagniaAerea.Properties.Settings" SettingsPropertyName="myUniboAirlinesConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Aereo" Member="Aereo">
-    <Type Name="Aereo">
-      <Column Name="nome" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="modello" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="capacità_economy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="capacità_buisness" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="capacità_first" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Aereo_Tratta" Member="Tratta" ThisKey="nome,modello" OtherKey="nome,modello" Type="Tratta" />
-    </Type>
-  </Table>
   <Table Name="dbo.Volo_attuale" Member="Volo_attuale">
     <Type Name="Volo_attuale">
       <Column Name="idPersonale" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -20,6 +10,16 @@
       <Association Name="Tratta_Volo_attuale" Member="Tratta" ThisKey="orario_partenza,data_partenza,gate_partenza" OtherKey="orario_partenza,data_partenza,gate_partenza" Type="Tratta" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Aereo" Member="Aereo">
+    <Type Name="Aereo">
+      <Column Name="nome" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="modello" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="capacità_economy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="capacità_buisness" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="capacità_first" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Aereo_Tratta" Member="Tratta" ThisKey="nome,modello" OtherKey="nome,modello" Type="Tratta" />
+    </Type>
+  </Table>
   <Table Name="dbo.Aeroporto" Member="Aeroporto">
     <Type Name="Aeroporto">
       <Column Name="nome" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -27,16 +27,16 @@
       <Column Name="email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="telefono" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="città" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Aeroporto_Piano_di_volo" Member="Piano_di_volo" ThisKey="nome" OtherKey="aeroporto_partenza" Type="Piano_di_volo" />
+      <Association Name="Aeroporto_Piano_di_volo1" Member="Piano_di_volo1" ThisKey="nome" OtherKey="aeroporto_arrivo" Type="Piano_di_volo" />
       <Association Name="Aeroporto_Tratta" Member="Tratta" ThisKey="nome" OtherKey="aeroporto_partenza" Type="Tratta" />
       <Association Name="Aeroporto_Tratta1" Member="Tratta1" ThisKey="nome" OtherKey="aeroporto_arrivo" Type="Tratta" />
     </Type>
   </Table>
   <Table Name="dbo.Babaglio_Imbarcato" Member="Babaglio_Imbarcato">
     <Type Name="Babaglio_Imbarcato">
-      <Column Name="idBagaglio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="peso" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="range_pesi" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="codice_biglietto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="range_pesi" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="codice_biglietto" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Biglietto_Babaglio_Imbarcato" Member="Biglietto" ThisKey="codice_biglietto" OtherKey="codice_biglietto" Type="Biglietto" IsForeignKey="true" />
       <Association Name="Prezzo_bagaglio_imbarcato_Babaglio_Imbarcato" Member="Prezzo_bagaglio_imbarcato" ThisKey="range_pesi" OtherKey="range_pesi" Type="Prezzo_bagaglio_imbarcato" IsForeignKey="true" />
     </Type>
@@ -116,6 +116,8 @@
   <Table Name="dbo.Piano_di_volo" Member="Piano_di_volo">
     <Type Name="Piano_di_volo">
       <Column Name="numero_volo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="aeroporto_partenza" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="aeroporto_arrivo" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="data_partenza" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="orario_partenza" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="data_arrivo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
@@ -123,6 +125,8 @@
       <Column Name="cancellato" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Piano_di_volo_Tariffario" Member="Tariffario" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tariffario" />
       <Association Name="Piano_di_volo_Tratta" Member="Tratta" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tratta" />
+      <Association Name="Aeroporto_Piano_di_volo" Member="Aeroporto" ThisKey="aeroporto_partenza" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
+      <Association Name="Aeroporto_Piano_di_volo1" Member="Aeroporto1" ThisKey="aeroporto_arrivo" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Prenotazione" Member="Prenotazione">

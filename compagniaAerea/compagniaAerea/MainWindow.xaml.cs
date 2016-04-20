@@ -31,6 +31,7 @@ namespace compagniaAerea
         //Variabile per la stringa di connessione
         Gestione_utente gestione_cliente;
         FlightImpl volo;
+        DipendenteVoloImpl dipendentevolo;
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
@@ -40,6 +41,7 @@ namespace compagniaAerea
 
             gestione_cliente = new Gestione_utente();// la classe può esssere richiamata anche sotto se si vuole
             volo = new FlightImpl();//classe volo
+            dipendentevolo = new DipendenteVoloImpl();
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
@@ -721,6 +723,7 @@ namespace compagniaAerea
         }
         private void Click_gestioneVoli(object sender, RoutedEventArgs e)
         {
+            dipendentevolo.UpdatePianodivolo();
             errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 5;
             currentGrid();
@@ -822,7 +825,22 @@ namespace compagniaAerea
             errore.ValueText(gatetxt);
             errore.ValueText(orario_partenzatxt);
             errore.ValueText(orario_arrivotxt);
-            dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+            /*int numero_volo = dipendentevolo.checkPianodivoloExist((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text);
+            if (numero_volo != -1)
+            {
+                
+            }*/
+            /*if(dipendentevolo.checkPianodivoloExist((DateTime) partenzapicker.SelectedDate, (DateTime) arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text) == true)
+            {
+                //Il piano di volo esiste, quindi aggiungi la tratta
+                MessageBox.Show("Piano di volo esistente");
+            } else
+            {
+                MessageBox.Show("Piano di volo non esistente");
+                //Il piano di volo non esiste, quindi aggiungerlo
+                //dipendentevolo.Aggiungi_pianodivolo((DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, orario_partenzatxt.Text, orario_arrivotxt.Text, false);
+            }*/
+            
             /*if (errore.checkText())
             {
                 
@@ -837,6 +855,7 @@ namespace compagniaAerea
         #endregion
 
         #endregion
+
         #region utility methods
         String getCellValue(DataGrid dg, int index)
         {
