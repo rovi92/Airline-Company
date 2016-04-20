@@ -8,7 +8,7 @@
         Title="MainWindow" Height="535.5" Width="867.5">
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
-        
+
         <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
             <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="55"><Run Text="User"/><Run Text="name:"/></TextBlock>
@@ -231,7 +231,7 @@
 
         </Grid>
 
-        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
+        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Visible">
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
             <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="374,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="374,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
@@ -252,7 +252,7 @@
             <CheckBox x:Name="cambia_telefono_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,162,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_telefonocb_Checked"/>
             <CheckBox x:Name="cambia_email_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,210,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_emailcb_Checked"/>
             <CheckBox x:Name="cambia_indirizzo_dipendentecb" Content="cambia" HorizontalAlignment="Left" Margin="762,268,0,0" VerticalAlignment="Top" Height="22" Checked="cambia_indirizzocb_Checked" RenderTransformOrigin="-2.586,-0.091"/>
-            <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="525,307,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Hidden"/>
+            <Button x:Name="salva_dipendentebtn" Content="salva" HorizontalAlignment="Left" Margin="633,314,0,0" VerticalAlignment="Top" Width="75" Click="salva_dipendentebtn_Click" Visibility="Visible"/>
             <TextBlock x:Name="Cerca" HorizontalAlignment="Left" Margin="49,35,0,0" TextWrapping="Wrap" Text="Cerca dipendente:" VerticalAlignment="Top"/>
             <TextBlock x:Name="genere" HorizontalAlignment="Left" Margin="374,269,0,0" TextWrapping="Wrap" Text="Genere" VerticalAlignment="Top" RenderTransformOrigin="0.421,0.752"/>
             <TextBlock x:Name="impiego" HorizontalAlignment="Left" Margin="374,313,0,0" TextWrapping="Wrap" Text="Impiego" VerticalAlignment="Top"/>
