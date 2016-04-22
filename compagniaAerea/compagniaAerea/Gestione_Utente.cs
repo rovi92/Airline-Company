@@ -36,23 +36,27 @@ namespace compagniaAerea
         //metodo per registrazione
         public void Registrazione_Cliente(String nome, String cognome, String indirizzo, String email, String città, int CAP, String CF)
         {
-
-            Passeggero p = new Passeggero()
+            if ((from p in myDatabase.getDb().Passeggero
+                where p.CF == CF
+                select p).Count()== 0)
             {
-                //inserimento dati nel database
-                
-                nome = nome,
-                cognome = cognome,
-                indirizzo = indirizzo,
-                email = email,
-                città = città,
-                CAP = CAP,
-                CF = CF,
-            };
-            myDatabase.getDb().Passeggero.InsertOnSubmit(p);
-            myDatabase.getDb().SubmitChanges();
+                Passeggero p = new Passeggero()
+                {
+                    //inserimento dati nel database
 
-            statoRegistrazione = true;
+                    nome = nome,
+                    cognome = cognome,
+                    indirizzo = indirizzo,
+                    email = email,
+                    città = città,
+                    CAP = CAP,
+                    CF = CF,
+                };
+                myDatabase.getDb().Passeggero.InsertOnSubmit(p);
+                myDatabase.getDb().SubmitChanges();
+
+                statoRegistrazione = true;
+            }
         }
     
            

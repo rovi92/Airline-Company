@@ -47,7 +47,7 @@ namespace compagniaAerea
 
             public Boolean cancellato { get; set; }
 
-            }
+        }
 
         //caricamento di database in locale 
         public void updateFlightLegs()
@@ -69,7 +69,6 @@ namespace compagniaAerea
                                cancellato = (Boolean)p.cancellato
                            }).ToList());
 
-
         }
 
         public List<FlightInfo> getFlights()
@@ -83,7 +82,7 @@ namespace compagniaAerea
             return (from v in voli
                     where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data && v.cancellato == false
                     select v).ToList();
-            
+
         }
         //metodo per controllare se esiste un una certa stringa nel database
 
@@ -92,7 +91,7 @@ namespace compagniaAerea
             return (from v in voli
                     where v.partenza == departure
                     select v).Count() > 0 ? true : false;
-           
+
 
         }
 
@@ -109,12 +108,13 @@ namespace compagniaAerea
             return (from v in voli
                     where v.dataPartenza.ToString("yyyy-MM-dd") == date
                     select v).Count() > 0 ? true : false;
-          
+
         }
 
-        public void setFlightClass(String className)
+        public void setFlightClass(String className, int idClasse)
         {
             this.nomeClasse = className;
+            this.idClasse = idClasse;
         }
 
         public String getFlightClassName()
@@ -122,7 +122,7 @@ namespace compagniaAerea
             return this.nomeClasse;
         }
 
-        public int getFlyClassId()
+        public int getFlightClassId()
         {
             return this.idClasse;
         }
@@ -137,7 +137,49 @@ namespace compagniaAerea
         public string getAirportName(string città)
         {
             return myDatabase.getDb().Aeroporto.First(a => a.città.ToString() == città).nome;
-           
+
+        }
+
+        public Boolean checkFlightSeats(int idVolo, int idClasse, int postiInPrenotamento)
+        {
+            //prossima modifica action c# code provider
+
+            switch (idClasse)
+            {
+                case 1:
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? (from p in myDatabase.getDb().Piano_di_volo
+                                                            where p.numero_volo == idVolo
+                                                            select ((p.Tratta.First().Aereo.capacità_economy - (p.Tratta.First().posti_economy + postiInPrenotamento)) > 0) && ((p.Tratta.Last().Aereo.capacità_economy - (p.Tratta.Last().posti_economy + postiInPrenotamento)) > 0)).First() : (from p in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                  where p.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                  select ((p.Tratta.First().Aereo.capacità_economy - (p.Tratta.First().posti_economy + postiInPrenotamento)) > 0)).First();
+
+
+                case 2:
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? (from p in myDatabase.getDb().Piano_di_volo
+                                                            where p.numero_volo == idVolo
+                                                            select ((p.Tratta.First().Aereo.capacità_buisness - (p.Tratta.First().posti_buisness + postiInPrenotamento)) > 0) && ((p.Tratta.Last().Aereo.capacità_buisness - (p.Tratta.Last().posti_buisness + postiInPrenotamento)) > 0)).First() : (from p in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                                      where p.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                                      select ((p.Tratta.First().Aereo.capacità_buisness - (p.Tratta.First().posti_buisness + postiInPrenotamento)) > 0)).First();
+
+
+                case 3:
+                    return (from p in myDatabase.getDb().Piano_di_volo
+                            where p.numero_volo == idVolo
+                            select p.Tratta).Count() > 1 ? (from p in myDatabase.getDb().Piano_di_volo
+                                                            where p.numero_volo == idVolo
+                                                            select ((p.Tratta.First().Aereo.capacità_first - (p.Tratta.First().posti_first + postiInPrenotamento)) > 0) && ((p.Tratta.Last().Aereo.capacità_first - (p.Tratta.Last().posti_first + postiInPrenotamento)) > 0)).First() : (from p in myDatabase.getDb().Piano_di_volo
+                                                                                                                                                                                                                                                                                          where p.numero_volo == idVolo
+                                                                                                                                                                                                                                                                                          select ((p.Tratta.First().Aereo.capacità_first - (p.Tratta.First().posti_first + postiInPrenotamento)) > 0)).First();
+
+
+                default:
+                    return false;
+            }
+
         }
     }
 }

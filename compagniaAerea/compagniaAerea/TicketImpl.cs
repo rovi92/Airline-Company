@@ -22,9 +22,12 @@ namespace compagniaAerea
         List<Prenotazione> prenotazione = new List<Prenotazione>();
         List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
+        int idTariffa = 0;
+        int lastIdBiglietto = 0;
         int quantitaPersone = 0;
         int idPrenotazioneAndata = 0;
         int idPrenotazioneRitorno = 0;
+        
 
 
         public TicketImpl()
@@ -99,30 +102,32 @@ namespace compagniaAerea
         }
 
         #region GET tiket e tutto ciò che è correlato al biglietto
-        public double getTotal(double kg, double quantitaBagagli, double numeroVolo, double confort,int classe)
+        public double getTicketPrice(int idBiglietto)
         {
-            double prezzoBagaglio = 0;
-            for (int i = 0; i < bagaglio.Count; i++)
-            {
-                if (bagaglio[i].range_pesi == (kg))
-                {
-                    prezzoBagaglio = bagaglio[i].prezzo;
-                }
-
-            }
-             double tariffaSolaAndata = 0;
-            for (int a = 0; a < tariffario.Count; a++)
-            {
-                if (tariffario[a].numero_volo == (numeroVolo) && tariffario[a].idClasse == classe)
-                {
-                    tariffaSolaAndata = tariffario[a].tariffa_solo_andata;
-                }
-            }
-
-
-            return (prezzoBagaglio * quantitaBagagli) + (tariffaSolaAndata + confort) ;
+            return (from b in myDatabase.getDb().Biglietto
+                    where b.codice_biglietto == idBiglietto
+                    select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + b.Comfort_inclusi.Sum(c => c.Comfort.prezzo) + b.Babaglio_Imbarcato.Sum(bi => bi.Prezzo_bagaglio_imbarcato.prezzo)).First();
         }
+        public void updatePrenotationPrice(int idPrenotazione)
+        {
+            List<int> ticketsId = (from b in myDatabase.getDb().Biglietto
+                                   where b.idPrenotazione == idPrenotazione
+                                   select b.codice_biglietto).ToList();
+            Double total = 0;
+            foreach (int i in ticketsId)
+            {
 
+                total += getTicketPrice(i);
+
+            }
+            Prenotazione p = myDatabase.getDb().Prenotazione.First(pr => pr.idPrenotazione == idPrenotazione);
+            p.totale = total;
+            myDatabase.getDb().SubmitChanges();
+        }
+        public Double getPrenotationPrice(int idPrenotazione)
+        {
+            return myDatabase.getDb().Prenotazione.First(pr => pr.idPrenotazione == idPrenotazione).totale;
+        }
 
         public void firstTicket(List<String> l)
         {
@@ -189,17 +194,16 @@ namespace compagniaAerea
             return ib.spesa.ToString();
         }
 
+        public int getCurrentIdTariffa()
+        {
+            return this.idTariffa;
+        }
         public int getIdTariffa(int numeroVolo, int numeroClasse)
         {
-            int idTariffa = 0;
-            foreach(Tariffario t in tariffario)
-            {
-                if (t.idClasse.Equals(numeroClasse) && t.numero_volo.Equals(numeroVolo)) 
-                {
-                    idTariffa = t.idTariffa;
-                }  
-            }
-            return idTariffa;
+
+           
+            this.idTariffa= myDatabase.getDb().Tariffario.First(t => t.idClasse == numeroClasse && t.numero_volo == numeroVolo).idTariffa;
+            return this.idTariffa;
         }
 
         #endregion
@@ -210,7 +214,6 @@ namespace compagniaAerea
         {
             Prenotazione pr = new Prenotazione()
             {
-                // Convert.ToDateTime(dataPrenotazione)
                 data_prenotazione = Convert.ToDateTime(dataPrenotazione).ToUniversalTime(),
                 numero_persone = numeroPersone,
                 totale = totale,
@@ -219,6 +222,7 @@ namespace compagniaAerea
             
             myDatabase.getDb().Prenotazione.InsertOnSubmit(pr);
             myDatabase.getDb().SubmitChanges();
+            this.quantitaPersone = numeroPersone;
             if (tipoViaggio.Equals("Andata"))
             {
                 idPrenotazioneAndata = pr.idPrenotazione;
@@ -251,16 +255,12 @@ namespace compagniaAerea
             };
             myDatabase.getDb().Biglietto.InsertOnSubmit(b);
             myDatabase.getDb().SubmitChanges();
+            lastIdBiglietto = b.codice_biglietto;
         }
         
         public int getQuatitàPersone()
         {
             return this.quantitaPersone;
-        }
-
-        public void setQuantitàPersone(int persone)
-        {
-            this.quantitaPersone = persone;
         }
 
         public int getIdPrenotazioneAndata()
@@ -271,6 +271,41 @@ namespace compagniaAerea
         public int getIdPrenotazioneRitorno()
         {
             return this.idPrenotazioneRitorno;
+        }
+
+        public void createFlightComfort(int idComfort)
+        {
+            Comfort_inclusi c = new Comfort_inclusi()
+            {
+                idComfort = idComfort,
+              idBiglietto = this.lastIdBiglietto,
+
+            };
+            myDatabase.getDb().Comfort_inclusi.InsertOnSubmit(c);
+            myDatabase.getDb().SubmitChanges();
+        }
+
+        public void createFlightLuggage(int range)
+        {
+            Babaglio_Imbarcato b = new Babaglio_Imbarcato()
+            {
+                range_pesi = range,
+                codice_biglietto = this.lastIdBiglietto
+            };
+             myDatabase.getDb().Babaglio_Imbarcato.InsertOnSubmit(b);
+            myDatabase.getDb().SubmitChanges();
+        }
+
+     
+
+        public int getLastIdBiglietto()
+        {
+            return this.lastIdBiglietto;
+        }
+
+        public void setQuantitaPersone(int nPersone)
+        {
+            this.quantitaPersone = nPersone;
         }
 
 
