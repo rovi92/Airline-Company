@@ -18,8 +18,10 @@ namespace compagniaAerea
         void setFlightClass(string className);
 
         List<FlightImpl.FlightInfo> getCustomFlight(string partenza, string arrivo, string data);
+        List<FlightImpl.FlightInfo> getFlights();
         string getFlightClassName();
         int getFlyClassId();
+        void CancelFlight(int numero_volo);
         string getAirportName(string città);
         
        

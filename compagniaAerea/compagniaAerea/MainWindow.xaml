@@ -4,8 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:compagniaAerea"
+        xmlns:t="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="535.5" Width="867.5">
+    <Window.Resources>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding cancellato}" Value="True">
+                    <Setter Property="Background" Value="IndianRed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
 
@@ -249,7 +259,7 @@
 
         </Grid>
 
-        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Visible">
+        <Grid x:Name="GridProfiloDipendente" HorizontalAlignment="Left" Height="397" Margin="0,25,0,-5" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="titolo" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Dipendente" VerticalAlignment="Top" Width="88" FontSize="14.667" FontWeight="Bold"/>
             <TextBox x:Name="cognomeDipendentetxt" HorizontalAlignment="Left" Height="22" Margin="374,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="nomeDipendentetxt" HorizontalAlignment="Left" Height="25" Margin="374,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
@@ -287,25 +297,89 @@
         </Grid>
 
         <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
-            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="519,0,0,0" TextWrapping="Wrap" Text="Gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
-            <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock11_Copy" HorizontalAlignment="Left" Margin="178,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
-            <DatePicker Name="arrivopicker" HorizontalAlignment="Left" Margin="178,82,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="28,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
-            <TextBox x:Name="aereoporto_partenzatxt" HorizontalAlignment="Left" Height="23" Margin="28,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="178,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
-            <TextBox x:Name="aereoporto_arrivotxt" HorizontalAlignment="Left" Height="23" Margin="178,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="321,9,0,0" TextWrapping="Wrap" Text="Gate" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
-            <TextBox x:Name="gatetxt" HorizontalAlignment="Left" Height="25" Margin="321,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.4,-0.433"/>
-            <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="28,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
-            <TextBox x:Name="orario_partenzatxt" HorizontalAlignment="Left" Height="22" Margin="28,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock14_Copy" HorizontalAlignment="Left" Margin="178,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
-            <TextBox x:Name="orario_arrivotxt" HorizontalAlignment="Left" Height="22" Margin="178,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="10,160,0,0" TextWrapping="Wrap" Text="Elenco voli:" VerticalAlignment="Top" FontSize="18.667"/>
-            <DataGrid x:Name="volidatagrid" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Height="192" Width="850"/>
-            <Button x:Name="aggiungi_volobtn" Content="Aggiungi" HorizontalAlignment="Left" Margin="321,132,0,0" VerticalAlignment="Top" Width="120" Click="aggiungi_voloClick"/>
-            <Button x:Name="elimina_volobtn" Content="Elimina" HorizontalAlignment="Left" Margin="690,162,0,0" VerticalAlignment="Top" Width="150"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="549,5,0,0" TextWrapping="Wrap" Text="Gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
+
+            <Grid x:Name="GridAggiungiPianoDiVolo" HorizontalAlignment="Left" Height="203" Margin="10,0,0,0" VerticalAlignment="Top" Width="473" Visibility="Visible">
+                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="28,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_partenzatxt" HorizontalAlignment="Left" Height="23" Margin="28,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="178,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_arrivotxt" HorizontalAlignment="Left" Height="23" Margin="178,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="28,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+                <DatePicker Name="partenzapicker" HorizontalAlignment="Left" Margin="28,82,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock11_Copy" HorizontalAlignment="Left" Margin="178,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
+                <DatePicker Name="arrivopicker" HorizontalAlignment="Left" Margin="178,82,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="28,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpPartenza" Height="20" Margin="28,134,325,49" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <TextBlock x:Name="textBlock14_Copy" HorizontalAlignment="Left" Margin="178,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpArrivo" Height="20" Margin="178,134,175,49" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <Button x:Name="aggiungi_volobtn" Content="Aggiungi piano di volo" HorizontalAlignment="Left" Margin="28,170,0,0" VerticalAlignment="Top" Width="129" Click="aggiungi_voloClick"/>
+                <CheckBox x:Name="scalichk" Content="Prevede scali" HorizontalAlignment="Left" Margin="178,173,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlock24" HorizontalAlignment="Left" Margin="337,9,0,0" TextWrapping="Wrap" Text="Tariffa" VerticalAlignment="Top"/>
+                <TextBox x:Name="tariffatxt" HorizontalAlignment="Left" Height="23" Margin="337,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+
+
+            <Grid x:Name="GridAggiungiTratta1" Height="207" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="406" Visibility="Hidden">
+                <TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="5,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_partenza1txt" HorizontalAlignment="Left" Height="23" Margin="5,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock10_Copy" HorizontalAlignment="Left" Margin="134,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_arrivo1txt" HorizontalAlignment="Left" Height="23" Margin="134,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock11_Copy1" HorizontalAlignment="Left" Margin="5,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+                <DatePicker x:Name="partenzapicker1" HorizontalAlignment="Left" Margin="5,82,0,0" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock11_Copy2" HorizontalAlignment="Left" Margin="134,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
+                <DatePicker x:Name="arrivopicker1" HorizontalAlignment="Left" Margin="134,82,0,0" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="262,11,0,0" TextWrapping="Wrap" Text="Gate partenza" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
+                <TextBox x:Name="gatepartenza1txt" HorizontalAlignment="Left" Height="25" Margin="262,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.4,-0.433"/>
+                <TextBox x:Name="gatearrivo1txt" HorizontalAlignment="Left" Height="25" Margin="345,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.4,-0.433"/>
+                <TextBlock x:Name="gatearrivotxtblk" HorizontalAlignment="Left" Margin="345,12,0,0" TextWrapping="Wrap" Text="Gate arrivo" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
+                <TextBlock x:Name="textBlock21" HorizontalAlignment="Left" Margin="261,63,0,0" TextWrapping="Wrap" Text="Aereo" VerticalAlignment="Top"/>
+                <ComboBox x:Name="aereicbx1" HorizontalAlignment="Left" Margin="262,84,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBlock x:Name="textBlock14_Copy1" HorizontalAlignment="Left" Margin="5,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpPartenza1" Height="20" Margin="5,135,291,52" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <TextBlock x:Name="textBlock14_Copy2" HorizontalAlignment="Left" Margin="134,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpArrivo1" Height="20" Margin="134,135,162,52" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <Button x:Name="aggiungi_tratta1btn" Content="Aggiungi prima tratta" HorizontalAlignment="Left" Margin="5,170,0,0" VerticalAlignment="Top" Width="239" Click="aggiungi_tratta1Click"/>
+            </Grid>
+
+            <Grid x:Name="GridAggiungiTratta2" Height="207" Margin="442,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="406" Visibility="Hidden">
+                <TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="5,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_partenza2txt" HorizontalAlignment="Left" Height="23" Margin="5,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock10_Copy1" HorizontalAlignment="Left" Margin="134,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>
+                <TextBox x:Name="aereoporto_arrivo2txt" HorizontalAlignment="Left" Height="23" Margin="134,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock11_Copy3" HorizontalAlignment="Left" Margin="5,61,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+                <DatePicker x:Name="partenzapicker2" HorizontalAlignment="Left" Margin="5,82,0,0" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock11_Copy4" HorizontalAlignment="Left" Margin="134,61,0,0" TextWrapping="Wrap" Text="Data arrivo" VerticalAlignment="Top"/>
+                <DatePicker x:Name="arrivopicker2" HorizontalAlignment="Left" Margin="134,82,0,0" VerticalAlignment="Top" Width="110"/>
+                <TextBlock x:Name="textBlock14_Copy3" HorizontalAlignment="Left" Margin="5,113,0,0" TextWrapping="Wrap" Text="Orario partenza" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpPartenza2" Height="20" Margin="5,135,291,52" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <TextBlock x:Name="textBlock14_Copy4" HorizontalAlignment="Left" Margin="134,113,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
+                <t:TimePicker x:Name="tpArrivo2" Height="20" Margin="134,135,162,52" CultureInfo="it-IT" TimeInterval="0:30:0" ShowButtonSpinner="False"/>
+                <TextBlock x:Name="textBlock22" HorizontalAlignment="Left" Margin="262,11,0,0" TextWrapping="Wrap" Text="Gate partenza" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
+                <TextBox x:Name="gatepartenza2txt" HorizontalAlignment="Left" Height="25" Margin="262,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.4,-0.433"/>
+                <TextBlock x:Name="gatearrivotxtblk1" HorizontalAlignment="Left" Margin="345,12,0,0" TextWrapping="Wrap" Text="Gate arrivo" VerticalAlignment="Top" RenderTransformOrigin="5.631,-1.316"/>
+                <TextBox x:Name="gatearrivo2txt" HorizontalAlignment="Left" Height="25" Margin="345,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.4,-0.433"/>
+                <TextBlock x:Name="textBlock23" HorizontalAlignment="Left" Margin="261,63,0,0" TextWrapping="Wrap" Text="Aereo" VerticalAlignment="Top"/>
+                <ComboBox x:Name="aereicbx2" HorizontalAlignment="Left" Margin="262,84,0,0" VerticalAlignment="Top" Width="120"/>
+                <Button x:Name="aggiungi_tratta2btn" Content="Aggiungi seconda tratta" HorizontalAlignment="Left" Margin="5,170,0,0" VerticalAlignment="Top" Width="239" Click="aggiungi_tratta2Click"/>
+            </Grid>
+
+            <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="10,207,0,0" TextWrapping="Wrap" Text="Elenco voli:" VerticalAlignment="Top" FontSize="18.667"/>
+
+            <DataGrid x:Name="pianidivolodatagrid" HorizontalAlignment="Left" Margin="0,237,0,0" VerticalAlignment="Top" Height="155" Width="850"
+                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended"
+                      RowHeight="30" Grid.Column="2" AutoGenerateColumns="False"  GridLinesVisibility="Horizontal" SelectionChanged="pianidivolodatagrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
+                    <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
+                    <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Arrivo in"/>
+                    <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data partenza"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataArrivo, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data arrivo"/>
+                    <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario arrivo"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="btnElimina_volo" Content="Elimina" HorizontalAlignment="Left" Margin="700,397,0,-25" VerticalAlignment="Top" Width="150" IsEnabled="False" Click="elimina_voloClick"/>
+
         </Grid>
 
         <Grid x:Name="GridDipendentetariffario" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">

@@ -45,33 +45,43 @@ namespace compagniaAerea
 
             public double costoFirst { get; set; }//5
 
+            public Boolean cancellato { get; set; }
+
             }
 
         //caricamento di database in locale 
         public void updateFlightLegs()
         {
+            voli.Clear();
             voli.AddRange((from p in myDatabase.getDb().Piano_di_volo
-                      select new FlightInfo
-                      {
-                          partenza = p.Tratta.First(t => (t.data_partenza == p.data_partenza && t.orario_partenza == p.orario_partenza)).Aeroporto.città,
-                          arrivo = p.Tratta.First(t =>(t.data_arrivo == p.data_arrivo && t.orario_arrivo == p.orario_arrivo)).Aeroporto1.città,
-                          dataPartenza = p.data_partenza,
-                          dataArrivo = p.data_arrivo,
-                          orarioPartenza = p.orario_partenza,
-                          orarioArrivo = p.orario_arrivo,
-                          codiceVolo = p.numero_volo,
-                          costoEconomy = p.Tariffario.First(t=>t.idClasse == 1).tariffa_solo_andata,
-                          costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
-                          costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata
-                      }).ToList());
+                           select new FlightInfo
+                           {
+                               partenza = p.Aeroporto.città,
+                               arrivo = p.Aeroporto1.città,
+                               dataPartenza = p.data_partenza,
+                               dataArrivo = p.data_arrivo,
+                               orarioPartenza = p.orario_partenza,
+                               orarioArrivo = p.orario_arrivo,
+                               codiceVolo = p.numero_volo,
+                               costoEconomy = p.Tariffario.First(t => t.idClasse == 1).tariffa_solo_andata,
+                               costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
+                               costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata,
+                               cancellato = (Boolean)p.cancellato
+                           }).ToList());
 
 
+        }
+
+        public List<FlightInfo> getFlights()
+        {
+            updateFlightLegs();
+            return voli;
         }
 
         public List<FlightInfo> getCustomFlight(string partenza, string arrivo, string data)
         {
             return (from v in voli
-                    where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data
+                    where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data && v.cancellato == false
                     select v).ToList();
             
         }
@@ -117,7 +127,12 @@ namespace compagniaAerea
             return this.idClasse;
         }
 
-        
+        public void CancelFlight(int numero_volo)
+        {
+            Piano_di_volo p = myDatabase.getDb().Piano_di_volo.First(pv => pv.numero_volo == numero_volo);
+            p.cancellato = true;
+            myDatabase.getDb().SubmitChanges();
+        }
 
         public string getAirportName(string città)
         {
