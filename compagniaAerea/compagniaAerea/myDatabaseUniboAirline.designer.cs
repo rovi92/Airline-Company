@@ -1105,6 +1105,8 @@ namespace compagniaAerea
 		
 		private EntitySet<Babaglio_Imbarcato> _Babaglio_Imbarcato;
 		
+		private EntitySet<Comfort_inclusi> _Comfort_inclusi;
+		
 		private EntityRef<Passeggero> _Passeggero;
 		
 		private EntityRef<Prenotazione> _Prenotazione;
@@ -1124,6 +1126,7 @@ namespace compagniaAerea
 		public Biglietto()
 		{
 			this._Babaglio_Imbarcato = new EntitySet<Babaglio_Imbarcato>(new Action<Babaglio_Imbarcato>(this.attach_Babaglio_Imbarcato), new Action<Babaglio_Imbarcato>(this.detach_Babaglio_Imbarcato));
+			this._Comfort_inclusi = new EntitySet<Comfort_inclusi>(new Action<Comfort_inclusi>(this.attach_Comfort_inclusi), new Action<Comfort_inclusi>(this.detach_Comfort_inclusi));
 			this._Passeggero = default(EntityRef<Passeggero>);
 			this._Prenotazione = default(EntityRef<Prenotazione>);
 			OnCreated();
@@ -1207,6 +1210,19 @@ namespace compagniaAerea
 			set
 			{
 				this._Babaglio_Imbarcato.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Biglietto_Comfort_inclusi", Storage="_Comfort_inclusi", ThisKey="codice_biglietto", OtherKey="idBiglietto")]
+		public EntitySet<Comfort_inclusi> Comfort_inclusi
+		{
+			get
+			{
+				return this._Comfort_inclusi;
+			}
+			set
+			{
+				this._Comfort_inclusi.Assign(value);
 			}
 		}
 		
@@ -1305,6 +1321,18 @@ namespace compagniaAerea
 		}
 		
 		private void detach_Babaglio_Imbarcato(Babaglio_Imbarcato entity)
+		{
+			this.SendPropertyChanging();
+			entity.Biglietto = null;
+		}
+		
+		private void attach_Comfort_inclusi(Comfort_inclusi entity)
+		{
+			this.SendPropertyChanging();
+			entity.Biglietto = this;
+		}
+		
+		private void detach_Comfort_inclusi(Comfort_inclusi entity)
 		{
 			this.SendPropertyChanging();
 			entity.Biglietto = null;
@@ -1593,51 +1621,51 @@ namespace compagniaAerea
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _idTariffa;
+		private int _idBiglietto;
 		
 		private int _idComfort;
 		
-		private EntityRef<Comfort> _Comfort;
+		private EntityRef<Biglietto> _Biglietto;
 		
-		private EntityRef<Tariffario> _Tariffario;
+		private EntityRef<Comfort> _Comfort;
 		
     #region Definizioni metodo Extensibility
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidTariffaChanging(int value);
-    partial void OnidTariffaChanged();
+    partial void OnidBigliettoChanging(int value);
+    partial void OnidBigliettoChanged();
     partial void OnidComfortChanging(int value);
     partial void OnidComfortChanged();
     #endregion
 		
 		public Comfort_inclusi()
 		{
+			this._Biglietto = default(EntityRef<Biglietto>);
 			this._Comfort = default(EntityRef<Comfort>);
-			this._Tariffario = default(EntityRef<Tariffario>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idTariffa", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idTariffa
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idBiglietto", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idBiglietto
 		{
 			get
 			{
-				return this._idTariffa;
+				return this._idBiglietto;
 			}
 			set
 			{
-				if ((this._idTariffa != value))
+				if ((this._idBiglietto != value))
 				{
-					if (this._Tariffario.HasLoadedOrAssignedValue)
+					if (this._Biglietto.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnidTariffaChanging(value);
+					this.OnidBigliettoChanging(value);
 					this.SendPropertyChanging();
-					this._idTariffa = value;
-					this.SendPropertyChanged("idTariffa");
-					this.OnidTariffaChanged();
+					this._idBiglietto = value;
+					this.SendPropertyChanged("idBiglietto");
+					this.OnidBigliettoChanged();
 				}
 			}
 		}
@@ -1662,6 +1690,40 @@ namespace compagniaAerea
 					this._idComfort = value;
 					this.SendPropertyChanged("idComfort");
 					this.OnidComfortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Biglietto_Comfort_inclusi", Storage="_Biglietto", ThisKey="idBiglietto", OtherKey="codice_biglietto", IsForeignKey=true)]
+		public Biglietto Biglietto
+		{
+			get
+			{
+				return this._Biglietto.Entity;
+			}
+			set
+			{
+				Biglietto previousValue = this._Biglietto.Entity;
+				if (((previousValue != value) 
+							|| (this._Biglietto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Biglietto.Entity = null;
+						previousValue.Comfort_inclusi.Remove(this);
+					}
+					this._Biglietto.Entity = value;
+					if ((value != null))
+					{
+						value.Comfort_inclusi.Add(this);
+						this._idBiglietto = value.codice_biglietto;
+					}
+					else
+					{
+						this._idBiglietto = default(int);
+					}
+					this.SendPropertyChanged("Biglietto");
 				}
 			}
 		}
@@ -1696,40 +1758,6 @@ namespace compagniaAerea
 						this._idComfort = default(int);
 					}
 					this.SendPropertyChanged("Comfort");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Comfort_inclusi", Storage="_Tariffario", ThisKey="idTariffa", OtherKey="idTariffa", IsForeignKey=true)]
-		public Tariffario Tariffario
-		{
-			get
-			{
-				return this._Tariffario.Entity;
-			}
-			set
-			{
-				Tariffario previousValue = this._Tariffario.Entity;
-				if (((previousValue != value) 
-							|| (this._Tariffario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Tariffario.Entity = null;
-						previousValue.Comfort_inclusi.Remove(this);
-					}
-					this._Tariffario.Entity = value;
-					if ((value != null))
-					{
-						value.Comfort_inclusi.Add(this);
-						this._idTariffa = value.idTariffa;
-					}
-					else
-					{
-						this._idTariffa = default(int);
-					}
-					this.SendPropertyChanged("Tariffario");
 				}
 			}
 		}
@@ -3269,8 +3297,6 @@ namespace compagniaAerea
 		
 		private int _idClasse;
 		
-		private EntitySet<Comfort_inclusi> _Comfort_inclusi;
-		
 		private EntitySet<Prenotazione> _Prenotazione;
 		
 		private EntityRef<Classe> _Classe;
@@ -3293,7 +3319,6 @@ namespace compagniaAerea
 		
 		public Tariffario()
 		{
-			this._Comfort_inclusi = new EntitySet<Comfort_inclusi>(new Action<Comfort_inclusi>(this.attach_Comfort_inclusi), new Action<Comfort_inclusi>(this.detach_Comfort_inclusi));
 			this._Prenotazione = new EntitySet<Prenotazione>(new Action<Prenotazione>(this.attach_Prenotazione), new Action<Prenotazione>(this.detach_Prenotazione));
 			this._Classe = default(EntityRef<Classe>);
 			this._Piano_di_volo = default(EntityRef<Piano_di_volo>);
@@ -3385,19 +3410,6 @@ namespace compagniaAerea
 					this.SendPropertyChanged("idClasse");
 					this.OnidClasseChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tariffario_Comfort_inclusi", Storage="_Comfort_inclusi", ThisKey="idTariffa", OtherKey="idTariffa")]
-		public EntitySet<Comfort_inclusi> Comfort_inclusi
-		{
-			get
-			{
-				return this._Comfort_inclusi;
-			}
-			set
-			{
-				this._Comfort_inclusi.Assign(value);
 			}
 		}
 		
@@ -3500,18 +3512,6 @@ namespace compagniaAerea
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Comfort_inclusi(Comfort_inclusi entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = this;
-		}
-		
-		private void detach_Comfort_inclusi(Comfort_inclusi entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tariffario = null;
 		}
 		
 		private void attach_Prenotazione(Prenotazione entity)
