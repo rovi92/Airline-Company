@@ -1003,11 +1003,11 @@ namespace compagniaAerea
 
         private void aggiungi_tratta2Click(object sender, RoutedEventArgs e)
         {
+            dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), numero_volo);
             errore.TraverseVisualTree(this.grid);
             GridAggiungiTratta1.Visibility = Visibility.Hidden;
             GridAggiungiTratta2.Visibility = Visibility.Hidden;
             GridAggiungiPianoDiVolo.Visibility = Visibility.Visible;
-            dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpPartenza2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), numero_volo);
             pianidivolodatagrid.ItemsSource = volo.getFlights();
             pianidivolodatagrid.Items.Refresh();
         }
