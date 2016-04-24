@@ -136,7 +136,7 @@
             <MenuItem x:Name="MIProfilo" Header="profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -278,8 +278,8 @@
             <TextBlock x:Name="Cerca" HorizontalAlignment="Left" Margin="49,35,0,0" TextWrapping="Wrap" Text="Cerca dipendente:" VerticalAlignment="Top"/>
             <TextBlock x:Name="genere" HorizontalAlignment="Left" Margin="374,269,0,0" TextWrapping="Wrap" Text="Genere" VerticalAlignment="Top" RenderTransformOrigin="0.421,0.752"/>
             <TextBlock x:Name="impiego" HorizontalAlignment="Left" Margin="374,313,0,0" TextWrapping="Wrap" Text="Impiego" VerticalAlignment="Top"/>
-            <TextBox x:Name="genereDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,285,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="genereDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,285,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <DataGrid x:Name="dataProfiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="245" Width="260" >
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True"/>
@@ -288,12 +288,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="cercaDipendentebtn" Content="Cerca" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="CercaDipendente_click"/>
+            <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         </Grid>
 
         <Grid x:Name="GridDipendenteVoli" HorizontalAlignment="Left" Height="392" Margin="0,25,0,0" VerticalAlignment="Top" Width="850" Visibility="Hidden">
             <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="549,5,0,0" TextWrapping="Wrap" Text="Gestione voli" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
 
-            <Grid x:Name="GridAggiungiPianoDiVolo" HorizontalAlignment="Left" Height="203" Margin="10,0,0,0" VerticalAlignment="Top" Width="473" Visibility="Visible">
+            <Grid x:Name="GridAggiungiPianoDiVolo" HorizontalAlignment="Left" Height="203" Margin="10,0,0,0" VerticalAlignment="Top" Width="473" Visibility="Hidden">
                 <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="28,9,0,0" TextWrapping="Wrap" Text="Aereoporto partenza" VerticalAlignment="Top"/>
                 <TextBox x:Name="aereoporto_partenzatxt" HorizontalAlignment="Left" Height="23" Margin="28,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="178,9,0,0" TextWrapping="Wrap" Text="Aereoporto arrivo" VerticalAlignment="Top"/>

@@ -61,7 +61,7 @@ namespace compagniaAerea
 
         public List<String> getValueGrid(DataGrid dg)
         {
-            
+
             List<String> tmp = new List<String>();
             for (int i = 0; i < dg.SelectedCells.Count; i++)
             {
@@ -134,6 +134,25 @@ namespace compagniaAerea
         #endregion
         #region set Dipendente
 
+        public void setDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess)
+        {
+            Personale p = new Personale()
+            {
+                nome = nome,
+                cognome = cognome,
+                indirizzo = indirizzo,
+                data_di_nascita = data_di_nascita,
+                data_assunzione = data_assunzione,
+                email = email,
+                telefono = telefono,
+                sesso = sesso,
+                pilota = pilota,
+                hostess = hostess
+            };
+            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            myDatatabase.getDb().SubmitChanges();
+        }
+
         public void setIndirizzo(string indirizzo)
         {
             Personale p = new Personale()
@@ -163,6 +182,7 @@ namespace compagniaAerea
             myDatatabase.getDb().Personale.InsertOnSubmit(p);
             myDatatabase.getDb().SubmitChanges();
         }
+
 
 
         #endregion
