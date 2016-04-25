@@ -45,7 +45,7 @@ namespace compagniaAerea
 
             public double costoFirst { get; set; }//5
 
-            public Boolean cancellato { get; set; }
+            public Boolean cancellato { get; set; }//nella g non c'è
 
         }
 
@@ -180,6 +180,12 @@ namespace compagniaAerea
                     return false;
             }
 
+        }
+        public int CountFlightLegs(int idVolo)
+        {
+            return (from p in myDatabase.getDb().Piano_di_volo
+                    where p.numero_volo == idVolo
+                    select p.Tratta).Count();
         }
     }
 }

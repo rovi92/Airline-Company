@@ -601,7 +601,15 @@ namespace compagniaAerea
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
                 ticket.setQuantitaPersone(ticket.getQuatitàPersone() - 1);
 
-
+                ticket.updatePrenotationPrice(ticket.getIdPrenotazioneAndata());
+                txtTotale.Text = ticket.getPrenotationPrice(ticket.getIdPrenotazioneAndata()).ToString();
+                txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                gridPagamentoRitorno.Visibility = Visibility.Hidden;
+                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata,0)))>0)
+                {
+                    GridScaloViewTicket.Visibility = Visibility.Visible;
+                }
+                
             }
             else
             {
@@ -614,6 +622,7 @@ namespace compagniaAerea
         {
             int biglietti = ticket.getQuatitàPersone();
 
+            GridScaloViewTicket.Visibility = Visibility.Hidden;
             if (rdbAndataRitorno.IsChecked.Value)
             {
                 ticket.insertRecordTicket(gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text), ticket.getIdPrenotazioneRitorno());
@@ -649,9 +658,13 @@ namespace compagniaAerea
                 dataArrivolbl.Content = dataRitorno.SelectedDate.ToString();
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
 
-
+               
                 btnConferma_ordine.Visibility = Visibility.Hidden;
                 btnConferma2.Visibility = Visibility.Visible;
+                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 0)
+                {
+                    GridScaloViewTicket.Visibility = Visibility.Visible;
+                }
                 /*
                 
             totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getFlightClassId()) * int.Parse(lblPosti.Content.ToString());
@@ -669,6 +682,7 @@ namespace compagniaAerea
             {
                 if (ticket.getQuatitàPersone() > 0)
                 {
+                   
                     this.gridCorrente = 7;
                     currentGrid();
                     errore.TraverseVisualTree(this.grid);
@@ -759,7 +773,7 @@ namespace compagniaAerea
             }
 
             MessageBox.Show("grazie per aver scelto la nostra compagnia");
-
+            gridPagamentoRitorno.Visibility = Visibility.Hidden;
             this.gridCorrente = 2;
             currentGrid();
             ticket.getPopulateDbTicket();
@@ -981,7 +995,7 @@ namespace compagniaAerea
 
         private void aggiungi_tratta1Click(object sender, RoutedEventArgs e)
         {
-            dipendentevolo.Aggiungi_tratta(aereoporto_partenza1txt.Text, aereoporto_arrivo1txt.Text, Convert.ToInt32(gatepartenza1txt.Text), Convert.ToInt32(gatearrivo1txt.Text), (DateTime)partenzapicker1.SelectedDate, (DateTime)arrivopicker1.SelectedDate, tpPartenza1.Text + ":00", tpArrivo1.Text + ":00", aereicbx1.SelectedValue.ToString().Split(null), numero_volo);
+            dipendentevolo.Aggiungi_tratta(aereoporto_partenza1txt.Text, aereoporto_arrivo1txt.Text, Convert.ToInt32(gatepartenza1txt.Text), Convert.ToInt32(gatearrivo1txt.Text), (DateTime)partenzapicker1.SelectedDate, (DateTime)arrivopicker1.SelectedDate, tpPartenza1.Text + ":00", tpArrivo1.Text + ":00", aereicbx1.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
             if (scalichk.IsChecked == true)
             {
                 GridAggiungiTratta2.Visibility = Visibility.Visible;
@@ -1003,7 +1017,7 @@ namespace compagniaAerea
 
         private void aggiungi_tratta2Click(object sender, RoutedEventArgs e)
         {
-            dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), numero_volo);
+            dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
             errore.TraverseVisualTree(this.grid);
             GridAggiungiTratta1.Visibility = Visibility.Hidden;
             GridAggiungiTratta2.Visibility = Visibility.Hidden;

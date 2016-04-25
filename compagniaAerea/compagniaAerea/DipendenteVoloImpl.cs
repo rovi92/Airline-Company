@@ -11,6 +11,8 @@ namespace compagniaAerea
     {
         DatabaseManager myDatabase;
         List<Piano_di_volo> piano_di_volo = new List<Piano_di_volo>();
+        int lastNumero_volo = 0;
+
 
         public DipendenteVoloImpl()
         {
@@ -40,6 +42,7 @@ namespace compagniaAerea
             };
             myDatabase.getDb().Piano_di_volo.InsertOnSubmit(p);       
             myDatabase.getDb().SubmitChanges();
+            this.lastNumero_volo = p.numero_volo;
             CreateFlightFare(p.numero_volo, tariffa);
             UpdatePianodivolo();
         }
@@ -140,6 +143,10 @@ namespace compagniaAerea
                     
         }
 
+        public int getLastNumero_volo()
+        {
+            return this.lastNumero_volo;
+        } 
     }
 
    
