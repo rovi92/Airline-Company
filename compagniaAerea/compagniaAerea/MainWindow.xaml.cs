@@ -381,7 +381,6 @@ namespace compagniaAerea
 
         #region profilo dipendente
 
-
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             errore.TraverseVisualTree(this.grid);
@@ -392,11 +391,10 @@ namespace compagniaAerea
             MIProfilo.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
         }
-        #region profilo dipendete
+
         /*ricerca del dipendente nell grid profilo dipendete*/
         private void CercaDipendente_click(object sender, RoutedEventArgs e)
         {
-            int i = 0;
             dipendente.getDipendente(Convert.ToInt32(dipendente.getValueGrid(dataProfiliDipendetente)[2]));
             cognomeDipendentetxt.Text = dipendente.getCognome();
             nomeDipendentetxt.Text = dipendente.getNome();
@@ -426,44 +424,110 @@ namespace compagniaAerea
             email_dipendentetxt.IsEnabled = true;
 
         }
+
         private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
         {
             salva_dipendentebtn.Visibility = Visibility.Visible;
             indirizzodi_pendente = indirizzo_dipendentetxt.Text;
             indirizzo_dipendentetxt.IsEnabled = true;
         }
+
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
-            errore.ValueText(telefonoDipendentetxt);
-            errore.ValueText(email_dipendentetxt);
-            errore.ValueText(indirizzo_dipendentetxt);
-
-            if (errore.checkText())
+            MessageBox.Show("Attenzione nella casella 'impiego dipendente' inserire la parola Pilota o Hostess in base alla scelta del impiego","ATTENZIONE!",MessageBoxButton.OK,MessageBoxImage.Asterisk);
+            DateTime currentDate = DateTime.Now;
+            bool flag = false;
+            if (aggiungiDipendente.IsChecked == true)
             {
-                /*inserimento dei dati nel db*/
-                if (cambia_email_dipendentecb.IsChecked == true)
-                    dipendente.setEmail(email_dipendentetxt.Text);
-                if (cambia_indirizzo_dipendentecb.IsChecked == true)
-                    dipendente.setIndirizzo(indirizzo_dipendentetxt.Text);
-                if (cambia_telefono_dipendentecb.IsChecked == true)
-                    dipendente.setTelefono(telefonoDipendentetxt.Text);
-                //reset checkbox
-                cambia_telefono_dipendentecb.IsChecked = false;
-                cambia_email_dipendentecb.IsChecked = false;
-                cambia_indirizzo_dipendentecb.IsChecked = false;
+                cognomeDipendentetxt.IsEnabled = true;
+                nomeDipendentetxt.IsEnabled = true;
+                codiceDipendentetxt.Visibility = Visibility.Hidden;
+                codice_dipendentetbl.Visibility = Visibility.Hidden;
+                nuova_data_nascita_dipendete.Visibility = Visibility.Visible;
+                genereDipendentetxt.IsEnabled = true;
+                impiegoDipendentetxt.IsEnabled = true;
+                indirizzo_dipendentetxt.IsEnabled = true;
+                telefonoDipendentetxt.IsEnabled = true;
+                email_dipendentetxt.IsEnabled = true;
+                cercaDipendentebtn.IsEnabled = false;
+                /*controllo campi vuoti*/
+                errore.ValueText(cognomeDipendentetxt);
+                errore.ValueText(nomeDipendentetxt);
+                errore.ValueText(genereDipendentetxt);
+                errore.ValueText(impiegoDipendentetxt);
+                errore.ValueText(email_dipendentetxt);
+                errore.ValueText(indirizzo_dipendentetxt);
+                errore.ValueText(telefonoDipendentetxt);
+                if (errore.checkText())
+                {
+                    if (nuova_data_nascita_dipendete.SelectedDate.Value.ToString("yyyy-MM-dd").Equals(false))
+                    {
+                        MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    if (impiegoDipendentetxt.Text == "Pilota" || impiegoDipendentetxt.Text == "pilota")
+                    {
+                        dipendente.setDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, true, false);
+                        flag = true;
+                    }
+                    else
+                    if (impiegoDipendentetxt.Text == "Hostess" || impiegoDipendentetxt.Text == "hostess")
+                    {
+                        dipendente.setDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, false, true);
+                        flag = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Inserire nella casella 'genere dipendente' Piolota oppure Hostess per selezionare l'impiego", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                if (flag == true)
+                {
+                    cognomeDipendentetxt.IsEnabled = false;
+                    nomeDipendentetxt.IsEnabled = false;
+                    codiceDipendentetxt.Visibility = Visibility.Visible;
+                    codice_dipendentetbl.Visibility = Visibility.Visible;
+                    nuova_data_nascita_dipendete.Visibility = Visibility.Hidden;
+                    genereDipendentetxt.IsEnabled = false;
+                    impiegoDipendentetxt.IsEnabled = false;
+                    indirizzo_dipendentetxt.IsEnabled = false;
+                    telefonoDipendentetxt.IsEnabled =false;
+                    email_dipendentetxt.IsEnabled = false;
+                    cercaDipendentebtn.IsEnabled = true;
+                }
 
             }
             else
             {
-                MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                errore.ValueText(telefonoDipendentetxt);
+                errore.ValueText(email_dipendentetxt);
+                errore.ValueText(indirizzo_dipendentetxt);
 
+                if (errore.checkText())
+                {
+                    /*inserimento dei dati nel db*/
+                    if (cambia_email_dipendentecb.IsChecked == true)
+                        dipendente.setEmail(email_dipendentetxt.Text);
+                    if (cambia_indirizzo_dipendentecb.IsChecked == true)
+                        dipendente.setIndirizzo(indirizzo_dipendentetxt.Text);
+                    if (cambia_telefono_dipendentecb.IsChecked == true)
+                        dipendente.setTelefono(telefonoDipendentetxt.Text);
+                    //reset checkbox
+                    cambia_telefono_dipendentecb.IsChecked = false;
+                    cambia_email_dipendentecb.IsChecked = false;
+                    cambia_indirizzo_dipendentecb.IsChecked = false;
+
+                }
+                else
+                {
+                    MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
             }
-
         }
 
         #endregion
 
-        #endregion
+
 
         #region place holder manuale
 

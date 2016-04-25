@@ -9,10 +9,10 @@ namespace compagniaAerea
 {
     interface Dipendente
     {
-        
+
         void getDipendente(int idDIpendente);
         List<Personale> getStaff();
-       
+
         /*get dei dati dipendente*/
         String getNome();
         String getCognome();
@@ -26,15 +26,10 @@ namespace compagniaAerea
         String getImpiego();
         List<String> getValueGrid(DataGrid dg);
         /*set dei dati dipende (ogni campo ho un sou metodo per gestire cambiamenti singoli nelle informazioni)*/
-        // void setNome(string nome);
-        // void setCognome(string cognome);
+        void setDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess);
         void setIndirizzo(string indirizzo);
-        //void setDataNascita(DateTime data);
-        //void setDataAssunzione(DateTime data);
         void setEmail(String email);
         void setTelefono(string telefono);
-       // void setSesso(string sesso);
-       // void setPilota(bool pilota);
-       // void sethostess(bool hostess);
+
     }
 }
