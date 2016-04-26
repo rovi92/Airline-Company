@@ -432,7 +432,7 @@
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
         </Grid>
-        <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Visible">
+        <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Hidden">
             <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="309,10,0,0" VerticalAlignment="Top" Height="160" Width="527">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
