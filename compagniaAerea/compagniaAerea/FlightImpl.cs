@@ -50,7 +50,14 @@ namespace compagniaAerea
             public int? idPromozione { get; set; }
 
         }
-
+        public class FlightLegsInfo
+        {
+            public TimeSpan orarioPartenza { get; set; }
+            public DateTime dataPartenza { get; set; }
+            public int gatePartenza { get; set; }
+            public string partenza { get; set; }
+            public string arrivo { get; set; }
+        }
         //caricamento di database in locale 
         public void updateFlightLegs()
         {
@@ -78,6 +85,19 @@ namespace compagniaAerea
         {
             updateFlightLegs();
             return voli;
+        }
+
+        public List<FlightLegsInfo> getFlightsLegs()
+        {
+            return (from t in myDatabase.getDb().Tratta
+                    select new FlightLegsInfo
+                    {
+                        orarioPartenza = t.orario_partenza,
+                        dataPartenza = t.data_partenza,
+                        gatePartenza = t.gate_partenza,
+                        partenza = t.Aeroporto.città,
+                        arrivo = t.Aeroporto1.città
+                    }).ToList();
         }
 
         public List<FlightInfo> getCustomFlight(string partenza, string arrivo, string data)

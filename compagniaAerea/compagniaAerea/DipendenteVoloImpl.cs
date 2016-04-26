@@ -41,7 +41,7 @@ namespace compagniaAerea
                 cancellato = cancellato,
                 idPromozione = null
             };
-            myDatabase.getDb().Piano_di_volo.InsertOnSubmit(p);       
+            myDatabase.getDb().Piano_di_volo.InsertOnSubmit(p);
             myDatabase.getDb().SubmitChanges();
             this.lastNumero_volo = p.numero_volo;
             CreateFlightFare(p.numero_volo, tariffa);
@@ -73,7 +73,7 @@ namespace compagniaAerea
             myDatabase.getDb().Tratta.InsertOnSubmit(t);
             myDatabase.getDb().SubmitChanges();
 
-          
+
         }
 
         //Controlla se il piano di volo è già inserito nel db
@@ -81,34 +81,34 @@ namespace compagniaAerea
         {
 
             return (from p in piano_di_volo
-                     where p.Aeroporto.città.ToString() == città_partenza &&
-                     p.Aeroporto1.città.ToString() == città_arrivo &&
-                     p.data_partenza.ToString("yyyy-MM-dd") == data_partenza &&
-                     p.data_arrivo.ToString("yyyy-MM-dd") == data_arrivo &&
-                     p.orario_arrivo.ToString("hh':'mm':'ss") == orario_arrivo &&
-                     p.orario_partenza.ToString("hh':'mm':'ss") == orario_partenza 
-                     select p).Count() > 0 ? true : false;
+                    where p.Aeroporto.città.ToString() == città_partenza &&
+                    p.Aeroporto1.città.ToString() == città_arrivo &&
+                    p.data_partenza.ToString("yyyy-MM-dd") == data_partenza &&
+                    p.data_arrivo.ToString("yyyy-MM-dd") == data_arrivo &&
+                    p.orario_arrivo.ToString("hh':'mm':'ss") == orario_arrivo &&
+                    p.orario_partenza.ToString("hh':'mm':'ss") == orario_partenza
+                    select p).Count() > 0 ? true : false;
 
         }
 
         //Restituisce il numero del volo
         public int getNumeroVolo(String città_partenza, String città_arrivo, String data_partenza, String data_arrivo, String orario_partenza, String orario_arrivo)
         {
-        
+
             return (from p in piano_di_volo
-                     where p.Aeroporto.città.ToString() == città_partenza &&
-                     p.Aeroporto1.città.ToString() == città_arrivo &&
-                     p.data_partenza.ToString("yyyy-MM-dd") == data_partenza &&
-                     p.data_arrivo.ToString("yyyy-MM-dd") == data_arrivo &&
-                     p.orario_partenza.ToString("hh':'mm':'ss") == orario_partenza &&
-                     p.orario_arrivo.ToString("hh':'mm':'ss") == orario_arrivo
-                     select p.numero_volo).First();
+                    where p.Aeroporto.città.ToString() == città_partenza &&
+                    p.Aeroporto1.città.ToString() == città_arrivo &&
+                    p.data_partenza.ToString("yyyy-MM-dd") == data_partenza &&
+                    p.data_arrivo.ToString("yyyy-MM-dd") == data_arrivo &&
+                    p.orario_partenza.ToString("hh':'mm':'ss") == orario_partenza &&
+                    p.orario_arrivo.ToString("hh':'mm':'ss") == orario_arrivo
+                    select p.numero_volo).First();
         }
 
         //Aggiungi tariffa
         public void CreateFlightFare(int numero_volo, double tariffa)
         {
-            for(int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 Tariffario t = new Tariffario()
                 {
@@ -130,7 +130,7 @@ namespace compagniaAerea
             return result;
         }
 
-        
+
         public class InfoAereo
         {
             public string descrizione { get; set; }
@@ -141,16 +141,57 @@ namespace compagniaAerea
         {
             return (from a in myDatabase.getDb().Aereo
                     select (a.nome + " " + a.modello)).ToList();
-                    
+
         }
 
         public int getLastNumero_volo()
         {
             return this.lastNumero_volo;
-        } 
+        }
+
+        public Boolean CombineEmplyerToFlight(int idPersonale, DateTime dataPartenza, TimeSpan oraPartenza, int gatePartenza)
+        {
+            if ((from v in myDatabase.getDb().Volo_attuale
+                 where v.idPersonale == idPersonale && v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza
+                 select v).Count() > 0)
+            {
+                return false;
+            }
+            else
+            {
+
+
+                Volo_attuale va = new Volo_attuale()
+                {
+                    orario_partenza = oraPartenza,
+                    data_partenza = dataPartenza,
+                    gate_partenza = gatePartenza,
+                    idPersonale = idPersonale
+                };
+                myDatabase.getDb().Volo_attuale.InsertOnSubmit(va);
+                myDatabase.getDb().SubmitChanges();
+                return true;
+            }
+        }
+        public List<Personale> getEmployersInFly(DateTime dataPartenza, TimeSpan oraPartenza, int gatePartenza)
+        {
+            return (from v in myDatabase.getDb().Volo_attuale
+                    where v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza
+                    select new Personale
+                    {
+                        nome = v.Personale.nome,
+                        cognome = v.Personale.cognome,
+                        idPersonale = v.Personale.idPersonale,
+                        indirizzo = v.Personale.indirizzo,
+                        data_di_nascita = v.Personale.data_di_nascita,
+                        data_assunzione = v.Personale.data_assunzione,
+                        email = v.Personale.email,
+                        telefono = v.Personale.telefono,
+                        sesso = v.Personale.sesso,
+                        pilota = v.Personale.pilota,
+                        hostess = v.Personale.hostess
+                    }).ToList();
+        }
     }
-
-   
-
-
 }
+

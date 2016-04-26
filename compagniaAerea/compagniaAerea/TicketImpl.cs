@@ -14,13 +14,13 @@ namespace compagniaAerea
     {
 
         DatabaseManager myDatabase;
-        List<String> primoTicket = new List<String>();
-        List<Comfort> comfort = new List<Comfort>();
-        List<Classe> classeVolo = new List<Classe>();
-        List<Tariffario> tariffario = new List<Tariffario>();
-        List<Pagamento> pagamento = new List<Pagamento>();
-        List<Prenotazione> prenotazione = new List<Prenotazione>();
-        List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
+        //List<String> primoTicket = new List<String>();
+      //  List<Comfort> comfort = new List<Comfort>();
+       // List<Classe> classeVolo = new List<Classe>();
+       // List<Tariffario> tariffario = new List<Tariffario>();
+      //  List<Pagamento> pagamento = new List<Pagamento>();
+       // List<Prenotazione> prenotazione = new List<Prenotazione>();
+       // List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
         InfoBiglietto ib = new InfoBiglietto();
         int idTariffa = 0;
         int lastIdBiglietto = 0;
@@ -72,7 +72,7 @@ namespace compagniaAerea
                   }).First();
         }
 
-        public void getPopulateDbTicket()
+      /*  public void getPopulateDbTicket()
         {
 
 
@@ -93,13 +93,8 @@ namespace compagniaAerea
 
             pagamento = (from pg in myDatabase.getDb().Pagamento
                          select pg).ToList();
-        }
+        }*/
 
-
-        public void DatiAnagraficiBiglietto(TextBox tb)
-        {
-            throw new NotImplementedException();
-        }
 
         #region GET tiket e tutto ciò che è correlato al biglietto
         public double getTicketPrice(int idBiglietto)
@@ -129,7 +124,7 @@ namespace compagniaAerea
             return myDatabase.getDb().Prenotazione.First(pr => pr.idPrenotazione == idPrenotazione).totale;
         }
 
-        public void firstTicket(List<String> l)
+      /*  public void firstTicket(List<String> l)
         {
             primoTicket = l;
         }
@@ -138,7 +133,7 @@ namespace compagniaAerea
         {
             return primoTicket;
         }
-
+        */
         public string getNome()
         {
             return ib.nome;
@@ -307,30 +302,7 @@ namespace compagniaAerea
         {
             this.quantitaPersone = nPersone;
         }
-
       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
     }
 }

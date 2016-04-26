@@ -24,12 +24,12 @@ namespace compagniaAerea
         String getTelefono();
         String getSesso();
         String getImpiego();
-        List<String> getValueGrid(DataGrid dg);
+       // List<String> getValueGrid(DataGrid dg);
         /*set dei dati dipende (ogni campo ho un sou metodo per gestire cambiamenti singoli nelle informazioni)*/
-        void setDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess);
-        void setIndirizzo(string indirizzo);
-        void setEmail(String email);
-        void setTelefono(string telefono);
+        void createDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess);
+        void setIndirizzo(string indirizzo, int idPersonale);
+        void setEmail(string email, int idPersonale);
+        void setTelefono(string telefono, int idPersonale);
 
     }
 }

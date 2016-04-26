@@ -13,6 +13,12 @@
                 <DataTrigger Binding="{Binding cancellato}" Value="True">
                     <Setter Property="Background" Value="IndianRed"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding pilota}" Value="True">
+                    <Setter Property="Background" Value="#FF30C5C5"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding hostess}" Value="True">
+                    <Setter Property="Background" Value="LightCoral"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -128,6 +134,7 @@
             </MenuItem>
             <MenuItem x:Name="MIofferte" Header="Offerte" Visibility="Hidden" Click="Click_gestioneofferte"/>
             <MenuItem x:Name="MIGestioneVoli" Header="Gestione voli" Visibility="Hidden" Click="Click_gestioneVoli"/>
+            <MenuItem x:Name="MIGestioneDipendenteVoli" Header="Personale di volo" Visibility="Hidden" Click="MIGestioneDipendenteVoli_Click" />
             <MenuItem x:Name="MIProfilo" Header="Profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
@@ -275,7 +282,7 @@
             <TextBlock x:Name="impiego" HorizontalAlignment="Left" Margin="374,313,0,0" TextWrapping="Wrap" Text="Impiego" VerticalAlignment="Top"/>
             <TextBox x:Name="genereDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,285,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <DataGrid x:Name="dataProfiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="245" Width="260" >
+            <DataGrid x:Name="dataProfiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="245" Width="260" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True"/>
@@ -283,7 +290,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="cercaDipendentebtn" Content="Cerca" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="CercaDipendente_click"/>
-            <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top" Checked="aggiungiDipendente_Checked"/>
             <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         </Grid>
 
@@ -449,7 +456,32 @@
             <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte"/>
             <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="45,24,0,0" TextWrapping="Wrap" Text="Selezionare lo sconto da applicare" VerticalAlignment="Top" FontSize="14.667" FontFamily="Yu Gothic UI Semibold"/>
         </Grid>
-
+        <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Hidden">
+            <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="462"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgTratte_SelectionChanged">
+                <DataGrid.Columns>      
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Ora partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data partenza"/>
+                    <DataGridTextColumn Binding="{Binding gatePartenza}" IsReadOnly="True" Header="Gate partenza"/>
+                    <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Città partenza"/>
+                    <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Città arrivo"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="btnAssocia" Content="Button" HorizontalAlignment="Left" Margin="360,119,0,0" VerticalAlignment="Top" Width="230" Click="btnAssocia_Click"/>
+            <DataGrid x:Name="dgPersonaleInVolo" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="842" Height="111" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding idPersonale}" IsReadOnly="True" Header="IdPersonale"/>
+                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True" Header="Nome"/>
+                    <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True" Header="Cognome"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="dgPersonaleDiVolo" HorizontalAlignment="Left" Margin="477,10,0,0" VerticalAlignment="Top" Width="375" Height="85" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding idPersonale}" IsReadOnly="True" Header="IdPersonale"/>
+                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True" Header="Nome"/>
+                    <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True" Header="Cognome"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
 
 

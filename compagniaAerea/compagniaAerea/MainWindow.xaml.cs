@@ -25,7 +25,7 @@ namespace compagniaAerea
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
-       
+
 
         public MainWindow()
         {
@@ -340,6 +340,7 @@ namespace compagniaAerea
             gridchange.Add(viewTicket);//grid del biglietto posizione 8
             gridchange.Add(GridPagamento);//grid del pagamento 9
             gridchange.Add(gridOfferte);//gird delle offerte 10
+            gridchange.Add(gridDipendenteVolo);// grid dei dipendenti in volo su un tratta 11
         }
 
         public void currentGrid()
@@ -400,7 +401,7 @@ namespace compagniaAerea
         /*ricerca del dipendente nell grid profilo dipendete*/
         private void CercaDipendente_click(object sender, RoutedEventArgs e)
         {
-            dipendente.getDipendente(Convert.ToInt32(dipendente.getValueGrid(dataProfiliDipendetente)[2]));
+            dipendente.getDipendente(Convert.ToInt32(getCellValue(dataProfiliDipendetente, 2)));
             cognomeDipendentetxt.Text = dipendente.getCognome();
             nomeDipendentetxt.Text = dipendente.getNome();
             codiceDipendentetxt.Text = dipendente.getCodice();
@@ -437,24 +438,29 @@ namespace compagniaAerea
             indirizzo_dipendentetxt.IsEnabled = true;
         }
 
+        private void aggiungiDipendente_Checked(object sender, RoutedEventArgs e)
+        {
+            cognomeDipendentetxt.IsEnabled = true;
+            nomeDipendentetxt.IsEnabled = true;
+            codiceDipendentetxt.Visibility = Visibility.Hidden;
+            codice_dipendentetbl.Visibility = Visibility.Hidden;
+            nuova_data_nascita_dipendete.Visibility = Visibility.Visible;
+            genereDipendentetxt.IsEnabled = true;
+            impiegoDipendentetxt.IsEnabled = true;
+            indirizzo_dipendentetxt.IsEnabled = true;
+            telefonoDipendentetxt.IsEnabled = true;
+            email_dipendentetxt.IsEnabled = true;
+            cercaDipendentebtn.IsEnabled = false;
+        }
+
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Attenzione nella casella 'impiego dipendente' inserire la parola Pilota o Hostess in base alla scelta del impiego","ATTENZIONE!",MessageBoxButton.OK,MessageBoxImage.Asterisk);
+            MessageBox.Show("Attenzione nella casella 'impiego dipendente' inserire la parola Pilota o Hostess in base alla scelta del impiego", "ATTENZIONE!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             DateTime currentDate = DateTime.Now;
             bool flag = false;
             if (aggiungiDipendente.IsChecked == true)
             {
-                cognomeDipendentetxt.IsEnabled = true;
-                nomeDipendentetxt.IsEnabled = true;
-                codiceDipendentetxt.Visibility = Visibility.Hidden;
-                codice_dipendentetbl.Visibility = Visibility.Hidden;
-                nuova_data_nascita_dipendete.Visibility = Visibility.Visible;
-                genereDipendentetxt.IsEnabled = true;
-                impiegoDipendentetxt.IsEnabled = true;
-                indirizzo_dipendentetxt.IsEnabled = true;
-                telefonoDipendentetxt.IsEnabled = true;
-                email_dipendentetxt.IsEnabled = true;
-                cercaDipendentebtn.IsEnabled = false;
+
                 /*controllo campi vuoti*/
                 errore.ValueText(cognomeDipendentetxt);
                 errore.ValueText(nomeDipendentetxt);
@@ -471,13 +477,13 @@ namespace compagniaAerea
                     }
                     if (impiegoDipendentetxt.Text == "Pilota" || impiegoDipendentetxt.Text == "pilota")
                     {
-                        dipendente.setDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, true, false);
+                        dipendente.createDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, true, false);
                         flag = true;
                     }
                     else
                     if (impiegoDipendentetxt.Text == "Hostess" || impiegoDipendentetxt.Text == "hostess")
                     {
-                        dipendente.setDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, false, true);
+                        dipendente.createDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, false, true);
                         flag = true;
                     }
                     else
@@ -495,9 +501,10 @@ namespace compagniaAerea
                     genereDipendentetxt.IsEnabled = false;
                     impiegoDipendentetxt.IsEnabled = false;
                     indirizzo_dipendentetxt.IsEnabled = false;
-                    telefonoDipendentetxt.IsEnabled =false;
+                    telefonoDipendentetxt.IsEnabled = false;
                     email_dipendentetxt.IsEnabled = false;
                     cercaDipendentebtn.IsEnabled = true;
+                    aggiungiDipendente.IsChecked = false;
                 }
 
             }
@@ -511,11 +518,11 @@ namespace compagniaAerea
                 {
                     /*inserimento dei dati nel db*/
                     if (cambia_email_dipendentecb.IsChecked == true)
-                        dipendente.setEmail(email_dipendentetxt.Text);
+                        dipendente.setEmail(email_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
                     if (cambia_indirizzo_dipendentecb.IsChecked == true)
-                        dipendente.setIndirizzo(indirizzo_dipendentetxt.Text);
+                        dipendente.setIndirizzo(indirizzo_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
                     if (cambia_telefono_dipendentecb.IsChecked == true)
-                        dipendente.setTelefono(telefonoDipendentetxt.Text);
+                        dipendente.setTelefono(telefonoDipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
                     //reset checkbox
                     cambia_telefono_dipendentecb.IsChecked = false;
                     cambia_email_dipendentecb.IsChecked = false;
@@ -587,10 +594,10 @@ namespace compagniaAerea
 
                 if (Login_usernametxt.Text.Equals("admin") && Login_passwordtxt.Password.Equals("admin"))
                 {
-
                     MIGestioneVoli.Visibility = Visibility.Visible;
                     MIProfilo.Visibility = Visibility.Visible;
                     MIofferte.Visibility = Visibility.Visible;
+                    MIGestioneDipendenteVoli.Visibility = Visibility.Visible;
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
@@ -615,7 +622,7 @@ namespace compagniaAerea
             errore.IsValidEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
             errore.CAPCheck(cappasseggerotxt);
-            
+
 
             if (errore.checkText())
             {
@@ -675,11 +682,11 @@ namespace compagniaAerea
                 txtTotale.Text = ticket.getPrenotationPrice(ticket.getIdPrenotazioneAndata()).ToString();
                 txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
                 gridPagamentoRitorno.Visibility = Visibility.Hidden;
-                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata,0)))>0)
+                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 0)
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
                 }
-                
+
             }
             else
             {
@@ -728,7 +735,7 @@ namespace compagniaAerea
                 dataArrivolbl.Content = dataRitorno.SelectedDate.ToString();
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
 
-               
+
                 btnConferma_ordine.Visibility = Visibility.Hidden;
                 btnConferma2.Visibility = Visibility.Visible;
                 if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 0)
@@ -752,7 +759,7 @@ namespace compagniaAerea
             {
                 if (ticket.getQuatitàPersone() > 0)
                 {
-                   
+
                     this.gridCorrente = 7;
                     currentGrid();
                     errore.TraverseVisualTree(this.grid);
@@ -781,7 +788,7 @@ namespace compagniaAerea
 
         private void btnConferma2_Click(object sender, RoutedEventArgs e)
         {
-          
+
             btnConferma_ordine.Visibility = Visibility.Visible;
             btnConferma2.Visibility = Visibility.Hidden;
             if (ticket.getQuatitàPersone() > 0)
@@ -805,7 +812,7 @@ namespace compagniaAerea
                 this.gridCorrente = 9;
                 currentGrid();
             }
-            
+
         }
 
 
@@ -832,7 +839,7 @@ namespace compagniaAerea
             gridPagamentoRitorno.Visibility = Visibility.Hidden;
             this.gridCorrente = 2;
             currentGrid();
-            ticket.getPopulateDbTicket();
+            // ticket.getPopulateDbTicket();
             gridTipoVolo.Visibility = Visibility.Hidden;
             volo.updateFlightLegs();
             errore.TraverseVisualTree(gridSelezionaVolo);
@@ -1043,7 +1050,7 @@ namespace compagniaAerea
             {
                 MessageBox.Show(errore.codError());
             }
-           
+
         }
 
         private void aggiungi_tratta1Click(object sender, RoutedEventArgs e)
@@ -1094,7 +1101,7 @@ namespace compagniaAerea
             errore.ValueText(gatearrivo2txt);
             errore.checkString(aereicbx2.Text);
             if (errore.checkText())
-           {
+            {
                 dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
                 errore.TraverseVisualTree(this.grid);
                 GridAggiungiTratta1.Visibility = Visibility.Hidden;
@@ -1103,11 +1110,11 @@ namespace compagniaAerea
                 pianidivolodatagrid.ItemsSource = volo.getFlights();
                 pianidivolodatagrid.Items.Refresh();
             }
-           else
-           {
-               MessageBox.Show(errore.codError());
-           }
-            
+            else
+            {
+                MessageBox.Show(errore.codError());
+            }
+
         }
 
         private void elimina_voloClick(object sender, RoutedEventArgs e)
@@ -1134,6 +1141,44 @@ namespace compagniaAerea
         {
             dgVolifiltrati.ItemsSource = volo.getLastMinute();
             dgVolifiltrati.Items.Clear();
+        }
+
+        private void MIGestioneDipendenteVoli_Click(object sender, RoutedEventArgs e)
+        {
+            this.gridCorrente = 11;
+            currentGrid();
+            dgTratte.ItemsSource = volo.getFlightsLegs();
+            dgPersonaleDiVolo.ItemsSource = dipendente.getStaff();
+
+        }
+
+        private void btnAssocia_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool flag = dipendentevolo.CombineEmplyerToFlight(int.Parse(getCellValue(dgPersonaleDiVolo, 0)),
+                DateTime.Parse(getCellValue(dgTratte, 1)),
+                TimeSpan.Parse(getCellValue(dgTratte, 0)),
+                int.Parse(getCellValue(dgTratte, 2))
+                );
+            if (!flag)
+            {
+                MessageBox.Show("Dipendente già in volo");
+            }
+            else
+            {
+                dgPersonaleInVolo.ItemsSource = dipendentevolo.getEmployersInFly(
+                DateTime.Parse(getCellValue(dgTratte, 1)),
+                TimeSpan.Parse(getCellValue(dgTratte, 0)),
+                int.Parse(getCellValue(dgTratte, 2)));
+            }
+        }
+
+        private void dgTratte_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*dgPersonaleInVolo.ItemsSource = dipendentevolo.getEmployersInFly(
+               DateTime.Parse(getCellValue(dgTratte, 1)),
+               TimeSpan.Parse(getCellValue(dgTratte, 0)),
+               int.Parse(getCellValue(dgTratte, 2)));*/
         }
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

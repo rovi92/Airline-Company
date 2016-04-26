@@ -24,7 +24,7 @@ namespace compagniaAerea
 
         int getQuatitàPersone();
        
-        void getPopulateDbTicket();//prelievo delle varie spese e somma delle stesse per ottenere una spesa totale
+        
         Double getTicketPrice(int idBiglietto);
        
         int getIdTariffa(int numeroVolo,int numeroClasse);
@@ -40,8 +40,8 @@ namespace compagniaAerea
         int getIdPrenotazioneRitorno();
         void insertRecordPagamento(string dataPagamento,string tipoPagamento,int idprenotazione);
         void insertRecordTicket(int idPasseggero,int idPrenotazione);
-        void firstTicket(List<String> l);
-        List<String> getFirstTicket();
+       // void firstTicket(List<String> l);
+        //List<String> getFirstTicket();
         void setQuantitaPersone(int nPersone);
        
     }

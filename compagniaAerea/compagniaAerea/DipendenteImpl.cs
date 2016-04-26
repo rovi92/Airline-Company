@@ -11,7 +11,7 @@ namespace compagniaAerea
     {
         DatabaseManager myDatatabase;
         InfoDipendente id = new InfoDipendente();
-        List<Personale> staff = new List<Personale>();
+       
         public DipendenteImpl()
         {
             myDatatabase = DatabaseManager.Instance;
@@ -53,13 +53,13 @@ namespace compagniaAerea
         }
         public List<Personale> getStaff()
         {
-            staff = (from d in myDatatabase.getDb().Personale
+            
+            return (from d in myDatatabase.getDb().Personale
                      select d).ToList();
-            return staff;
         }
 
 
-        public List<String> getValueGrid(DataGrid dg)
+       /* public List<String> getValueGrid(DataGrid dg)
         {
 
             List<String> tmp = new List<String>();
@@ -69,7 +69,7 @@ namespace compagniaAerea
             }
             return tmp;
 
-        }
+        }*/
 
         #region get Dipendente
         public string getCognome()
@@ -134,7 +134,7 @@ namespace compagniaAerea
         #endregion
         #region set Dipendente
 
-        public void setDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess)
+        public void createDipendente(string nome, string cognome, string indirizzo, DateTime data_di_nascita, DateTime data_assunzione, string email, string telefono, string sesso, bool pilota, bool hostess)
         {
             Personale p = new Personale()
             {
@@ -153,34 +153,25 @@ namespace compagniaAerea
             myDatatabase.getDb().SubmitChanges();
         }
 
-        public void setIndirizzo(string indirizzo)
+        public void setIndirizzo(string indirizzo, int idPersonale)
         {
-            Personale p = new Personale()
-            {
-                indirizzo = indirizzo
-            };
-            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            Personale p = myDatatabase.getDb().Personale.First(pr => pr.idPersonale == idPersonale);
+            p.indirizzo = indirizzo;
             myDatatabase.getDb().SubmitChanges();
         }
 
-        public void setEmail(string email)
+        public void setEmail(string email, int idPersonale)
         {
-            Personale p = new Personale()
-            {
-                email = email
-            };
-            myDatatabase.getDb().Personale.InsertOnSubmit(p);
+            Personale p = myDatatabase.getDb().Personale.First(pr => pr.idPersonale == idPersonale);
+            p.email = email;
             myDatatabase.getDb().SubmitChanges();
         }
 
-        public void setTelefono(string telefono)
+        public void setTelefono(string telefono, int idPersonale)
         {
-            Personale p = new Personale()
-            {
-                telefono = telefono
-            };
-            myDatatabase.getDb().Personale.InsertOnSubmit(p);
-            myDatatabase.getDb().SubmitChanges();
+            Personale p = myDatatabase.getDb().Personale.First(pr => pr.idPersonale == idPersonale);
+            p.telefono = telefono;
+            myDatatabase.getDb().SubmitChanges();          
         }
 
 
