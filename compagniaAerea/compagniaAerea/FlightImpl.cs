@@ -187,5 +187,67 @@ namespace compagniaAerea
                     where p.numero_volo == idVolo
                     select p.Tratta).Count();
         }
+
+        public void updateFlightSeats(int idVolo, int idClasse, int postiPrenotati)
+        {
+           
+            List<int> posti = new List<int>();
+            posti.AddRange(from t in myDatabase.getDb().Tratta
+                           where t.numero_volo == idVolo
+                           select idClasse == 1 ? t.posti_economy : idClasse == 2 ? t.posti_buisness : t.posti_first);
+
+            if (posti.Count() > 1)
+            {
+                posti[0] += postiPrenotati;
+                posti[1] += postiPrenotati;
+
+                List<Tratta> t0 = myDatabase.getDb().Tratta.Where(t => t.numero_volo == idVolo).ToList();
+                
+           
+                
+                if (idClasse == 1)
+                {
+                    t0[0].posti_economy = posti[0];
+                    t0[1].posti_economy = posti[1];
+                }
+                else
+                {
+                    if (idClasse == 2)
+                    {
+                        t0[0].posti_buisness = posti[0];
+                        t0[1].posti_economy = posti[1];
+                    }
+                    else
+                    {
+                        t0[0].posti_first = posti[0];
+                        t0[1].posti_first = posti[1];
+                    }
+                }
+                myDatabase.getDb().SubmitChanges();
+            }
+            else
+            {
+                posti[0] += postiPrenotati;
+                Tratta t0 = myDatabase.getDb().Tratta.First(t => t.numero_volo == idVolo);
+
+                if (idClasse == 1)
+                {
+                    t0.posti_economy = posti[0];
+                }
+                else
+                {
+                    if (idClasse == 2)
+                    {
+                        t0.posti_buisness = posti[0];
+                    }
+                    else
+                    {
+                        t0.posti_first = posti[0];
+                    }
+                }
+                myDatabase.getDb().SubmitChanges();
+
+            }
+        }
     }
 }
