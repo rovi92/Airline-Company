@@ -929,7 +929,7 @@ namespace compagniaAerea
 
         private void txtDestinazioneVolo_LostFocus(object sender, RoutedEventArgs e)
         {
-            lblErroreD.Visibility = !volo.checkDeparture(txtDestinazioneVolo.Text) ? Visibility.Visible : Visibility.Hidden;
+            lblErroreD.Visibility = !volo.checkArrival(txtDestinazioneVolo.Text) ? Visibility.Visible : Visibility.Hidden;
         }
 
 
