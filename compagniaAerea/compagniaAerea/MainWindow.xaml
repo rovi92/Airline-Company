@@ -137,7 +137,7 @@
             </MenuItem>
             <MenuItem x:Name="MIVoli" Header="I miei voli" >
                 <MenuItem x:Name="MIprenotaVolo" Header="Prenota il tuo volo" Click="prenotaVolo_Click" />
-                <MenuItem x:Name="MIinfoBiglietto" Header="info sul tuo biglietto" Click="InfoBiglietto_Click" />
+                <MenuItem x:Name="MIinfoBiglietto" Header="Info sul tuo biglietto" Click="InfoBiglietto_Click" />
             </MenuItem>
             <MenuItem x:Name="MIofferte" Header="Offerte" />
             <MenuItem x:Name="MIGestioneVoli" Header="Gestione voli" Visibility="Hidden" Click="Click_gestioneVoli"/>
