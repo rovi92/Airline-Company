@@ -24,6 +24,7 @@ namespace compagniaAerea
         void CancelFlight(int numero_volo);
         string getAirportName(string città);
         int CountFlightLegs(int idVolo);
+        void updateFlightSeats(int idVolo, int idClasse, int postiPrenotati);
 
 
     }

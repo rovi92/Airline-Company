@@ -25,7 +25,7 @@ namespace compagniaAerea
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
-        int numero_volo = 1;//Indica il numero del volo per l'aggiunta delle tratte
+       
 
         public MainWindow()
         {
@@ -36,6 +36,8 @@ namespace compagniaAerea
             //appena apro il main faccio queste 3 cose cioè popolo la lista e dentro a un contenitore Grid ci metto la prima pagina.
             InitializeComponent();
             populateGrid();
+            dataPartenza.DisplayDateStart = DateTime.Today;
+            dataRitorno.DisplayDateStart = DateTime.Today;
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
             volo.updateFlightLegs();//aggiornamento database locale
@@ -148,7 +150,10 @@ namespace compagniaAerea
                                int.Parse(lblPosti.Content.ToString()),
                                0,
                                ticket.getIdTariffa(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId()), "Ritorno");
+                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
+                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
                     btnIndietro.Visibility = Visibility.Hidden;
+
 
 
                     this.gridCorrente = 7;
@@ -169,8 +174,7 @@ namespace compagniaAerea
                                int.Parse(lblPosti.Content.ToString()),
                                0,
                                ticket.getIdTariffa(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId()), "Andata");
-
-
+                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
                     this.gridCorrente = 7;
                     currentGrid();
                 }
@@ -776,6 +780,7 @@ namespace compagniaAerea
 
         private void btnConferma2_Click(object sender, RoutedEventArgs e)
         {
+          
             btnConferma_ordine.Visibility = Visibility.Visible;
             btnConferma2.Visibility = Visibility.Hidden;
             if (ticket.getQuatitàPersone() > 0)
@@ -799,23 +804,7 @@ namespace compagniaAerea
                 this.gridCorrente = 9;
                 currentGrid();
             }
-            // ticket.insertRecordTicket(gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text), ticket.getIdPrenotazioneAndata());
-            //creo la prenotazione di ritorno
-
-            /* ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                                 int.Parse(lblPosti.Content.ToString()),
-                                 Double.Parse(totalelbl.Content.ToString()),
-                                  ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlightClassId()), "Ritorno");*/
-            //imposto l'id di ritorno della prenotazione
-            /*
-            txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
-            txtTotale.Text = Convert.ToString(Convert.ToDouble(ticket.getFirstTicket()[10]) + Double.Parse(totalelbl.Content.ToString()));
-
-            btnRegistraCliente.Visibility = Visibility.Visible;
-            GridSupplemento.Visibility = Visibility.Hidden;
-
-            this.gridCorrente = 7;
-            currentGrid();*/
+            
         }
 
 
@@ -824,6 +813,7 @@ namespace compagniaAerea
         #region GRIDPAGAMENTO
         private void btnConferma3_Click(object sender, RoutedEventArgs e)
         {
+            gridTipoVolo.Visibility = Visibility.Hidden;
             ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
             string tipoPagamento = itemA.Content.ToString();
             ComboBoxItem itemR = (ComboBoxItem)cmbTipoPagamento_Ritorno.SelectedItem;
@@ -1123,6 +1113,11 @@ namespace compagniaAerea
             volo.CancelFlight(int.Parse(getCellValue(pianidivolodatagrid, 0)));
             pianidivolodatagrid.ItemsSource = volo.getFlights();
             pianidivolodatagrid.Items.Refresh();
+        }
+
+        private void dataGridAndata_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            gridTipoVolo.Visibility = Visibility.Visible;
         }
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

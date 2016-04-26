@@ -43,5 +43,6 @@ namespace compagniaAerea
         void firstTicket(List<String> l);
         List<String> getFirstTicket();
         void setQuantitaPersone(int nPersone);
+       
     }
 }

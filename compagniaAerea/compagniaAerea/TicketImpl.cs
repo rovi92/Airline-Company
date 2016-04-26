@@ -308,6 +308,8 @@ namespace compagniaAerea
             this.quantitaPersone = nPersone;
         }
 
+      
+
 
 
 
