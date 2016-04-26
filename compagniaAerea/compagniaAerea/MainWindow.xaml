@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:compagniaAerea"
         xmlns:t="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="535.5" Width="867.5">
+        Title="MainWindow" Height="535.5" Width="867.5" Icon="icona1 (2).ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="DataGridRow">
             <Style.Triggers>
