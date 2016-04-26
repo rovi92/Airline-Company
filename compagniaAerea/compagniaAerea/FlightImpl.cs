@@ -45,7 +45,9 @@ namespace compagniaAerea
 
             public double costoFirst { get; set; }//5
 
-            public Boolean cancellato { get; set; }//nella g non c'è
+            public Boolean? cancellato { get; set; }//nella g non c'è
+
+            public int? idPromozione { get; set; }
 
         }
 
@@ -66,7 +68,8 @@ namespace compagniaAerea
                                costoEconomy = p.Tariffario.First(t => t.idClasse == 1).tariffa_solo_andata,
                                costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
                                costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata,
-                               cancellato = (Boolean)p.cancellato
+                               cancellato = p.cancellato,
+                               idPromozione = p.idPromozione
                            }).ToList());
 
         }
@@ -84,7 +87,29 @@ namespace compagniaAerea
                     select v).ToList();
 
         }
-        //metodo per controllare se esiste un una certa stringa nel database
+
+        /*QUESTA E' LA PARTE CHE ABBIAMO APPENA AGGIUNTO*/
+        public List<FlightInfo> getLastMinute()
+        {
+            return (from v in voli
+                    where v.dataPartenza == DateTime.Today.AddDays(1)
+                    select v).ToList();
+        }
+
+        public List<FlightInfo> getXmasFlights()
+        {
+            return (from v in voli
+                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-12-25"
+                    select v).ToList();
+        }
+
+        public List<FlightInfo> getSummerBankHolidayFlights()
+        {
+            return (from v in voli
+                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-08-15"
+                    select v).ToList();
+        }
+        /*FINE PARTE APPENA AGGIUNTA*/
 
         public Boolean checkDeparture(string departure)
         {

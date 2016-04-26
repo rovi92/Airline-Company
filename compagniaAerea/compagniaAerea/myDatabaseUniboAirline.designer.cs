@@ -72,6 +72,9 @@ namespace compagniaAerea
     partial void InsertPrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
     partial void UpdatePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
     partial void DeletePrezzo_bagaglio_imbarcato(Prezzo_bagaglio_imbarcato instance);
+    partial void InsertPromozioni(Promozioni instance);
+    partial void UpdatePromozioni(Promozioni instance);
+    partial void DeletePromozioni(Promozioni instance);
     partial void InsertTariffario(Tariffario instance);
     partial void UpdateTariffario(Tariffario instance);
     partial void DeleteTariffario(Tariffario instance);
@@ -219,6 +222,14 @@ namespace compagniaAerea
 			get
 			{
 				return this.GetTable<Prezzo_bagaglio_imbarcato>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Promozioni> Promozioni
+		{
+			get
+			{
+				return this.GetTable<Promozioni>();
 			}
 		}
 		
@@ -2568,6 +2579,8 @@ namespace compagniaAerea
 		
 		private System.Nullable<bool> _cancellato;
 		
+		private System.Nullable<int> _idPromozione;
+		
 		private EntitySet<Tariffario> _Tariffario;
 		
 		private EntitySet<Tratta> _Tratta;
@@ -2575,6 +2588,8 @@ namespace compagniaAerea
 		private EntityRef<Aeroporto> _Aeroporto;
 		
 		private EntityRef<Aeroporto> _Aeroporto1;
+		
+		private EntityRef<Promozioni> _Promozioni;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2596,6 +2611,8 @@ namespace compagniaAerea
     partial void Onorario_arrivoChanged();
     partial void OncancellatoChanging(System.Nullable<bool> value);
     partial void OncancellatoChanged();
+    partial void OnidPromozioneChanging(System.Nullable<int> value);
+    partial void OnidPromozioneChanged();
     #endregion
 		
 		public Piano_di_volo()
@@ -2604,6 +2621,7 @@ namespace compagniaAerea
 			this._Tratta = new EntitySet<Tratta>(new Action<Tratta>(this.attach_Tratta), new Action<Tratta>(this.detach_Tratta));
 			this._Aeroporto = default(EntityRef<Aeroporto>);
 			this._Aeroporto1 = default(EntityRef<Aeroporto>);
+			this._Promozioni = default(EntityRef<Promozioni>);
 			OnCreated();
 		}
 		
@@ -2775,6 +2793,30 @@ namespace compagniaAerea
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPromozione", DbType="Int")]
+		public System.Nullable<int> idPromozione
+		{
+			get
+			{
+				return this._idPromozione;
+			}
+			set
+			{
+				if ((this._idPromozione != value))
+				{
+					if (this._Promozioni.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidPromozioneChanging(value);
+					this.SendPropertyChanging();
+					this._idPromozione = value;
+					this.SendPropertyChanged("idPromozione");
+					this.OnidPromozioneChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Piano_di_volo_Tariffario", Storage="_Tariffario", ThisKey="numero_volo", OtherKey="numero_volo")]
 		public EntitySet<Tariffario> Tariffario
 		{
@@ -2865,6 +2907,40 @@ namespace compagniaAerea
 						this._aeroporto_arrivo = default(string);
 					}
 					this.SendPropertyChanged("Aeroporto1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Promozioni_Piano_di_volo", Storage="_Promozioni", ThisKey="idPromozione", OtherKey="idPromozione", IsForeignKey=true)]
+		public Promozioni Promozioni
+		{
+			get
+			{
+				return this._Promozioni.Entity;
+			}
+			set
+			{
+				Promozioni previousValue = this._Promozioni.Entity;
+				if (((previousValue != value) 
+							|| (this._Promozioni.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Promozioni.Entity = null;
+						previousValue.Piano_di_volo.Remove(this);
+					}
+					this._Promozioni.Entity = value;
+					if ((value != null))
+					{
+						value.Piano_di_volo.Add(this);
+						this._idPromozione = value.idPromozione;
+					}
+					else
+					{
+						this._idPromozione = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Promozioni");
 				}
 			}
 		}
@@ -3280,6 +3356,144 @@ namespace compagniaAerea
 		{
 			this.SendPropertyChanging();
 			entity.Prezzo_bagaglio_imbarcato = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Promozioni")]
+	public partial class Promozioni : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idPromozione;
+		
+		private string _descrizione;
+		
+		private int _sconto;
+		
+		private EntitySet<Piano_di_volo> _Piano_di_volo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidPromozioneChanging(int value);
+    partial void OnidPromozioneChanged();
+    partial void OndescrizioneChanging(string value);
+    partial void OndescrizioneChanged();
+    partial void OnscontoChanging(int value);
+    partial void OnscontoChanged();
+    #endregion
+		
+		public Promozioni()
+		{
+			this._Piano_di_volo = new EntitySet<Piano_di_volo>(new Action<Piano_di_volo>(this.attach_Piano_di_volo), new Action<Piano_di_volo>(this.detach_Piano_di_volo));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPromozione", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idPromozione
+		{
+			get
+			{
+				return this._idPromozione;
+			}
+			set
+			{
+				if ((this._idPromozione != value))
+				{
+					this.OnidPromozioneChanging(value);
+					this.SendPropertyChanging();
+					this._idPromozione = value;
+					this.SendPropertyChanged("idPromozione");
+					this.OnidPromozioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descrizione", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descrizione
+		{
+			get
+			{
+				return this._descrizione;
+			}
+			set
+			{
+				if ((this._descrizione != value))
+				{
+					this.OndescrizioneChanging(value);
+					this.SendPropertyChanging();
+					this._descrizione = value;
+					this.SendPropertyChanged("descrizione");
+					this.OndescrizioneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sconto", DbType="Int NOT NULL")]
+		public int sconto
+		{
+			get
+			{
+				return this._sconto;
+			}
+			set
+			{
+				if ((this._sconto != value))
+				{
+					this.OnscontoChanging(value);
+					this.SendPropertyChanging();
+					this._sconto = value;
+					this.SendPropertyChanged("sconto");
+					this.OnscontoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Promozioni_Piano_di_volo", Storage="_Piano_di_volo", ThisKey="idPromozione", OtherKey="idPromozione")]
+		public EntitySet<Piano_di_volo> Piano_di_volo
+		{
+			get
+			{
+				return this._Piano_di_volo;
+			}
+			set
+			{
+				this._Piano_di_volo.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Piano_di_volo(Piano_di_volo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Promozioni = this;
+		}
+		
+		private void detach_Piano_di_volo(Piano_di_volo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Promozioni = null;
 		}
 	}
 	

@@ -38,7 +38,8 @@ namespace compagniaAerea
                 data_arrivo = data_arrivo,
                 orario_partenza = TimeSpan.ParseExact(orario_partenza, "hh\\:mm\\:ss", CultureInfo.InvariantCulture),
                 orario_arrivo = TimeSpan.ParseExact(orario_arrivo, "hh\\:mm\\:ss", CultureInfo.InvariantCulture),
-                cancellato = cancellato
+                cancellato = cancellato,
+                idPromozione = null
             };
             myDatabase.getDb().Piano_di_volo.InsertOnSubmit(p);       
             myDatabase.getDb().SubmitChanges();

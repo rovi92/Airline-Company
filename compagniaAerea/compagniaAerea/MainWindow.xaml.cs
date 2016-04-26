@@ -339,6 +339,7 @@ namespace compagniaAerea
             gridchange.Add(gridInfoVolo);//grid del tasto prenota posizione 7
             gridchange.Add(viewTicket);//grid del biglietto posizione 8
             gridchange.Add(GridPagamento);//grid del pagamento 9
+            gridchange.Add(gridOfferte);//gird delle offerte 10
         }
 
         public void currentGrid()
@@ -391,8 +392,8 @@ namespace compagniaAerea
             this.gridCorrente = 0;
             currentGrid();
             MIGestioneVoli.Visibility = Visibility.Hidden;
-            MIGestioneTariffario.Visibility = Visibility.Hidden;
             MIProfilo.Visibility = Visibility.Hidden;
+            MIofferte.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
         }
 
@@ -588,8 +589,8 @@ namespace compagniaAerea
                 {
 
                     MIGestioneVoli.Visibility = Visibility.Visible;
-                    MIGestioneTariffario.Visibility = Visibility.Visible;
                     MIProfilo.Visibility = Visibility.Visible;
+                    MIofferte.Visibility = Visibility.Visible;
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
@@ -827,7 +828,7 @@ namespace compagniaAerea
                 ticket.insertRecordPagamento(txtdataPagamento_Ritorno.Text, tipoPagamentoR, ticket.getIdPrenotazioneRitorno());
             }
 
-            MessageBox.Show("grazie per aver scelto la nostra compagnia");
+            MessageBox.Show("Grazie per aver scelto la nostra compagnia");
             gridPagamentoRitorno.Visibility = Visibility.Hidden;
             this.gridCorrente = 2;
             currentGrid();
@@ -837,6 +838,7 @@ namespace compagniaAerea
             errore.TraverseVisualTree(gridSelezionaVolo);
         }
         #endregion
+
 
         #region btnMenu
         private void click_Tariffario(object sender, RoutedEventArgs e)
@@ -1118,6 +1120,20 @@ namespace compagniaAerea
         private void dataGridAndata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gridTipoVolo.Visibility = Visibility.Visible;
+        }
+
+        private void Click_gestioneofferte(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            //dgCercavoli.ItemsSource = volo.getFlights();
+            this.gridCorrente = 10;
+            currentGrid();
+        }
+
+        private void rdblastminute_Checked(object sender, RoutedEventArgs e)
+        {
+            dgVolifiltrati.ItemsSource = volo.getLastMinute();
+            dgVolifiltrati.Items.Clear();
         }
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

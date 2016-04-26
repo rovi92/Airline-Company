@@ -26,19 +26,6 @@
             <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="23,97,0,181" Text="Password:" Foreground="White" RenderTransformOrigin="0.679,1.37" HorizontalAlignment="Left" Width="56"/>
             <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,120,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
             <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,201,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="login_click"/>
-            <Label Margin="23,157,16,109" Foreground="#FFFFC4C4">
-                <Hyperlink Click="click_apriRegistrazione">
-                    <TextBlock Text="Non hai un account? Registrati" Foreground="White" />
-                </Hyperlink>
-            </Label>
-            <Label Height="25" Margin="24,235,6,36">
-                <Hyperlink Click="click_apriFormClienteNonRegistrato">
-                    <InlineUIContainer>
-                        <TextBlock Height="17" RenderTransformOrigin="0.282,0.533" Width="169" Foreground="White" ><Run Text="Oppure prenota "/><Run Text="il"/><Run Text=" tuo"/><Run Text=" biglietto"/></TextBlock>
-                    </InlineUIContainer>
-                </Hyperlink>
-            </Label>
-
         </Grid>
 
         <Grid x:Name="grid_ricerca_biglietto" Height="214" VerticalAlignment="Top" HorizontalAlignment="Left" Width="272" Margin="272,78,0,0" Background="#FF9E0000" Visibility="Hidden" >
@@ -139,13 +126,12 @@
                 <MenuItem x:Name="MIprenotaVolo" Header="Prenota il tuo volo" Click="prenotaVolo_Click" />
                 <MenuItem x:Name="MIinfoBiglietto" Header="Info sul tuo biglietto" Click="InfoBiglietto_Click" />
             </MenuItem>
-            <MenuItem x:Name="MIofferte" Header="Offerte" />
+            <MenuItem x:Name="MIofferte" Header="Offerte" Visibility="Hidden" Click="Click_gestioneofferte"/>
             <MenuItem x:Name="MIGestioneVoli" Header="Gestione voli" Visibility="Hidden" Click="Click_gestioneVoli"/>
-            <MenuItem x:Name="MIGestioneTariffario" Header="Tariffario" Visibility="Hidden" Click="click_Tariffario"/>
             <MenuItem x:Name="MIProfilo" Header="Profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="35*"/>
@@ -445,6 +431,23 @@
                 </RadialGradientBrush>
             </Grid.Background>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
+        </Grid>
+        <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Visible">
+            <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="309,10,0,0" VerticalAlignment="Top" Height="160" Width="527">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
+                    <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
+                    <DataGridTextColumn Binding="{Binding arrivo}" IsReadOnly="True" Header="Arrivo in"/>
+                    <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data partenza"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataArrivo, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data arrivo"/>
+                    <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario arrivo"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <RadioButton x:Name="rdblastminute" Content="Last minute (50%)" HorizontalAlignment="Left" Margin="63,57,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdblastminute_Checked"/>
+            <RadioButton x:Name="rdbnatale" Content="Sconto Natale (10%)" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" GroupName="rbdOfferte"/>
+            <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte"/>
+            <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="45,24,0,0" TextWrapping="Wrap" Text="Selezionare lo sconto da applicare" VerticalAlignment="Top" FontSize="14.667" FontFamily="Yu Gothic UI Semibold"/>
         </Grid>
 
 

@@ -124,10 +124,12 @@
       <Column Name="data_arrivo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="orario_arrivo" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="cancellato" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="idPromozione" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Piano_di_volo_Tariffario" Member="Tariffario" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tariffario" />
       <Association Name="Piano_di_volo_Tratta" Member="Tratta" ThisKey="numero_volo" OtherKey="numero_volo" Type="Tratta" />
       <Association Name="Aeroporto_Piano_di_volo" Member="Aeroporto" ThisKey="aeroporto_partenza" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
       <Association Name="Aeroporto_Piano_di_volo1" Member="Aeroporto1" ThisKey="aeroporto_arrivo" OtherKey="nome" Type="Aeroporto" IsForeignKey="true" />
+      <Association Name="Promozioni_Piano_di_volo" Member="Promozioni" ThisKey="idPromozione" OtherKey="idPromozione" Type="Promozioni" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Prenotazione" Member="Prenotazione">
@@ -147,6 +149,14 @@
       <Column Name="range_pesi" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="prezzo" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Prezzo_bagaglio_imbarcato_Babaglio_Imbarcato" Member="Babaglio_Imbarcato" ThisKey="range_pesi" OtherKey="range_pesi" Type="Babaglio_Imbarcato" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Promozioni" Member="Promozioni">
+    <Type Name="Promozioni">
+      <Column Name="idPromozione" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descrizione" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="sconto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Promozioni_Piano_di_volo" Member="Piano_di_volo" ThisKey="idPromozione" OtherKey="idPromozione" Type="Piano_di_volo" />
     </Type>
   </Table>
   <Table Name="dbo.Tariffario" Member="Tariffario">
