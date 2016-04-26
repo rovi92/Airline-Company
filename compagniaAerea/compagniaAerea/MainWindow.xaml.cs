@@ -85,7 +85,7 @@ namespace compagniaAerea
                    CodiceFiscaletxt.Text);
 
                     errore.TraverseVisualTree(gridRegistrazione);
-                    MessageBox.Show("registrazione avvenuta con successo");
+                    MessageBox.Show("Registrazione avvenuta con successo");
                     this.gridCorrente = 2;
                     volo.updateFlightLegs();
                     currentGrid();
@@ -613,7 +613,8 @@ namespace compagniaAerea
             errore.ValueText(cognomepasseggerotxt);
             errore.IsValidEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
-            errore.CAPCheck(cappasseggerotxt, cappasseggerotxt.Text, 5);
+            errore.CAPCheck(cappasseggerotxt);
+            
 
             if (errore.checkText())
             {
@@ -990,87 +991,121 @@ namespace compagniaAerea
         {
             errore.ValueText(aereoporto_partenzatxt);
             errore.ValueText(aereoporto_arrivotxt);
-          if (dipendentevolo.checkPianodivoloExist(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, partenzapicker.SelectedDate.Value.ToString("yyyy-MM-dd"), arrivopicker.SelectedDate.Value.ToString("yyyy-MM-dd"), tpPartenza.Text + ":00", tpArrivo.Text + ":00"))
+            errore.checkString(tpPartenza.Text);
+            errore.checkString(tpArrivo.Text);
+            errore.ValueText(tariffatxt);
+            errore.checkNumber(tariffatxt);
+            if (errore.checkText())
             {
-                MessageBox.Show("Piano di volo già esistente");
-            }
-            else
-            {
-                dipendentevolo.Aggiungi_pianodivolo(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, (DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, tpPartenza.Text + ":00", tpArrivo.Text + ":00", false, Double.Parse(tariffatxt.Text));
-
-                GridAggiungiPianoDiVolo.Visibility = Visibility.Hidden;
-                GridAggiungiTratta1.Visibility = Visibility.Visible;
-                if (scalichk.IsChecked == true)
+                if (dipendentevolo.checkPianodivoloExist(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, partenzapicker.SelectedDate.Value.ToString("yyyy-MM-dd"), arrivopicker.SelectedDate.Value.ToString("yyyy-MM-dd"), tpPartenza.Text + ":00", tpArrivo.Text + ":00"))
                 {
-                    if (partenzapicker.SelectedDate == arrivopicker.SelectedDate)
+                    MessageBox.Show("Piano di volo già esistente");
+                }
+                else
+                {
+                    dipendentevolo.Aggiungi_pianodivolo(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, (DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, tpPartenza.Text + ":00", tpArrivo.Text + ":00", false, Double.Parse(tariffatxt.Text));
+
+                    GridAggiungiPianoDiVolo.Visibility = Visibility.Hidden;
+                    GridAggiungiTratta1.Visibility = Visibility.Visible;
+                    if (scalichk.IsChecked == true)
                     {
+                        if (partenzapicker.SelectedDate == arrivopicker.SelectedDate)
+                        {
+                            arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
+                            partenzapicker2.SelectedDate = partenzapicker.SelectedDate;
+                        }
+                        aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
+                        aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
+                        partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
+                        tpPartenza1.Text = tpPartenza.Text;
+
+                        aereoporto_arrivo2txt.Text = aereoporto_arrivotxt.Text;
+                        arrivopicker2.SelectedDate = arrivopicker.SelectedDate;
+                        tpArrivo2.Text = tpArrivo.Text;
+                    }
+                    else
+                    {
+                        aereoporto_arrivo1txt.Text = aereoporto_arrivotxt.Text;
                         arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
-                        partenzapicker2.SelectedDate = partenzapicker.SelectedDate;
+                        tpArrivo1.Text = tpArrivo.Text;
                     }
                     aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
                     aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
                     partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
                     tpPartenza1.Text = tpPartenza.Text;
 
-                    aereoporto_arrivo2txt.Text = aereoporto_arrivotxt.Text;
-                    arrivopicker2.SelectedDate = arrivopicker.SelectedDate;
-                    tpArrivo2.Text = tpArrivo.Text;
+
                 }
-                else
-                {
-                    aereoporto_arrivo1txt.Text = aereoporto_arrivotxt.Text;
-                    arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
-                    tpArrivo1.Text = tpArrivo.Text;
-                }
-                aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
-                aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
-                partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
-                tpPartenza1.Text = tpPartenza.Text;
-
-
-            }
-
-            /*if (errore.checkText())
-            {
-                
             }
             else
             {
                 MessageBox.Show(errore.codError());
-            }*/
+            }
+           
         }
 
         private void aggiungi_tratta1Click(object sender, RoutedEventArgs e)
         {
-            dipendentevolo.Aggiungi_tratta(aereoporto_partenza1txt.Text, aereoporto_arrivo1txt.Text, Convert.ToInt32(gatepartenza1txt.Text), Convert.ToInt32(gatearrivo1txt.Text), (DateTime)partenzapicker1.SelectedDate, (DateTime)arrivopicker1.SelectedDate, tpPartenza1.Text + ":00", tpArrivo1.Text + ":00", aereicbx1.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
-            if (scalichk.IsChecked == true)
+            errore.ValueText(aereoporto_partenza1txt);
+            errore.ValueText(aereoporto_arrivo1txt);
+            errore.checkString(tpPartenza1.Text);
+            errore.checkString(tpArrivo1.Text);
+            errore.ValueText(gatepartenza1txt);
+            errore.ValueText(gatearrivo1txt);
+            errore.checkString(aereicbx1.Text);
+
+            if (errore.checkText())
             {
-                GridAggiungiTratta2.Visibility = Visibility.Visible;
-                aereicbx2.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
-                aereoporto_partenza2txt.Text = aereoporto_arrivo1txt.Text;
-                partenzapicker2.SelectedDate = arrivopicker1.SelectedDate;
+                dipendentevolo.Aggiungi_tratta(aereoporto_partenza1txt.Text, aereoporto_arrivo1txt.Text, Convert.ToInt32(gatepartenza1txt.Text), Convert.ToInt32(gatearrivo1txt.Text), (DateTime)partenzapicker1.SelectedDate, (DateTime)arrivopicker1.SelectedDate, tpPartenza1.Text + ":00", tpArrivo1.Text + ":00", aereicbx1.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
+                if (scalichk.IsChecked == true)
+                {
+                    GridAggiungiTratta2.Visibility = Visibility.Visible;
+                    aereicbx2.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
+                    aereoporto_partenza2txt.Text = aereoporto_arrivo1txt.Text;
+                    partenzapicker2.SelectedDate = arrivopicker1.SelectedDate;
+                }
+                else
+                {
+                    errore.TraverseVisualTree(this.grid);
+                    GridAggiungiTratta1.Visibility = Visibility.Hidden;
+                    GridAggiungiPianoDiVolo.Visibility = Visibility.Visible;
+                    pianidivolodatagrid.ItemsSource = volo.getFlights();
+                    pianidivolodatagrid.Items.Refresh();
+
+
+                }
             }
             else
             {
-                errore.TraverseVisualTree(this.grid);
-                GridAggiungiTratta1.Visibility = Visibility.Hidden;
-                GridAggiungiPianoDiVolo.Visibility = Visibility.Visible;
-                pianidivolodatagrid.ItemsSource = volo.getFlights();
-                pianidivolodatagrid.Items.Refresh();
-
-
+                MessageBox.Show(errore.codError());
             }
+
         }
 
         private void aggiungi_tratta2Click(object sender, RoutedEventArgs e)
         {
-            dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
-            errore.TraverseVisualTree(this.grid);
-            GridAggiungiTratta1.Visibility = Visibility.Hidden;
-            GridAggiungiTratta2.Visibility = Visibility.Hidden;
-            GridAggiungiPianoDiVolo.Visibility = Visibility.Visible;
-            pianidivolodatagrid.ItemsSource = volo.getFlights();
-            pianidivolodatagrid.Items.Refresh();
+            errore.ValueText(aereoporto_partenza2txt);
+            errore.ValueText(aereoporto_arrivo2txt);
+            errore.checkString(tpPartenza2.Text);
+            errore.checkString(tpArrivo2.Text);
+            errore.ValueText(gatepartenza2txt);
+            errore.ValueText(gatearrivo2txt);
+            errore.checkString(aereicbx2.Text);
+            if (errore.checkText())
+           {
+                dipendentevolo.Aggiungi_tratta(aereoporto_partenza2txt.Text, aereoporto_arrivo2txt.Text, Convert.ToInt32(gatepartenza2txt.Text), Convert.ToInt32(gatearrivo2txt.Text), (DateTime)partenzapicker2.SelectedDate, (DateTime)arrivopicker2.SelectedDate, tpPartenza2.Text + ":00", tpArrivo2.Text + ":00", aereicbx2.SelectedValue.ToString().Split(null), dipendentevolo.getLastNumero_volo());
+                errore.TraverseVisualTree(this.grid);
+                GridAggiungiTratta1.Visibility = Visibility.Hidden;
+                GridAggiungiTratta2.Visibility = Visibility.Hidden;
+                GridAggiungiPianoDiVolo.Visibility = Visibility.Visible;
+                pianidivolodatagrid.ItemsSource = volo.getFlights();
+                pianidivolodatagrid.Items.Refresh();
+            }
+           else
+           {
+               MessageBox.Show(errore.codError());
+           }
+            
         }
 
         private void elimina_voloClick(object sender, RoutedEventArgs e)

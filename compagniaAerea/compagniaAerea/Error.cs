@@ -52,7 +52,7 @@ namespace compagniaAerea
         #endregion
 
         #region controllo CAP
-        public void CAPCheck(TextBox tx, string numero, int num)
+        public void CAPCheck(TextBox tx)
         {
             /* try
              {
@@ -73,13 +73,29 @@ namespace compagniaAerea
             /*int i = 0;
             Boolean result = int.TryParse(numero, out i); */
             
-            if(Convert.ToInt32(numero) == int.Parse(numero))
+            if(Convert.ToInt32(tx.Text) == int.Parse(tx.Text) && tx.Text.Length == 5)
             {
                 errorTxtBox.Add(true);
             } else
             {
                 errorTxtBox.Add(false);
                 tipeError.Add(5);
+            }
+        }
+        #endregion
+
+        #region checkNumber
+        public void checkNumber(TextBox tx)
+        {
+            if(Convert.ToInt32(tx.Text) == int.Parse(tx.Text))
+            {
+                errorTxtBox.Add(true);
+            }
+            else
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(7);
+
             }
         }
         #endregion
@@ -97,6 +113,21 @@ namespace compagniaAerea
             {
                 errorTxtBox.Add(false);
                 tipeError.Add(6);
+            }
+        }
+        #endregion
+
+        #region checkTimePicker
+        public void checkString(String s)//Controlla se è stato scritto un orario attraverso il time picker
+        {
+            if(s == null)
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(1);
+            } else
+            {
+                errorTxtBox.Add(true);
+               
             }
         }
         #endregion
@@ -159,6 +190,7 @@ namespace compagniaAerea
             Boolean repetCaseCf = false;
             Boolean repetCaseCAP = false;
             Boolean repetCaseEmail = false;
+            Boolean repetCaseNum = false;
             
 
             for (int i = 0; i < tipeError.Count; i++)
@@ -212,6 +244,14 @@ namespace compagniaAerea
                         {
                             repetCaseEmail = true;
                             result = " Email non valida";
+                            tmp.Add(result);
+                        }
+                        break;
+                    case 7://messaggio di errore se è stato inserito un carattere invece di un numero
+                        if (repetCaseNum.Equals(false))
+                        {
+                            repetCaseNum = true;
+                            result = " Il campo compilato deve essere formato da soli numeri";
                             tmp.Add(result);
                         }
                         break;
