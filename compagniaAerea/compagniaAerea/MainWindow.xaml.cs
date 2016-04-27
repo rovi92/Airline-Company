@@ -416,26 +416,47 @@ namespace compagniaAerea
         }
 
         string telefono_dipendente, email_dipendente, indirizzodi_pendente;
-        private void cambia_telefonocb_Checked(object sender, RoutedEventArgs e)
+       
+        private void cambia_telefono_dipendentecb_Click(object sender, RoutedEventArgs e)
         {
-            salva_dipendentebtn.Visibility = Visibility.Visible;
-            telefono_dipendente = telefonoDipendentetxt.Text;
-            telefonoDipendentetxt.IsEnabled = true;
+            if (cambia_telefono_dipendentecb.IsChecked.Value == false)
+            {
+                telefonoDipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                telefono_dipendente = telefonoDipendentetxt.Text;
+                telefonoDipendentetxt.IsEnabled = true;
+            }
         }
 
-        private void cambia_emailcb_Checked(object sender, RoutedEventArgs e)
+        private void cambia_email_dipendentecb_Click(object sender, RoutedEventArgs e)
         {
-            salva_dipendentebtn.Visibility = Visibility.Visible;
-            email_dipendente = email_dipendentetxt.Text;
-            email_dipendentetxt.IsEnabled = true;
-
+            if (cambia_email_dipendentecb.IsChecked.Value == false)
+            {
+                email_dipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                email_dipendente = email_dipendentetxt.Text;
+                email_dipendentetxt.IsEnabled = true;
+            }
         }
 
-        private void cambia_indirizzocb_Checked(object sender, RoutedEventArgs e)
+        private void cambia_indirizzo_dipendentecb_Click(object sender, RoutedEventArgs e)
         {
-            salva_dipendentebtn.Visibility = Visibility.Visible;
-            indirizzodi_pendente = indirizzo_dipendentetxt.Text;
-            indirizzo_dipendentetxt.IsEnabled = true;
+            if (cambia_indirizzo_dipendentecb.IsChecked.Value == false)
+            {
+                indirizzo_dipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                indirizzodi_pendente = indirizzo_dipendentetxt.Text;
+                indirizzo_dipendentetxt.IsEnabled = true;
+            }
         }
 
         private void aggiungiDipendente_Click(object sender, RoutedEventArgs e)
@@ -515,23 +536,17 @@ namespace compagniaAerea
             dipendenteMaschiordb.Visibility = Visibility.Hidden;
             dipendentePilotardb.Visibility = Visibility.Hidden;
             dipendenteHostessrdb.Visibility = Visibility.Hidden;
-        }
-
-        private void aggiungiDipendente_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+        }       
 
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
             DateTime currentDate = DateTime.Now;
-            MessageBox.Show(nuova_data_nascita_dipendete.Text, "");
             /*cambio di un solo parametro fra telefono indirizzo email*/
             if (cambia_email_dipendentecb.IsChecked == true || cambia_indirizzo_dipendentecb.IsChecked == true || cambia_telefono_dipendentecb.IsChecked == true)
             {
 
                 errore.ValueText(telefonoDipendentetxt);
-                errore.ValueText(email_dipendentetxt);
+                errore.checkEmail(email_dipendentetxt);
                 errore.ValueText(indirizzo_dipendentetxt);
                 if (errore.checkText())
                 {
@@ -561,7 +576,7 @@ namespace compagniaAerea
                     /*controllo campi vuoti*/
                     errore.ValueText(cognomeDipendentetxt);
                     errore.ValueText(nomeDipendentetxt);
-                    errore.ValueText(email_dipendentetxt);
+                    errore.checkEmail(email_dipendentetxt);
                     errore.ValueText(indirizzo_dipendentetxt);
                     errore.ValueText(telefonoDipendentetxt);
                     if (errore.checkText())
@@ -584,12 +599,12 @@ namespace compagniaAerea
                                     dipendenteMaschiordb.IsChecked.Value ? "M" : "F",
                                     dipendentePilotardb.IsChecked.Value,
                                     dipendenteHostessrdb.IsChecked.Value);
-                            }                            
+                            }
                         }
                     }
                     else
                     {
-                        MessageBox.Show(errore.codError(),"ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 }
@@ -1076,13 +1091,15 @@ namespace compagniaAerea
                 }
                 else
                 {
-                    if(dipendentevolo.checkAeroporto(aereoporto_partenzatxt.Text).Equals(false))
+                    if (dipendentevolo.checkAeroporto(aereoporto_partenzatxt.Text).Equals(false))
                     {
                         MessageBox.Show("L'aeroporto " + aereoporto_partenzatxt.Text + " non è presente nel database");
-                    } else if(dipendentevolo.checkAeroporto(aereoporto_arrivotxt.Text).Equals(false))
+                    }
+                    else if (dipendentevolo.checkAeroporto(aereoporto_arrivotxt.Text).Equals(false))
                     {
                         MessageBox.Show("L'aeroporto " + aereoporto_arrivotxt.Text + " non è presente nel database");
-                    } else
+                    }
+                    else
                     {
                         dipendentevolo.Aggiungi_pianodivolo(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, (DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, tpPartenza.Text + ":00", tpArrivo.Text + ":00", false, Double.Parse(tariffatxt.Text));
 
@@ -1230,7 +1247,7 @@ namespace compagniaAerea
         private void applicaSconto_Click(object sender, RoutedEventArgs e)
         {
             int sconto = rdblastminute.IsChecked.Value == true ? 1 : rdbnatale.IsChecked.Value == true ? 2 : 3;
-            volo.addDiscount(int.Parse(getCellValue(dgVolifiltrati,0)), sconto);
+            volo.addDiscount(int.Parse(getCellValue(dgVolifiltrati, 0)), sconto);
             dgVolifiltrati.ItemsSource = sconto == 1 ? volo.getLastMinute() : sconto == 2 ? volo.getXmasFlights() : volo.getSummerBankHolidayFlights();
         }
 
@@ -1271,7 +1288,7 @@ namespace compagniaAerea
                TimeSpan.Parse(getCellValue(dgTratte, 0)),
                int.Parse(getCellValue(dgTratte, 2)));*/
         }
-        
+
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
