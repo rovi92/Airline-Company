@@ -54,7 +54,7 @@
             <Button x:Name="CercaBiglietto" Content="Cerca" HorizontalAlignment="Left" Margin="15,147,0,0" VerticalAlignment="Top" Width="232" Height="20" Click="cercaBiglietto_Click"/>
         </Grid>
 
-        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="406" Margin="0,50,0,0" VerticalAlignment="Top" Width="856" Visibility="Hidden">
+        <Grid x:Name="viewTicket" HorizontalAlignment="Left" Height="406" Margin="10,40,-4,0" VerticalAlignment="Top" Width="856" Visibility="Hidden">
             <TextBlock x:Name="titolotbl" HorizontalAlignment="Left" Margin="70,54,0,0" TextWrapping="Wrap" Text="Dati biglietto" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
             <TextBlock x:Name="nametbl" HorizontalAlignment="Left" Margin="70,108,0,0" TextWrapping="Wrap" Text="Nome: " VerticalAlignment="Top"/>
             <Label x:Name="nomelbl" Content="nome" HorizontalAlignment="Left" Margin="114,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.577" Width="68"/>
@@ -86,13 +86,17 @@
             <Label x:Name="lblpesoBagaglio" Content="" HorizontalAlignment="Left" Margin="412,135,0,0" VerticalAlignment="Top"/>
             <Label x:Name="lblpesoBagaglio2" Content="" HorizontalAlignment="Left" Margin="452,135,0,0" VerticalAlignment="Top"/>
             <Label x:Name="lblpesoBagaglio3" Content="" HorizontalAlignment="Left" Margin="491,135,0,0" VerticalAlignment="Top"/>
-            <Grid x:Name="GridScaloViewTicket" HorizontalAlignment="Left" Height="84" Margin="552,172,0,0" VerticalAlignment="Top" Width="294">
-                <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="Scalo A" VerticalAlignment="Top"/>
-                <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
+            <Grid x:Name="GridScaloViewTicket" HorizontalAlignment="Left" Height="84" Margin="552,172,0,0" VerticalAlignment="Top" Width="294" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="221*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="con scalo a:" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="4,38,0,0" TextWrapping="Wrap" Text="Orario arrivo" VerticalAlignment="Top"/>
                 <TextBlock x:Name="textBlock16_Copy" HorizontalAlignment="Left" Margin="132,38,0,0" TextWrapping="Wrap" Text="Orario Partenza" VerticalAlignment="Top"/>
                 <Label x:Name="lblScalo" Content="Label" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="lblOrarioPartenza" Content="Label" HorizontalAlignment="Left" Margin="227,33,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="LblOrarioArrivo" Content="Label" HorizontalAlignment="Left" Margin="89,31,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblOrarioPartenza" Content="Label" HorizontalAlignment="Left" Margin="6,33,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label x:Name="LblOrarioArrivo" Content="Label" HorizontalAlignment="Left" Margin="71,33,0,0" VerticalAlignment="Top"/>
 
             </Grid>
         </Grid>
@@ -147,7 +151,7 @@
             <MenuItem x:Name="MIProfilo" Header="Profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="2,43,0,55" Background="White" Visibility="Hidden">
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="-8,31,0,67" Background="White" Visibility="Hidden">
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333" Grid.ColumnSpan="3" LostFocus="txtPartenza_LostFocus"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold" Grid.ColumnSpan="3"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="174,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2"/>
@@ -160,7 +164,6 @@
             <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="174,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
             <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="349,353,0,0" VerticalAlignment="Top" Width="96" Height="25" Click="btnCercaVolo_Click"/>
             <Grid HorizontalAlignment="Left" Height="100" Margin="528,178,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
-            <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="492,178,0,0" VerticalAlignment="Top" Width="278" Grid.Column="2"/>
             <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="349,24,0,0" VerticalAlignment="Top" Height="149" Width="501" 
                             GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" RowHeight="30"
                             HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" IsReadOnly="True"
@@ -215,17 +218,16 @@
             <TextBlock x:Name="lblErroreD" HorizontalAlignment="Left" Margin="174,94,0,0" TextWrapping="Wrap" Text="Nessun volo da questa città" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
             <TextBlock x:Name="lblErroreDP" HorizontalAlignment="Left" Margin="20,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="Nessun volo "/><Run Text="in questa data"/></TextBlock>
             <TextBlock x:Name="lblErroreDA" HorizontalAlignment="Left" Margin="174,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="Nessun volo "/><Run Text="in questa data"/></TextBlock>
-            <Grid x:Name="gridTipoVolo" HorizontalAlignment="Left" Height="144" Margin="10,250,0,0" VerticalAlignment="Top" Width="356" Grid.ColumnSpan="3">
+            <Grid x:Name="gridTipoVolo" HorizontalAlignment="Left" Height="158" Margin="0,241,0,0" VerticalAlignment="Top" Width="331" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="88*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
+                <Slider x:Name="sldPosti" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="36,10,0,0" VerticalAlignment="Top" Width="94" Maximum="5" Minimum="1"/>
                 <RadioButton x:Name="rdbEconomy" Content="Economy" HorizontalAlignment="Left" Margin="36,73,0,0" VerticalAlignment="Top" GroupName="Classe" IsChecked="True" Checked="rdbEconomy_Checked"/>
-                <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Right" Margin="0,73,160,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbBuisness_Checked"/>
+                <RadioButton x:Name="rdbBuisness" Content="Buisness" HorizontalAlignment="Right" Margin="0,73,136,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbBuisness_Checked"/>
                 <RadioButton x:Name="rdbFirst" Content="First" HorizontalAlignment="Left" Margin="222,73,0,0" VerticalAlignment="Top"  GroupName="Classe" Checked="rdbFirst_Checked"/>
-                <Label x:Name="lblPosti" Content="{Binding Value, ElementName=sldPosti}" HorizontalAlignment="Left" Margin="109,8,0,0" VerticalAlignment="Top" Width="24"/>
-                <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="36,93,0,0" VerticalAlignment="Top" Height="27" Width="68"/>
+                <Label x:Name="lblPosti" Content="{Binding Value, ElementName=sldPosti}" HorizontalAlignment="Left" Margin="144,8,0,0" VerticalAlignment="Top" Width="24"/>
 
             </Grid>
         </Grid>
@@ -459,7 +461,7 @@
 
         </Grid>
 
-        <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Visible">
+        <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Hidden">
             <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="617"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgTratte_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Ora partenza"/>

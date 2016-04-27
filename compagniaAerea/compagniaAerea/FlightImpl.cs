@@ -71,9 +71,9 @@ namespace compagniaAerea
                                orarioPartenza = p.orario_partenza,
                                orarioArrivo = p.orario_arrivo,
                                codiceVolo = p.numero_volo,
-                               costoEconomy = p.Tariffario.First(t => t.idClasse == 1).tariffa_solo_andata,
-                               costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata,
-                               costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata,
+                               costoEconomy = p.Tariffario.First(t => t.idClasse == 1).tariffa_solo_andata + p.Tariffario.First(t => t.idClasse == 1).Classe.prezzo,
+                               costoBuisness = p.Tariffario.First(t => t.idClasse == 2).tariffa_solo_andata + p.Tariffario.First(t => t.idClasse == 2).Classe.prezzo,
+                               costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata + p.Tariffario.First(t => t.idClasse == 3).Classe.prezzo,
                                cancellato = p.cancellato,
                                idPromozione = p.idPromozione
                            }).ToList();
@@ -237,6 +237,19 @@ namespace compagniaAerea
                     where p.numero_volo == idVolo
                     select p.Tratta).Count();
         }
+        public string getFlightLegDeparture(int idVolo)
+        {
+            return myDatabase.getDb().Piano_di_volo.First(pv => pv.numero_volo == idVolo).Tratta.First().aeroporto_arrivo;
+        }
+
+        public string getFlightLegArrivalTime(int idVolo)
+        {
+            return myDatabase.getDb().Piano_di_volo.First(pv => pv.numero_volo == idVolo).Tratta.First().orario_arrivo.ToString();
+        }
+        public string getFlightLegDepartureTime(int idVolo)
+        {
+            return myDatabase.getDb().Piano_di_volo.First(pv => pv.numero_volo == idVolo).Tratta.Last().orario_partenza.ToString();
+        }
 
         public void updateFlightSeats(int idVolo, int idClasse, int postiPrenotati)
         {
@@ -299,5 +312,7 @@ namespace compagniaAerea
 
             }
         }
+
+        
     }
 }

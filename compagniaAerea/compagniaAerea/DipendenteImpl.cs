@@ -58,19 +58,6 @@ namespace compagniaAerea
                      select d).ToList();
         }
 
-
-       /* public List<String> getValueGrid(DataGrid dg)
-        {
-
-            List<String> tmp = new List<String>();
-            for (int i = 0; i < dg.SelectedCells.Count; i++)
-            {
-                tmp.Add((dg.SelectedCells[i].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text);
-            }
-            return tmp;
-
-        }*/
-
         #region get Dipendente
         public string getCognome()
         {

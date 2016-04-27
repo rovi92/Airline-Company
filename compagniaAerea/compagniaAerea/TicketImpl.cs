@@ -14,13 +14,7 @@ namespace compagniaAerea
     {
 
         DatabaseManager myDatabase;
-        //List<String> primoTicket = new List<String>();
-      //  List<Comfort> comfort = new List<Comfort>();
-       // List<Classe> classeVolo = new List<Classe>();
-       // List<Tariffario> tariffario = new List<Tariffario>();
-      //  List<Pagamento> pagamento = new List<Pagamento>();
-       // List<Prenotazione> prenotazione = new List<Prenotazione>();
-       // List<Prezzo_bagaglio_imbarcato> bagaglio = new List<Prezzo_bagaglio_imbarcato>();
+    
         InfoBiglietto ib = new InfoBiglietto();
         int idTariffa = 0;
         int lastIdBiglietto = 0;
@@ -58,9 +52,7 @@ namespace compagniaAerea
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
-                     /* nome = b.nome_intestatario,
-                      cognome = b.cognome_intestatario,
-                      cod_fiscale = b.Prenotazione.Passeggero.CF,*/
+                   
                       cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
@@ -72,37 +64,30 @@ namespace compagniaAerea
                   }).First();
         }
 
-      /*  public void getPopulateDbTicket()
-        {
 
 
-            tariffario = (from t in myDatabase.getDb().Tariffario
-                          select t).ToList();
-            classeVolo = (from cll in myDatabase.getDb().Classe
-                          select cll).ToList();
 
-            bagaglio = (from pbi in myDatabase.getDb().Prezzo_bagaglio_imbarcato
-                        select pbi).ToList();
-
-            comfort = (from c in myDatabase.getDb().Comfort
-                       select c).ToList();
-
-            prenotazione = (from pr in myDatabase.getDb().Prenotazione
-                            select pr).ToList();
-
-
-            pagamento = (from pg in myDatabase.getDb().Pagamento
-                         select pg).ToList();
-        }*/
-
-
-        #region GET tiket e tutto ciò che è correlato al biglietto
+        #region GET ticket e tutto ciò che è correlato al biglietto
         public double getTicketPrice(int idBiglietto)
         {
             return (from b in myDatabase.getDb().Biglietto
                     where b.codice_biglietto == idBiglietto
                     select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + b.Comfort_inclusi.Sum(c => c.Comfort.prezzo) + b.Babaglio_Imbarcato.Sum(bi => bi.Prezzo_bagaglio_imbarcato.prezzo)).First();
         }
+
+        private double CalculatePrice(double price,int? sconto)
+        {
+            if(sconto == null)
+            {
+                return price;
+            }
+            else
+            {
+                return price - (price * Convert.ToDouble(sconto) / 100);
+            }
+        }
+
+
         public void updatePrenotationPrice(int idPrenotazione)
         {
             List<int> ticketsId = (from b in myDatabase.getDb().Biglietto
@@ -124,16 +109,7 @@ namespace compagniaAerea
             return myDatabase.getDb().Prenotazione.First(pr => pr.idPrenotazione == idPrenotazione).totale;
         }
 
-      /*  public void firstTicket(List<String> l)
-        {
-            primoTicket = l;
-        }
-
-        public List<string> getFirstTicket()
-        {
-            return primoTicket;
-        }
-        */
+     
         public string getNome()
         {
             return ib.nome;
@@ -203,7 +179,7 @@ namespace compagniaAerea
 
         #endregion
 
-        #region CREATE TIKET
+        #region CREATE TICKET
 
         public void createBooking(string dataPrenotazione, int numeroPersone,double totale, int idTariffa,string tipoViaggio)
         {

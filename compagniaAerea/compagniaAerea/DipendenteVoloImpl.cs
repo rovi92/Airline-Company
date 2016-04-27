@@ -28,8 +28,6 @@ namespace compagniaAerea
         //Aggiungi piano di volo
         public void Aggiungi_pianodivolo(String città_partenza, String città_arrivo, DateTime data_partenza, DateTime data_arrivo, String orario_partenza, String orario_arrivo, Boolean cancellato, double tariffa)
         {
-            /*TimeSpan orario_p = TimeSpan.Parse(DateTime.Parse(orario_partenza, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss"));
-            TimeSpan orario_a = TimeSpan.Parse(DateTime.Parse(orario_arrivo, System.Globalization.CultureInfo.CurrentCulture).ToString("HH:mm:ss"));*/
             Piano_di_volo p = new Piano_di_volo()
             {
                 aeroporto_partenza = myDatabase.getDb().Aeroporto.First(a => a.città.ToString() == città_partenza).nome,
@@ -122,6 +120,15 @@ namespace compagniaAerea
             myDatabase.getDb().SubmitChanges();
         }
 
+        public void UpdateFlightFare(int numero_volo)
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                Tariffario t = myDatabase.getDb().Tariffario.First(tr => tr.numero_volo == numero_volo && tr.idClasse == i);
+                t.tariffa_solo_andata = t.tariffa_solo_andata - (t.tariffa_solo_andata * Convert.ToDouble(t.Piano_di_volo.Promozioni.sconto) / 100);
+                myDatabase.getDb().SubmitChanges();
+            }
+        }
 
         public dynamic getPianiDiVolo()
         {

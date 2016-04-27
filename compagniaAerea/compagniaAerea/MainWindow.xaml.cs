@@ -762,6 +762,9 @@ namespace compagniaAerea
                 if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 0)
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
+                    lblScalo.Content = volo.getFlightLegDeparture(int.Parse(getCellValue(dataGridAndata, 0)));
+                    lblOrarioPartenza.Content = volo.getFlightLegDepartureTime(int.Parse(getCellValue(dataGridAndata, 0)));
+                    LblOrarioArrivo.Content = volo.getFlightLegArrivalTime(int.Parse(getCellValue(dataGridAndata, 0)));
                 }
 
             }
@@ -819,19 +822,7 @@ namespace compagniaAerea
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
                 }
-                /*
-                
-            totalelbl.Content = ticket.getTotal(Convert.ToDouble(stato), Convert.ToDouble(bagaglitxt.Text), Convert.ToDouble(codiceVololbl.Content.ToString()), Convert.ToDouble(txtSommaConfort.Text), volo.getFlightClassId()) * int.Parse(lblPosti.Content.ToString());
-                btnConferma2.Visibility = Visibility.Visible;
-                btnConferma_ordine.Visibility = Visibility.Hidden;
-                //creo la prenotazione di andata
-                ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                                  int.Parse(lblPosti.Content.ToString()),
-                                  Double.Parse(totalelbl.Content.ToString()),
-                              ticket.getIdTariffa(int.Parse(codiceVololbl.Content.ToString()), volo.getFlightClassId()), "Andata");
-*/
-
-            }
+                  }
             else
             {
                 if (ticket.getQuatitàPersone() > 0)
@@ -901,12 +892,13 @@ namespace compagniaAerea
             gridTipoVolo.Visibility = Visibility.Hidden;
             ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
             string tipoPagamento = itemA.Content.ToString();
-            ComboBoxItem itemR = (ComboBoxItem)cmbTipoPagamento_Ritorno.SelectedItem;
-            string tipoPagamentoR = itemR.Content.ToString();
+           
             ticket.updatePrenotationPrice(ticket.getIdPrenotazioneAndata());
             ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
             if (rdbAndataRitorno.IsChecked.Value)
             {
+                ComboBoxItem itemR = (ComboBoxItem)cmbTipoPagamento_Ritorno.SelectedItem;
+                string tipoPagamentoR = itemR.Content.ToString();
                 ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
                 ticket.updatePrenotationPrice(ticket.getIdPrenotazioneRitorno());
                 ticket.insertRecordPagamento(txtdataPagamento_Ritorno.Text, tipoPagamentoR, ticket.getIdPrenotazioneRitorno());
@@ -1218,6 +1210,7 @@ namespace compagniaAerea
         private void dataGridAndata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gridTipoVolo.Visibility = Visibility.Visible;
+            
         }
 
         private void Click_gestioneofferte(object sender, RoutedEventArgs e)
@@ -1248,6 +1241,7 @@ namespace compagniaAerea
         {
             int sconto = rdblastminute.IsChecked.Value == true ? 1 : rdbnatale.IsChecked.Value == true ? 2 : 3;
             volo.addDiscount(int.Parse(getCellValue(dgVolifiltrati, 0)), sconto);
+            dipendentevolo.UpdateFlightFare(int.Parse(getCellValue(dgVolifiltrati, 0)));
             dgVolifiltrati.ItemsSource = sconto == 1 ? volo.getLastMinute() : sconto == 2 ? volo.getXmasFlights() : volo.getSummerBankHolidayFlights();
         }
 
