@@ -1140,7 +1140,17 @@ namespace compagniaAerea
         private void rdblastminute_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getLastMinute();
-            dgVolifiltrati.Items.Clear();
+            
+        }
+
+        private void rdbnatale_Checked(object sender, RoutedEventArgs e)
+        {
+            dgVolifiltrati.ItemsSource = volo.getXmasFlights();
+        }
+
+        private void rdbferragosto_Checked(object sender, RoutedEventArgs e)
+        {
+            dgVolifiltrati.ItemsSource = volo.getSummerBankHolidayFlights();
         }
 
         private void MIGestioneDipendenteVoli_Click(object sender, RoutedEventArgs e)
