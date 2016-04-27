@@ -184,20 +184,7 @@ namespace compagniaAerea
         {
             return (from v in myDatabase.getDb().Volo_attuale
                     where v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza
-                    select new Personale
-                    {
-                        nome = v.Personale.nome,
-                        cognome = v.Personale.cognome,
-                        idPersonale = v.Personale.idPersonale,
-                        indirizzo = v.Personale.indirizzo,
-                        data_di_nascita = v.Personale.data_di_nascita,
-                        data_assunzione = v.Personale.data_assunzione,
-                        email = v.Personale.email,
-                        telefono = v.Personale.telefono,
-                        sesso = v.Personale.sesso,
-                        pilota = v.Personale.pilota,
-                        hostess = v.Personale.hostess
-                    }).ToList();
+                    select v.Personale).ToList();     
         }
     }
 }

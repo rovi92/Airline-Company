@@ -107,14 +107,15 @@ namespace compagniaAerea
         #region checkEmail
         public void checkEmail(TextBox tx)
         {
-            Regex r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)­$");
+           // Regex r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)­$");
+            Regex r = new Regex(@"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}\b");
             if (r.IsMatch(tx.Text))
             {
-                errorTxtBox.Add(true);
+                errorTxtBox.Add(false);
             }
             else
             {
-                errorTxtBox.Add(false);
+                errorTxtBox.Add(true);
                 tipeError.Add(6);
             }
            
