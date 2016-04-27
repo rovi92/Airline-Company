@@ -266,7 +266,7 @@
             <TextBlock x:Name="data_assunzione_dipendentetbl" HorizontalAlignment="Left" Margin="374,181,0,0" TextWrapping="Wrap" Text="Data assunzione" VerticalAlignment="Top"/>
             <TextBox x:Name="telefonoDipendentetxt" HorizontalAlignment="Left" Margin="620,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
             <TextBox x:Name="data_nascita_dipendentetxt" HorizontalAlignment="Left" Margin="374,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="24" IsEnabled="False"/>
-            <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="620,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="26" IsEnabled="False"/>
+            <TextBox x:Name="email_dipendentetxt" HorizontalAlignment="Left" Margin="620,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="20" IsEnabled="False"/>
             <TextBox x:Name="indirizzo_dipendentetxt" HorizontalAlignment="Left" Margin="620,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5" Height="22" IsEnabled="False"/>
             <TextBlock x:Name="Telefono_dipendentetbl" HorizontalAlignment="Left" Margin="620,140,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top" Height="18"/>
             <TextBlock x:Name="data_nascita_dipendentetbl" HorizontalAlignment="Left" Margin="374,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="D"/><Run Text="ata Nascita"/></TextBlock>
@@ -283,14 +283,14 @@
             <TextBox x:Name="impiegoDipendentetxt" HorizontalAlignment="Left" Height="23" Margin="374,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <DataGrid x:Name="dataProfiliDipendetente" HorizontalAlignment="Right" Margin="0,63,541,0" VerticalAlignment="Top" Height="245" Width="260" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns >
-                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding nome}" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding cognome}" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding idPersonale}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="cercaDipendentebtn" Content="Cerca" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="CercaDipendente_click"/>
-            <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top"  Click="aggiungiDipendente_Click"/>
-            <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>            
+            <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top"  Click="aggiungiDipendente_Click" Checked="aggiungiDipendente_Checked"/>
+            <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <RadioButton x:Name="dipendenteMaschiordb" Content="M" HorizontalAlignment="Left" Margin="375,292,0,0" VerticalAlignment="Top" GroupName="genereDipendete" Visibility="Hidden"/>
             <RadioButton x:Name="dipendenteFemminardb" Content="F" HorizontalAlignment="Left" Margin="416,292,0,0" VerticalAlignment="Top" GroupName="genereDipendete" Visibility="Hidden"/>
             <RadioButton x:Name="dipendentePilotardb" Content="Pilota" HorizontalAlignment="Left" Margin="374,334,0,0" VerticalAlignment="Top" GroupName="impiegoDipendete" Visibility="Hidden"/>

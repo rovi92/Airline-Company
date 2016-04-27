@@ -13,8 +13,10 @@ namespace compagniaAerea
         #region se ci sono errori
         public Boolean checkText()//metodo per riempire una arrayList per sapere se ci sono errori
         {
-                for(int i = 0;i < errorTxtBox.Count; i++){
-                if (errorTxtBox[i].Equals(false)){
+                for(int i = 0;i < errorTxtBox.Count; i++)
+            {
+                if (errorTxtBox[i].Equals(false))
+                {
                     errorTxtBox.Clear();
                     return false;
                 }  

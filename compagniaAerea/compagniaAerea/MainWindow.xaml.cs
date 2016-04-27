@@ -437,7 +437,7 @@ namespace compagniaAerea
             indirizzodi_pendente = indirizzo_dipendentetxt.Text;
             indirizzo_dipendentetxt.IsEnabled = true;
         }
-        
+
         private void aggiungiDipendente_Click(object sender, RoutedEventArgs e)
         {
 
@@ -517,76 +517,22 @@ namespace compagniaAerea
             dipendenteHostessrdb.Visibility = Visibility.Hidden;
         }
 
+        private void aggiungiDipendente_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
-            pulisciDipendente();
             DateTime currentDate = DateTime.Now;
-            bool flag = false;
-            if (aggiungiDipendente.IsChecked == true)
+            MessageBox.Show(nuova_data_nascita_dipendete.Text, "");
+            /*cambio di un solo parametro fra telefono indirizzo email*/
+            if (cambia_email_dipendentecb.IsChecked == true || cambia_indirizzo_dipendentecb.IsChecked == true || cambia_telefono_dipendentecb.IsChecked == true)
             {
 
-                /*controllo campi vuoti*/
-                errore.ValueText(cognomeDipendentetxt);
-                errore.ValueText(nomeDipendentetxt);
-                errore.ValueText(genereDipendentetxt);
-                errore.ValueText(impiegoDipendentetxt);
-                errore.ValueText(email_dipendentetxt);
-                errore.ValueText(indirizzo_dipendentetxt);
-                errore.ValueText(telefonoDipendentetxt);
-                if (errore.checkText())
-                {
-                    if (nuova_data_nascita_dipendete.SelectedDate.Value.ToString("yyyy-MM-dd").Equals(false))
-                    {
-                        MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    if (dipendenteMaschiordb.IsChecked == true && (dipendentePilotardb.IsChecked == true || dipendenteHostessrdb.IsChecked == true))
-                    {
-                        dipendente.createDipendente(nomeDipendentetxt.Text,
-                            cognomeDipendentetxt.Text,
-                            indirizzo_dipendentetxt.Text,
-                            nuova_data_nascita_dipendete.SelectedDate.Value,
-                            currentDate,
-                            email_dipendentetxt.Text,
-                            telefonoDipendentetxt.Text,
-                            "M",
-                            dipendentePilotardb.IsChecked.Value,
-                            dipendenteHostessrdb.IsChecked.Value);
-                        flag = true;
-                    }
-                    else
-                    if (dipendenteFemminardb.IsChecked == true && (dipendentePilotardb.IsChecked == true || dipendenteHostessrdb.IsChecked == true))
-                    {
-                        dipendente.createDipendente(nomeDipendentetxt.Text,
-                            cognomeDipendentetxt.Text,
-                            indirizzo_dipendentetxt.Text,
-                            nuova_data_nascita_dipendete.SelectedDate.Value,
-                            currentDate,
-                            email_dipendentetxt.Text,
-                            telefonoDipendentetxt.Text,
-                            "F",
-                            dipendentePilotardb.IsChecked.Value,
-                            dipendenteHostessrdb.IsChecked.Value);
-                        flag = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                if (flag == true)
-                {
-                    pulisciDipendente();
-                    abilitaVisioneDipendente();
-
-                }
-
-            }
-            else
-            {
                 errore.ValueText(telefonoDipendentetxt);
                 errore.ValueText(email_dipendentetxt);
                 errore.ValueText(indirizzo_dipendentetxt);
-
                 if (errore.checkText())
                 {
                     /*inserimento dei dati nel db*/
@@ -600,14 +546,57 @@ namespace compagniaAerea
                     cambia_telefono_dipendentecb.IsChecked = false;
                     cambia_email_dipendentecb.IsChecked = false;
                     cambia_indirizzo_dipendentecb.IsChecked = false;
-
                 }
                 else
                 {
                     MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            if (aggiungiDipendente.IsChecked.Value == true)
+            {
+                cambia_telefono_dipendentecb.IsEnabled = false;
+                cambia_email_dipendentecb.IsEnabled = false;
+                cambia_indirizzo_dipendentecb.IsEnabled = false;
+                {
+                    /*controllo campi vuoti*/
+                    errore.ValueText(cognomeDipendentetxt);
+                    errore.ValueText(nomeDipendentetxt);
+                    errore.ValueText(email_dipendentetxt);
+                    errore.ValueText(indirizzo_dipendentetxt);
+                    errore.ValueText(telefonoDipendentetxt);
+                    if (errore.checkText())
+                    {
+                        if (nuova_data_nascita_dipendete.Text == "")
+                        {
+                            MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            if ((dipendenteMaschiordb.IsChecked.Value == true || dipendenteFemminardb.IsChecked.Value == true) && (dipendentePilotardb.IsChecked.Value == true || dipendenteHostessrdb.IsChecked.Value == true))
+                            {
+                                dipendente.createDipendente(nomeDipendentetxt.Text,
+                                    cognomeDipendentetxt.Text,
+                                    indirizzo_dipendentetxt.Text,
+                                    nuova_data_nascita_dipendete.SelectedDate.Value,
+                                    currentDate,
+                                    email_dipendentetxt.Text,
+                                    telefonoDipendentetxt.Text,
+                                    dipendenteMaschiordb.IsChecked.Value ? "M" : "F",
+                                    dipendentePilotardb.IsChecked.Value,
+                                    dipendenteHostessrdb.IsChecked.Value);
+                            }                            
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(errore.codError(),"ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
 
                 }
             }
+            pulisciDipendente();
+            abilitaVisioneDipendente();
+            dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid            
         }
 
         #endregion
@@ -1215,7 +1204,7 @@ namespace compagniaAerea
         private void rdblastminute_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getLastMinute();
-            
+
         }
 
         private void rdbnatale_Checked(object sender, RoutedEventArgs e)
@@ -1266,7 +1255,6 @@ namespace compagniaAerea
                int.Parse(getCellValue(dgTratte, 2)));*/
         }
 
-      
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
