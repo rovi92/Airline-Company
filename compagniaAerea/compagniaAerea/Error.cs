@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -89,7 +90,8 @@ namespace compagniaAerea
         #region checkNumber
         public void checkNumber(TextBox tx)
         {
-            if(Convert.ToInt32(tx.Text) == int.Parse(tx.Text))
+            double value;
+            if(double.TryParse(tx.Text, out value))
             {
                 errorTxtBox.Add(true);
             }
@@ -103,10 +105,19 @@ namespace compagniaAerea
         #endregion
 
         #region checkEmail
-        public void IsValidEmail(TextBox tx)
+        public void checkEmail(TextBox tx)
         {
-           
-            try
+            Regex r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)­$");
+            if (r.IsMatch(tx.Text))
+            {
+                errorTxtBox.Add(true);
+            }
+            else
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(6);
+            }
+            /*try
             {
                 var addr = new System.Net.Mail.MailAddress(tx.Text);
                 errorTxtBox.Add(true);
@@ -115,7 +126,7 @@ namespace compagniaAerea
             {
                 errorTxtBox.Add(false);
                 tipeError.Add(6);
-            }
+            }*/
         }
         #endregion
 
@@ -253,7 +264,7 @@ namespace compagniaAerea
                         if (repetCaseNum.Equals(false))
                         {
                             repetCaseNum = true;
-                            result = " Il campo compilato deve essere formato da soli numeri";
+                            result = " C'è almeno un campo che deve contenere solo numeri";
                             tmp.Add(result);
                         }
                         break;

@@ -15,7 +15,7 @@ namespace compagniaAerea
         void valuePassword(PasswordBox ps);
         void CfCheck(TextBox txtB1, int num);
         void CAPCheck(TextBox txtB1);
-        void IsValidEmail(TextBox txtB1);
+        void checkEmail(TextBox txtB1);
         void checkString(String s);
         void checkNumber(TextBox txtB1);
         void checkPs(PasswordBox ps1, PasswordBox ps2);

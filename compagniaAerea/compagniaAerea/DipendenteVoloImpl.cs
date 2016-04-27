@@ -130,6 +130,13 @@ namespace compagniaAerea
             return result;
         }
 
+        public Boolean checkAeroporto (String aeroporto)
+        {
+            return (from a in myDatabase.getDb().Aeroporto
+                    where a.città.ToString() == aeroporto
+                    select a).Count() > 0 ? true : false;
+        }
+
 
         public class InfoAereo
         {

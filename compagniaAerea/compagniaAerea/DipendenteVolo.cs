@@ -15,5 +15,6 @@ namespace compagniaAerea
         int getNumeroVolo(String città_partenza, String città_arrivo, String data_partenza, String data_arrivo, String orario_partenza, String orario_arrivo);
         void CreateFlightFare(int numero_volo, double tariffa);
         int getLastNumero_volo();
+        Boolean checkAeroporto(String aeroporto);
     }
 }
