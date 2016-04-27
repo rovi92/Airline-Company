@@ -118,16 +118,7 @@ namespace compagniaAerea
                 errorTxtBox.Add(true);
                 tipeError.Add(6);
             }
-            /*try
-            {
-                var addr = new System.Net.Mail.MailAddress(tx.Text);
-                errorTxtBox.Add(true);
-            }
-            catch
-            {
-                errorTxtBox.Add(false);
-                tipeError.Add(6);
-            }*/
+           
         }
         #endregion
 
