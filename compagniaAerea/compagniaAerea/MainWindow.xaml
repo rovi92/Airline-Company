@@ -31,7 +31,7 @@
             <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
             <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="23,97,0,181" Text="Password:" Foreground="White" RenderTransformOrigin="0.679,1.37" HorizontalAlignment="Left" Width="56"/>
             <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,120,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
-            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,201,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="login_click"/>
+            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,150,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="login_click"/>
         </Grid>
 
         <Grid x:Name="grid_ricerca_biglietto" Height="214" VerticalAlignment="Top" HorizontalAlignment="Left" Width="272" Margin="272,78,0,0" Background="#FF9E0000" Visibility="Hidden" >
@@ -433,17 +433,10 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="footer" Margin="0,452,0,5">
-            <Grid.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF5F0202" Offset="1"/>
-                    <GradientStop Color="#FFFF0606" Offset="0.23"/>
-                </RadialGradientBrush>
-            </Grid.Background>
-            <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
-        </Grid>
+
         <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Hidden">
-            <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="309,10,0,0" VerticalAlignment="Top" Height="160" Width="527">
+            <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="285,57,0,0" VerticalAlignment="Top" Height="160" Width="551"
+                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  GridLinesVisibility="Horizontal">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
                     <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
@@ -455,13 +448,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <RadioButton x:Name="rdblastminute" Content="Last minute (50%)" HorizontalAlignment="Left" Margin="63,57,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdblastminute_Checked"/>
-            <RadioButton x:Name="rdbnatale" Content="Sconto Natale (10%)" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" GroupName="rbdOfferte"/>
-            <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte"/>
+            <RadioButton x:Name="rdbnatale" Content="Sconto Natale (10%)" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbnatale_Checked"/>
+            <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbferragosto_Checked"/>
             <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="45,24,0,0" TextWrapping="Wrap" Text="Selezionare lo sconto da applicare" VerticalAlignment="Top" FontSize="14.667" FontFamily="Yu Gothic UI Semibold"/>
+            <Button x:Name="button" Content="Applica sconto" HorizontalAlignment="Left" Margin="709,222,0,0" VerticalAlignment="Top" Width="127"/>
         </Grid>
         <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Hidden">
             <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="462"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgTratte_SelectionChanged">
-                <DataGrid.Columns>      
+                <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Ora partenza"/>
                     <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data partenza"/>
                     <DataGridTextColumn Binding="{Binding gatePartenza}" IsReadOnly="True" Header="Gate partenza"/>
@@ -486,8 +480,15 @@
             </DataGrid>
         </Grid>
 
-
-
+        <Grid x:Name="footer" Margin="0,452,0,5">
+            <Grid.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF5F0202" Offset="1"/>
+                    <GradientStop Color="#FFFF0606" Offset="0.23"/>
+                </RadialGradientBrush>
+            </Grid.Background>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Source="immagini/1 logo db .jpg"/>
+        </Grid>
 
     </Grid>
 </Window>
