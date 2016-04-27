@@ -59,10 +59,9 @@ namespace compagniaAerea
             public string arrivo { get; set; }
         }
         //caricamento di database in locale 
-        public void updateFlightLegs()
+        public void UpdateFlights()
         {
-            voli.Clear();
-            /*voli.AddRange((from p in myDatabase.getDb().Piano_di_volo
+            voli = (from p in myDatabase.getDb().Piano_di_volo
                            select new FlightInfo
                            {
                                partenza = p.Aeroporto.città,
@@ -77,13 +76,13 @@ namespace compagniaAerea
                                costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata,
                                cancellato = p.cancellato,
                                idPromozione = p.idPromozione
-                           }).ToList());*/
+                           }).ToList();
 
         }
 
         public List<FlightInfo> getFlights()
         {
-            updateFlightLegs();
+            UpdateFlights();
             return voli;
         }
 
@@ -108,28 +107,34 @@ namespace compagniaAerea
 
         }
 
-        /*QUESTA E' LA PARTE CHE ABBIAMO APPENA AGGIUNTO*/
         public List<FlightInfo> getLastMinute()
         {
             return (from v in voli
-                    where v.dataPartenza == DateTime.Today.AddDays(1)
+                    where v.dataPartenza == DateTime.Today.AddDays(1) && v.cancellato == false
                     select v).ToList();
         }
 
         public List<FlightInfo> getXmasFlights()
         {
             return (from v in voli
-                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-12-25"
+                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-12-25" && v.cancellato == false
                     select v).ToList();
         }
 
         public List<FlightInfo> getSummerBankHolidayFlights()
         {
             return (from v in voli
-                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-08-15"
+                    where v.dataPartenza.ToString("yyyy-MM-dd") == DateTime.Today.Year.ToString() + "-08-15" && v.cancellato == false
                     select v).ToList();
         }
-        /*FINE PARTE APPENA AGGIUNTA*/
+
+        public void addDiscount(int numero_volo, int idPromozione)
+        {
+            Piano_di_volo p = myDatabase.getDb().Piano_di_volo.First(pv => pv.numero_volo == numero_volo);
+            p.idPromozione = idPromozione;
+            myDatabase.getDb().SubmitChanges();
+            UpdateFlights();
+        }
 
         public Boolean checkDeparture(string departure)
         {

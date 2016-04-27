@@ -10,6 +10,15 @@
     <Window.Resources>
         <Style TargetType="DataGridRow">
             <Style.Triggers>
+                <DataTrigger Binding="{Binding idPromozione}" Value="1">
+                    <Setter Property="Background" Value="Aquamarine"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding idPromozione}" Value="2">
+                    <Setter Property="Background" Value="Aquamarine"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding idPromozione}" Value="3">
+                    <Setter Property="Background" Value="Aquamarine"/>
+                </DataTrigger>
                 <DataTrigger Binding="{Binding cancellato}" Value="True">
                     <Setter Property="Background" Value="IndianRed"/>
                 </DataTrigger>
@@ -25,13 +34,13 @@
     <Grid Name="base" Background="White">
         <Button x:Name="btnLogOut" Content="Logout" HorizontalAlignment="Left" Margin="786,25,0,0" VerticalAlignment="Top" Width="74" BorderBrush="White" Background="White" Click="btnLogOut_Click" Visibility="Hidden"/>
 
-        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
+        <Grid x:Name="gridLogIn" HorizontalAlignment="Left" Height="199" VerticalAlignment="Top" Width="211" Background="#FF9E0000" Margin="91,53,0,0" Visibility="Hidden">
             <TextBlock x:Name="Login_title" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="18.667" FontFamily="Arial Black" Opacity="0.6" Foreground="White"/>
-            <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="55"><Run Text="User"/><Run Text="name:"/></TextBlock>
+            <TextBlock x:Name="login_username" HorizontalAlignment="Left" Margin="24,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="56" Height="21"><Run Text="User"/><Run Text="name:"/></TextBlock>
             <TextBox x:Name="Login_usernametxt" HorizontalAlignment="Left" Height="20" Margin="23,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
-            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="23,97,0,181" Text="Password:" Foreground="White" RenderTransformOrigin="0.679,1.37" HorizontalAlignment="Left" Width="56"/>
-            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="23,120,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
-            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,150,0,0" VerticalAlignment="Top" Width="163" Height="20" Click="login_click"/>
+            <TextBlock x:Name="login_password" TextWrapping="Wrap" Margin="24,82,0,99" Text="Password:" Foreground="White" RenderTransformOrigin="0.679,1.37" HorizontalAlignment="Left" Width="56"/>
+            <PasswordBox x:Name="Login_passwordtxt" HorizontalAlignment="Left" Margin="24,105,0,0" VerticalAlignment="Top" Width="164" Height="20"/>
+            <Button x:Name="Loginbtn" Content="Login" HorizontalAlignment="Left" Margin="24,144,0,0" VerticalAlignment="Top" Width="163" Height="25" Click="login_click"/>
         </Grid>
 
         <Grid x:Name="grid_ricerca_biglietto" Height="214" VerticalAlignment="Top" HorizontalAlignment="Left" Width="272" Margin="272,78,0,0" Background="#FF9E0000" Visibility="Hidden" >
@@ -138,34 +147,29 @@
             <MenuItem x:Name="MIProfilo" Header="Profilo dipendente" Visibility="Hidden" Click="Click_profilo"/>
         </Menu>
 
-        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="0,45,0,53" Background="White" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="802*"/>
-            </Grid.ColumnDefinitions>
+        <Grid x:Name="gridSelezionaVolo" HorizontalAlignment="Left" Width="860" Margin="2,43,0,55" Background="White" Visibility="Hidden">
             <TextBox x:Name="txtPartenza" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" FontSize="13.333" Grid.ColumnSpan="3" LostFocus="txtPartenza_LostFocus"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,51,0,0" TextWrapping="Wrap" Text="Partenza volo" VerticalAlignment="Top" Width="148" FontWeight="Bold" Grid.ColumnSpan="3"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="174,51,0,0" TextWrapping="Wrap" Text="Destinazione del tuo volo" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2"/>
-            <TextBox x:Name="txtDestinazioneVolo" HorizontalAlignment="Left" Height="20" Margin="172,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="2" LostFocus="txtDestinazioneVolo_LostFocus"/>
+            <TextBox x:Name="txtDestinazioneVolo" HorizontalAlignment="Left" Height="20" Margin="174,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" LostFocus="txtDestinazioneVolo_LostFocus"/>
             <RadioButton x:Name="rdbAndataRitorno" Content="Andata e Ritorno" HorizontalAlignment="Left" Margin="20,115,0,0" VerticalAlignment="Top" Checked="rdbAndataRitorno_Checked" IsChecked="True" GroupName="rdbTipoVolo" Grid.ColumnSpan="3"/>
             <RadioButton x:Name="rdbSoloAndata" Content="Sola Andata" HorizontalAlignment="Left" Margin="172,115,0,0" VerticalAlignment="Top" GroupName="rdbTipoVolo" Checked="rdbSoloAndata_Checked" Grid.Column="2"/>
-            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" CalendarClosed="dataPartenza_CalendarClosed"/>
-            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="172,178,0,0" VerticalAlignment="Top" Grid.Column="2" CalendarClosed="dataRitorno_CalendarClosed"/>
-            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="20,157,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="172,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="2"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
-            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="336,370,0,0" VerticalAlignment="Top" Width="96" Height="27" Click="btnCercaVolo_Click" Grid.Column="2"/>
+            <DatePicker x:Name="dataPartenza" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top" CalendarClosed="dataPartenza_CalendarClosed"/>
+            <DatePicker x:Name="dataRitorno" HorizontalAlignment="Left" Margin="174,178,0,0" VerticalAlignment="Top" CalendarClosed="dataRitorno_CalendarClosed" RenderTransformOrigin="1.456,0.659"/>
+            <TextBlock x:Name="tblandata" HorizontalAlignment="Left" Margin="20,157,0,0" TextWrapping="Wrap" Text="Data partenza" VerticalAlignment="Top"/>
+            <TextBlock x:Name="tblRitorno" HorizontalAlignment="Left" Margin="174,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21"><Run Text="Data "/><Run Text="ritorno"/><LineBreak/><Run/></TextBlock>
+            <Button x:Name="btnCercaVolo" Content="Cerca Volo" HorizontalAlignment="Left" Margin="349,353,0,0" VerticalAlignment="Top" Width="96" Height="25" Click="btnCercaVolo_Click"/>
             <Grid HorizontalAlignment="Left" Height="100" Margin="528,178,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
             <Grid x:Name="GRID" HorizontalAlignment="Left" Height="191" Margin="492,178,0,0" VerticalAlignment="Top" Width="278" Grid.Column="2"/>
-            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="336,24,0,0" VerticalAlignment="Top" Height="149" Width="466" 
-                            GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30"
+            <DataGrid x:Name="dataGridAndata" HorizontalAlignment="Left" Margin="349,24,0,0" VerticalAlignment="Top" Height="149" Width="501" 
+                            GridLinesVisibility="Horizontal" HeadersVisibility="All" ColumnWidth="100" RowHeight="30"
                             HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" IsReadOnly="True"
-                             AlternatingRowBackground="White" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2" AutoGenerateColumns="False" SelectionChanged="dataGridAndata_SelectionChanged">
+                            SelectionMode="Extended" AutoGenerateColumns="False" SelectionChanged="dataGridAndata_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
                             <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                <Setter Property="Background" Value="Chocolate" />
+                                <Setter Property="Background" Value="#FF7E0000" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -181,15 +185,15 @@
                     <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="676,367,0,0" VerticalAlignment="Top" Width="94" Height="27" Click="prenota_click" Grid.Column="2"/>
-            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="336,173,0,0" VerticalAlignment="Top" Height="150" Width="466"
-                            GridLinesVisibility="Horizontal" HeadersVisibility="All"  ColumnWidth="100" Background="LightBlue" RowBackground="LightGray" RowHeight="30" IsReadOnly="True"
-                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AlternatingRowBackground="white" BorderBrush="Gray" BorderThickness="5" SelectionMode="Extended" Grid.Column="2" AutoGenerateColumns="False">
+            <Button x:Name="btnPrenota" Content="Prenota" HorizontalAlignment="Left" Margin="756,353,0,0" VerticalAlignment="Top" Width="94" Height="25" Click="prenota_click"/>
+            <DataGrid x:Name="dataGridRitorno" HorizontalAlignment="Left" Margin="349,184,0,0" VerticalAlignment="Top" Height="150" Width="501"
+                            GridLinesVisibility="Horizontal" HeadersVisibility="All"  ColumnWidth="100" RowHeight="30" IsReadOnly="True"
+                            HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" SelectionMode="Extended" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
                             <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                <Setter Property="Background" Value="Chocolate" />
+                                <Setter Property="Background" Value="#FF7E0000" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -207,10 +211,10 @@
             </DataGrid>
             <TextBlock x:Name="textBlock18" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,-2,0,0" TextWrapping="Wrap" Text="Cerca volo" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
 
-            <TextBlock x:Name="lblErroreP" Grid.Column="1" HorizontalAlignment="Left" Margin="0,94,0,0" TextWrapping="Wrap" Text="nessun volo da questa città" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
-            <TextBlock x:Name="lblErroreD" Grid.Column="2" HorizontalAlignment="Left" Margin="174,96,0,0" TextWrapping="Wrap" Text="nessun volo da questa città" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
-            <TextBlock x:Name="lblErroreDP" Grid.Column="1" HorizontalAlignment="Left" Margin="0,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="nessun volo "/><Run Text="in questa data"/></TextBlock>
-            <TextBlock x:Name="lblErroreDA" Grid.Column="2" HorizontalAlignment="Left" Margin="171,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="nessun volo "/><Run Text="in questa data"/></TextBlock>
+            <TextBlock x:Name="lblErroreP" HorizontalAlignment="Left" Margin="20,94,0,0" TextWrapping="Wrap" Text="Nessun volo da questa città" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
+            <TextBlock x:Name="lblErroreD" HorizontalAlignment="Left" Margin="174,94,0,0" TextWrapping="Wrap" Text="Nessun volo da questa città" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"/>
+            <TextBlock x:Name="lblErroreDP" HorizontalAlignment="Left" Margin="20,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="Nessun volo "/><Run Text="in questa data"/></TextBlock>
+            <TextBlock x:Name="lblErroreDA" HorizontalAlignment="Left" Margin="174,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" FontSize="9" Foreground="Red" Visibility="Hidden"><Run Text="Nessun volo "/><Run Text="in questa data"/></TextBlock>
             <Grid x:Name="gridTipoVolo" HorizontalAlignment="Left" Height="144" Margin="10,250,0,0" VerticalAlignment="Top" Width="356" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="88*"/>
@@ -290,7 +294,7 @@
             </DataGrid>
             <Button x:Name="cercaDipendentebtn" Content="Cerca" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="CercaDipendente_click"/>
             <CheckBox x:Name="aggiungiDipendente" Content="Aggiungi nuovo dipendente" HorizontalAlignment="Left" Margin="594,18,0,0" VerticalAlignment="Top"  Click="aggiungiDipendente_Click"/>
-            <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>            
+            <DatePicker x:Name="nuova_data_nascita_dipendete" HorizontalAlignment="Left" Margin="374,240,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <RadioButton x:Name="dipendenteMaschiordb" Content="M" HorizontalAlignment="Left" Margin="375,292,0,0" VerticalAlignment="Top" GroupName="genereDipendete" Visibility="Hidden"/>
             <RadioButton x:Name="dipendenteFemminardb" Content="F" HorizontalAlignment="Left" Margin="416,292,0,0" VerticalAlignment="Top" GroupName="genereDipendete" Visibility="Hidden"/>
             <RadioButton x:Name="dipendentePilotardb" Content="Pilota" HorizontalAlignment="Left" Margin="374,334,0,0" VerticalAlignment="Top" GroupName="impiegoDipendete" Visibility="Hidden"/>
@@ -435,8 +439,8 @@
 
 
         <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Hidden">
-            <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="285,57,0,0" VerticalAlignment="Top" Height="160" Width="551"
-                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  GridLinesVisibility="Horizontal">
+            <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Height="229" Width="826"
+                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" RowHeight="30" GridLinesVisibility="Horizontal">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
                     <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
@@ -451,8 +455,10 @@
             <RadioButton x:Name="rdbnatale" Content="Sconto Natale (10%)" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbnatale_Checked"/>
             <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbferragosto_Checked"/>
             <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="45,24,0,0" TextWrapping="Wrap" Text="Selezionare lo sconto da applicare" VerticalAlignment="Top" FontSize="14.667" FontFamily="Yu Gothic UI Semibold"/>
-            <Button x:Name="button" Content="Applica sconto" HorizontalAlignment="Left" Margin="709,222,0,0" VerticalAlignment="Top" Width="127"/>
+            <Button x:Name="button" Content="Applica sconto" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" Width="826" Height="25" Click="applicaSconto_Click"/>
+
         </Grid>
+
         <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Hidden">
             <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="462"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgTratte_SelectionChanged">
                 <DataGrid.Columns>

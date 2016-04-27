@@ -40,7 +40,7 @@ namespace compagniaAerea
             dataRitorno.DisplayDateStart = DateTime.Today;
             grid = (Grid)gridchange[2];//in questo caso la pagina di prenotazione
             grid.Visibility = Visibility.Visible;
-            volo.updateFlightLegs();//aggiornamento database locale
+            volo.UpdateFlights();//aggiornamento database locale
 
 
         }
@@ -87,7 +87,7 @@ namespace compagniaAerea
                     errore.TraverseVisualTree(gridRegistrazione);
                     MessageBox.Show("Registrazione avvenuta con successo");
                     this.gridCorrente = 2;
-                    volo.updateFlightLegs();
+                    volo.UpdateFlights();
                     currentGrid();
                 }
 
@@ -365,7 +365,7 @@ namespace compagniaAerea
         {
             errore.TraverseVisualTree(gridSelezionaVolo);
             this.gridCorrente = 2;
-            volo.updateFlightLegs();
+            volo.UpdateFlights();
             gridTipoVolo.Visibility = Visibility.Hidden;//aggiornamento database locale
             currentGrid();
         }
@@ -692,7 +692,7 @@ namespace compagniaAerea
         {
             errore.ValueText(nomepasseggerotxt);
             errore.ValueText(cognomepasseggerotxt);
-            errore.IsValidEmail(emailpasseggerotxt);
+            errore.checkEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
             errore.CAPCheck(cappasseggerotxt);
 
@@ -914,7 +914,7 @@ namespace compagniaAerea
             currentGrid();
             // ticket.getPopulateDbTicket();
             gridTipoVolo.Visibility = Visibility.Hidden;
-            volo.updateFlightLegs();
+            volo.UpdateFlights();
             errore.TraverseVisualTree(gridSelezionaVolo);
         }
         #endregion
@@ -1087,36 +1087,46 @@ namespace compagniaAerea
                 }
                 else
                 {
-                    dipendentevolo.Aggiungi_pianodivolo(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, (DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, tpPartenza.Text + ":00", tpArrivo.Text + ":00", false, Double.Parse(tariffatxt.Text));
-
-                    GridAggiungiPianoDiVolo.Visibility = Visibility.Hidden;
-                    GridAggiungiTratta1.Visibility = Visibility.Visible;
-                    if (scalichk.IsChecked == true)
+                    if(dipendentevolo.checkAeroporto(aereoporto_partenzatxt.Text).Equals(false))
                     {
-                        if (partenzapicker.SelectedDate == arrivopicker.SelectedDate)
+                        MessageBox.Show("L'aeroporto " + aereoporto_partenzatxt.Text + " non è presente nel database");
+                    } else if(dipendentevolo.checkAeroporto(aereoporto_arrivotxt.Text).Equals(false))
+                    {
+                        MessageBox.Show("L'aeroporto " + aereoporto_arrivotxt.Text + " non è presente nel database");
+                    } else
+                    {
+                        dipendentevolo.Aggiungi_pianodivolo(aereoporto_partenzatxt.Text, aereoporto_arrivotxt.Text, (DateTime)partenzapicker.SelectedDate, (DateTime)arrivopicker.SelectedDate, tpPartenza.Text + ":00", tpArrivo.Text + ":00", false, Double.Parse(tariffatxt.Text));
+
+
+                        GridAggiungiPianoDiVolo.Visibility = Visibility.Hidden;
+                        GridAggiungiTratta1.Visibility = Visibility.Visible;
+                        if (scalichk.IsChecked == true)
                         {
+                            if (partenzapicker.SelectedDate == arrivopicker.SelectedDate)
+                            {
+                                arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
+                                partenzapicker2.SelectedDate = partenzapicker.SelectedDate;
+                            }
+                            aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
+                            aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
+                            partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
+                            tpPartenza1.Text = tpPartenza.Text;
+
+                            aereoporto_arrivo2txt.Text = aereoporto_arrivotxt.Text;
+                            arrivopicker2.SelectedDate = arrivopicker.SelectedDate;
+                            tpArrivo2.Text = tpArrivo.Text;
+                        }
+                        else
+                        {
+                            aereoporto_arrivo1txt.Text = aereoporto_arrivotxt.Text;
                             arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
-                            partenzapicker2.SelectedDate = partenzapicker.SelectedDate;
+                            tpArrivo1.Text = tpArrivo.Text;
                         }
                         aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
                         aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
                         partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
                         tpPartenza1.Text = tpPartenza.Text;
-
-                        aereoporto_arrivo2txt.Text = aereoporto_arrivotxt.Text;
-                        arrivopicker2.SelectedDate = arrivopicker.SelectedDate;
-                        tpArrivo2.Text = tpArrivo.Text;
                     }
-                    else
-                    {
-                        aereoporto_arrivo1txt.Text = aereoporto_arrivotxt.Text;
-                        arrivopicker1.SelectedDate = arrivopicker.SelectedDate;
-                        tpArrivo1.Text = tpArrivo.Text;
-                    }
-                    aereicbx1.ItemsSource = dipendentevolo.getAerei();//Popula la combobox aerei
-                    aereoporto_partenza1txt.Text = aereoporto_partenzatxt.Text;
-                    partenzapicker1.SelectedDate = partenzapicker.SelectedDate;
-                    tpPartenza1.Text = tpPartenza.Text;
 
 
                 }
@@ -1207,15 +1217,15 @@ namespace compagniaAerea
         private void Click_gestioneofferte(object sender, RoutedEventArgs e)
         {
             errore.TraverseVisualTree(this.grid);
-            //dgCercavoli.ItemsSource = volo.getFlights();
             this.gridCorrente = 10;
             currentGrid();
+            rdblastminute.IsChecked = true;
+
         }
 
         private void rdblastminute_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getLastMinute();
-            
         }
 
         private void rdbnatale_Checked(object sender, RoutedEventArgs e)
@@ -1226,6 +1236,13 @@ namespace compagniaAerea
         private void rdbferragosto_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getSummerBankHolidayFlights();
+        }
+
+        private void applicaSconto_Click(object sender, RoutedEventArgs e)
+        {
+            int sconto = rdblastminute.IsChecked.Value == true ? 1 : rdbnatale.IsChecked.Value == true ? 2 : 3;
+            volo.addDiscount(int.Parse(getCellValue(dgVolifiltrati,0)), sconto);
+            dgVolifiltrati.ItemsSource = sconto == 1 ? volo.getLastMinute() : sconto == 2 ? volo.getXmasFlights() : volo.getSummerBankHolidayFlights();
         }
 
         private void MIGestioneDipendenteVoli_Click(object sender, RoutedEventArgs e)
@@ -1265,8 +1282,7 @@ namespace compagniaAerea
                TimeSpan.Parse(getCellValue(dgTratte, 0)),
                int.Parse(getCellValue(dgTratte, 2)));*/
         }
-
-      
+        
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
