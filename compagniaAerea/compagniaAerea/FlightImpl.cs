@@ -62,7 +62,7 @@ namespace compagniaAerea
         public void updateFlightLegs()
         {
             voli.Clear();
-            voli.AddRange((from p in myDatabase.getDb().Piano_di_volo
+            /*voli.AddRange((from p in myDatabase.getDb().Piano_di_volo
                            select new FlightInfo
                            {
                                partenza = p.Aeroporto.città,
@@ -77,7 +77,7 @@ namespace compagniaAerea
                                costoFirst = p.Tariffario.First(t => t.idClasse == 3).tariffa_solo_andata,
                                cancellato = p.cancellato,
                                idPromozione = p.idPromozione
-                           }).ToList());
+                           }).ToList());*/
 
         }
 

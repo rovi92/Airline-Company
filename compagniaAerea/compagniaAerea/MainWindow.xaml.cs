@@ -437,8 +437,44 @@ namespace compagniaAerea
             indirizzodi_pendente = indirizzo_dipendentetxt.Text;
             indirizzo_dipendentetxt.IsEnabled = true;
         }
+        
+        private void aggiungiDipendente_Click(object sender, RoutedEventArgs e)
+        {
 
-        private void aggiungiDipendente_Checked(object sender, RoutedEventArgs e)
+            if (aggiungiDipendente.IsChecked.Value == true)
+            {
+                pulisciDipendente();
+                abilitaModificaDipendente();
+            }
+            else if (aggiungiDipendente.IsChecked.Value == false)
+            {
+                pulisciDipendente();
+                abilitaVisioneDipendente();
+            }
+        }
+        /*3 metodi per pulire e rendenre visibili degli elementi nella grid di profiloDipendente*/
+        public void pulisciDipendente()
+        {
+            cognomeDipendentetxt.Clear();
+            nomeDipendentetxt.Clear();
+            codiceDipendentetxt.Clear();
+            data_nascita_dipendentetxt.Clear();
+            telefonoDipendentetxt.Clear();
+            dataAssunzione_dipendentetxt.Clear();
+            email_dipendentetxt.Clear();
+            indirizzo_dipendentetxt.Clear();
+            cambia_telefono_dipendentecb.IsChecked = false;
+            cambia_email_dipendentecb.IsChecked = false;
+            cambia_indirizzo_dipendentecb.IsChecked = false;
+            genereDipendentetxt.Clear();
+            impiegoDipendentetxt.Clear();
+            dipendenteMaschiordb.IsChecked = false;
+            dipendenteFemminardb.IsChecked = false;
+            dipendentePilotardb.IsChecked = false;
+            dipendenteHostessrdb.IsChecked = false;
+        }
+
+        public void abilitaModificaDipendente()
         {
             cognomeDipendentetxt.IsEnabled = true;
             nomeDipendentetxt.IsEnabled = true;
@@ -451,11 +487,39 @@ namespace compagniaAerea
             telefonoDipendentetxt.IsEnabled = true;
             email_dipendentetxt.IsEnabled = true;
             cercaDipendentebtn.IsEnabled = false;
+            genereDipendentetxt.Visibility = Visibility.Hidden;
+            impiegoDipendentetxt.Visibility = Visibility.Hidden;
+            dipendenteFemminardb.Visibility = Visibility.Visible;
+            dipendenteMaschiordb.Visibility = Visibility.Visible;
+            dipendentePilotardb.Visibility = Visibility.Visible;
+            dipendenteHostessrdb.Visibility = Visibility.Visible;
+        }
+
+        public void abilitaVisioneDipendente()
+        {
+            cognomeDipendentetxt.IsEnabled = false;
+            nomeDipendentetxt.IsEnabled = false;
+            codiceDipendentetxt.Visibility = Visibility.Visible;
+            codice_dipendentetbl.Visibility = Visibility.Visible;
+            nuova_data_nascita_dipendete.Visibility = Visibility.Hidden;
+            genereDipendentetxt.IsEnabled = false;
+            impiegoDipendentetxt.IsEnabled = false;
+            indirizzo_dipendentetxt.IsEnabled = false;
+            telefonoDipendentetxt.IsEnabled = false;
+            email_dipendentetxt.IsEnabled = false;
+            cercaDipendentebtn.IsEnabled = true;
+            aggiungiDipendente.IsChecked = false;
+            genereDipendentetxt.Visibility = Visibility.Visible;
+            impiegoDipendentetxt.Visibility = Visibility.Visible;
+            dipendenteFemminardb.Visibility = Visibility.Hidden;
+            dipendenteMaschiordb.Visibility = Visibility.Hidden;
+            dipendentePilotardb.Visibility = Visibility.Hidden;
+            dipendenteHostessrdb.Visibility = Visibility.Hidden;
         }
 
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Attenzione nella casella 'impiego dipendente' inserire la parola Pilota o Hostess in base alla scelta del impiego", "ATTENZIONE!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            pulisciDipendente();
             DateTime currentDate = DateTime.Now;
             bool flag = false;
             if (aggiungiDipendente.IsChecked == true)
@@ -475,36 +539,45 @@ namespace compagniaAerea
                     {
                         MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    if (impiegoDipendentetxt.Text == "Pilota" || impiegoDipendentetxt.Text == "pilota")
+                    if (dipendenteMaschiordb.IsChecked == true && (dipendentePilotardb.IsChecked == true || dipendenteHostessrdb.IsChecked == true))
                     {
-                        dipendente.createDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, true, false);
+                        dipendente.createDipendente(nomeDipendentetxt.Text,
+                            cognomeDipendentetxt.Text,
+                            indirizzo_dipendentetxt.Text,
+                            nuova_data_nascita_dipendete.SelectedDate.Value,
+                            currentDate,
+                            email_dipendentetxt.Text,
+                            telefonoDipendentetxt.Text,
+                            "M",
+                            dipendentePilotardb.IsChecked.Value,
+                            dipendenteHostessrdb.IsChecked.Value);
                         flag = true;
                     }
                     else
-                    if (impiegoDipendentetxt.Text == "Hostess" || impiegoDipendentetxt.Text == "hostess")
+                    if (dipendenteFemminardb.IsChecked == true && (dipendentePilotardb.IsChecked == true || dipendenteHostessrdb.IsChecked == true))
                     {
-                        dipendente.createDipendente(nomeDipendentetxt.Text, cognomeDipendentetxt.Text, indirizzo_dipendentetxt.Text, nuova_data_nascita_dipendete.SelectedDate.Value, currentDate, email_dipendentetxt.Text, telefonoDipendentetxt.Text, genereDipendentetxt.Text, false, true);
+                        dipendente.createDipendente(nomeDipendentetxt.Text,
+                            cognomeDipendentetxt.Text,
+                            indirizzo_dipendentetxt.Text,
+                            nuova_data_nascita_dipendete.SelectedDate.Value,
+                            currentDate,
+                            email_dipendentetxt.Text,
+                            telefonoDipendentetxt.Text,
+                            "F",
+                            dipendentePilotardb.IsChecked.Value,
+                            dipendenteHostessrdb.IsChecked.Value);
                         flag = true;
                     }
                     else
                     {
-                        MessageBox.Show("Inserire nella casella 'genere dipendente' Piolota oppure Hostess per selezionare l'impiego", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 if (flag == true)
                 {
-                    cognomeDipendentetxt.IsEnabled = false;
-                    nomeDipendentetxt.IsEnabled = false;
-                    codiceDipendentetxt.Visibility = Visibility.Visible;
-                    codice_dipendentetbl.Visibility = Visibility.Visible;
-                    nuova_data_nascita_dipendete.Visibility = Visibility.Hidden;
-                    genereDipendentetxt.IsEnabled = false;
-                    impiegoDipendentetxt.IsEnabled = false;
-                    indirizzo_dipendentetxt.IsEnabled = false;
-                    telefonoDipendentetxt.IsEnabled = false;
-                    email_dipendentetxt.IsEnabled = false;
-                    cercaDipendentebtn.IsEnabled = true;
-                    aggiungiDipendente.IsChecked = false;
+                    pulisciDipendente();
+                    abilitaVisioneDipendente();
+
                 }
 
             }
@@ -872,6 +945,8 @@ namespace compagniaAerea
         {
             errore.TraverseVisualTree(this.grid);
             this.gridCorrente = 4;
+            pulisciDipendente();
+            abilitaVisioneDipendente();
             currentGrid();
         }
         #endregion
@@ -1180,6 +1255,8 @@ namespace compagniaAerea
                TimeSpan.Parse(getCellValue(dgTratte, 0)),
                int.Parse(getCellValue(dgTratte, 2)));*/
         }
+
+      
 
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
