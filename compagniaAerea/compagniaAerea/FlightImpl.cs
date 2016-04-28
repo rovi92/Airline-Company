@@ -22,31 +22,18 @@ namespace compagniaAerea
 
         }
         public class FlightInfo
-
         {
-
             public string partenza { get; set; }//1
-
             public string arrivo { get; set; }//2
-
             public DateTime dataPartenza { get; set; }//nella g non c'è
-
             public DateTime dataArrivo { get; set; }//nella g non c'è
-
             public TimeSpan orarioPartenza { get; set; }//6
-
             public TimeSpan orarioArrivo { get; set; }//7
-
             public int codiceVolo { get; set; }//0
-
             public double costoEconomy { get; set; }//3
-
             public double costoBuisness { get; set; }//4
-
             public double costoFirst { get; set; }//5
-
             public Boolean? cancellato { get; set; }//nella g non c'è
-
             public int? idPromozione { get; set; }
 
         }
@@ -99,10 +86,10 @@ namespace compagniaAerea
                     }).ToList();
         }
 
-        public List<FlightInfo> getCustomFlight(string partenza, string arrivo, string data)
+        public List<FlightInfo> getCustomFlight(string partenza, string arrivo, DateTime? data)
         {
             return (from v in voli
-                    where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data && v.cancellato == false
+                    where v.cancellato == false && v.partenza.ToUpper() == partenza.ToUpper() && v.arrivo.ToUpper() == arrivo.ToUpper() && (data == null ? v.dataPartenza.Date >= DateTime.Today.Date : v.dataPartenza.Date.ToString("yyyy-MM-dd") == ((DateTime)data).ToString("yyyy-MM-dd")) 
                     select v).ToList();
 
         }
@@ -139,7 +126,7 @@ namespace compagniaAerea
         public Boolean checkDeparture(string departure)
         {
             return (from v in voli
-                    where v.partenza == departure
+                    where v.cancellato == false && v.partenza.ToUpper() == departure.ToUpper()
                     select v).Count() > 0 ? true : false;
 
 
@@ -147,17 +134,16 @@ namespace compagniaAerea
 
         public Boolean checkArrival(string arrival)
         {
-
             return (from v in voli
-                    where v.arrivo == arrival
+                    where v.cancellato == false && v.arrivo.ToUpper() == arrival.ToUpper()
                     select v).Count() > 0 ? true : false;
         }
 
-        public Boolean checkDateFlight(string date)
+        public Boolean checkDateFlight(DateTime? date)
         {
-            return (from v in voli
-                    where v.dataPartenza.ToString("yyyy-MM-dd") == date
-                    select v).Count() > 0 ? true : false;
+            return date == null ? true : (from v in voli
+                                          where v.cancellato == false && v.dataPartenza.ToString("yyyy-MM-dd") == ((DateTime)date).ToString("yyyy-MM-dd")
+                                          select v).Count() > 0 ? true : false;
 
         }
 

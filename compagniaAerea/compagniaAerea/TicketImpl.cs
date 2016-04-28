@@ -52,7 +52,9 @@ namespace compagniaAerea
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
-                   
+                      nome = b.Passeggero.nome,
+                      cognome = b.Passeggero.cognome,
+                      cod_fiscale = b.Passeggero.CF,
                       cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,
@@ -72,21 +74,8 @@ namespace compagniaAerea
         {
             return (from b in myDatabase.getDb().Biglietto
                     where b.codice_biglietto == idBiglietto
-                    select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + b.Comfort_inclusi.Sum(c => c.Comfort.prezzo) + b.Babaglio_Imbarcato.Sum(bi => bi.Prezzo_bagaglio_imbarcato.prezzo)).First();
+                    select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + (b.Comfort_inclusi.Sum(c => (double?) c.Comfort.prezzo) ?? 0) + (b.Babaglio_Imbarcato.Sum(bi => (double?) bi.Prezzo_bagaglio_imbarcato.prezzo) ?? 0)).First();
         }
-
-        private double CalculatePrice(double price,int? sconto)
-        {
-            if(sconto == null)
-            {
-                return price;
-            }
-            else
-            {
-                return price - (price * Convert.ToDouble(sconto) / 100);
-            }
-        }
-
 
         public void updatePrenotationPrice(int idPrenotazione)
         {
