@@ -297,6 +297,247 @@ namespace compagniaAerea
         }
         #endregion
 
+        #region profilo dipendente
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            this.gridCorrente = 0;
+            currentGrid();
+            MIGestioneVoli.Visibility = Visibility.Hidden;
+            MIProfilo.Visibility = Visibility.Hidden;
+            MIofferte.Visibility = Visibility.Hidden;
+            btnLogOut.Visibility = Visibility.Hidden;
+        }
+
+        /*ricerca del dipendente nell grid profilo dipendete*/
+        private void CercaDipendente_click(object sender, RoutedEventArgs e)
+        {
+            dipendente.getDipendente(Convert.ToInt32(getCellValue(dataProfiloDipendente, 2)));
+            cognomeDipendentetxt.Text = dipendente.getCognome();
+            nomeDipendentetxt.Text = dipendente.getNome();
+            codiceDipendentetxt.Text = dipendente.getCodice();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            dataAssunzione_dipendentetxt.Text = dipendente.getDataAssunzione();
+            data_nascita_dipendentetxt.Text = dipendente.getDataNascita();
+            genereDipendentetxt.Text = dipendente.getSesso();
+            impiegoDipendentetxt.Text = dipendente.getImpiego();
+            telefonoDipendentetxt.Text = dipendente.getTelefono();
+            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
+            email_dipendentetxt.Text = dipendente.getEmail();
+            cambia_email_dipendentecb.IsEnabled = true;
+            cambia_indirizzo_dipendentecb.IsEnabled = true;
+            cambia_telefono_dipendentecb.IsEnabled = true;
+        }
+
+        string telefono_dipendente, email_dipendente, indirizzodi_pendente;
+
+        private void cambia_telefono_dipendentecb_Click(object sender, RoutedEventArgs e)
+        {
+            if (cambia_telefono_dipendentecb.IsChecked.Value == false)
+            {
+                telefonoDipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                telefono_dipendente = telefonoDipendentetxt.Text;
+                telefonoDipendentetxt.IsEnabled = true;
+            }
+        }
+
+        private void cambia_email_dipendentecb_Click(object sender, RoutedEventArgs e)
+        {
+            if (cambia_email_dipendentecb.IsChecked.Value == false)
+            {
+                email_dipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                email_dipendente = email_dipendentetxt.Text;
+                email_dipendentetxt.IsEnabled = true;
+            }
+        }
+
+        private void cambia_indirizzo_dipendentecb_Click(object sender, RoutedEventArgs e)
+        {
+            if (cambia_indirizzo_dipendentecb.IsChecked.Value == false)
+            {
+                indirizzo_dipendentetxt.IsEnabled = false;
+            }
+            else
+            {
+                salva_dipendentebtn.Visibility = Visibility.Visible;
+                indirizzodi_pendente = indirizzo_dipendentetxt.Text;
+                indirizzo_dipendentetxt.IsEnabled = true;
+            }
+        }
+
+        private void aggiungiDipendente_Click(object sender, RoutedEventArgs e)
+        {
+            cambia_email_dipendentecb.IsEnabled = false;
+            cambia_indirizzo_dipendentecb.IsEnabled = false;
+            cambia_telefono_dipendentecb.IsEnabled = false;
+
+            if (aggiungiDipendente.IsChecked.Value == true)
+            {
+                pulisciDipendente();
+                abilitaModificaDipendente();
+            }
+            else if (aggiungiDipendente.IsChecked.Value == false)
+            {
+                pulisciDipendente();
+                abilitaVisioneDipendente();
+            }
+        }
+        /*3 metodi per pulire e rendenre visibili degli elementi nella grid di profiloDipendente*/
+        public void pulisciDipendente()
+        {
+            cognomeDipendentetxt.Clear();
+            nomeDipendentetxt.Clear();
+            codiceDipendentetxt.Clear();
+            data_nascita_dipendentetxt.Clear();
+            telefonoDipendentetxt.Clear();
+            dataAssunzione_dipendentetxt.Clear();
+            email_dipendentetxt.Clear();
+            indirizzo_dipendentetxt.Clear();
+            cambia_telefono_dipendentecb.IsChecked = false;
+            cambia_email_dipendentecb.IsChecked = false;
+            cambia_indirizzo_dipendentecb.IsChecked = false;
+            genereDipendentetxt.Clear();
+            impiegoDipendentetxt.Clear();
+            dipendenteMaschiordb.IsChecked = false;
+            dipendenteFemminardb.IsChecked = false;
+            dipendentePilotardb.IsChecked = false;
+            dipendenteHostessrdb.IsChecked = false;
+        }
+
+        public void abilitaModificaDipendente()
+        {
+            cognomeDipendentetxt.IsEnabled = true;
+            nomeDipendentetxt.IsEnabled = true;
+            codiceDipendentetxt.Visibility = Visibility.Hidden;
+            codice_dipendentetbl.Visibility = Visibility.Hidden;
+            nuova_data_nascita_dipendete.Visibility = Visibility.Visible;
+            genereDipendentetxt.IsEnabled = true;
+            impiegoDipendentetxt.IsEnabled = true;
+            indirizzo_dipendentetxt.IsEnabled = true;
+            telefonoDipendentetxt.IsEnabled = true;
+            email_dipendentetxt.IsEnabled = true;
+            cercaDipendentebtn.IsEnabled = false;
+            genereDipendentetxt.Visibility = Visibility.Hidden;
+            impiegoDipendentetxt.Visibility = Visibility.Hidden;
+            dipendenteFemminardb.Visibility = Visibility.Visible;
+            dipendenteMaschiordb.Visibility = Visibility.Visible;
+            dipendentePilotardb.Visibility = Visibility.Visible;
+            dipendenteHostessrdb.Visibility = Visibility.Visible;
+        }
+
+        public void abilitaVisioneDipendente()
+        {
+            cognomeDipendentetxt.IsEnabled = false;
+            nomeDipendentetxt.IsEnabled = false;
+            codiceDipendentetxt.Visibility = Visibility.Visible;
+            codice_dipendentetbl.Visibility = Visibility.Visible;
+            nuova_data_nascita_dipendete.Visibility = Visibility.Hidden;
+            genereDipendentetxt.IsEnabled = false;
+            impiegoDipendentetxt.IsEnabled = false;
+            indirizzo_dipendentetxt.IsEnabled = false;
+            telefonoDipendentetxt.IsEnabled = false;
+            email_dipendentetxt.IsEnabled = false;
+            cercaDipendentebtn.IsEnabled = true;
+            aggiungiDipendente.IsChecked = false;
+            genereDipendentetxt.Visibility = Visibility.Visible;
+            impiegoDipendentetxt.Visibility = Visibility.Visible;
+            dipendenteFemminardb.Visibility = Visibility.Hidden;
+            dipendenteMaschiordb.Visibility = Visibility.Hidden;
+            dipendentePilotardb.Visibility = Visibility.Hidden;
+            dipendenteHostessrdb.Visibility = Visibility.Hidden;
+        }
+
+        private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
+        {
+            cambia_telefono_dipendentecb.IsEnabled = false;
+            cambia_email_dipendentecb.IsEnabled = false;
+            cambia_indirizzo_dipendentecb.IsEnabled = false;
+
+            DateTime currentDate = DateTime.Now;
+            /*cambio di un solo parametro fra telefono indirizzo email*/
+            if (cambia_email_dipendentecb.IsChecked == true || cambia_indirizzo_dipendentecb.IsChecked == true || cambia_telefono_dipendentecb.IsChecked == true)
+            {
+
+                errore.ValueText(telefonoDipendentetxt);
+                errore.checkEmail(email_dipendentetxt);
+                errore.ValueText(indirizzo_dipendentetxt);
+                if (errore.checkText())
+                {
+                    /*inserimento dei dati nel db*/
+                    if (cambia_email_dipendentecb.IsChecked == true)
+                        dipendente.setEmail(email_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
+                    if (cambia_indirizzo_dipendentecb.IsChecked == true)
+                        dipendente.setIndirizzo(indirizzo_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
+                    if (cambia_telefono_dipendentecb.IsChecked == true)
+                        dipendente.setTelefono(telefonoDipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
+                    //reset checkbox
+                    cambia_telefono_dipendentecb.IsChecked = false;
+                    cambia_email_dipendentecb.IsChecked = false;
+                    cambia_indirizzo_dipendentecb.IsChecked = false;
+                }
+                else
+                {
+                    MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            if (aggiungiDipendente.IsChecked.Value == true)
+            {
+                cambia_telefono_dipendentecb.IsEnabled = false;
+                cambia_email_dipendentecb.IsEnabled = false;
+                cambia_indirizzo_dipendentecb.IsEnabled = false;
+                {
+                    /*controllo campi vuoti*/
+                    errore.ValueText(cognomeDipendentetxt);
+                    errore.ValueText(nomeDipendentetxt);
+                    errore.checkEmail(email_dipendentetxt);
+                    errore.ValueText(indirizzo_dipendentetxt);
+                    errore.ValueText(telefonoDipendentetxt);
+                    if (errore.checkText())
+                    {
+                        if (nuova_data_nascita_dipendete.Text == "")
+                        {
+                            MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            if ((dipendenteMaschiordb.IsChecked.Value == true || dipendenteFemminardb.IsChecked.Value == true) && (dipendentePilotardb.IsChecked.Value == true || dipendenteHostessrdb.IsChecked.Value == true))
+                            {
+                                dipendente.createDipendente(nomeDipendentetxt.Text,
+                                    cognomeDipendentetxt.Text,
+                                    indirizzo_dipendentetxt.Text,
+                                    nuova_data_nascita_dipendete.SelectedDate.Value,
+                                    currentDate,
+                                    email_dipendentetxt.Text,
+                                    telefonoDipendentetxt.Text,
+                                    dipendenteMaschiordb.IsChecked.Value ? "M" : "F",
+                                    dipendentePilotardb.IsChecked.Value,
+                                    dipendenteHostessrdb.IsChecked.Value);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
+                }
+            }
+            pulisciDipendente();
+            abilitaVisioneDipendente();
+            dataProfiloDipendente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid            
+        }
+
+        #endregion
+
         #region gestione delle grid
 
         private void click_apriFormClienteNonRegistrato(object sender, RoutedEventArgs e)
@@ -385,236 +626,7 @@ namespace compagniaAerea
             currentGrid();
         }
 
-        #region profilo dipendente
-
-        private void btnLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            this.gridCorrente = 0;
-            currentGrid();
-            MIGestioneVoli.Visibility = Visibility.Hidden;
-            MIProfilo.Visibility = Visibility.Hidden;
-            MIofferte.Visibility = Visibility.Hidden;
-            btnLogOut.Visibility = Visibility.Hidden;
-        }
-
-        /*ricerca del dipendente nell grid profilo dipendete*/
-        private void CercaDipendente_click(object sender, RoutedEventArgs e)
-        {
-            dipendente.getDipendente(Convert.ToInt32(getCellValue(dataProfiliDipendetente, 2)));
-            cognomeDipendentetxt.Text = dipendente.getCognome();
-            nomeDipendentetxt.Text = dipendente.getNome();
-            codiceDipendentetxt.Text = dipendente.getCodice();
-            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
-            dataAssunzione_dipendentetxt.Text = dipendente.getDataAssunzione();
-            data_nascita_dipendentetxt.Text = dipendente.getDataNascita();
-            genereDipendentetxt.Text = dipendente.getSesso();
-            impiegoDipendentetxt.Text = dipendente.getImpiego();
-            telefonoDipendentetxt.Text = dipendente.getTelefono();
-            indirizzo_dipendentetxt.Text = dipendente.getIndirizzo();
-            email_dipendentetxt.Text = dipendente.getEmail();
-        }
-
-        string telefono_dipendente, email_dipendente, indirizzodi_pendente;
        
-        private void cambia_telefono_dipendentecb_Click(object sender, RoutedEventArgs e)
-        {
-            if (cambia_telefono_dipendentecb.IsChecked.Value == false)
-            {
-                telefonoDipendentetxt.IsEnabled = false;
-            }
-            else
-            {
-                salva_dipendentebtn.Visibility = Visibility.Visible;
-                telefono_dipendente = telefonoDipendentetxt.Text;
-                telefonoDipendentetxt.IsEnabled = true;
-            }
-        }
-
-        private void cambia_email_dipendentecb_Click(object sender, RoutedEventArgs e)
-        {
-            if (cambia_email_dipendentecb.IsChecked.Value == false)
-            {
-                email_dipendentetxt.IsEnabled = false;
-            }
-            else
-            {
-                salva_dipendentebtn.Visibility = Visibility.Visible;
-                email_dipendente = email_dipendentetxt.Text;
-                email_dipendentetxt.IsEnabled = true;
-            }
-        }
-
-        private void cambia_indirizzo_dipendentecb_Click(object sender, RoutedEventArgs e)
-        {
-            if (cambia_indirizzo_dipendentecb.IsChecked.Value == false)
-            {
-                indirizzo_dipendentetxt.IsEnabled = false;
-            }
-            else
-            {
-                salva_dipendentebtn.Visibility = Visibility.Visible;
-                indirizzodi_pendente = indirizzo_dipendentetxt.Text;
-                indirizzo_dipendentetxt.IsEnabled = true;
-            }
-        }
-
-        private void aggiungiDipendente_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (aggiungiDipendente.IsChecked.Value == true)
-            {
-                pulisciDipendente();
-                abilitaModificaDipendente();
-            }
-            else if (aggiungiDipendente.IsChecked.Value == false)
-            {
-                pulisciDipendente();
-                abilitaVisioneDipendente();
-            }
-        }
-        /*3 metodi per pulire e rendenre visibili degli elementi nella grid di profiloDipendente*/
-        public void pulisciDipendente()
-        {
-            cognomeDipendentetxt.Clear();
-            nomeDipendentetxt.Clear();
-            codiceDipendentetxt.Clear();
-            data_nascita_dipendentetxt.Clear();
-            telefonoDipendentetxt.Clear();
-            dataAssunzione_dipendentetxt.Clear();
-            email_dipendentetxt.Clear();
-            indirizzo_dipendentetxt.Clear();
-            cambia_telefono_dipendentecb.IsChecked = false;
-            cambia_email_dipendentecb.IsChecked = false;
-            cambia_indirizzo_dipendentecb.IsChecked = false;
-            genereDipendentetxt.Clear();
-            impiegoDipendentetxt.Clear();
-            dipendenteMaschiordb.IsChecked = false;
-            dipendenteFemminardb.IsChecked = false;
-            dipendentePilotardb.IsChecked = false;
-            dipendenteHostessrdb.IsChecked = false;
-        }
-
-        public void abilitaModificaDipendente()
-        {
-            cognomeDipendentetxt.IsEnabled = true;
-            nomeDipendentetxt.IsEnabled = true;
-            codiceDipendentetxt.Visibility = Visibility.Hidden;
-            codice_dipendentetbl.Visibility = Visibility.Hidden;
-            nuova_data_nascita_dipendete.Visibility = Visibility.Visible;
-            genereDipendentetxt.IsEnabled = true;
-            impiegoDipendentetxt.IsEnabled = true;
-            indirizzo_dipendentetxt.IsEnabled = true;
-            telefonoDipendentetxt.IsEnabled = true;
-            email_dipendentetxt.IsEnabled = true;
-            cercaDipendentebtn.IsEnabled = false;
-            genereDipendentetxt.Visibility = Visibility.Hidden;
-            impiegoDipendentetxt.Visibility = Visibility.Hidden;
-            dipendenteFemminardb.Visibility = Visibility.Visible;
-            dipendenteMaschiordb.Visibility = Visibility.Visible;
-            dipendentePilotardb.Visibility = Visibility.Visible;
-            dipendenteHostessrdb.Visibility = Visibility.Visible;
-        }
-
-        public void abilitaVisioneDipendente()
-        {
-            cognomeDipendentetxt.IsEnabled = false;
-            nomeDipendentetxt.IsEnabled = false;
-            codiceDipendentetxt.Visibility = Visibility.Visible;
-            codice_dipendentetbl.Visibility = Visibility.Visible;
-            nuova_data_nascita_dipendete.Visibility = Visibility.Hidden;
-            genereDipendentetxt.IsEnabled = false;
-            impiegoDipendentetxt.IsEnabled = false;
-            indirizzo_dipendentetxt.IsEnabled = false;
-            telefonoDipendentetxt.IsEnabled = false;
-            email_dipendentetxt.IsEnabled = false;
-            cercaDipendentebtn.IsEnabled = true;
-            aggiungiDipendente.IsChecked = false;
-            genereDipendentetxt.Visibility = Visibility.Visible;
-            impiegoDipendentetxt.Visibility = Visibility.Visible;
-            dipendenteFemminardb.Visibility = Visibility.Hidden;
-            dipendenteMaschiordb.Visibility = Visibility.Hidden;
-            dipendentePilotardb.Visibility = Visibility.Hidden;
-            dipendenteHostessrdb.Visibility = Visibility.Hidden;
-        }       
-
-        private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
-        {
-            DateTime currentDate = DateTime.Now;
-            /*cambio di un solo parametro fra telefono indirizzo email*/
-            if (cambia_email_dipendentecb.IsChecked == true || cambia_indirizzo_dipendentecb.IsChecked == true || cambia_telefono_dipendentecb.IsChecked == true)
-            {
-
-                errore.ValueText(telefonoDipendentetxt);
-                errore.checkEmail(email_dipendentetxt);
-                errore.ValueText(indirizzo_dipendentetxt);
-                if (errore.checkText())
-                {
-                    /*inserimento dei dati nel db*/
-                    if (cambia_email_dipendentecb.IsChecked == true)
-                        dipendente.setEmail(email_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
-                    if (cambia_indirizzo_dipendentecb.IsChecked == true)
-                        dipendente.setIndirizzo(indirizzo_dipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
-                    if (cambia_telefono_dipendentecb.IsChecked == true)
-                        dipendente.setTelefono(telefonoDipendentetxt.Text, Convert.ToInt32(codiceDipendentetxt.Text));
-                    //reset checkbox
-                    cambia_telefono_dipendentecb.IsChecked = false;
-                    cambia_email_dipendentecb.IsChecked = false;
-                    cambia_indirizzo_dipendentecb.IsChecked = false;
-                }
-                else
-                {
-                    MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            if (aggiungiDipendente.IsChecked.Value == true)
-            {
-                cambia_telefono_dipendentecb.IsEnabled = false;
-                cambia_email_dipendentecb.IsEnabled = false;
-                cambia_indirizzo_dipendentecb.IsEnabled = false;
-                {
-                    /*controllo campi vuoti*/
-                    errore.ValueText(cognomeDipendentetxt);
-                    errore.ValueText(nomeDipendentetxt);
-                    errore.checkEmail(email_dipendentetxt);
-                    errore.ValueText(indirizzo_dipendentetxt);
-                    errore.ValueText(telefonoDipendentetxt);
-                    if (errore.checkText())
-                    {
-                        if (nuova_data_nascita_dipendete.Text == "")
-                        {
-                            MessageBox.Show("Selezionare una data di nascita", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        else
-                        {
-                            if ((dipendenteMaschiordb.IsChecked.Value == true || dipendenteFemminardb.IsChecked.Value == true) && (dipendentePilotardb.IsChecked.Value == true || dipendenteHostessrdb.IsChecked.Value == true))
-                            {
-                                dipendente.createDipendente(nomeDipendentetxt.Text,
-                                    cognomeDipendentetxt.Text,
-                                    indirizzo_dipendentetxt.Text,
-                                    nuova_data_nascita_dipendete.SelectedDate.Value,
-                                    currentDate,
-                                    email_dipendentetxt.Text,
-                                    telefonoDipendentetxt.Text,
-                                    dipendenteMaschiordb.IsChecked.Value ? "M" : "F",
-                                    dipendentePilotardb.IsChecked.Value,
-                                    dipendenteHostessrdb.IsChecked.Value);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show(errore.codError(), "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                }
-            }
-            pulisciDipendente();
-            abilitaVisioneDipendente();
-            dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid            
-        }
-
-        #endregion
 
 
 
@@ -678,13 +690,15 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
-                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
+                    dataProfiloDipendente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
                 }
             }
             else
             {
                 MessageBox.Show("Riempire tutti i campi", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            //selezione primo elemento nel datagrid dataProfiloDipendente come elemento di default
+            dataProfiloDipendente.SelectedIndex = 0;         
         }
         #endregion
 
@@ -1298,7 +1312,7 @@ namespace compagniaAerea
         #region utility methods
         String getCellValue(DataGrid dg, int index)
         {
-            return (dg.SelectedCells[index].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text;
+           return (dg.SelectedCells[index].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text;
         }
 
         #endregion

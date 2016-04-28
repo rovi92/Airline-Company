@@ -190,7 +190,7 @@ namespace compagniaAerea
         public List<Personale> getEmployersInFly(DateTime dataPartenza, TimeSpan oraPartenza, int gatePartenza)
         {
             return (from v in myDatabase.getDb().Volo_attuale
-                    where v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza
+                    where v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza 
                     select v.Personale).ToList();     
         }
     }

@@ -57,7 +57,7 @@ namespace compagniaAerea
             return (from d in myDatatabase.getDb().Personale
                      select d).ToList();
         }
-
+       
         #region get Dipendente
         public string getCognome()
         {
