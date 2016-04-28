@@ -111,21 +111,21 @@ namespace compagniaAerea
 
                     if (volo.checkDeparture(txtPartenza.Text).Equals(true) &&
                           volo.checkArrival(txtDestinazioneVolo.Text).Equals(true) &&
-                          volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true) &&
-                          volo.checkDateFlight(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true))
+                          volo.checkDateFlight(dataPartenza.SelectedDate).Equals(true) &&
+                          volo.checkDateFlight(dataRitorno.SelectedDate).Equals(true))
                     {
 
-                        dataGridRitorno.ItemsSource = volo.getCustomFlight(txtDestinazioneVolo.Text, txtPartenza.Text, dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd"));
-                        dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        dataGridRitorno.ItemsSource = volo.getCustomFlight(txtDestinazioneVolo.Text, txtPartenza.Text, dataRitorno.SelectedDate);
+                        dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate);
                     }
                     break;
                 case false:
 
                     if (volo.checkDeparture(txtPartenza.Text).Equals(true) &&
                             volo.checkArrival(txtDestinazioneVolo.Text).Equals(true) &&
-                            volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")).Equals(true))
+                            volo.checkDateFlight(dataPartenza.SelectedDate).Equals(true))
                     {
-                        dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate);
                     }
                     break;
 
@@ -699,6 +699,7 @@ namespace compagniaAerea
             errore.checkEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
             errore.CAPCheck(cappasseggerotxt);
+            errore.CfCheck(cfpasseggerotxt,16);
 
 
             if (errore.checkText())
@@ -711,15 +712,14 @@ namespace compagniaAerea
                     btnConferma_ordine.Visibility = Visibility.Visible;
                 }
 
-
-
                 gestione_cliente.Registrazione_Cliente(nomepasseggerotxt.Text,
-                  cognomepasseggerotxt.Text,
-                  viapasseggerotxt.Text,
-                  emailpasseggerotxt.Text,
-                  cittàpasseggerotxt.Text,
-                  Int32.Parse(cappasseggerotxt.Text),
-                  cfpasseggerotxt.Text);
+                    cognomepasseggerotxt.Text,
+                    viapasseggerotxt.Text,
+                    emailpasseggerotxt.Text,
+                    cittàpasseggerotxt.Text,
+                    Int32.Parse(cappasseggerotxt.Text),
+                    cfpasseggerotxt.Text);
+
                 ticket.insertRecordTicket(gestione_cliente.getLastIdPassenger(cfpasseggerotxt.Text), ticket.getIdPrenotazioneAndata());
 
                 if (cbVenti.IsChecked.Value)
@@ -750,8 +750,8 @@ namespace compagniaAerea
                 aereoportoArrivolbl.Content = volo.getAirportName(getCellValue(dataGridAndata, 2));
                 oraPartenzalbl.Content = getCellValue(dataGridAndata, 6);
                 oraArrivolbl.Content = getCellValue(dataGridAndata, 7);
-                dataPartenzalbl.Content = dataPartenza.SelectedDate.ToString();
-                dataArrivolbl.Content = dataRitorno.SelectedDate.ToString();
+                dataPartenzalbl.Content = ((DateTime)dataPartenza.SelectedDate).ToString("dd-MM-yyyy");
+                dataArrivolbl.Content = rdbAndataRitorno.IsChecked.Value ? ((DateTime)dataRitorno.SelectedDate).ToString("dd-MM-yyyy") : ((DateTime)dataPartenza.SelectedDate).ToString("dd-MM-yyyy");             
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
                 ticket.setQuantitaPersone(ticket.getQuatitàPersone() - 1);
 
@@ -759,7 +759,7 @@ namespace compagniaAerea
                 txtTotale.Text = ticket.getPrenotationPrice(ticket.getIdPrenotazioneAndata()).ToString();
                 txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
                 gridPagamentoRitorno.Visibility = Visibility.Hidden;
-                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 0)
+                if (volo.CountFlightLegs(int.Parse(getCellValue(dataGridAndata, 0))) > 1)
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
                     lblScalo.Content = volo.getFlightLegDeparture(int.Parse(getCellValue(dataGridAndata, 0)));
@@ -1014,14 +1014,14 @@ namespace compagniaAerea
 
         private void dataPartenza_CalendarClosed(object sender, RoutedEventArgs e)
         {
-            try { lblErroreDP.Visibility = !volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; }
+            try { lblErroreDP.Visibility = !volo.checkDateFlight(dataPartenza.SelectedDate.Value) ? Visibility.Visible : Visibility.Hidden; }
             catch { }
 
         }
 
         private void dataRitorno_CalendarClosed(object sender, RoutedEventArgs e)
         {
-            try { lblErroreDA.Visibility = !volo.checkDateFlight(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; } catch { }
+            try { lblErroreDA.Visibility = !volo.checkDateFlight(dataRitorno.SelectedDate.Value) ? Visibility.Visible : Visibility.Hidden; } catch { }
 
         }
 

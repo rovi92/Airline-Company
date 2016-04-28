@@ -99,10 +99,10 @@ namespace compagniaAerea
                     }).ToList();
         }
 
-        public List<FlightInfo> getCustomFlight(string partenza, string arrivo, string data)
+        public List<FlightInfo> getCustomFlight(string partenza, string arrivo, DateTime? data)
         {
             return (from v in voli
-                    where v.partenza == partenza && v.arrivo == arrivo && v.dataPartenza.ToString("yyyy-MM-dd") == data && v.cancellato == false
+                    where v.cancellato == false && v.partenza == partenza && v.arrivo == arrivo && (data == null ? v.dataPartenza.Date >= DateTime.Today.Date : v.dataPartenza.Date.ToString("yyyy-MM-dd") == ((DateTime)data).ToString("yyyy-MM-dd")) 
                     select v).ToList();
 
         }
@@ -153,11 +153,11 @@ namespace compagniaAerea
                     select v).Count() > 0 ? true : false;
         }
 
-        public Boolean checkDateFlight(string date)
+        public Boolean checkDateFlight(DateTime? date)
         {
-            return (from v in voli
-                    where v.dataPartenza.ToString("yyyy-MM-dd") == date
-                    select v).Count() > 0 ? true : false;
+            return date == null ? true : (from v in voli
+                                          where v.dataPartenza.ToString("yyyy-MM-dd") == ((DateTime)date).ToString("yyyy-MM-dd")
+                                          select v).Count() > 0 ? true : false;
 
         }
 

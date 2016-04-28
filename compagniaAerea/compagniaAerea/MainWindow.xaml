@@ -184,7 +184,9 @@
                     <DataGridTextColumn Binding="{Binding costoEconomy}" IsReadOnly="True" Header="Economy"/>
                     <DataGridTextColumn Binding="{Binding costoBuisness}" IsReadOnly="True" Header="Buisness"/>
                     <DataGridTextColumn Binding="{Binding costoFirst}" IsReadOnly="True" Header="First"/>
-                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data di partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataArrivo, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data di arrivo"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario di partenza"/>
                     <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -208,7 +210,9 @@
                     <DataGridTextColumn Binding="{Binding costoEconomy}" IsReadOnly="True" Header="Economy"/>
                     <DataGridTextColumn Binding="{Binding costoBuisness}" IsReadOnly="True" Header="Buisness"/>
                     <DataGridTextColumn Binding="{Binding costoFirst}" IsReadOnly="True" Header="First"/>
-                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data di partenza"/>
+                    <DataGridTextColumn Binding="{Binding dataArrivo, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data di arrivo"/>
+                    <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Orario di partenza"/>
                     <DataGridTextColumn Binding="{Binding orarioArrivo}" IsReadOnly="True" Header="Orario di Arrivo"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -417,14 +421,14 @@
         <Grid x:Name="GridPagamento" Height="304" Margin="-5,107,5,0" VerticalAlignment="Top" Visibility="Hidden">
             <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="56,0,0,0" TextWrapping="Wrap" Text="Pagamento" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
             <TextBlock x:Name="data_pagamento" HorizontalAlignment="Left" Margin="56,50,0,0" TextWrapping="Wrap" Text="Data pagamento" VerticalAlignment="Top" Height="22" Width="113"/>
-            <TextBox x:Name="txtdataPagamento" HorizontalAlignment="Left" Height="24" Margin="56,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtdataPagamento" HorizontalAlignment="Left" Height="24" Margin="56,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
             <TextBlock x:Name="tipoPagamento" HorizontalAlignment="Left" Margin="266,50,0,0" TextWrapping="Wrap" Text="Tipo pagamento" VerticalAlignment="Top" Height="22" Width="120"/>
             <ComboBox x:Name="cmbTipoPagamento" HorizontalAlignment="Left" Margin="266,79,0,0" VerticalAlignment="Top" Width="120">
                 <ComboBoxItem x:Name="Visa" Content="Visa" ></ComboBoxItem>
                 <ComboBoxItem x:Name="Master" Content="Master Card" ></ComboBoxItem>
             </ComboBox>
             <TextBlock x:Name="tblpagamento" HorizontalAlignment="Left" Margin="468,50,0,0" TextWrapping="Wrap" Text="Totale" VerticalAlignment="Top" Height="22" Width="103"/>
-            <TextBox x:Name="txtTotale" HorizontalAlignment="Left" Height="22" Margin="468,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtTotale" HorizontalAlignment="Left" Height="22" Margin="468,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
             <Button x:Name="btnConferma3" Content="Conferma pagamento" HorizontalAlignment="Left" Margin="661,251,0,0" VerticalAlignment="Top" Width="128" Height="24" Click="btnConferma3_Click"/>
             <Grid x:Name="gridPagamentoRitorno" HorizontalAlignment="Left" Height="106" Margin="0,120,0,0" VerticalAlignment="Top" Width="860">
                 <TextBox x:Name="txtdataPagamento_Ritorno" HorizontalAlignment="Left" Height="24" Margin="54,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
