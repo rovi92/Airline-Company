@@ -104,7 +104,6 @@ namespace compagniaAerea
         #region bottone cerca volo
         private void btnCercaVolo_Click(object sender, RoutedEventArgs e)
         {
-            gridTipoVolo.Visibility = Visibility.Visible;
             switch (rdbAndataRitorno.IsChecked)
             {
                 case true:
@@ -128,8 +127,8 @@ namespace compagniaAerea
                         dataGridAndata.ItemsSource = volo.getCustomFlight(txtPartenza.Text, txtDestinazioneVolo.Text, dataPartenza.SelectedDate);
                     }
                     break;
-
             }
+            gridTipoVolo.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -138,30 +137,36 @@ namespace compagniaAerea
         {
             if (rdbAndataRitorno.IsChecked.Value)
             {
-
-                if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())) && volo.checkFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
+                if (dataGridAndata.SelectedIndex != -1 && dataGridRitorno.SelectedIndex != -1)
                 {
+                    if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())) && volo.checkFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
+                    {
 
-                    ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                               int.Parse(lblPosti.Content.ToString()),
-                               0,
-                               ticket.getIdTariffa(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId()), "Andata");
-                    ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                               int.Parse(lblPosti.Content.ToString()),
-                               0,
-                               ticket.getIdTariffa(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId()), "Ritorno");
-                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
-                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
-                    btnIndietro.Visibility = Visibility.Hidden;
+                        ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
+                                   int.Parse(lblPosti.Content.ToString()),
+                                   0,
+                                   ticket.getIdTariffa(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId()), "Andata");
+                        ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
+                                   int.Parse(lblPosti.Content.ToString()),
+                                   0,
+                                   ticket.getIdTariffa(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId()), "Ritorno");
+                        volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
+                        volo.updateFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
+                        btnIndietro.Visibility = Visibility.Hidden;
 
 
 
-                    this.gridCorrente = 7;
-                    currentGrid();
+                        this.gridCorrente = 7;
+                        currentGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Posti esauriti");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Posti esauriti dio porco");
+                    MessageBox.Show("Selezionare un volo");
                 }
 
             }
@@ -180,7 +185,7 @@ namespace compagniaAerea
                 }
                 else
                 {
-                    MessageBox.Show("Posti esauriti dio porco");
+                    MessageBox.Show("Posti esauriti");
                 }
             }
         }
@@ -748,10 +753,10 @@ namespace compagniaAerea
                 codiceVololbl.Content = getCellValue(dataGridAndata, 0);
                 aereoporteAndatalbl.Content = volo.getAirportName(getCellValue(dataGridAndata, 1));
                 aereoportoArrivolbl.Content = volo.getAirportName(getCellValue(dataGridAndata, 2));
-                oraPartenzalbl.Content = getCellValue(dataGridAndata, 6);
-                oraArrivolbl.Content = getCellValue(dataGridAndata, 7);
-                dataPartenzalbl.Content = ((DateTime)dataPartenza.SelectedDate).ToString("dd-MM-yyyy");
-                dataArrivolbl.Content = rdbAndataRitorno.IsChecked.Value ? ((DateTime)dataRitorno.SelectedDate).ToString("dd-MM-yyyy") : ((DateTime)dataPartenza.SelectedDate).ToString("dd-MM-yyyy");             
+                oraPartenzalbl.Content = getCellValue(dataGridAndata, 8);
+                oraArrivolbl.Content = getCellValue(dataGridAndata, 9);
+                dataPartenzalbl.Content = getCellValue(dataGridAndata, 6);
+                dataArrivolbl.Content = rdbAndataRitorno.IsChecked.Value ? getCellValue(dataGridAndata, 6) : getCellValue(dataGridAndata, 6);             
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
                 ticket.setQuantitaPersone(ticket.getQuatitàPersone() - 1);
 
@@ -889,7 +894,6 @@ namespace compagniaAerea
         #region GRIDPAGAMENTO
         private void btnConferma3_Click(object sender, RoutedEventArgs e)
         {
-            gridTipoVolo.Visibility = Visibility.Hidden;
             ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
             string tipoPagamento = itemA.Content.ToString();
            
@@ -909,9 +913,9 @@ namespace compagniaAerea
             this.gridCorrente = 2;
             currentGrid();
             // ticket.getPopulateDbTicket();
-            gridTipoVolo.Visibility = Visibility.Hidden;
             volo.UpdateFlights();
             errore.TraverseVisualTree(gridSelezionaVolo);
+            gridTipoVolo.Visibility = Visibility.Hidden;
         }
         #endregion
 

@@ -72,21 +72,8 @@ namespace compagniaAerea
         {
             return (from b in myDatabase.getDb().Biglietto
                     where b.codice_biglietto == idBiglietto
-                    select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + b.Comfort_inclusi.Sum(c => c.Comfort.prezzo) + b.Babaglio_Imbarcato.Sum(bi => bi.Prezzo_bagaglio_imbarcato.prezzo)).First();
+                    select b.Prenotazione.Tariffario.tariffa_solo_andata + b.Prenotazione.Tariffario.Classe.prezzo + (b.Comfort_inclusi.Sum(c => (double?) c.Comfort.prezzo) ?? 0) + (b.Babaglio_Imbarcato.Sum(bi => (double?) bi.Prezzo_bagaglio_imbarcato.prezzo) ?? 0)).First();
         }
-
-        private double CalculatePrice(double price,int? sconto)
-        {
-            if(sconto == null)
-            {
-                return price;
-            }
-            else
-            {
-                return price - (price * Convert.ToDouble(sconto) / 100);
-            }
-        }
-
 
         public void updatePrenotationPrice(int idPrenotazione)
         {
