@@ -57,29 +57,28 @@ namespace compagniaAerea
         #region controllo CAP
         public void CAPCheck(TextBox tx)
         {
-            /* try
-             {
-                 Int32.Parse(numero);
-                 errorTxtBox.Add(true);
-             }
-             catch (FormatException)
-             {
-                 errorTxtBox.Add(false);
-                 tipeError.Add(5);
-             }
-
-             if (tx.Text.Length != num)
-             {
-                 errorTxtBox.Add(false);
-                 tipeError.Add(5);
-             }*/
-            /*int i = 0;
-            Boolean result = int.TryParse(numero, out i); */
-            
-            if(Convert.ToInt32(tx.Text) == int.Parse(tx.Text) && tx.Text.Length == 5)
+            /*if(Convert.ToInt32(tx.Text) == int.Parse(tx.Text) && tx.Text.Length == 5)
             {
                 errorTxtBox.Add(true);
             } else
+            {
+                errorTxtBox.Add(false);
+                tipeError.Add(5);
+            }*/
+            int value;
+            if (tx.Text.Length == 5)
+            {
+                if(int.TryParse(tx.Text, out value))
+                {
+                    errorTxtBox.Add(true);
+                } else
+                {
+                    errorTxtBox.Add(false);
+                    tipeError.Add(5);
+                }
+                
+            }
+            else
             {
                 errorTxtBox.Add(false);
                 tipeError.Add(5);

@@ -52,7 +52,9 @@ namespace compagniaAerea
                   where b.codice_biglietto == codiceBiglietto
                   select new InfoBiglietto
                   {
-                   
+                      nome = b.Passeggero.nome,
+                      cognome = b.Passeggero.cognome,
+                      cod_fiscale = b.Passeggero.CF,
                       cod_volo = b.Prenotazione.Tariffario.numero_volo,
                       aereop_partenza = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_partenza,
                       aereop_arrivo = b.Prenotazione.Tariffario.Piano_di_volo.Tratta.First(t => t.numero_volo.Equals(b.Prenotazione.Tariffario.numero_volo)).aeroporto_arrivo,

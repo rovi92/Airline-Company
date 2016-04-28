@@ -258,6 +258,7 @@ namespace compagniaAerea
                     this.gridCorrente = 8;
                     currentGrid();
                     //modifica parametri nella grid di visualizzazione biglietto
+                    
                     nomelbl.Content = ticket.getNome();
                     cognomelbl.Content = ticket.getCognome();
                     CFlbl.Content = ticket.getCF();
@@ -385,6 +386,50 @@ namespace compagniaAerea
             currentGrid();
         }
 
+        #region place holder manuale
+
+        //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
+        private void InFocus(object sender, RoutedEventArgs e)
+        {
+
+            TextBox tb = (TextBox)sender;
+            this.textInBox = tb.Text;
+            tb.Text = "";
+        }
+
+        private void OutFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text.Equals(""))
+            {
+                tb.Text = this.textInBox;
+            }
+        }
+
+        private void InPasswordFocus(object sender, RoutedEventArgs e)//non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per la password
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            this.textInBox = pb.Password;
+            pb.Password = "";
+        }
+
+        private void OutPasswordFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = (PasswordBox)sender;
+            if (pb.Password.Equals(""))
+            {
+                pb.Password = this.textInBox;
+            }
+        }
+
+
+
+
+
+        #endregion
+
+        #endregion
+
         #region profilo dipendente
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
@@ -416,7 +461,7 @@ namespace compagniaAerea
         }
 
         string telefono_dipendente, email_dipendente, indirizzodi_pendente;
-       
+
         private void cambia_telefono_dipendentecb_Click(object sender, RoutedEventArgs e)
         {
             if (cambia_telefono_dipendentecb.IsChecked.Value == false)
@@ -536,7 +581,7 @@ namespace compagniaAerea
             dipendenteMaschiordb.Visibility = Visibility.Hidden;
             dipendentePilotardb.Visibility = Visibility.Hidden;
             dipendenteHostessrdb.Visibility = Visibility.Hidden;
-        }       
+        }
 
         private void salva_dipendentebtn_Click(object sender, RoutedEventArgs e)
         {
@@ -616,50 +661,6 @@ namespace compagniaAerea
 
         #endregion
 
-
-
-        #region place holder manuale
-
-        //non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per le textBox
-        private void InFocus(object sender, RoutedEventArgs e)
-        {
-
-            TextBox tb = (TextBox)sender;
-            this.textInBox = tb.Text;
-            tb.Text = "";
-        }
-
-        private void OutFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            if (tb.Text.Equals(""))
-            {
-                tb.Text = this.textInBox;
-            }
-        }
-
-        private void InPasswordFocus(object sender, RoutedEventArgs e)//non essendoci più il metodo place holder ho dovuto costruire una cosa simile sia per la password
-        {
-            PasswordBox pb = (PasswordBox)sender;
-            this.textInBox = pb.Password;
-            pb.Password = "";
-        }
-
-        private void OutPasswordFocus(object sender, RoutedEventArgs e)
-        {
-            PasswordBox pb = (PasswordBox)sender;
-            if (pb.Password.Equals(""))
-            {
-                pb.Password = this.textInBox;
-            }
-        }
-
-
-
-
-
-        #endregion
-
         #region grid logIn
         private void login_click(object sender, RoutedEventArgs e)
         {
@@ -679,11 +680,14 @@ namespace compagniaAerea
                     this.gridCorrente = 4;
                     currentGrid();
                     dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
+                } else
+                {
+                    MessageBox.Show("Username o password errati.","Errore");
                 }
             }
             else
             {
-                MessageBox.Show("Riempire tutti i campi", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Riempire tutti i campi", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
@@ -822,7 +826,7 @@ namespace compagniaAerea
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
                 }
-                  }
+            }
             else
             {
                 if (ticket.getQuatitàPersone() > 0)
@@ -882,185 +886,6 @@ namespace compagniaAerea
             }
 
         }
-
-
-        #endregion
-
-        #region GRIDPAGAMENTO
-        private void btnConferma3_Click(object sender, RoutedEventArgs e)
-        {
-            gridTipoVolo.Visibility = Visibility.Hidden;
-            ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
-            string tipoPagamento = itemA.Content.ToString();
-           
-            ticket.updatePrenotationPrice(ticket.getIdPrenotazioneAndata());
-            ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
-            if (rdbAndataRitorno.IsChecked.Value)
-            {
-                ComboBoxItem itemR = (ComboBoxItem)cmbTipoPagamento_Ritorno.SelectedItem;
-                string tipoPagamentoR = itemR.Content.ToString();
-                ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
-                ticket.updatePrenotationPrice(ticket.getIdPrenotazioneRitorno());
-                ticket.insertRecordPagamento(txtdataPagamento_Ritorno.Text, tipoPagamentoR, ticket.getIdPrenotazioneRitorno());
-            }
-
-            MessageBox.Show("Grazie per aver scelto la nostra compagnia");
-            gridPagamentoRitorno.Visibility = Visibility.Hidden;
-            this.gridCorrente = 2;
-            currentGrid();
-            // ticket.getPopulateDbTicket();
-            gridTipoVolo.Visibility = Visibility.Hidden;
-            volo.UpdateFlights();
-            errore.TraverseVisualTree(gridSelezionaVolo);
-        }
-        #endregion
-
-
-        #region btnMenu
-        private void click_Tariffario(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            this.gridCorrente = 6;
-            currentGrid();
-        }
-        private void Click_gestioneVoli(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            pianidivolodatagrid.ItemsSource = volo.getFlights();
-            this.gridCorrente = 5;
-            currentGrid();
-            partenzapicker.DisplayDateStart = DateTime.Today;
-            arrivopicker.DisplayDateStart = DateTime.Today;
-            partenzapicker1.DisplayDateStart = DateTime.Today;
-            arrivopicker1.DisplayDateStart = DateTime.Today;
-            partenzapicker2.DisplayDateStart = DateTime.Today;
-            arrivopicker2.DisplayDateStart = DateTime.Today;
-
-        }
-        private void Click_profilo(object sender, RoutedEventArgs e)
-        {
-            errore.TraverseVisualTree(this.grid);
-            this.gridCorrente = 4;
-            pulisciDipendente();
-            abilitaVisioneDipendente();
-            currentGrid();
-        }
-        #endregion
-
-        #region tariffario
-
-        private void ckbOfferta_Checked(object sender, RoutedEventArgs e)
-        {
-            borderGridTO.Visibility = Visibility.Visible;
-        }
-
-        private void ckbOfferta_Unchecked(object sender, RoutedEventArgs e)
-        {
-            borderGridTO.Visibility = Visibility.Hidden;
-        }
-
-        private void click_salvaPrezzo(object sender, RoutedEventArgs e)
-        {
-            errore.ValueText(txtCostoTratta);
-            if (errore.checkText())
-            {
-
-            }
-            else
-            {
-                MessageBox.Show(errore.codError());
-            }
-        }
-
-        private void txtPartenza_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void rdbDipendenteNome_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rdbDipendenteCodice_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void click_applicaOfferta(object sender, RoutedEventArgs e)
-        {
-            errore.ValueText(txtPsconto);
-            if (errore.checkText())
-            {
-
-            }
-            else
-            {
-                MessageBox.Show(errore.codError());
-            }
-        }
-
-        private void txtPartenza_LostFocus(object sender, RoutedEventArgs e)
-        {
-            lblErroreP.Visibility = !volo.checkDeparture(txtPartenza.Text) ? Visibility.Visible : Visibility.Hidden;
-        }
-
-        private void txtDestinazioneVolo_LostFocus(object sender, RoutedEventArgs e)
-        {
-            lblErroreD.Visibility = !volo.checkArrival(txtDestinazioneVolo.Text) ? Visibility.Visible : Visibility.Hidden;
-        }
-
-
-
-        private void dataPartenza_CalendarClosed(object sender, RoutedEventArgs e)
-        {
-            try { lblErroreDP.Visibility = !volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; }
-            catch { }
-
-        }
-
-        private void dataRitorno_CalendarClosed(object sender, RoutedEventArgs e)
-        {
-            try { lblErroreDA.Visibility = !volo.checkDateFlight(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; } catch { }
-
-        }
-
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private void cbVenti_Checked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio.Content = lblpesoBagaglio.Content.ToString() + "20 kg, ";
-        }
-
-        private void cbTrenta_Checked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio2.Content = lblpesoBagaglio.Content.ToString() + "30kg, ";
-        }
-
-        private void cbCinquanta_Checked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio3.Content = lblpesoBagaglio.Content.ToString() + "50kg";
-        }
-
-        private void cbVenti_Unchecked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio.Content = "";
-        }
-
-        private void cbTrenta_Unchecked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio2.Content = "";
-        }
-
-        private void cbCinquanta_Unchecked(object sender, RoutedEventArgs e)
-        {
-            lblpesoBagaglio3.Content = "";
-        }
-
 
 
         #endregion
@@ -1210,7 +1035,7 @@ namespace compagniaAerea
         private void dataGridAndata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gridTipoVolo.Visibility = Visibility.Visible;
-            
+
         }
 
         private void Click_gestioneofferte(object sender, RoutedEventArgs e)
@@ -1219,22 +1044,26 @@ namespace compagniaAerea
             this.gridCorrente = 10;
             currentGrid();
             rdblastminute.IsChecked = true;
+            dgVolifiltrati.ItemsSource = volo.getLastMinute();
 
         }
 
         private void rdblastminute_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getLastMinute();
+            btnsconto.IsEnabled = false;
         }
 
         private void rdbnatale_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getXmasFlights();
+            btnsconto.IsEnabled = false;
         }
 
         private void rdbferragosto_Checked(object sender, RoutedEventArgs e)
         {
             dgVolifiltrati.ItemsSource = volo.getSummerBankHolidayFlights();
+            btnsconto.IsEnabled = false;
         }
 
         private void applicaSconto_Click(object sender, RoutedEventArgs e)
@@ -1275,25 +1104,199 @@ namespace compagniaAerea
             }
         }
 
-        private void dgTratte_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            /*dgPersonaleInVolo.ItemsSource = dipendentevolo.getEmployersInFly(
-               DateTime.Parse(getCellValue(dgTratte, 1)),
-               TimeSpan.Parse(getCellValue(dgTratte, 0)),
-               int.Parse(getCellValue(dgTratte, 2)));*/
-        }
-
-
         private void pianidivolodatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnElimina_volo.IsEnabled = true;
         }
 
-
+        private void volifiltrati_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnsconto.IsEnabled = true;
+        }
 
         #endregion
 
+        #region GRIDPAGAMENTO
+        private void btnConferma3_Click(object sender, RoutedEventArgs e)
+        {
+            gridTipoVolo.Visibility = Visibility.Hidden;
+            ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
+            string tipoPagamento = itemA.Content.ToString();
+
+            ticket.updatePrenotationPrice(ticket.getIdPrenotazioneAndata());
+            ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
+            if (rdbAndataRitorno.IsChecked.Value)
+            {
+                ComboBoxItem itemR = (ComboBoxItem)cmbTipoPagamento_Ritorno.SelectedItem;
+                string tipoPagamentoR = itemR.Content.ToString();
+                ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
+                ticket.updatePrenotationPrice(ticket.getIdPrenotazioneRitorno());
+                ticket.insertRecordPagamento(txtdataPagamento_Ritorno.Text, tipoPagamentoR, ticket.getIdPrenotazioneRitorno());
+            }
+
+            MessageBox.Show("Grazie per aver scelto la nostra compagnia");
+            gridPagamentoRitorno.Visibility = Visibility.Hidden;
+            this.gridCorrente = 2;
+            currentGrid();
+            // ticket.getPopulateDbTicket();
+            gridTipoVolo.Visibility = Visibility.Hidden;
+            volo.UpdateFlights();
+            errore.TraverseVisualTree(gridSelezionaVolo);
+        }
         #endregion
+
+        #region btnMenu
+        private void click_Tariffario(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            this.gridCorrente = 6;
+            currentGrid();
+        }
+        private void Click_gestioneVoli(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            pianidivolodatagrid.ItemsSource = volo.getFlights();
+            this.gridCorrente = 5;
+            currentGrid();
+            partenzapicker.DisplayDateStart = DateTime.Today;
+            arrivopicker.DisplayDateStart = DateTime.Today;
+            partenzapicker1.DisplayDateStart = DateTime.Today;
+            arrivopicker1.DisplayDateStart = DateTime.Today;
+            partenzapicker2.DisplayDateStart = DateTime.Today;
+            arrivopicker2.DisplayDateStart = DateTime.Today;
+            partenzapicker.SelectedDate = DateTime.Today;
+            arrivopicker.SelectedDate = DateTime.Today;
+            partenzapicker1.SelectedDate = DateTime.Today;
+            arrivopicker1.SelectedDate = DateTime.Today;
+            partenzapicker2.SelectedDate = DateTime.Today;
+            arrivopicker2.SelectedDate = DateTime.Today;
+
+        }
+        private void Click_profilo(object sender, RoutedEventArgs e)
+        {
+            errore.TraverseVisualTree(this.grid);
+            this.gridCorrente = 4;
+            pulisciDipendente();
+            abilitaVisioneDipendente();
+            currentGrid();
+        }
+        #endregion
+
+        #region tariffario
+
+        private void ckbOfferta_Checked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Visible;
+        }
+
+        private void ckbOfferta_Unchecked(object sender, RoutedEventArgs e)
+        {
+            borderGridTO.Visibility = Visibility.Hidden;
+        }
+
+        private void click_salvaPrezzo(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtCostoTratta);
+            if (errore.checkText())
+            {
+
+            }
+            else
+            {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        private void txtPartenza_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void rdbDipendenteNome_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rdbDipendenteCodice_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void click_applicaOfferta(object sender, RoutedEventArgs e)
+        {
+            errore.ValueText(txtPsconto);
+            if (errore.checkText())
+            {
+
+            }
+            else
+            {
+                MessageBox.Show(errore.codError());
+            }
+        }
+
+        private void txtPartenza_LostFocus(object sender, RoutedEventArgs e)
+        {
+            lblErroreP.Visibility = !volo.checkDeparture(txtPartenza.Text) ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void txtDestinazioneVolo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            lblErroreD.Visibility = !volo.checkArrival(txtDestinazioneVolo.Text) ? Visibility.Visible : Visibility.Hidden;
+        }
+
+
+
+        private void dataPartenza_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            try { lblErroreDP.Visibility = !volo.checkDateFlight(dataPartenza.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; }
+            catch { }
+
+        }
+
+        private void dataRitorno_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            try { lblErroreDA.Visibility = !volo.checkDateFlight(dataRitorno.SelectedDate.Value.ToString("yyyy-MM-dd")) ? Visibility.Visible : Visibility.Hidden; } catch { }
+
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void cbVenti_Checked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio.Content = lblpesoBagaglio.Content.ToString() + "20 kg, ";
+        }
+
+        private void cbTrenta_Checked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio2.Content = lblpesoBagaglio.Content.ToString() + "30kg, ";
+        }
+
+        private void cbCinquanta_Checked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio3.Content = lblpesoBagaglio.Content.ToString() + "50kg";
+        }
+
+        private void cbVenti_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio.Content = "";
+        }
+
+        private void cbTrenta_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio2.Content = "";
+        }
+
+        private void cbCinquanta_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lblpesoBagaglio3.Content = "";
+        }
+
+        #endregion 
 
         #region utility methods
         String getCellValue(DataGrid dg, int index)

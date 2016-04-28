@@ -442,7 +442,7 @@
 
         <Grid x:Name="gridOfferte"  HorizontalAlignment="Left" Height="422" Margin="10,25,0,0" VerticalAlignment="Top" Width="846" Visibility="Hidden">
             <DataGrid x:Name="dgVolifiltrati" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Height="229" Width="826"
-                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" RowHeight="30" GridLinesVisibility="Horizontal">
+                      BorderBrush="Gray" BorderThickness="1" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" RowHeight="30" GridLinesVisibility="Horizontal" SelectionChanged="volifiltrati_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding codiceVolo}" IsReadOnly="True" Header="Numero volo"/>
                     <DataGridTextColumn Binding="{Binding partenza}" IsReadOnly="True" Header="Partenza da"/>
@@ -457,12 +457,12 @@
             <RadioButton x:Name="rdbnatale" Content="Sconto Natale (10%)" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbnatale_Checked"/>
             <RadioButton x:Name="rdbferragosto" Content="Sconto Ferragosto (5%)" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" GroupName="rbdOfferte" Checked="rdbferragosto_Checked"/>
             <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="45,24,0,0" TextWrapping="Wrap" Text="Selezionare lo sconto da applicare" VerticalAlignment="Top" FontSize="14.667" FontFamily="Yu Gothic UI Semibold"/>
-            <Button x:Name="button" Content="Applica sconto" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" Width="826" Height="25" Click="applicaSconto_Click"/>
+            <Button x:Name="btnsconto" Content="Applica sconto" HorizontalAlignment="Left" Margin="10,387,0,0" VerticalAlignment="Top" Width="826" Height="25" Click="applicaSconto_Click" IsEnabled="false"/>
 
         </Grid>
 
         <Grid x:Name="gridDipendenteVolo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="427" Width="862" Margin="0,20,0,0" Visibility="Hidden">
-            <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="617"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgTratte_SelectionChanged">
+            <DataGrid x:Name="dgTratte" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="85" Width="617"  AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding orarioPartenza}" IsReadOnly="True" Header="Ora partenza"/>
                     <DataGridTextColumn Binding="{Binding dataPartenza, StringFormat=\{0:dd/MM/yyyy\}}" IsReadOnly="True" Header="Data partenza"/>
