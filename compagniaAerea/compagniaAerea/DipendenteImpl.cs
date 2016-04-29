@@ -11,7 +11,7 @@ namespace compagniaAerea
     {
         DatabaseManager myDatatabase;
         InfoDipendente id = new InfoDipendente();
-       
+
         public DipendenteImpl()
         {
             myDatatabase = DatabaseManager.Instance;
@@ -53,10 +53,11 @@ namespace compagniaAerea
         }
         public List<Personale> getStaff()
         {
-            
+
             return (from d in myDatatabase.getDb().Personale
-                     select d).ToList();
+                    select d).ToList();
         }
+
        
         #region get Dipendente
         public string getCognome()
@@ -158,7 +159,7 @@ namespace compagniaAerea
         {
             Personale p = myDatatabase.getDb().Personale.First(pr => pr.idPersonale == idPersonale);
             p.telefono = telefono;
-            myDatatabase.getDb().SubmitChanges();          
+            myDatatabase.getDb().SubmitChanges();
         }
 
 

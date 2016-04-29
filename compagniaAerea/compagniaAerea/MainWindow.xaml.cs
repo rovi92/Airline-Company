@@ -20,8 +20,8 @@ namespace compagniaAerea
         String textInBox; //contenitore del text telle dextbox
         //Variabile per la stringa di connessione
         Gestione_utente gestione_cliente;
-        FlightImpl volo;
-        DipendenteVoloImpl dipendentevolo;
+        Flight volo;
+        DipendenteVolo dipendentevolo;
         InterfacciaError errore = new Error();
         Ticket ticket = new TicketImpl();
         Dipendente dipendente = new DipendenteImpl();
@@ -139,28 +139,28 @@ namespace compagniaAerea
             {
                 if (dataGridAndata.SelectedIndex != -1 && dataGridRitorno.SelectedIndex != -1)
                 {
-                if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())) && volo.checkFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
-                {
+                    if (volo.checkFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())) && volo.checkFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString())))
+                    {
 
-                    ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                               int.Parse(lblPosti.Content.ToString()),
-                               0,
-                               ticket.getIdTariffa(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId()), "Andata");
-                    ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
-                               int.Parse(lblPosti.Content.ToString()),
-                               0,
-                               ticket.getIdTariffa(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId()), "Ritorno");
-                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
-                    volo.updateFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
-                    btnIndietro.Visibility = Visibility.Hidden;
+                        ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
+                                   int.Parse(lblPosti.Content.ToString()),
+                                   0,
+                                   ticket.getIdTariffa(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId()), "Andata");
+                        ticket.createBooking(DateTime.Today.ToString("yyyy-MM-dd"),
+                                   int.Parse(lblPosti.Content.ToString()),
+                                   0,
+                                   ticket.getIdTariffa(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId()), "Ritorno");
+                        volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
+                        volo.updateFlightSeats(int.Parse(getCellValue(dataGridRitorno, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
+                        btnIndietro.Visibility = Visibility.Hidden;
 
 
 
-                    this.gridCorrente = 7;
-                    currentGrid();
-                }
-                else
-                {
+                        this.gridCorrente = 7;
+                        currentGrid();
+                    }
+                    else
+                    {
                         MessageBox.Show("Posti esauriti");
                     }
                 }
@@ -263,7 +263,7 @@ namespace compagniaAerea
                     this.gridCorrente = 8;
                     currentGrid();
                     //modifica parametri nella grid di visualizzazione biglietto
-                    
+
                     nomelbl.Content = ticket.getNome();
                     cognomelbl.Content = ticket.getCognome();
                     CFlbl.Content = ticket.getCF();
@@ -694,10 +694,11 @@ namespace compagniaAerea
                     btnLogOut.Visibility = Visibility.Visible;
                     this.gridCorrente = 4;
                     currentGrid();
-                    dataProfiliDipendetente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
-                } else
+                    dataProfiloDipendente.ItemsSource = dipendente.getStaff(); //rimepimento datagrid
+                }
+                else
                 {
-                    MessageBox.Show("Username o password errati.","Errore");
+                    MessageBox.Show("Username o password errati.", "Errore");
                 }
             }
             else
@@ -705,7 +706,7 @@ namespace compagniaAerea
                 MessageBox.Show("Riempire tutti i campi", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             //selezione primo elemento nel datagrid dataProfiloDipendente come elemento di default
-            dataProfiloDipendente.SelectedIndex = 0;         
+            dataProfiloDipendente.SelectedIndex = 0;
         }
         #endregion
 
@@ -720,7 +721,7 @@ namespace compagniaAerea
             errore.checkEmail(emailpasseggerotxt);
             errore.ValueText(viapasseggerotxt);
             errore.CAPCheck(cappasseggerotxt);
-            errore.CfCheck(cfpasseggerotxt,16);
+            errore.CfCheck(cfpasseggerotxt, 16);
 
 
             if (errore.checkText())
@@ -772,7 +773,7 @@ namespace compagniaAerea
                 oraPartenzalbl.Content = getCellValue(dataGridAndata, 8);
                 oraArrivolbl.Content = getCellValue(dataGridAndata, 9);
                 dataPartenzalbl.Content = getCellValue(dataGridAndata, 6);
-                dataArrivolbl.Content = rdbAndataRitorno.IsChecked.Value ? getCellValue(dataGridAndata, 6) : getCellValue(dataGridAndata, 6);             
+                dataArrivolbl.Content = rdbAndataRitorno.IsChecked.Value ? getCellValue(dataGridAndata, 6) : getCellValue(dataGridAndata, 6);
                 totalelbl.Content = ticket.getTicketPrice(ticket.getLastIdBiglietto());
                 ticket.setQuantitaPersone(ticket.getQuatitàPersone() - 1);
 
@@ -843,7 +844,7 @@ namespace compagniaAerea
                 {
                     GridScaloViewTicket.Visibility = Visibility.Visible;
                 }
-                  }
+            }
             else
             {
                 if (ticket.getQuatitàPersone() > 0)
@@ -912,7 +913,7 @@ namespace compagniaAerea
         {
             ComboBoxItem itemA = (ComboBoxItem)cmbTipoPagamento.SelectedItem;
             string tipoPagamento = itemA.Content.ToString();
-           
+
             ticket.updatePrenotationPrice(ticket.getIdPrenotazioneAndata());
             ticket.insertRecordPagamento(txtdataPagamento.Text, tipoPagamento, ticket.getIdPrenotazioneAndata());
             if (rdbAndataRitorno.IsChecked.Value)
@@ -1230,7 +1231,7 @@ namespace compagniaAerea
         private void dataGridAndata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gridTipoVolo.Visibility = Visibility.Visible;
-            
+
         }
 
         private void Click_gestioneofferte(object sender, RoutedEventArgs e)
@@ -1280,22 +1281,32 @@ namespace compagniaAerea
 
         private void btnAssocia_Click(object sender, RoutedEventArgs e)
         {
-
-            bool flag = dipendentevolo.CombineEmplyerToFlight(int.Parse(getCellValue(dgPersonaleDiVolo, 0)),
+            if (dipendentevolo.CheckEmployerInFly(int.Parse(getCellValue(dgPersonaleDiVolo, 0)),
                 DateTime.Parse(getCellValue(dgTratte, 1)),
-                TimeSpan.Parse(getCellValue(dgTratte, 0)),
-                int.Parse(getCellValue(dgTratte, 2))
-                );
-            if (!flag)
+                TimeSpan.Parse(getCellValue(dgTratte, 0))))
             {
-                MessageBox.Show("Dipendente già in volo");
+
+
+
+                if (!dipendentevolo.CombineEmplyerToFlight(int.Parse(getCellValue(dgPersonaleDiVolo, 0)),
+                    DateTime.Parse(getCellValue(dgTratte, 1)),
+                    TimeSpan.Parse(getCellValue(dgTratte, 0)),
+                    int.Parse(getCellValue(dgTratte, 2))
+                    ))
+                {
+                    MessageBox.Show("Dipendente già in questo volo");
+                }
+                else
+                {
+                    dgPersonaleInVolo.ItemsSource = dipendentevolo.getEmployersInFly(
+                    DateTime.Parse(getCellValue(dgTratte, 1)),
+                    TimeSpan.Parse(getCellValue(dgTratte, 0)),
+                    int.Parse(getCellValue(dgTratte, 2)));
+                }
             }
             else
             {
-                dgPersonaleInVolo.ItemsSource = dipendentevolo.getEmployersInFly(
-                DateTime.Parse(getCellValue(dgTratte, 1)),
-                TimeSpan.Parse(getCellValue(dgTratte, 0)),
-                int.Parse(getCellValue(dgTratte, 2)));
+                MessageBox.Show("Dipendente ancora in volo", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1314,7 +1325,7 @@ namespace compagniaAerea
         #region utility methods
         String getCellValue(DataGrid dg, int index)
         {
-           return (dg.SelectedCells[index].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text;
+            return (dg.SelectedCells[index].Column.GetCellContent(dg.SelectedItem) as TextBlock).Text;
         }
 
         #endregion

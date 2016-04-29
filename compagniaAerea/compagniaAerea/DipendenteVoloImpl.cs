@@ -193,6 +193,13 @@ namespace compagniaAerea
                     where v.data_partenza == dataPartenza && v.orario_partenza == oraPartenza && v.gate_partenza == gatePartenza 
                     select v.Personale).ToList();     
         }
+
+        public Boolean CheckEmployerInFly(int idDipendente,DateTime dataPartenza, TimeSpan oraPartenza)
+        {
+            return (from v in myDatabase.getDb().Volo_attuale
+                    where v.Tratta.data_arrivo == dataPartenza && v.Tratta.orario_arrivo >= oraPartenza && v.idPersonale == idDipendente
+                    select v).Count() > 0 ? false : true;
+        }
     }
 }
 

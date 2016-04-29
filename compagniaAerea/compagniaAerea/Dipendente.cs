@@ -12,7 +12,7 @@ namespace compagniaAerea
 
         void getDipendente(int idDIpendente);
         List<Personale> getStaff();
-    
+       
         /*get dei dati dipendente*/
         String getNome();
         String getCognome();

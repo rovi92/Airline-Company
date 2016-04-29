@@ -16,5 +16,10 @@ namespace compagniaAerea
         void CreateFlightFare(int numero_volo, double tariffa);
         int getLastNumero_volo();
         Boolean checkAeroporto(String aeroporto);
+        List<String> getAerei();
+        void UpdateFlightFare(int numero_volo);
+        Boolean CheckEmployerInFly(int idDipendente, DateTime dataPartenza, TimeSpan oraPartenza);
+        Boolean CombineEmplyerToFlight(int idPersonale, DateTime dataPartenza, TimeSpan oraPartenza, int gatePartenza);
+        List<Personale> getEmployersInFly(DateTime dataPartenza, TimeSpan oraPartenza, int gatePartenza);
     }
 }

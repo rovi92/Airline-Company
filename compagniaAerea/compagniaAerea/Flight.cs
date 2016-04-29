@@ -28,6 +28,10 @@ namespace compagniaAerea
         string getAirportName(string città);
         int CountFlightLegs(int idVolo);
         void updateFlightSeats(int idVolo, int idClasse, int postiPrenotati);
+        string getFlightLegDeparture(int idVolo);
+        string getFlightLegDepartureTime(int idVolo);
+        string getFlightLegArrivalTime(int idVolo);
+        List<FlightImpl.FlightLegsInfo> getFlightsLegs();
 
 
     }
