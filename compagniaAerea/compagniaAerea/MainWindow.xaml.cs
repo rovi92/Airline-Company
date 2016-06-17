@@ -965,6 +965,7 @@ namespace compagniaAerea
             pulisciDipendente();
             abilitaVisioneDipendente();
             currentGrid();
+            dataProfiloDipendente.ItemsSource = dipendente.getStaff();
         }
         #endregion
 
