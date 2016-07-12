@@ -446,7 +446,7 @@ namespace compagniaAerea
             MIProfilo.Visibility = Visibility.Hidden;
             MIofferte.Visibility = Visibility.Hidden;
             btnLogOut.Visibility = Visibility.Hidden;
-            MIGestioneDipendenteVoli.Visibility = Visibility.Hidden;
+            MIGestioneDipendenteVoli.Visibility = Visibility.Hidden;//qui 
         }
 
         /*ricerca del dipendente nell grid profilo dipendete*/
