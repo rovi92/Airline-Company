@@ -10,6 +10,7 @@ namespace compagniaAerea
     interface Ticket
     {
         void getBiglietto(int codiceBiglietto);
+     
         String getNome();// prelievo del nome dell'intestatario del biglio
         String getCognome();//prelievo cognome intestatario biglietto
         String getCF();//prelievo codice fiscale intestatario biglietto

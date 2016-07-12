@@ -269,6 +269,7 @@ namespace compagniaAerea
                     nomelbl.Content = ticket.getNome();
                     cognomelbl.Content = ticket.getCognome();
                     CFlbl.Content = ticket.getCF();
+                    lblCodiceB.Content = codice;
                     codiceVololbl.Content = ticket.getCodiceVolo();
                     aereoporteAndatalbl.Content = ticket.getAereoportoAndata();
                     aereoportoArrivolbl.Content = ticket.getAereoportoArrivo();
@@ -771,6 +772,7 @@ namespace compagniaAerea
                 cognomelbl.Content = cognomepasseggerotxt.Text;
                 CFlbl.Content = cfpasseggerotxt.Text;
                 codiceVololbl.Content = getCellValue(dataGridAndata, 0);
+                lblCodiceB.Content = ticket.getLastIdBiglietto();//qui
                 aereoporteAndatalbl.Content = volo.getAirportName(getCellValue(dataGridAndata, 1));
                 aereoportoArrivolbl.Content = volo.getAirportName(getCellValue(dataGridAndata, 2));
                 oraPartenzalbl.Content = getCellValue(dataGridAndata, 8);
