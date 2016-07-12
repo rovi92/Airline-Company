@@ -158,6 +158,7 @@ namespace compagniaAerea
 
                         this.gridCorrente = 7;
                         currentGrid();
+                        errore.TraverseVisualTree(this.grid);
                     }
                     else
                     {
@@ -182,6 +183,7 @@ namespace compagniaAerea
                     volo.updateFlightSeats(int.Parse(getCellValue(dataGridAndata, 0)), volo.getFlightClassId(), int.Parse(lblPosti.Content.ToString()));
                     this.gridCorrente = 7;
                     currentGrid();
+                    errore.TraverseVisualTree(this.grid);
                 }
                 else
                 {
@@ -796,6 +798,7 @@ namespace compagniaAerea
 
                 MessageBox.Show(errore.codError());
             }
+          
         }
 
         private void conferma_ordine_click(object sender, RoutedEventArgs e)
@@ -864,8 +867,10 @@ namespace compagniaAerea
                     {
                         gridPagamentoRitorno.Visibility = Visibility.Hidden;
                     }
+
                     this.gridCorrente = 9;
                     currentGrid();
+                   
                 }
                 /* txtdataPagamento.Text = DateTime.Today.ToString("yyyy-MM-dd");
               //  txtTotale.Text = totalelbl.Content.ToString(); GridSupplemento.Visibility = Visibility.Hidden;
